@@ -6,7 +6,7 @@ import edu.netcracker.center.service.StudentService;
 import edu.netcracker.center.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +16,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,10 +28,10 @@ import java.util.Optional;
 public class StudentResource {
 
     private final Logger log = LoggerFactory.getLogger(StudentResource.class);
-        
+
     @Inject
     private StudentService studentService;
-    
+
     /**
      * POST  /students -> Create a new student.
      */
@@ -77,7 +78,19 @@ public class StudentResource {
     public List<Student> getAllStudents() {
         log.debug("REST request to get all Students");
         return studentService.findAll();
-            }
+    }
+
+    /**
+     * GET  /history/students/:dateTime -> get history of students by "dateTime".
+     */
+    @RequestMapping(value = "/history/students/{dateTime}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<Student> getHistoryOfStudents(@PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy-HH-mm-ss") Date dateTime) {/*21:01:2016-22-30-00*/
+        log.debug("REST request to get history of Students by date : {}", dateTime);
+        return studentService.getHistoryOfStudents(dateTime);
+    }
 
     /**
      * GET  /students/:id -> get the "id" student.

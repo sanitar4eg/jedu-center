@@ -5,7 +5,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
    <changeSet author="jhipster" id="1453366677087-1">
       <createTable tableName="REVINFO">
-         <column autoIncrement="true" name="REV" type="INT">
+         <column autoIncrement="true" name="REV" type="SERIAL">
             <constraints primaryKey="true" primaryKeyName="REVINFOPK"/>
          </column>
          <column name="REVTSTMP" type="BIGINT"/>
@@ -16,7 +16,7 @@
          <column name="id" type="BIGINT">
             <constraints nullable="false"/>
          </column>
-         <column name="REV" type="INT">
+         <column name="REV" type="SERIAL">
             <constraints nullable="false"/>
          </column>
          <column name="REVTYPE" type="TINYINT"/>

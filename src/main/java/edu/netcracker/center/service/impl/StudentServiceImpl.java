@@ -1,31 +1,67 @@
 package edu.netcracker.center.service.impl;
 
-import edu.netcracker.center.service.StudentService;
 import edu.netcracker.center.domain.Student;
 import edu.netcracker.center.repository.StudentRepository;
+import edu.netcracker.center.service.StudentService;
+import org.hibernate.envers.AuditReader;
+import org.hibernate.envers.AuditReaderFactory;
+import org.hibernate.envers.RevisionType;
+import org.hibernate.envers.exception.RevisionDoesNotExistException;
+import org.hibernate.envers.query.AuditEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Service Implementation for managing Student.
  */
 @Service
 @Transactional
-public class StudentServiceImpl implements StudentService{
+public class StudentServiceImpl implements StudentService {
 
     private final Logger log = LoggerFactory.getLogger(StudentServiceImpl.class);
-    
+
     @Inject
     private StudentRepository studentRepository;
-    
+
+    @Inject
+    EntityManager entityManager;
+
+    /**
+     * get history of students by date.
+     *
+     * @return the list of entities
+     */
+    @Transactional(readOnly = true)
+    public List<Student> getHistoryOfStudents(Date date) {
+//        Date convertedDate = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        log.debug("Request to get history of Students : {}", date);
+        AuditReader auditReader = AuditReaderFactory.get(entityManager);
+        List<Student> list;
+        try {
+            list = (List<Student>) auditReader.createQuery()
+                .forRevisionsOfEntity(Student.class, true, true)
+                .add(AuditEntity.revisionNumber().le(auditReader.getRevisionNumberForDate(date)))
+                .add(AuditEntity.revisionNumber().maximize().computeAggregationInInstanceContext()
+                    .add(AuditEntity.revisionNumber().le(auditReader.getRevisionNumberForDate(date))))
+                .add(AuditEntity.revisionType().ne(RevisionType.DEL))
+                .getResultList();
+        } catch (RevisionDoesNotExistException exception) {
+            list = Collections.EMPTY_LIST;
+        }
+        return list;
+    }
+
     /**
      * Save a student.
+     *
      * @return the persisted entity
      */
     public Student save(Student student) {
@@ -35,10 +71,11 @@ public class StudentServiceImpl implements StudentService{
     }
 
     /**
-     *  get all the students.
-     *  @return the list of entities
+     * get all the students.
+     *
+     * @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<Student> findAll() {
         log.debug("Request to get all Students");
         List<Student> result = studentRepository.findAll();
@@ -46,10 +83,11 @@ public class StudentServiceImpl implements StudentService{
     }
 
     /**
-     *  get one student by id.
-     *  @return the entity
+     * get one student by id.
+     *
+     * @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Student findOne(Long id) {
         log.debug("Request to get Student : {}", id);
         Student student = studentRepository.findOne(id);
@@ -57,7 +95,7 @@ public class StudentServiceImpl implements StudentService{
     }
 
     /**
-     *  delete the  student by id.
+     * delete the  student by id.
      */
     public void delete(Long id) {
         log.debug("Request to delete Student : {}", id);
