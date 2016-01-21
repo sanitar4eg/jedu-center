@@ -1,0 +1,67 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "firstName",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "lastName",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "middleName",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "type",
+            "fieldType": "TypeEnumeration",
+            "fieldValues": "DEV,QA",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "email",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "phone",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "university",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "specialty",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "course",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "groupName",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160120075554",
+    "dto": "no",
+    "service": "serviceImpl",
+    "pagination": "no",
+    "enableEntityAudit": true
+}
