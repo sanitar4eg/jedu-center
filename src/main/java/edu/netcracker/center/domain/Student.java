@@ -9,11 +9,13 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import edu.netcracker.center.domain.enumeration.TypeEnumeration;
+import org.hibernate.envers.Audited;
 
 /**
  * A Student.
  */
 @Entity
+@Audited
 @Table(name = "student")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Student implements Serializable {
@@ -24,37 +26,37 @@ public class Student implements Serializable {
 
     @Column(name = "first_name")
     private String firstName;
-    
+
     @Column(name = "last_name")
     private String lastName;
-    
+
     @Column(name = "middle_name")
     private String middleName;
-    
+
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
     private TypeEnumeration type;
-    
+
     @NotNull
     @Column(name = "email", nullable = false)
     private String email;
-    
+
     @Column(name = "phone")
     private String phone;
-    
+
     @Column(name = "university")
     private String university;
-    
+
     @Column(name = "specialty")
     private String specialty;
-    
+
     @Column(name = "course")
     private String course;
-    
+
     @Column(name = "group_name")
     private String groupName;
-    
+
     public Long getId() {
         return id;
     }
@@ -66,7 +68,7 @@ public class Student implements Serializable {
     public String getFirstName() {
         return firstName;
     }
-    
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -74,7 +76,7 @@ public class Student implements Serializable {
     public String getLastName() {
         return lastName;
     }
-    
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -82,7 +84,7 @@ public class Student implements Serializable {
     public String getMiddleName() {
         return middleName;
     }
-    
+
     public void setMiddleName(String middleName) {
         this.middleName = middleName;
     }
@@ -90,7 +92,7 @@ public class Student implements Serializable {
     public TypeEnumeration getType() {
         return type;
     }
-    
+
     public void setType(TypeEnumeration type) {
         this.type = type;
     }
@@ -98,7 +100,7 @@ public class Student implements Serializable {
     public String getEmail() {
         return email;
     }
-    
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -106,7 +108,7 @@ public class Student implements Serializable {
     public String getPhone() {
         return phone;
     }
-    
+
     public void setPhone(String phone) {
         this.phone = phone;
     }
@@ -114,7 +116,7 @@ public class Student implements Serializable {
     public String getUniversity() {
         return university;
     }
-    
+
     public void setUniversity(String university) {
         this.university = university;
     }
@@ -122,7 +124,7 @@ public class Student implements Serializable {
     public String getSpecialty() {
         return specialty;
     }
-    
+
     public void setSpecialty(String specialty) {
         this.specialty = specialty;
     }
@@ -130,7 +132,7 @@ public class Student implements Serializable {
     public String getCourse() {
         return course;
     }
-    
+
     public void setCourse(String course) {
         this.course = course;
     }
@@ -138,7 +140,7 @@ public class Student implements Serializable {
     public String getGroupName() {
         return groupName;
     }
-    
+
     public void setGroupName(String groupName) {
         this.groupName = groupName;
     }

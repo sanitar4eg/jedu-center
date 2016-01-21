@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+   <changeSet author="jhipster" id="1453366677087-1">
+      <createTable tableName="REVINFO">
+         <column autoIncrement="true" name="REV" type="INT">
+            <constraints primaryKey="true" primaryKeyName="REVINFOPK"/>
+         </column>
+         <column name="REVTSTMP" type="BIGINT"/>
+      </createTable>
+   </changeSet>
+   <changeSet author="jhipster" id="1453366677087-2">
+      <createTable tableName="student_AUD">
+         <column name="id" type="BIGINT">
+            <constraints nullable="false"/>
+         </column>
+         <column name="REV" type="INT">
+            <constraints nullable="false"/>
+         </column>
+         <column name="REVTYPE" type="TINYINT"/>
+         <column name="course" type="VARCHAR(255)"/>
+         <column name="email" type="VARCHAR(255)"/>
+         <column name="first_name" type="VARCHAR(255)"/>
+         <column name="group_name" type="VARCHAR(255)"/>
+         <column name="last_name" type="VARCHAR(255)"/>
+         <column name="middle_name" type="VARCHAR(255)"/>
+         <column name="phone" type="VARCHAR(255)"/>
+         <column name="specialty" type="VARCHAR(255)"/>
+         <column name="type" type="VARCHAR(255)"/>
+         <column name="university" type="VARCHAR(255)"/>
+      </createTable>
+   </changeSet>
+   <changeSet author="jhipster" id="1453366677087-3">
+      <addPrimaryKey columnNames="id, REV"
+                     constraintName="student_AUDPK"
+                     tableName="student_AUD"/>
+   </changeSet>
+   <changeSet author="jhipster" id="1453366677087-4">
+      <addForeignKeyConstraint baseColumnNames="REV"
+                               baseTableName="student_AUD"
+                               constraintName="FK_h4i1o350meftdjp06n3ck0x3g"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="REV"
+                               referencedTableName="REVINFO"/>
+   </changeSet>
+</databaseChangeLog>

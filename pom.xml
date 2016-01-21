@@ -544,7 +544,7 @@
                     <driver>org.h2.Driver</driver>
                     <url>jdbc:h2:file:./target/h2db/db/jeducenter</url>
                     <defaultSchemaName></defaultSchemaName>
-                    <username></username>
+                    <username>jeduCenter</username>
                     <password></password>
                     <referenceUrl>hibernate:spring:edu.netcracker.center.domain?dialect=org.hibernate.dialect.H2Dialect</referenceUrl>
                     <verbose>true</verbose>
