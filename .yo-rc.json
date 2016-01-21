@@ -1,0 +1,24 @@
+{
+  "generator-jhipster": {
+    "baseName": "jeduCenter",
+    "packageName": "edu.netcracker.center",
+    "packageFolder": "edu/netcracker/center",
+    "authenticationType": "session",
+    "hibernateCache": "ehcache",
+    "clusteredHttpSession": "no",
+    "websocket": "no",
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": "no",
+    "useSass": false,
+    "buildTool": "maven",
+    "frontendBuilder": "grunt",
+    "enableTranslation": true,
+    "enableSocialSignIn": false,
+    "rememberMeKey": "6d0fbf0f23725c69d51d8cce62c72a872d261fd6",
+    "testFrameworks": [
+      "gatling"
+    ]
+  }
+}
