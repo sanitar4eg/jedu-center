@@ -1,0 +1,31 @@
+{
+    "jeducenterApp": {
+        "student" : {
+            "home": {
+                "title": "Студенты",
+                "createLabel": "Добавить нового студента",
+                "createOrEditLabel": "Добавить или редактировать запись",
+                "search": "Искать"
+            },
+            "created": "A new Student is created with identifier {{ param }}",
+            "updated": "A Student is updated with identifier {{ param }}",
+            "deleted": "A Student is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Student {{ id }}?"
+            },
+            "detail": {
+                "title": "Студент"
+            },
+            "firstName": "Имя",
+            "lastName": "Фамилия",
+            "middleName": "Отчество",
+            "type": "Тип обучения",
+            "email": "Email",
+            "phone": "Телефон",
+            "university": "Университет",
+            "specialty": "Специальность",
+            "course": "Курс",
+            "groupName": "Группа"
+        }
+    }
+}

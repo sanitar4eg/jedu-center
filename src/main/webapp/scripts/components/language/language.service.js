@@ -28,6 +28,7 @@ angular.module('jeducenterApp')
  */
     .constant('LANGUAGES', [
         'en', 'fr'
+        ,'ru'
         // jhipster-needle-006 - JHipster will add new languages here
     ]
 );
