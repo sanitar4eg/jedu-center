@@ -4,6 +4,7 @@
             "home": {
                 "title": "Students",
                 "createLabel": "Create a new Student",
+                "historyLabel": "History of students",
                 "createOrEditLabel": "Create or edit a Student",
                 "search": "Search for Student"
             },
