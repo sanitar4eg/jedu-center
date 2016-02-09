@@ -3,9 +3,17 @@
 angular.module('jeducenterApp')
     .controller('StudentHistoryController', function ($scope, $state, StudentHistory) {
 
+        var historyDate = new Date();
+
+        var picker = $('#datetimepicker').datetimepicker({
+            defaultDate: historyDate,
+            locale: 'ru'
+        });
+
         $scope.students = [];
         $scope.loadAll = function(dateTime) {
-            StudentHistory.query({dateTime: '22-01-2016-17-15-00'}, function(result) {
+            var date = picker.data("DateTimePicker").date();
+            StudentHistory.query({dateTime: date.toISOString()}, function(result) {
                 $scope.students = result;
             });
         };

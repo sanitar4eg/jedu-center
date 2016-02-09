@@ -83,11 +83,11 @@ public class StudentResource {
     /**
      * GET  /history/students/:dateTime -> get history of students by "dateTime".
      */
-    @RequestMapping(value = "/history/students/{dateTime}",
+    @RequestMapping(value = "/history/students/{dateTime:.+}",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public List<Student> getHistoryOfStudents(@PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy-HH-mm-ss") Date dateTime) {/*21:01:2016-22-30-00*/
+    public List<Student> getHistoryOfStudents(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date dateTime) {
         log.debug("REST request to get history of Students by date : {}", dateTime);
         return studentService.getHistoryOfStudents(dateTime);
     }

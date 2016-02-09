@@ -2,11 +2,11 @@
     <h2 translate="user-management.home.title">Users</h2>
     <div class="container">
         <div class="row">
-          <div class="col-md-4">
-              <button class="btn btn-primary" ui-sref="user-management.new">
-                  <span class="glyphicon glyphicon-flash"></span> <span translate="user-management.home.createLabel">Create a new User</span>
-              </button>
-          </div>
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="user-management.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span translate="user-management.home.createLabel">Create a new User</span>
+                </button>
+            </div>
         </div>
     </div>
     <div class="table-responsive">
@@ -68,7 +68,8 @@
         </table>
     </div>
     <div class="text-center">
-        <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pagination>
+        <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="page"
+                        ng-change="loadAll()"></uib-pagination>
     </div>
     <jh-alert></jh-alert>
 </div>
