@@ -5,6 +5,7 @@
                 "title": "Студенты",
                 "createLabel": "Добавить нового студента",
                 "historyLabel": "Просмотр истории",
+                "integrationLabel": "Импорт/Экспорт",
                 "createOrEditLabel": "Добавить или редактировать запись",
                 "search": "Искать"
             },

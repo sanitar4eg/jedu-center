@@ -2,19 +2,18 @@ package edu.netcracker.center.web.rest;
 
 import edu.netcracker.center.Application;
 import edu.netcracker.center.domain.Student;
+import edu.netcracker.center.domain.enumeration.TypeEnumeration;
 import edu.netcracker.center.repository.StudentRepository;
 import edu.netcracker.center.service.StudentService;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -27,10 +26,9 @@ import javax.inject.Inject;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import edu.netcracker.center.domain.enumeration.TypeEnumeration;
 
 /**
  * Test class for the StudentResource REST controller.
@@ -49,7 +47,7 @@ public class StudentResourceIntTest {
     private static final String UPDATED_LAST_NAME = "BBBBB";
     private static final String DEFAULT_MIDDLE_NAME = "AAAAA";
     private static final String UPDATED_MIDDLE_NAME = "BBBBB";
-    
+
     private static final TypeEnumeration DEFAULT_TYPE = TypeEnumeration.DEV;
     private static final TypeEnumeration UPDATED_TYPE = TypeEnumeration.QA;
     private static final String DEFAULT_EMAIL = "AAAAA";

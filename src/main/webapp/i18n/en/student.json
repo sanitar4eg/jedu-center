@@ -5,6 +5,7 @@
                 "title": "Students",
                 "createLabel": "Create a new Student",
                 "historyLabel": "History of students",
+                "integrationLabel": "Import/Export",
                 "createOrEditLabel": "Create or edit a Student",
                 "search": "Search for Student"
             },

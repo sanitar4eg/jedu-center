@@ -11,13 +11,6 @@ import java.util.List;
 public interface StudentService {
 
     /**
-     * get history of students by date.
-     *
-     * @return the list of entities
-     */
-    public List<Student> getHistoryOfStudents(Date date);
-
-    /**
      * Save a student.
      *
      * @return the persisted entity

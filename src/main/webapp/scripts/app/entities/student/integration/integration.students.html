@@ -1,0 +1,24 @@
+<div>
+    <h2 translate="jeducenterApp.student.home.title">Students History</h2>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4">
+                <button class="btn btn-primary" ng-click="getImportFile()" >
+                    <span class="glyphicon glyphicon-folder-open"></span>
+                    <span
+                        translate="jeducenterApp.student.home.historyLabel">History of students
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <br/>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+    <jh-alert></jh-alert>
+</div>

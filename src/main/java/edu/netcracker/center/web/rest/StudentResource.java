@@ -2,7 +2,9 @@ package edu.netcracker.center.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import edu.netcracker.center.domain.Student;
+import edu.netcracker.center.service.HistoryService;
 import edu.netcracker.center.service.StudentService;
+import edu.netcracker.center.service.StudentXslView;
 import edu.netcracker.center.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -31,6 +34,9 @@ public class StudentResource {
 
     @Inject
     private StudentService studentService;
+
+    @Inject
+    private HistoryService historyService;
 
     /**
      * POST  /students -> Create a new student.
@@ -89,7 +95,18 @@ public class StudentResource {
     @Timed
     public List<Student> getHistoryOfStudents(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date dateTime) {
         log.debug("REST request to get history of Students by date : {}", dateTime);
-        return studentService.getHistoryOfStudents(dateTime);
+        return historyService.getHistoryOfStudents(dateTime);
+    }
+
+    /**
+     * GET  /import/students -> get XSL file with all students.
+     */
+    @RequestMapping(value = "/import/students",
+        method = RequestMethod.GET)
+    @Timed
+    public ModelAndView getXslOfStudents() {
+        log.debug("REST request to get XSL of Students");
+        return new ModelAndView(new StudentXslView(), "students", studentService.findAll());
     }
 
     /**

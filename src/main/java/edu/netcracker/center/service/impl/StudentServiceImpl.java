@@ -31,34 +31,6 @@ public class StudentServiceImpl implements StudentService {
     @Inject
     private StudentRepository studentRepository;
 
-    @Inject
-    EntityManager entityManager;
-
-    /**
-     * get history of students by date.
-     *
-     * @return the list of entities
-     */
-    @Transactional(readOnly = true)
-    public List<Student> getHistoryOfStudents(Date date) {
-//        Date convertedDate = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        log.debug("Request to get history of Students : {}", date);
-        AuditReader auditReader = AuditReaderFactory.get(entityManager);
-        List<Student> list;
-        try {
-            list = (List<Student>) auditReader.createQuery()
-                .forRevisionsOfEntity(Student.class, true, true)
-                .add(AuditEntity.revisionNumber().le(auditReader.getRevisionNumberForDate(date)))
-                .add(AuditEntity.revisionNumber().maximize().computeAggregationInInstanceContext()
-                    .add(AuditEntity.revisionNumber().le(auditReader.getRevisionNumberForDate(date))))
-                .add(AuditEntity.revisionType().ne(RevisionType.DEL))
-                .getResultList();
-        } catch (RevisionDoesNotExistException exception) {
-            list = Collections.EMPTY_LIST;
-        }
-        return list;
-    }
-
     /**
      * Save a student.
      *

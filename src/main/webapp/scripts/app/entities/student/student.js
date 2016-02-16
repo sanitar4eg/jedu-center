@@ -26,7 +26,7 @@ angular.module('jeducenterApp')
                 }
             })
             .state('student.history', {
-                parent: 'entity',
+                parent: 'student',
                 url: '/history/students',
                 data: {
                     authorities: ['ROLE_USER'],
@@ -34,7 +34,7 @@ angular.module('jeducenterApp')
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/student/history.students.html',
+                        templateUrl: 'scripts/app/entities/student/history/history.students.html',
                         controller: 'StudentHistoryController'
                     }
                 },
@@ -42,6 +42,27 @@ angular.module('jeducenterApp')
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('student');
                         $translatePartialLoader.addPart('typeEnumeration');
+                        $translatePartialLoader.addPart('global');
+                        return $translate.refresh();
+                    }]
+                }
+            })
+            .state('student.integration', {
+                parent: 'student',
+                url: '/integration/students',
+                data: {
+                    authorities: ['ROLE_USER'],
+                    pageTitle: 'jeducenterApp.student.home.title'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/student/integration/integration.students.html',
+                        controller: 'StudentIntegrationController'
+                    }
+                },
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('student');
                         $translatePartialLoader.addPart('global');
                         return $translate.refresh();
                     }]
