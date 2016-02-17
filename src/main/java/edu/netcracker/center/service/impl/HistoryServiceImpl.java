@@ -2,6 +2,7 @@ package edu.netcracker.center.service.impl;
 
 import edu.netcracker.center.domain.Student;
 import edu.netcracker.center.repository.StudentRepository;
+import edu.netcracker.center.service.HistoryService;
 import org.hibernate.envers.AuditReader;
 import org.hibernate.envers.AuditReaderFactory;
 import org.hibernate.envers.RevisionType;
@@ -23,12 +24,9 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class HistoryServiceImpl {
+public class HistoryServiceImpl implements HistoryService {
 
     private final Logger log = LoggerFactory.getLogger(HistoryServiceImpl.class);
-
-    @Inject
-    private StudentRepository studentRepository;
 
     @Inject
     EntityManager entityManager;
@@ -40,7 +38,6 @@ public class HistoryServiceImpl {
      */
     @Transactional(readOnly = true)
     public List<Student> getHistoryOfStudents(Date date) {
-//        Date convertedDate = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
         log.debug("Request to get history of Students : {}", date);
         AuditReader auditReader = AuditReaderFactory.get(entityManager);
         List<Student> list;
