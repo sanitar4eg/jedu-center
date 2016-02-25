@@ -1,17 +1,15 @@
 'use strict';
 
 angular.module('jeducenterApp')
-    .controller('StudentIntegrationController', function ($scope, $state, StudentIntegration) {
+    .controller('StudentIntegrationController', function ($scope, $state, $location,  StudentIntegration) {
 
         $scope.refresh = function () {
 
         };
 
         $scope.getImportFile = function () {
-
-            StudentIntegration.query(function() {
-
-            });
+            var importUrl = $location.protocol()+"://"+$location.host()+":"+$location.port()+"/api/import/students/";
+            window.open(importUrl);
         };
 
     });
