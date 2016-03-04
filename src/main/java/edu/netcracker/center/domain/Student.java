@@ -10,6 +10,7 @@ import java.util.Objects;
 
 import edu.netcracker.center.domain.enumeration.TypeEnumeration;
 import org.hibernate.envers.Audited;
+import org.hibernate.validator.constraints.Email;
 
 /**
  * A Student.
@@ -40,6 +41,7 @@ public class Student implements Serializable {
 
     @NotNull
     @Column(name = "email", nullable = false)
+    @Email
     private String email;
 
     @Column(name = "phone")
