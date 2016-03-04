@@ -38,37 +38,25 @@ public class StudentXslView extends AbstractXlsView {
 
         String currentDate = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss").format(new Date());
         response.setHeader("Content-Type", "application/octet-stream");
-        response.setHeader("Content-Disposition", "attachment; filename=Students_${currentDate}.xls");
-
-        Sheet sheet = workbook.createSheet("Cписок студентов");
-        sheet.setDefaultColumnWidth(15);
-
-        Font font = workbook.createFont();
-        font.setFontName("Arial");
-        font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
-        font.setColor(HSSFColor.WHITE.index);
-        CellStyle style = workbook.createCellStyle();
-        style.setFillForegroundColor(HSSFColor.BLUE.index);
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        style.setFont(font);
-
-        Row header = sheet.createRow(0);
-
-        setCellValueAndStyle(header.createCell(ID), "ID", style);
-        setCellValueAndStyle(header.createCell(FIRST_NAME), "Имя", style);
-        setCellValueAndStyle(header.createCell(MIDDLE_NAME), "Отчество", style);
-        setCellValueAndStyle(header.createCell(LAST_NAME), "Фамилия", style);
-        setCellValueAndStyle(header.createCell(TYPE), "Вид обучения", style);
-        setCellValueAndStyle(header.createCell(EMAIL), "Email", style);
-        setCellValueAndStyle(header.createCell(PHONE), "Телефон", style);
-        setCellValueAndStyle(header.createCell(UNIVER), "Университет", style);
-        setCellValueAndStyle(header.createCell(SPECIALTY), "Специальность", style);
-        setCellValueAndStyle(header.createCell(COURSE), "Курс", style);
-        setCellValueAndStyle(header.createCell(GROUP), "Группа", style);
+        response.setHeader("Content-Disposition", "attachment; filename=Students_" + currentDate + ".xls");
 
         List<Student> students = (List<Student>) model.get("students");
-        int counter = 1;
 
+        generateWorkbook(students, workbook);
+    }
+
+    private void generateWorkbook(List<Student> students, Workbook workbook) {
+        Sheet sheet = createSheet(workbook);
+
+        CellStyle headerStyle = createHeaderStyle(workbook);
+
+        createHeader(sheet, headerStyle);
+
+        completeTable(students, sheet);
+    }
+
+    private void completeTable(List<Student> students, Sheet sheet) {
+        int counter = 1;
         for (Student student : students) {
             Row row = sheet.createRow(counter++);
             setCellValueAndStyle(row.createCell(ID), student.getId().toString(), null);
@@ -83,6 +71,40 @@ public class StudentXslView extends AbstractXlsView {
             setCellValueAndStyle(row.createCell(COURSE), student.getCourse(), null);
             setCellValueAndStyle(row.createCell(GROUP), student.getGroupName(), null);
         }
+    }
+
+    private void createHeader(Sheet sheet, CellStyle style) {
+        Row header = sheet.createRow(0);
+
+        setCellValueAndStyle(header.createCell(ID), "ID", style);
+        setCellValueAndStyle(header.createCell(FIRST_NAME), "Имя", style);
+        setCellValueAndStyle(header.createCell(MIDDLE_NAME), "Отчество", style);
+        setCellValueAndStyle(header.createCell(LAST_NAME), "Фамилия", style);
+        setCellValueAndStyle(header.createCell(TYPE), "Вид обучения", style);
+        setCellValueAndStyle(header.createCell(EMAIL), "Email", style);
+        setCellValueAndStyle(header.createCell(PHONE), "Телефон", style);
+        setCellValueAndStyle(header.createCell(UNIVER), "Университет", style);
+        setCellValueAndStyle(header.createCell(SPECIALTY), "Специальность", style);
+        setCellValueAndStyle(header.createCell(COURSE), "Курс", style);
+        setCellValueAndStyle(header.createCell(GROUP), "Группа", style);
+    }
+
+    private CellStyle createHeaderStyle(Workbook workbook) {
+        Font font = workbook.createFont();
+        font.setFontName("Arial");
+        font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+        font.setColor(HSSFColor.WHITE.index);
+        CellStyle style = workbook.createCellStyle();
+        style.setFillForegroundColor(HSSFColor.BLUE.index);
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+        style.setFont(font);
+        return style;
+    }
+
+    private Sheet createSheet(Workbook workbook) {
+        Sheet sheet = workbook.createSheet("Cписок студентов");
+        sheet.setDefaultColumnWidth(15);
+        return sheet;
     }
 
     private void setCellValueAndStyle(Cell cell, String value, CellStyle style) {
