@@ -3,6 +3,7 @@ package edu.netcracker.center.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import edu.netcracker.center.domain.Student;
 import edu.netcracker.center.service.HistoryService;
+import edu.netcracker.center.service.ImportService;
 import edu.netcracker.center.service.StudentService;
 import edu.netcracker.center.service.StudentXslView;
 import edu.netcracker.center.web.rest.util.HeaderUtil;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.inject.Inject;
@@ -37,6 +39,9 @@ public class StudentResource {
 
     @Inject
     private HistoryService historyService;
+
+    @Inject
+    private ImportService importService;
 
     /**
      * POST  /students -> Create a new student.
@@ -101,12 +106,22 @@ public class StudentResource {
     /**
      * GET  /import/students -> get XSL file with all students.
      */
-    @RequestMapping(value = "/import/students",
+    @RequestMapping(value = "/export/students",
         method = RequestMethod.GET)
     @Timed
     public ModelAndView getXslOfStudents() {
         log.debug("REST request to get XSL of Students");
         return new ModelAndView(new StudentXslView(), "students", studentService.findAll());
+    }
+
+    /**
+     * POST  /export/students -> upload file with students for saving.
+     */
+    @RequestMapping(value = "/import/students", method = RequestMethod.POST,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    public String handleImport(@RequestParam("file") MultipartFile file) {
+        importService.handleImportOfStudents(file);
+        return null;
     }
 
     /**

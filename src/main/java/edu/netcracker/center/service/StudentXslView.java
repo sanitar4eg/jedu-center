@@ -18,17 +18,17 @@ import java.util.Map;
  */
 public class StudentXslView extends AbstractXlsView {
 
-    private static final int ID = 0;
-    private static final int FIRST_NAME = 1;
-    private static final int MIDDLE_NAME = 2;
-    private static final int LAST_NAME = 3;
-    private static final int TYPE = 4;
-    private static final int EMAIL = 5;
-    private static final int PHONE = 6;
-    private static final int UNIVER = 7;
-    private static final int SPECIALTY = 8;
-    private static final int COURSE = 9;
-    private static final int GROUP = 10;
+    public static final int ID = 0;
+    public static final int FIRST_NAME = 1;
+    public static final int MIDDLE_NAME = 2;
+    public static final int LAST_NAME = 3;
+    public static final int TYPE = 4;
+    public static final int EMAIL = 5;
+    public static final int PHONE = 6;
+    public static final int UNIVER = 7;
+    public static final int SPECIALTY = 8;
+    public static final int COURSE = 9;
+    public static final int GROUP = 10;
 
     @Override
     protected void buildExcelDocument(Map<String, Object> model,
