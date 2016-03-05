@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('jeducenterApp')
-    .controller('StudentHistoryController', function ($scope, $state, StudentHistory) {
+    .controller('StudentHistoryController', function ($scope, $state, tmhDynamicLocale, StudentHistory) {
 
         var historyDate = new Date();
 
         var picker = $('#datetimepicker').datetimepicker({
             defaultDate: historyDate,
-            locale: 'ru'
+            locale: tmhDynamicLocale.get()
         });
 
         $scope.students = [];
