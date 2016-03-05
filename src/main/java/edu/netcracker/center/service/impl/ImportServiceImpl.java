@@ -3,6 +3,7 @@ package edu.netcracker.center.service.impl;
 import edu.netcracker.center.domain.Student;
 import edu.netcracker.center.domain.enumeration.TypeEnumeration;
 import edu.netcracker.center.repository.StudentRepository;
+import edu.netcracker.center.service.ImportService;
 import edu.netcracker.center.service.StudentXslView;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
@@ -21,7 +22,7 @@ import java.io.IOException;
  */
 @Service
 @Transactional
-public class ImportServiceImpl {
+public class ImportServiceImpl implements ImportService {
 
     private static final Logger LOG = LoggerFactory.getLogger(ImportServiceImpl.class);
 
@@ -29,7 +30,8 @@ public class ImportServiceImpl {
 
 //    HibernateValidator validator;
 
-    void handleImport(MultipartFile file) {
+    @Override
+    public void handleImportOfStudents(MultipartFile file) {
         Workbook workbook;
         try (ByteArrayInputStream stream = new ByteArrayInputStream(file.getBytes())) {
             workbook = new HSSFWorkbook(stream);
