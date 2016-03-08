@@ -2,17 +2,15 @@
 
 angular.module('jeducenterApp')
     .factory('StudentIntegration', function ($resource) {
-        return $resource('api/import/students/'
+        return $resource('api/import/students/:id', {}
             , {
-            'query': {method: 'GET', isFile: true}
-            /*'get': {
-                method: 'GET',
-                transformResponse: function (data) {
-                    data = angular.fromJson(data);
-                    return data;
+                'uploadFile': {
+                    method: 'POST',
+                    headers: {'Content-Type': undefined},
+                    transformRequest: function (data) {
+                        return data;
+                    }
                 }
-            },
-            'update': {method: 'PUT'}*/
-        });
+            });
     });
 

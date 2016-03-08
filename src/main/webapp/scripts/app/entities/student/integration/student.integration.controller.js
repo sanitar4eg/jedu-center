@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('jeducenterApp')
-    .controller('StudentIntegrationController', function ($scope, $state, $location, $http, tmhDynamicLocale,  StudentIntegration) {
+    .controller('StudentIntegrationController', function ($scope, $state, $location, tmhDynamicLocale,
+                                                          StudentIntegration) {
 
         $scope.getImportFile = function () {
             var importUrl = $location.protocol()+"://"+$location.host()+":"+$location.port()+"/api/export/students/";
@@ -15,16 +16,7 @@ angular.module('jeducenterApp')
         $scope.uploadExportFile=function (){
             var formData=new FormData();
             formData.append("file",inputFile.get(0).files[0]);
-            $http({
-                method: 'POST',
-                url: "/api/import/students/",
-                headers: {'Content-Type': undefined},
-                data: formData,
-                transformRequest: function(data, headersGetterFunction) {
-                    return data;
-                }
-            });
-
+            StudentIntegration.uploadFile(formData);
         };
 
     });

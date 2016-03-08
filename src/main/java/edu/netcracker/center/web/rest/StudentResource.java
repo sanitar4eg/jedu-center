@@ -104,7 +104,7 @@ public class StudentResource {
     }
 
     /**
-     * GET  /import/students -> get XSL file with all students.
+     * GET  /export/students -> get XSL file with all students.
      */
     @RequestMapping(value = "/export/students",
         method = RequestMethod.GET)
@@ -115,10 +115,12 @@ public class StudentResource {
     }
 
     /**
-     * POST  /export/students -> upload file with students for saving.
+     * POST  /import/students -> upload file with students for saving.
      */
-    @RequestMapping(value = "/import/students", method = RequestMethod.POST,
+    @RequestMapping(value = "/import/students",
+        method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
     public String handleImport(@RequestParam("file") MultipartFile file) {
         importService.handleImportOfStudents(file);
         return null;

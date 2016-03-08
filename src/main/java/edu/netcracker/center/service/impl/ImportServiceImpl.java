@@ -6,6 +6,7 @@ import edu.netcracker.center.repository.StudentRepository;
 import edu.netcracker.center.service.ImportService;
 import edu.netcracker.center.service.StudentXslView;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
@@ -14,8 +15,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.inject.Inject;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.Optional;
+import java.util.function.Consumer;
 
 /**
  * Service Implementation for importing.
@@ -26,6 +30,7 @@ public class ImportServiceImpl implements ImportService {
 
     private static final Logger LOG = LoggerFactory.getLogger(ImportServiceImpl.class);
 
+    @Inject
     StudentRepository studentRepository;
 
 //    HibernateValidator validator;
@@ -43,20 +48,39 @@ public class ImportServiceImpl implements ImportService {
         for (Row row : workbook.getSheetAt(0)) {
             if (row.getRowNum() != 0) {
                 Student student = new Student();
-                student.setId(new Double(row.getCell(StudentXslView.ID).getNumericCellValue()).longValue());
-                student.setFirstName(row.getCell(StudentXslView.FIRST_NAME).getStringCellValue());
-                student.setLastName(row.getCell(StudentXslView.LAST_NAME).getStringCellValue());
-                student.setMiddleName(row.getCell(StudentXslView.MIDDLE_NAME).getStringCellValue());
-                student.setType(TypeEnumeration.valueOf(row.getCell(StudentXslView.TYPE).getStringCellValue()));
-                student.setEmail(row.getCell(StudentXslView.EMAIL).getStringCellValue());
-                student.setPhone(row.getCell(StudentXslView.PHONE).getStringCellValue());
-                student.setUniversity(row.getCell(StudentXslView.UNIVER).getStringCellValue());
-                student.setSpecialty(row.getCell(StudentXslView.SPECIALTY).getStringCellValue());
-                student.setCourse(row.getCell(StudentXslView.COURSE).getStringCellValue());
-                student.setGroupName(row.getCell(StudentXslView.GROUP).getStringCellValue());
+                setId(row,StudentXslView.ID, student::setId);
+                setParameter(row, StudentXslView.FIRST_NAME, student::setFirstName);
+                setParameter(row, StudentXslView.LAST_NAME, student::setLastName);
+                setParameter(row, StudentXslView.MIDDLE_NAME, student::setMiddleName);
+                setType(row, StudentXslView.TYPE, student::setType);
+                setParameter(row, StudentXslView.EMAIL, student::setEmail);
+                setParameter(row, StudentXslView.PHONE, student::setPhone);
+                setParameter(row, StudentXslView.UNIVER, student::setUniversity);
+                setParameter(row, StudentXslView.SPECIALTY, student::setSpecialty);
+                setParameter(row, StudentXslView.COURSE, student::setCourse);
+                setParameter(row, StudentXslView.GROUP, student::setGroupName);
 
                 studentRepository.save(student);
             }
         }
+    }
+
+    private void setType(Row row, int field, Consumer<TypeEnumeration> consumer) {
+        getNullableCell(row.getCell(field)).
+            ifPresent(cell -> consumer.accept(TypeEnumeration.valueOf(cell.getStringCellValue())));
+    }
+
+    private void setId(Row row, int field, Consumer<Long> consumer) {
+        getNullableCell(row.getCell(field)).
+            ifPresent(cell -> consumer.accept(new Long(cell.getStringCellValue())));
+    }
+
+    private void setParameter(Row row, int field, Consumer<String> consumer) {
+        getNullableCell(row.getCell(field)).
+            ifPresent(cell -> consumer.accept(cell.getStringCellValue()));
+    }
+
+    private Optional<Cell> getNullableCell(Cell value) {
+        return Optional.ofNullable(value);
     }
 }
