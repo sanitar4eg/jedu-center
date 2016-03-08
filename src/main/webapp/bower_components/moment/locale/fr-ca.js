@@ -2,9 +2,8 @@
 //! locale : canadian french (fr-ca)
 //! author : Jonathan Abourbih : https://github.com/jonbca
 
-;(function (global, factory) {
-   typeof exports === 'object' && typeof module !== 'undefined'
-       && typeof require === 'function' ? factory(require('../moment')) :
+(function (global, factory) {
+   typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('../moment')) :
    typeof define === 'function' && define.amd ? define(['moment'], factory) :
    factory(global.moment)
 }(this, function (moment) { 'use strict';
@@ -18,11 +17,11 @@
         weekdaysMin : 'Di_Lu_Ma_Me_Je_Ve_Sa'.split('_'),
         longDateFormat : {
             LT : 'HH:mm',
-            LTS : 'HH:mm:ss',
+            LTS : 'LT:ss',
             L : 'YYYY-MM-DD',
             LL : 'D MMMM YYYY',
-            LLL : 'D MMMM YYYY HH:mm',
-            LLLL : 'dddd D MMMM YYYY HH:mm'
+            LLL : 'D MMMM YYYY LT',
+            LLLL : 'dddd D MMMM YYYY LT'
         },
         calendar : {
             sameDay: '[Aujourd\'hui à] LT',
@@ -47,9 +46,9 @@
             y : 'un an',
             yy : '%d ans'
         },
-        ordinalParse: /\d{1,2}(er|e)/,
+        ordinalParse: /\d{1,2}(er|)/,
         ordinal : function (number) {
-            return number + (number === 1 ? 'er' : 'e');
+            return number + (number === 1 ? 'er' : '');
         }
     });
 

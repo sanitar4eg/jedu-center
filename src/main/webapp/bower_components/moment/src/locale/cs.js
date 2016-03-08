@@ -73,30 +73,16 @@ export default moment.defineLocale('cs', {
         }
         return _monthsParse;
     }(months, monthsShort)),
-    shortMonthsParse : (function (monthsShort) {
-        var i, _shortMonthsParse = [];
-        for (i = 0; i < 12; i++) {
-            _shortMonthsParse[i] = new RegExp('^' + monthsShort[i] + '$', 'i');
-        }
-        return _shortMonthsParse;
-    }(monthsShort)),
-    longMonthsParse : (function (months) {
-        var i, _longMonthsParse = [];
-        for (i = 0; i < 12; i++) {
-            _longMonthsParse[i] = new RegExp('^' + months[i] + '$', 'i');
-        }
-        return _longMonthsParse;
-    }(months)),
     weekdays : 'neděle_pondělí_úterý_středa_čtvrtek_pátek_sobota'.split('_'),
     weekdaysShort : 'ne_po_út_st_čt_pá_so'.split('_'),
     weekdaysMin : 'ne_po_út_st_čt_pá_so'.split('_'),
     longDateFormat : {
         LT: 'H:mm',
-        LTS : 'H:mm:ss',
+        LTS : 'LT:ss',
         L : 'DD.MM.YYYY',
         LL : 'D. MMMM YYYY',
-        LLL : 'D. MMMM YYYY H:mm',
-        LLLL : 'dddd D. MMMM YYYY H:mm'
+        LLL : 'D. MMMM YYYY LT',
+        LLLL : 'dddd D. MMMM YYYY LT'
     },
     calendar : {
         sameDay: '[dnes v] LT',

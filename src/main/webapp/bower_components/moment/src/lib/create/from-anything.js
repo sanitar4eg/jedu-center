@@ -1,3 +1,4 @@
+import defaultParsingFlags from './default-parsing-flags';
 import isArray from '../utils/is-array';
 import isDate from '../utils/is-date';
 import map from '../utils/map';
@@ -6,7 +7,6 @@ import { Moment, isMoment } from '../moment/constructor';
 import { getLocale } from '../locale/locales';
 import { hooks } from '../utils/hooks';
 import checkOverflow from './check-overflow';
-import { isValid } from './valid';
 
 import { configFromStringAndArray }  from './from-string-and-array';
 import { configFromStringAndFormat } from './from-string-and-format';
@@ -15,19 +15,9 @@ import { configFromArray }           from './from-array';
 import { configFromObject }          from './from-object';
 
 function createFromConfig (config) {
-    var res = new Moment(checkOverflow(prepareConfig(config)));
-    if (res._nextDay) {
-        // Adding is smart enough around DST
-        res.add(1, 'd');
-        res._nextDay = undefined;
-    }
-
-    return res;
-}
-
-export function prepareConfig (config) {
     var input = config._i,
-        format = config._f;
+        format = config._f,
+        res;
 
     config._locale = config._locale || getLocale(config._l);
 
@@ -45,23 +35,24 @@ export function prepareConfig (config) {
         configFromStringAndArray(config);
     } else if (format) {
         configFromStringAndFormat(config);
-    } else if (isDate(input)) {
-        config._d = input;
     } else {
         configFromInput(config);
     }
 
-    if (!isValid(config)) {
-        config._d = null;
+    res = new Moment(checkOverflow(config));
+    if (res._nextDay) {
+        // Adding is smart enough around DST
+        res.add(1, 'd');
+        res._nextDay = undefined;
     }
 
-    return config;
+    return res;
 }
 
 function configFromInput(config) {
     var input = config._i;
     if (input === undefined) {
-        config._d = new Date(hooks.now());
+        config._d = new Date();
     } else if (isDate(input)) {
         config._d = new Date(+input);
     } else if (typeof input === 'string') {
@@ -96,6 +87,7 @@ export function createLocalOrUTC (input, format, locale, strict, isUTC) {
     c._i = input;
     c._f = format;
     c._strict = strict;
+    c._pf = defaultParsingFlags();
 
     return createFromConfig(c);
 }

@@ -3,7 +3,6 @@
 //! author : Aggelos Karalias : https://github.com/mehiel
 
 import moment from '../moment';
-import isFunction from '../lib/utils/is-function';
 
 export default moment.defineLocale('el', {
     monthsNominativeEl : 'Ιανουάριος_Φεβρουάριος_Μάρτιος_Απρίλιος_Μάιος_Ιούνιος_Ιούλιος_Αύγουστος_Σεπτέμβριος_Οκτώβριος_Νοέμβριος_Δεκέμβριος'.split('_'),
@@ -35,8 +34,8 @@ export default moment.defineLocale('el', {
         LTS : 'h:mm:ss A',
         L : 'DD/MM/YYYY',
         LL : 'D MMMM YYYY',
-        LLL : 'D MMMM YYYY h:mm A',
-        LLLL : 'dddd, D MMMM YYYY h:mm A'
+        LLL : 'D MMMM YYYY LT',
+        LLLL : 'dddd, D MMMM YYYY LT'
     },
     calendarEl : {
         sameDay : '[Σήμερα {}] LT',
@@ -56,7 +55,7 @@ export default moment.defineLocale('el', {
     calendar : function (key, mom) {
         var output = this._calendarEl[key],
             hours = mom && mom.hours();
-        if (isFunction(output)) {
+        if (typeof output === 'function') {
             output = output.apply(mom);
         }
         return output.replace('{}', (hours % 12 === 1 ? 'στη' : 'στις'));

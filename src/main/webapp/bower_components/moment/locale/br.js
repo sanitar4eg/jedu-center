@@ -2,9 +2,8 @@
 //! locale : breton (br)
 //! author : Jean-Baptiste Le Duigou : https://github.com/jbleduigou
 
-;(function (global, factory) {
-   typeof exports === 'object' && typeof module !== 'undefined'
-       && typeof require === 'function' ? factory(require('../moment')) :
+(function (global, factory) {
+   typeof exports === 'object' && typeof module !== 'undefined' ? factory(require('../moment')) :
    typeof define === 'function' && define.amd ? define(['moment'], factory) :
    factory(global.moment)
 }(this, function (moment) { 'use strict';
@@ -65,8 +64,8 @@
             LTS : 'h[e]mm:ss A',
             L : 'DD/MM/YYYY',
             LL : 'D [a viz] MMMM YYYY',
-            LLL : 'D [a viz] MMMM YYYY h[e]mm A',
-            LLLL : 'dddd, D [a viz] MMMM YYYY h[e]mm A'
+            LLL : 'D [a viz] MMMM YYYY LT',
+            LLLL : 'dddd, D [a viz] MMMM YYYY LT'
         },
         calendar : {
             sameDay : '[Hiziv da] LT',

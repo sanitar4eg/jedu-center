@@ -66,16 +66,24 @@ function translate(number, withoutSuffix, key, isFuture) {
 export default moment.defineLocale('sk', {
     months : months,
     monthsShort : monthsShort,
+    monthsParse : (function (months, monthsShort) {
+        var i, _monthsParse = [];
+        for (i = 0; i < 12; i++) {
+            // use custom parser to solve problem with July (červenec)
+            _monthsParse[i] = new RegExp('^' + months[i] + '$|^' + monthsShort[i] + '$', 'i');
+        }
+        return _monthsParse;
+    }(months, monthsShort)),
     weekdays : 'nedeľa_pondelok_utorok_streda_štvrtok_piatok_sobota'.split('_'),
     weekdaysShort : 'ne_po_ut_st_št_pi_so'.split('_'),
     weekdaysMin : 'ne_po_ut_st_št_pi_so'.split('_'),
     longDateFormat : {
         LT: 'H:mm',
-        LTS : 'H:mm:ss',
+        LTS : 'LT:ss',
         L : 'DD.MM.YYYY',
         LL : 'D. MMMM YYYY',
-        LLL : 'D. MMMM YYYY H:mm',
-        LLLL : 'dddd D. MMMM YYYY H:mm'
+        LLL : 'D. MMMM YYYY LT',
+        LLLL : 'dddd D. MMMM YYYY LT'
     },
     calendar : {
         sameDay: '[dnes o] LT',

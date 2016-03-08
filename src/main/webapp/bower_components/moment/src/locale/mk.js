@@ -12,28 +12,28 @@ export default moment.defineLocale('mk', {
     weekdaysMin : 'нe_пo_вт_ср_че_пе_сa'.split('_'),
     longDateFormat : {
         LT : 'H:mm',
-        LTS : 'H:mm:ss',
+        LTS : 'LT:ss',
         L : 'D.MM.YYYY',
         LL : 'D MMMM YYYY',
-        LLL : 'D MMMM YYYY H:mm',
-        LLLL : 'dddd, D MMMM YYYY H:mm'
+        LLL : 'D MMMM YYYY LT',
+        LLLL : 'dddd, D MMMM YYYY LT'
     },
     calendar : {
         sameDay : '[Денес во] LT',
         nextDay : '[Утре во] LT',
-        nextWeek : '[Во] dddd [во] LT',
+        nextWeek : 'dddd [во] LT',
         lastDay : '[Вчера во] LT',
         lastWeek : function () {
             switch (this.day()) {
             case 0:
             case 3:
             case 6:
-                return '[Изминатата] dddd [во] LT';
+                return '[Во изминатата] dddd [во] LT';
             case 1:
             case 2:
             case 4:
             case 5:
-                return '[Изминатиот] dddd [во] LT';
+                return '[Во изминатиот] dddd [во] LT';
             }
         },
         sameElse : 'L'
