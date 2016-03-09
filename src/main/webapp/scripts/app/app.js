@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('jeducenterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pascalprecht.translate',
-    'ngResource', 'ngCookies', 'ngAria', 'ngCacheBuster', 'ngFileUpload',
-    // jhipster-needle-angularjs-add-module JHipster will add new module here
-    'ui.bootstrap', 'ui.router',  'infinite-scroll', 'angular-loading-bar'])
+        'ngResource', 'ngCookies', 'ngAria', 'ngCacheBuster', 'ngFileUpload',
+        // jhipster-needle-angularjs-add-module JHipster will add new module here
+        'ui.bootstrap', 'ui.router', 'infinite-scroll', 'angular-loading-bar'])
 
     .run(function ($rootScope, $location, $window, $http, $state, $translate, Language, Auth, Principal, ENV, VERSION) {
         // update the window title using params in the following
@@ -11,7 +11,7 @@ angular.module('jeducenterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pas
         // 1. titleKey parameter
         // 2. $state.$current.data.pageTitle (current state page title)
         // 3. 'global.title'
-        var updateTitle = function(titleKey) {
+        var updateTitle = function (titleKey) {
             if (!titleKey && $state.$current.data && $state.$current.data.pageTitle) {
                 titleKey = $state.$current.data.pageTitle;
             }
@@ -38,16 +38,16 @@ angular.module('jeducenterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pas
 
         });
 
-        $rootScope.$on('$stateChangeSuccess',  function(event, toState, toParams, fromState, fromParams) {
-            var titleKey = 'global.title' ;
+        $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+            var titleKey = 'global.title';
 
             // Remember previous state unless we've been redirected to login or we've just
             // reset the state memory after logout. If we're redirected to login, our
             // previousState is already set in the authExpiredInterceptor. If we're going
             // to login directly, we don't want to be sent to some previous state anyway
             if (toState.name != 'login' && $rootScope.previousStateName) {
-              $rootScope.previousStateName = fromState.name;
-              $rootScope.previousStateParams = fromParams;
+                $rootScope.previousStateName = fromState.name;
+                $rootScope.previousStateParams = fromParams;
             }
 
             // Set the page title key to the one configured in state or use default one
@@ -58,10 +58,12 @@ angular.module('jeducenterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pas
         });
 
         // if the current translation changes, update the window title
-        $rootScope.$on('$translateChangeSuccess', function() { updateTitle(); });
+        $rootScope.$on('$translateChangeSuccess', function () {
+            updateTitle();
+        });
 
 
-        $rootScope.back = function() {
+        $rootScope.back = function () {
             // If previous state is 'activate' or do not exist go to 'home'
             if ($rootScope.previousStateName === 'activate' || $state.get($rootScope.previousStateName) === null) {
                 $state.go('home');
@@ -123,13 +125,21 @@ angular.module('jeducenterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pas
 
     })
     // jhipster-needle-angularjs-add-config JHipster will add new application configuration here
-    .config(['$urlMatcherFactoryProvider', function($urlMatcherFactory) {
+    .config(['$urlMatcherFactoryProvider', function ($urlMatcherFactory) {
         $urlMatcherFactory.type('boolean', {
-            name : 'boolean',
-            decode: function(val) { return val == true ? true : val == "true" ? true : false },
-            encode: function(val) { return val ? 1 : 0; },
-            equals: function(a, b) { return this.is(a) && a === b; },
-            is: function(val) { return [true,false,0,1].indexOf(val) >= 0 },
+            name: 'boolean',
+            decode: function (val) {
+                return val == true ? true : val == "true" ? true : false
+            },
+            encode: function (val) {
+                return val ? 1 : 0;
+            },
+            equals: function (a, b) {
+                return this.is(a) && a === b;
+            },
+            is: function (val) {
+                return [true, false, 0, 1].indexOf(val) >= 0
+            },
             pattern: /bool|true|0|1/
         });
     }]);
