@@ -3,20 +3,22 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-8">
-                <button class="btn btn-primary" ng-click="getImportFile()">
+                <button class="btn btn-primary" ng-click="getExportFile()">
                     <span class="glyphicon glyphicon-folder-open"></span>
-                    <span translate="jeducenterApp.student.home.historyLabel">History of students
-                    </span>
+                    <span translate="jeducenterApp.student.home.exportLabel">Download import file</span>
                 </button>
             </div>
         </div>
     </div>
 
+    <br/>
+
     <form method="post" id="formFileUpload" enctype="multipart/form-data"
           ng-submit="uploadExportFile()">
         <div class="form-group">
             <div class="col-xs-8 input-group form-control-static ">
-                <label id="input-label" class="control-label" for="input-file">Select File</label>
+                <label id="input-label" class="control-label" for="input-file"
+                       translate="jeducenterApp.student.home.importLabel">Select File</label>
                 <input id="input-file" name="file" type="file" class="file" data-show-preview="false" ng-model="file"
                        data-rule-required="true" accept=".csv,.xsl,.xml,.mpp,application/vnd.ms-excel">
             </div>

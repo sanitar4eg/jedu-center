@@ -4,7 +4,7 @@ angular.module('jeducenterApp')
     .controller('StudentIntegrationController', function ($scope, $state, $location, tmhDynamicLocale,
                                                           StudentIntegration) {
 
-        $scope.getImportFile = function () {
+        $scope.getExportFile = function () {
             var importUrl = $location.protocol()+"://"+$location.host()+":"+$location.port()+"/api/export/students/";
             window.open(importUrl);
         };
