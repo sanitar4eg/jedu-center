@@ -10,17 +10,28 @@ export default moment.defineLocale('vi', {
     weekdays : 'chủ nhật_thứ hai_thứ ba_thứ tư_thứ năm_thứ sáu_thứ bảy'.split('_'),
     weekdaysShort : 'CN_T2_T3_T4_T5_T6_T7'.split('_'),
     weekdaysMin : 'CN_T2_T3_T4_T5_T6_T7'.split('_'),
+    meridiemParse: /sa|ch/i,
+    isPM : function (input) {
+        return /^ch$/i.test(input);
+    },
+    meridiem : function (hours, minutes, isLower) {
+        if (hours < 12) {
+            return isLower ? 'sa' : 'SA';
+        } else {
+            return isLower ? 'ch' : 'CH';
+        }
+    },
     longDateFormat : {
         LT : 'HH:mm',
-        LTS : 'LT:ss',
+        LTS : 'HH:mm:ss',
         L : 'DD/MM/YYYY',
         LL : 'D MMMM [năm] YYYY',
-        LLL : 'D MMMM [năm] YYYY LT',
-        LLLL : 'dddd, D MMMM [năm] YYYY LT',
+        LLL : 'D MMMM [năm] YYYY HH:mm',
+        LLLL : 'dddd, D MMMM [năm] YYYY HH:mm',
         l : 'DD/M/YYYY',
         ll : 'D MMM YYYY',
-        lll : 'D MMM YYYY LT',
-        llll : 'ddd, D MMM YYYY LT'
+        lll : 'D MMM YYYY HH:mm',
+        llll : 'ddd, D MMM YYYY HH:mm'
     },
     calendar : {
         sameDay: '[Hôm nay lúc] LT',

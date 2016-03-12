@@ -15,8 +15,8 @@ export default moment.defineLocale('ml', {
         LTS : 'A h:mm:ss -നു',
         L : 'DD/MM/YYYY',
         LL : 'D MMMM YYYY',
-        LLL : 'D MMMM YYYY, LT',
-        LLLL : 'dddd, D MMMM YYYY, LT'
+        LLL : 'D MMMM YYYY, A h:mm -നു',
+        LLLL : 'dddd, D MMMM YYYY, A h:mm -നു'
     },
     calendar : {
         sameDay : '[ഇന്ന്] LT',
@@ -42,8 +42,17 @@ export default moment.defineLocale('ml', {
         yy : '%d വർഷം'
     },
     meridiemParse: /രാത്രി|രാവിലെ|ഉച്ച കഴിഞ്ഞ്|വൈകുന്നേരം|രാത്രി/i,
-    isPM : function (input) {
-        return /^(ഉച്ച കഴിഞ്ഞ്|വൈകുന്നേരം|രാത്രി)$/.test(input);
+    meridiemHour : function (hour, meridiem) {
+        if (hour === 12) {
+            hour = 0;
+        }
+        if ((meridiem === 'രാത്രി' && hour >= 4) ||
+                meridiem === 'ഉച്ച കഴിഞ്ഞ്' ||
+                meridiem === 'വൈകുന്നേരം') {
+            return hour + 12;
+        } else {
+            return hour;
+        }
     },
     meridiem : function (hour, minute, isLower) {
         if (hour < 4) {
