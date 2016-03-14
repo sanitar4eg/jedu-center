@@ -1,0 +1,22 @@
+{
+    "jeducenterApp": {
+        "lesson" : {
+            "home": {
+                "title": "Уроки",
+                "createLabel": "Создать новый урок",
+                "createOrEditLabel": "Создать или редактировать урок",
+                "search": "Поиск урока"
+            },
+            "delete": {
+                "question": "Вы уверены что хотите удалить урок {{ id }}?"
+            },
+            "detail": {
+                "title": "Урок"
+            },
+            "topic": "Тема",
+            "time": "Время",
+            "timeTable": "Расписание",
+            "evaluation": "Оценки"
+        }
+    }
+}

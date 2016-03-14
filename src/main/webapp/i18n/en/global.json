@@ -13,6 +13,9 @@
                 "recall": "Recall",
                 "note": "Note",
                 "form": "Form",
+                "timeTable": "TimeTable",
+                "lesson": "Lesson",
+                "evaluation": "Evaluation",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

@@ -20,7 +20,8 @@
             "type": "Type",
             "description": "Description",
             "isActive": "IsActive",
-            "student": "Student"
+            "student": "Student",
+            "timeTable": "TimeTable"
         }
     }
 }

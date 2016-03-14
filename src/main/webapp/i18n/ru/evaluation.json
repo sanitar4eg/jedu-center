@@ -1,0 +1,21 @@
+{
+    "jeducenterApp": {
+        "evaluation" : {
+            "home": {
+                "title": "Оценки",
+                "createLabel": "Создать новую оценку",
+                "createOrEditLabel": "Создать или редактировать оценку",
+                "search": "Поиск оценки"
+            },
+            "delete": {
+                "question": "Вы уврены, что хотите удалить оценку {{ id }}?"
+            },
+            "detail": {
+                "title": "Оценка"
+            },
+            "value": "Значение",
+            "lesson": "Урок",
+            "student": "Студент"
+        }
+    }
+}

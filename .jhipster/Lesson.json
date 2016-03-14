@@ -1,0 +1,40 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "timeTable",
+            "otherEntityName": "timeTable",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "evaluation",
+            "otherEntityName": "evaluation",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "lesson"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "topic",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "time",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20160314214531",
+    "dto": "no",
+    "service": "no",
+    "pagination": "pager"
+}

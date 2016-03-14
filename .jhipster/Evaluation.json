@@ -1,0 +1,36 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "lesson",
+            "otherEntityName": "lesson",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "topic"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "student",
+            "otherEntityName": "student",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "lastName"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "value",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required",
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": 0,
+            "fieldValidateRulesMax": "6"
+        }
+    ],
+    "changelogDate": "20160314214819",
+    "dto": "no",
+    "service": "no",
+    "pagination": "pagination"
+}

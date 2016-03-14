@@ -46,6 +46,9 @@ public class GroupOfStudent implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Student> students = new HashSet<>();
 
+    @OneToOne
+    private TimeTable timeTable;
+
     public Long getId() {
         return id;
     }
@@ -92,6 +95,14 @@ public class GroupOfStudent implements Serializable {
 
     public void setStudents(Set<Student> students) {
         this.students = students;
+    }
+
+    public TimeTable getTimeTable() {
+        return timeTable;
+    }
+
+    public void setTimeTable(TimeTable timeTable) {
+        this.timeTable = timeTable;
     }
 
     @Override

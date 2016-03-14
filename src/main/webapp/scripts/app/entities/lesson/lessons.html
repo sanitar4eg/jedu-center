@@ -1,0 +1,63 @@
+<div>
+    <h2 translate="jeducenterApp.lesson.home.title">Lessons</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="lesson.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                        translate="jeducenterApp.lesson.home.createLabel">Create new Lesson
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="loadAll()">
+                    <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="topic"><span translate="jeducenterApp.lesson.topic">Topic</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="time"><span translate="jeducenterApp.lesson.time">Time</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="timeTable.id"><span translate="jeducenterApp.lesson.timeTable">timeTable</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="lesson in lessons track by lesson.id">
+                    <td><a ui-sref="lesson.detail({id:lesson.id})">{{lesson.id}}</a></td>
+                    <td>{{lesson.topic}}</td>
+                    <td>{{lesson.time | date:'medium'}}</td>
+                    <td>
+                        <a ui-sref="timeTable.detail({id:lesson.timeTable.id})">{{lesson.timeTable.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="lesson.detail({id:lesson.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="lesson.edit({id:lesson.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="lesson.delete({id:lesson.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <uib-pager total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pager>
+</div>

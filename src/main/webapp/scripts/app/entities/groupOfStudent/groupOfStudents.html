@@ -23,6 +23,7 @@
                     <th><span translate="jeducenterApp.groupOfStudent.type">Type</span></th>
                     <th><span translate="jeducenterApp.groupOfStudent.description">Description</span></th>
                     <th><span translate="jeducenterApp.groupOfStudent.isActive">IsActive</span></th>
+                    <th><span translate="jeducenterApp.groupOfStudent.timeTable">timeTable</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -33,6 +34,9 @@
                     <td translate="{{'jeducenterApp.TypeEnumeration.' + groupOfStudent.type}}">{{groupOfStudent.type}}</td>
                     <td>{{groupOfStudent.description}}</td>
                     <td>{{groupOfStudent.isActive}}</td>
+                    <td>
+                        <a ui-sref="timeTable.detail({id:groupOfStudent.timeTable.id})">{{groupOfStudent.timeTable.id}}</a>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

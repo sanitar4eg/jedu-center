@@ -1,0 +1,24 @@
+{
+    "jeducenterApp": {
+        "timeTable" : {
+            "home": {
+                "title": "TimeTables",
+                "createLabel": "Create a new TimeTable",
+                "createOrEditLabel": "Create or edit a TimeTable",
+                "search": "Search for TimeTable"
+            },
+            "created": "A new TimeTable is created with identifier {{ param }}",
+            "updated": "A TimeTable is updated with identifier {{ param }}",
+            "deleted": "A TimeTable is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete TimeTable {{ id }}?"
+            },
+            "detail": {
+                "title": "TimeTable"
+            },
+            "name": "Name",
+            "groupOfStudent": "GroupOfStudent",
+            "lesson": "Lesson"
+        }
+    }
+}

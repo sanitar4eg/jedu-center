@@ -42,6 +42,14 @@
                     <span class="form-control-static">{{groupOfStudent.isActive}}</span>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <span translate="jeducenterApp.groupOfStudent.timeTable">timeTable</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="timeTable.detail({id:groupOfStudent.timeTable.id})">{{groupOfStudent.timeTable.id}}</a>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>

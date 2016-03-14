@@ -1,0 +1,24 @@
+{
+    "jeducenterApp": {
+        "evaluation" : {
+            "home": {
+                "title": "Evaluations",
+                "createLabel": "Create a new Evaluation",
+                "createOrEditLabel": "Create or edit a Evaluation",
+                "search": "Search for Evaluation"
+            },
+            "created": "A new Evaluation is created with identifier {{ param }}",
+            "updated": "A Evaluation is updated with identifier {{ param }}",
+            "deleted": "A Evaluation is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Evaluation {{ id }}?"
+            },
+            "detail": {
+                "title": "Evaluation"
+            },
+            "value": "Value",
+            "lesson": "Lesson",
+            "student": "Student"
+        }
+    }
+}

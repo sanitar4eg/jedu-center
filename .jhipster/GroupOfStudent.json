@@ -6,6 +6,15 @@
             "otherEntityName": "student",
             "relationshipType": "one-to-many",
             "otherEntityRelationshipName": "groupOfStudent"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "timeTable",
+            "otherEntityName": "timeTable",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "groupOfStudent"
         }
     ],
     "fields": [

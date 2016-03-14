@@ -1,0 +1,33 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "groupOfStudent",
+            "otherEntityName": "groupOfStudent",
+            "relationshipType": "one-to-one",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "timeTable"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "lesson",
+            "otherEntityName": "lesson",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "timeTable"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20160312173231",
+    "dto": "no",
+    "service": "no",
+    "pagination": "no"
+}

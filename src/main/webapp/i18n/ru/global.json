@@ -13,6 +13,9 @@
                 "recall": "Отзывы",
                 "note": "Заметки",
                 "form": "Анкеты",
+                "timeTable": "Расписание",
+                "lesson": "Уроки",
+                "evaluation": "Оценки",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

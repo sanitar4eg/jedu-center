@@ -1,0 +1,21 @@
+{
+    "jeducenterApp": {
+        "timeTable" : {
+            "home": {
+                "title": "Расписание",
+                "createLabel": "Создать расписание",
+                "createOrEditLabel": "Создать или редактировать расписание",
+                "search": "Поиск расписания"
+            },
+            "delete": {
+                "question": "Вы уверены, что хотите удалить расписание? {{ id }}?"
+            },
+            "detail": {
+                "title": "Расписание"
+            },
+            "name": "Имя",
+            "groupOfStudent": "Группа",
+            "lesson": "Уроки"
+        }
+    }
+}
