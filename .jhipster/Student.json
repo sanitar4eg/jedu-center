@@ -23,6 +23,14 @@
             "relationshipType": "many-to-one",
             "otherEntityField": "lastName",
             "otherEntityRelationshipName": "student"
+        },
+        {
+            "relationshipId": 4,
+            "relationshipName": "form",
+            "otherEntityName": "form",
+            "relationshipType": "one-to-one",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "student"
         }
     ],
     "fields": [

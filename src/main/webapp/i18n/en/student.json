@@ -28,7 +28,8 @@
             "isActive": "IsActive",
             "user": "User",
             "groupOfStudent": "GroupOfStudent",
-            "curator": "Curator"
+            "curator": "Curator",
+            "form": "Form"
         }
     }
 }

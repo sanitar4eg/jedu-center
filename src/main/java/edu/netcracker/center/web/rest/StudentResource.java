@@ -6,6 +6,7 @@ import edu.netcracker.center.service.StudentService;
 import edu.netcracker.center.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * REST controller for managing Student.
@@ -26,10 +29,10 @@ import java.util.Optional;
 public class StudentResource {
 
     private final Logger log = LoggerFactory.getLogger(StudentResource.class);
-
+        
     @Inject
     private StudentService studentService;
-
+    
     /**
      * POST  /students -> Create a new student.
      */
@@ -73,10 +76,14 @@ public class StudentResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public List<Student> getAllStudents() {
+    public List<Student> getAllStudents(@RequestParam(required = false) String filter) {
+        if ("form-is-null".equals(filter)) {
+            log.debug("REST request to get all Students where form is null");
+            return studentService.findAllWhereFormIsNull();
+        }
         log.debug("REST request to get all Students");
         return studentService.findAll();
-    }
+            }
 
     /**
      * GET  /students/:id -> get the "id" student.

@@ -1,17 +1,15 @@
 package edu.netcracker.center.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import edu.netcracker.center.domain.enumeration.TypeEnumeration;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
-
-import edu.netcracker.center.domain.enumeration.TypeEnumeration;
-import org.hibernate.validator.constraints.Email;
 
 /**
  * A Student.
@@ -71,6 +69,10 @@ public class Student implements Serializable {
     @ManyToOne
     @JoinColumn(name = "curator_id")
     private Curator curator;
+
+    @OneToOne(mappedBy = "student")
+    @JsonIgnore
+    private Form form;
 
     public Long getId() {
         return id;
@@ -184,6 +186,14 @@ public class Student implements Serializable {
         this.curator = curator;
     }
 
+    public Form getForm() {
+        return form;
+    }
+
+    public void setForm(Form form) {
+        this.form = form;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -193,7 +203,7 @@ public class Student implements Serializable {
             return false;
         }
         Student student = (Student) o;
-        if(student.id == null || id == null) {
+        if (student.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, student.id);

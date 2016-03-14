@@ -20,6 +20,11 @@ public interface StudentService {
      *  @return the list of entities
      */
     public List<Student> findAll();
+    /**
+     *  get all the students where Form is null.
+     *  @return the list of entities
+     */
+    public List<Student> findAllWhereFormIsNull();
 
     /**
      *  get the "id" student.
