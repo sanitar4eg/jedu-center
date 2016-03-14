@@ -1,5 +1,30 @@
 {
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "login",
+            "otherEntityRelationshipName": "student",
+            "ownerSide": true
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "groupOfStudent",
+            "otherEntityName": "groupOfStudent",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "curator",
+            "otherEntityName": "curator",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "lastName",
+            "otherEntityRelationshipName": "student"
+        }
+    ],
     "fields": [
         {
             "fieldId": 1,
@@ -9,7 +34,10 @@
         {
             "fieldId": 2,
             "fieldName": "lastName",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldId": 3,
@@ -55,11 +83,14 @@
         },
         {
             "fieldId": 10,
-            "fieldName": "groupName",
-            "fieldType": "String"
+            "fieldName": "isActive",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
-    "changelogDate": "20160120075554",
+    "changelogDate": "20160312175031",
     "dto": "no",
     "service": "serviceImpl",
     "pagination": "no",

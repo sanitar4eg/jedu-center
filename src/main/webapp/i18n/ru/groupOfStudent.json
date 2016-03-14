@@ -1,0 +1,23 @@
+{
+    "jeducenterApp": {
+        "groupOfStudent" : {
+            "home": {
+                "title": "Группы",
+                "createLabel": "Создать новую группу",
+                "createOrEditLabel": "Создать или редактировать группу",
+                "search": "Искать группу"
+            },
+            "delete": {
+                "question": "Вы уверены, что хотите удалить группу {{ id }}?"
+            },
+            "detail": {
+                "title": "Группа"
+            },
+            "name": "Имя",
+            "type": "Тип",
+            "description": "Описание",
+            "isActive": "Активна",
+            "student": "Студенты"
+        }
+    }
+}

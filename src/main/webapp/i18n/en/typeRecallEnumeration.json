@@ -1,0 +1,10 @@
+{
+    "jeducenterApp": {
+        "TypeRecallEnumeration" : {
+            "null": "",
+            "Technical": "Technical",
+            "Interview": "Interview",
+            "Managerial": "Managerial"
+        }
+    }
+}

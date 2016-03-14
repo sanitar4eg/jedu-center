@@ -6,17 +6,17 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 import edu.netcracker.center.domain.enumeration.TypeEnumeration;
-import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Email;
 
 /**
  * A Student.
  */
 @Entity
-@Audited
 @Table(name = "student")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Student implements Serializable {
@@ -28,7 +28,8 @@ public class Student implements Serializable {
     @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last_name")
+    @NotNull
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
     @Column(name = "middle_name")
@@ -56,8 +57,20 @@ public class Student implements Serializable {
     @Column(name = "course")
     private String course;
 
-    @Column(name = "group_name")
-    private String groupName;
+    @NotNull
+    @Column(name = "is_active", nullable = false)
+    private Boolean isActive;
+
+    @OneToOne
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "group_of_student_id")
+    private GroupOfStudent groupOfStudent;
+
+    @ManyToOne
+    @JoinColumn(name = "curator_id")
+    private Curator curator;
 
     public Long getId() {
         return id;
@@ -139,12 +152,36 @@ public class Student implements Serializable {
         this.course = course;
     }
 
-    public String getGroupName() {
-        return groupName;
+    public Boolean getIsActive() {
+        return isActive;
     }
 
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public GroupOfStudent getGroupOfStudent() {
+        return groupOfStudent;
+    }
+
+    public void setGroupOfStudent(GroupOfStudent groupOfStudent) {
+        this.groupOfStudent = groupOfStudent;
+    }
+
+    public Curator getCurator() {
+        return curator;
+    }
+
+    public void setCurator(Curator curator) {
+        this.curator = curator;
     }
 
     @Override
@@ -180,7 +217,7 @@ public class Student implements Serializable {
             ", university='" + university + "'" +
             ", specialty='" + specialty + "'" +
             ", course='" + course + "'" +
-            ", groupName='" + groupName + "'" +
+            ", isActive='" + isActive + "'" +
             '}';
     }
 }

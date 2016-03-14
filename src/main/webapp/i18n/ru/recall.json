@@ -1,0 +1,23 @@
+{
+    "jeducenterApp": {
+        "recall" : {
+            "home": {
+                "title": "Отзывы",
+                "createLabel": "Создать новый отзыв",
+                "createOrEditLabel": "Создать или редактировать отзыв",
+                "search": "Искать отзыв"
+            },
+            "delete": {
+                "question": "Вы уверены, что хотите удалить отзыв {{ id }}?"
+            },
+            "detail": {
+                "title": "Отзыв"
+            },
+            "type": "Тип",
+            "name": "Имя",
+            "description": "Описание",
+            "student": "Студент",
+            "curator": "Куратор"
+        }
+    }
+}

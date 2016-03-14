@@ -1,0 +1,48 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "student",
+            "otherEntityName": "student",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "lastName"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "curator",
+            "otherEntityName": "curator",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "lastName",
+            "otherEntityRelationshipName": "recall"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "type",
+            "fieldType": "TypeRecallEnumeration",
+            "fieldValues": "Technical,Interview,Managerial",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "description",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20160312182239",
+    "dto": "no",
+    "service": "no",
+    "pagination": "no"
+}

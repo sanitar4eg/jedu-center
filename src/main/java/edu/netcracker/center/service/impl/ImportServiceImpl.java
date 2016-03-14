@@ -58,7 +58,7 @@ public class ImportServiceImpl implements ImportService {
                 setParameter(row, StudentXslView.UNIVER, student::setUniversity);
                 setParameter(row, StudentXslView.SPECIALTY, student::setSpecialty);
                 setParameter(row, StudentXslView.COURSE, student::setCourse);
-                setParameter(row, StudentXslView.GROUP, student::setGroupName);
+//                setParameter(row, StudentXslView.GROUP, student::setGroupName);
 
                 studentRepository.save(student);
             }

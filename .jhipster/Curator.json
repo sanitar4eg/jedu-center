@@ -1,0 +1,67 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "login",
+            "otherEntityRelationshipName": "curator",
+            "ownerSide": true
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "student",
+            "otherEntityName": "student",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "curator"
+        },
+        {
+            "relationshipId": 3,
+            "relationshipName": "recall",
+            "otherEntityName": "recall",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "curator"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "firstName",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "lastName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "email",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "department",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "isActive",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20160312174511",
+    "dto": "no",
+    "service": "no",
+    "pagination": "no"
+}

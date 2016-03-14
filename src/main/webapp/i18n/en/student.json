@@ -4,10 +4,6 @@
             "home": {
                 "title": "Students",
                 "createLabel": "Create a new Student",
-                "historyLabel": "History of students",
-                "importLabel": "Choose file for import",
-                "exportLabel": "Download import file",
-                "integrationLabel": "Import/Export",
                 "createOrEditLabel": "Create or edit a Student",
                 "search": "Search for Student"
             },
@@ -29,7 +25,10 @@
             "university": "University",
             "specialty": "Specialty",
             "course": "Course",
-            "groupName": "GroupName"
+            "isActive": "IsActive",
+            "user": "User",
+            "groupOfStudent": "GroupOfStudent",
+            "curator": "Curator"
         }
     }
 }

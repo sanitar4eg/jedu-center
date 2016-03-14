@@ -39,7 +39,10 @@
                     <th><span translate="jeducenterApp.student.university">University</span></th>
                     <th><span translate="jeducenterApp.student.specialty">Specialty</span></th>
                     <th><span translate="jeducenterApp.student.course">Course</span></th>
-                    <th><span translate="jeducenterApp.student.groupName">GroupName</span></th>
+                    <th><span translate="jeducenterApp.student.isActive">IsActive</span></th>
+                    <th><span translate="jeducenterApp.student.user">user</span></th>
+                    <th><span translate="jeducenterApp.student.groupOfStudent">groupOfStudent</span></th>
+                    <th><span translate="jeducenterApp.student.curator">curator</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -55,7 +58,16 @@
                     <td>{{student.university}}</td>
                     <td>{{student.specialty}}</td>
                     <td>{{student.course}}</td>
-                    <td>{{student.groupName}}</td>
+                    <td>{{student.isActive}}</td>
+                    <td>
+                        {{student.user.login}}
+                    </td>
+                    <td>
+                        <a ui-sref="groupOfStudent.detail({id:student.groupOfStudent.id})">{{student.groupOfStudent.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="curator.detail({id:student.curator.id})">{{student.curator.lastName}}</a>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

@@ -8,6 +8,9 @@
             "entities": {
                 "main": "Сущности",
                 "student": "Студенты",
+                "groupOfStudent": "Группы",
+                "curator": "Кураторы",
+                "recall": "Отзывы",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

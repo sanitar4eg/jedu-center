@@ -1,0 +1,26 @@
+{
+    "jeducenterApp": {
+        "curator" : {
+            "home": {
+                "title": "Кураторы",
+                "createLabel": "Добавить нового куратора",
+                "createOrEditLabel": "Добавить или редактировать куратора",
+                "search": "Искать куратора"
+            },
+            "delete": {
+                "question": "Вы уверены, что хотите удалить куратора? {{ id }}?"
+            },
+            "detail": {
+                "title": "Куратор"
+            },
+            "firstName": "Имя",
+            "lastName": "Фамилия",
+            "email": "Email",
+            "department": "Отдел",
+            "isActive": "Активен",
+            "user": "User",
+            "student": "Студенты",
+            "recall": "Отзывы"
+        }
+    }
+}

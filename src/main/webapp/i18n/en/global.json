@@ -8,6 +8,9 @@
             "entities": {
                 "main": "Entities",
                 "student": "Student",
+                "groupOfStudent": "GroupOfStudent",
+                "curator": "Curator",
+                "recall": "Recall",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

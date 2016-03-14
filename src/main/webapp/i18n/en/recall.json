@@ -1,0 +1,26 @@
+{
+    "jeducenterApp": {
+        "recall" : {
+            "home": {
+                "title": "Recalls",
+                "createLabel": "Create a new Recall",
+                "createOrEditLabel": "Create or edit a Recall",
+                "search": "Search for Recall"
+            },
+            "created": "A new Recall is created with identifier {{ param }}",
+            "updated": "A Recall is updated with identifier {{ param }}",
+            "deleted": "A Recall is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Recall {{ id }}?"
+            },
+            "detail": {
+                "title": "Recall"
+            },
+            "type": "Type",
+            "name": "Name",
+            "description": "Description",
+            "student": "Student",
+            "curator": "Curator"
+        }
+    }
+}

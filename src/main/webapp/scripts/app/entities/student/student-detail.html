@@ -84,10 +84,34 @@
             </tr>
             <tr>
                 <td>
-                    <span translate="jeducenterApp.student.groupName">GroupName</span>
+                    <span translate="jeducenterApp.student.isActive">IsActive</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{student.groupName}}</span>
+                    <span class="form-control-static">{{student.isActive}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="jeducenterApp.student.user">user</span>
+                </td>
+                <td>
+                    {{student.user.login}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="jeducenterApp.student.groupOfStudent">groupOfStudent</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="groupOfStudent.detail({id:student.groupOfStudent.id})">{{student.groupOfStudent.name}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="jeducenterApp.student.curator">curator</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="curator.detail({id:student.curator.id})">{{student.curator.lastName}}</a>
                 </td>
             </tr>
             </tbody>

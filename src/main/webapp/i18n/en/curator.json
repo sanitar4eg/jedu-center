@@ -1,0 +1,29 @@
+{
+    "jeducenterApp": {
+        "curator" : {
+            "home": {
+                "title": "Curators",
+                "createLabel": "Create a new Curator",
+                "createOrEditLabel": "Create or edit a Curator",
+                "search": "Search for Curator"
+            },
+            "created": "A new Curator is created with identifier {{ param }}",
+            "updated": "A Curator is updated with identifier {{ param }}",
+            "deleted": "A Curator is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Curator {{ id }}?"
+            },
+            "detail": {
+                "title": "Curator"
+            },
+            "firstName": "FirstName",
+            "lastName": "LastName",
+            "email": "Email",
+            "department": "Department",
+            "isActive": "IsActive",
+            "user": "User",
+            "student": "Student",
+            "recall": "Recall"
+        }
+    }
+}

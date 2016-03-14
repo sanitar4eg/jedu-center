@@ -29,7 +29,10 @@
             "university": "Университет",
             "specialty": "Специальность",
             "course": "Курс",
-            "groupName": "Группа"
+            "isActive": "Активен",
+            "user": "User",
+            "groupOfStudent": "Группа",
+            "curator": "Куратор"
         }
     }
 }

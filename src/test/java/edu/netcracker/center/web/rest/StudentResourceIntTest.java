@@ -2,18 +2,19 @@ package edu.netcracker.center.web.rest;
 
 import edu.netcracker.center.Application;
 import edu.netcracker.center.domain.Student;
-import edu.netcracker.center.domain.enumeration.TypeEnumeration;
 import edu.netcracker.center.repository.StudentRepository;
 import edu.netcracker.center.service.StudentService;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -26,9 +27,10 @@ import javax.inject.Inject;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import edu.netcracker.center.domain.enumeration.TypeEnumeration;
 
 /**
  * Test class for the StudentResource REST controller.
@@ -47,11 +49,11 @@ public class StudentResourceIntTest {
     private static final String UPDATED_LAST_NAME = "BBBBB";
     private static final String DEFAULT_MIDDLE_NAME = "AAAAA";
     private static final String UPDATED_MIDDLE_NAME = "BBBBB";
-
+    
     private static final TypeEnumeration DEFAULT_TYPE = TypeEnumeration.DEV;
     private static final TypeEnumeration UPDATED_TYPE = TypeEnumeration.QA;
-    private static final String DEFAULT_EMAIL = "AAAAA@DSDS";
-    private static final String UPDATED_EMAIL = "BBBBB@DSDS";
+    private static final String DEFAULT_EMAIL = "AAAAA";
+    private static final String UPDATED_EMAIL = "BBBBB";
     private static final String DEFAULT_PHONE = "AAAAA";
     private static final String UPDATED_PHONE = "BBBBB";
     private static final String DEFAULT_UNIVERSITY = "AAAAA";
@@ -60,8 +62,9 @@ public class StudentResourceIntTest {
     private static final String UPDATED_SPECIALTY = "BBBBB";
     private static final String DEFAULT_COURSE = "AAAAA";
     private static final String UPDATED_COURSE = "BBBBB";
-    private static final String DEFAULT_GROUP_NAME = "AAAAA";
-    private static final String UPDATED_GROUP_NAME = "BBBBB";
+
+    private static final Boolean DEFAULT_IS_ACTIVE = false;
+    private static final Boolean UPDATED_IS_ACTIVE = true;
 
     @Inject
     private StudentRepository studentRepository;
@@ -101,7 +104,7 @@ public class StudentResourceIntTest {
         student.setUniversity(DEFAULT_UNIVERSITY);
         student.setSpecialty(DEFAULT_SPECIALTY);
         student.setCourse(DEFAULT_COURSE);
-        student.setGroupName(DEFAULT_GROUP_NAME);
+        student.setIsActive(DEFAULT_IS_ACTIVE);
     }
 
     @Test
@@ -129,7 +132,25 @@ public class StudentResourceIntTest {
         assertThat(testStudent.getUniversity()).isEqualTo(DEFAULT_UNIVERSITY);
         assertThat(testStudent.getSpecialty()).isEqualTo(DEFAULT_SPECIALTY);
         assertThat(testStudent.getCourse()).isEqualTo(DEFAULT_COURSE);
-        assertThat(testStudent.getGroupName()).isEqualTo(DEFAULT_GROUP_NAME);
+        assertThat(testStudent.getIsActive()).isEqualTo(DEFAULT_IS_ACTIVE);
+    }
+
+    @Test
+    @Transactional
+    public void checkLastNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = studentRepository.findAll().size();
+        // set the field null
+        student.setLastName(null);
+
+        // Create the Student, which fails.
+
+        restStudentMockMvc.perform(post("/api/students")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(student)))
+                .andExpect(status().isBadRequest());
+
+        List<Student> students = studentRepository.findAll();
+        assertThat(students).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -170,6 +191,24 @@ public class StudentResourceIntTest {
 
     @Test
     @Transactional
+    public void checkIsActiveIsRequired() throws Exception {
+        int databaseSizeBeforeTest = studentRepository.findAll().size();
+        // set the field null
+        student.setIsActive(null);
+
+        // Create the Student, which fails.
+
+        restStudentMockMvc.perform(post("/api/students")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(student)))
+                .andExpect(status().isBadRequest());
+
+        List<Student> students = studentRepository.findAll();
+        assertThat(students).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllStudents() throws Exception {
         // Initialize the database
         studentRepository.saveAndFlush(student);
@@ -188,7 +227,7 @@ public class StudentResourceIntTest {
                 .andExpect(jsonPath("$.[*].university").value(hasItem(DEFAULT_UNIVERSITY.toString())))
                 .andExpect(jsonPath("$.[*].specialty").value(hasItem(DEFAULT_SPECIALTY.toString())))
                 .andExpect(jsonPath("$.[*].course").value(hasItem(DEFAULT_COURSE.toString())))
-                .andExpect(jsonPath("$.[*].groupName").value(hasItem(DEFAULT_GROUP_NAME.toString())));
+                .andExpect(jsonPath("$.[*].isActive").value(hasItem(DEFAULT_IS_ACTIVE.booleanValue())));
     }
 
     @Test
@@ -211,7 +250,7 @@ public class StudentResourceIntTest {
             .andExpect(jsonPath("$.university").value(DEFAULT_UNIVERSITY.toString()))
             .andExpect(jsonPath("$.specialty").value(DEFAULT_SPECIALTY.toString()))
             .andExpect(jsonPath("$.course").value(DEFAULT_COURSE.toString()))
-            .andExpect(jsonPath("$.groupName").value(DEFAULT_GROUP_NAME.toString()));
+            .andExpect(jsonPath("$.isActive").value(DEFAULT_IS_ACTIVE.booleanValue()));
     }
 
     @Test
@@ -240,7 +279,7 @@ public class StudentResourceIntTest {
         student.setUniversity(UPDATED_UNIVERSITY);
         student.setSpecialty(UPDATED_SPECIALTY);
         student.setCourse(UPDATED_COURSE);
-        student.setGroupName(UPDATED_GROUP_NAME);
+        student.setIsActive(UPDATED_IS_ACTIVE);
 
         restStudentMockMvc.perform(put("/api/students")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -260,7 +299,7 @@ public class StudentResourceIntTest {
         assertThat(testStudent.getUniversity()).isEqualTo(UPDATED_UNIVERSITY);
         assertThat(testStudent.getSpecialty()).isEqualTo(UPDATED_SPECIALTY);
         assertThat(testStudent.getCourse()).isEqualTo(UPDATED_COURSE);
-        assertThat(testStudent.getGroupName()).isEqualTo(UPDATED_GROUP_NAME);
+        assertThat(testStudent.getIsActive()).isEqualTo(UPDATED_IS_ACTIVE);
     }
 
     @Test
