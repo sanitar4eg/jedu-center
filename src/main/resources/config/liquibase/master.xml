@@ -9,5 +9,6 @@
     <include file="classpath:config/liquibase/changelog/20160312174511_added_entity_Curator.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160312175031_added_entity_Student.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160312182239_added_entity_Recall.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160314203942_added_entity_Note.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
 </databaseChangeLog>

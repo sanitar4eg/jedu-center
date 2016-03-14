@@ -11,6 +11,7 @@
                 "groupOfStudent": "Группы",
                 "curator": "Кураторы",
                 "recall": "Отзывы",
+                "note": "Заметки",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
