@@ -49,11 +49,11 @@ public class StudentResourceIntTest {
     private static final String UPDATED_LAST_NAME = "BBBBB";
     private static final String DEFAULT_MIDDLE_NAME = "AAAAA";
     private static final String UPDATED_MIDDLE_NAME = "BBBBB";
-    
+
     private static final TypeEnumeration DEFAULT_TYPE = TypeEnumeration.DEV;
     private static final TypeEnumeration UPDATED_TYPE = TypeEnumeration.QA;
-    private static final String DEFAULT_EMAIL = "AAAAA";
-    private static final String UPDATED_EMAIL = "BBBBB";
+    private static final String DEFAULT_EMAIL = "AAAAA@DDDD";
+    private static final String UPDATED_EMAIL = "BBBBB@ARAR";
     private static final String DEFAULT_PHONE = "AAAAA";
     private static final String UPDATED_PHONE = "BBBBB";
     private static final String DEFAULT_UNIVERSITY = "AAAAA";
