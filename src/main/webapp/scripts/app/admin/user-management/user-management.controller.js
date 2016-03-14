@@ -3,7 +3,7 @@
 angular.module('jeducenterApp')
     .controller('UserManagementController', function ($scope, Principal, User, ParseLinks, Language) {
         $scope.users = [];
-        $scope.authorities = ["ROLE_USER", "ROLE_ADMIN"];
+        $scope.authorities = ["ROLE_USER", "ROLE_ADMIN", "ROLE_TEACHER", "ROLE_CURATOR", "ROLE_STUDENT"];
         Language.getAll().then(function (languages) {
             $scope.languages = languages;
         });
