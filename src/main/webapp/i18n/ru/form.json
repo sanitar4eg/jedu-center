@@ -1,0 +1,21 @@
+{
+    "jeducenterApp": {
+        "form" : {
+            "home": {
+                "title": "Анкеты",
+                "createLabel": "Содать новую анкету",
+                "createOrEditLabel": "Создать или редактировать анкету",
+                "search": "Искать анкету"
+            },
+            "delete": {
+                "question": "Вы действительно хотите удать анкету {{ id }}?"
+            },
+            "detail": {
+                "title": "Анкета"
+            },
+            "pathToFile": "Путь до файла",
+            "creationTime": "Время создания",
+            "student": "Студент"
+        }
+    }
+}

@@ -1,0 +1,60 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myFormLabel" translate="jeducenterApp.form.home.createOrEditLabel">Create or edit a Form</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="form.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="jeducenterApp.form.pathToFile" for="field_pathToFile">PathToFile</label>
+            <input type="text" class="form-control" name="pathToFile" id="field_pathToFile"
+                    ng-model="form.pathToFile"
+                    required />
+            <div ng-show="editForm.pathToFile.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.pathToFile.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="jeducenterApp.form.creationTime" for="field_creationTime">CreationTime</label>
+            <input type="datetime-local" class="form-control" name="creationTime" id="field_creationTime"
+                    ng-model="form.creationTime"
+                    required />
+            <div ng-show="editForm.creationTime.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.creationTime.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.creationTime.$error.ZonedDateTimelocal" translate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label translate="jeducenterApp.form.student" for="field_student">student</label>
+            <select class="form-control" id="field_student" name="student" ng-model="form.student" ng-options="student as student.email for student in students | orderBy:'id' track by student.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

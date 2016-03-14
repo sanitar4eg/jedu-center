@@ -12,6 +12,7 @@
                 "curator": "Curator",
                 "recall": "Recall",
                 "note": "Note",
+                "form": "Form",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

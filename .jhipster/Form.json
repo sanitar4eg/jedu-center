@@ -1,0 +1,35 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "student",
+            "otherEntityName": "student",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "email",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "form"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "pathToFile",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "creationTime",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20160314210335",
+    "dto": "no",
+    "service": "no",
+    "pagination": "no"
+}
