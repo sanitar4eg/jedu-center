@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * Service Implementation for managing Student.
@@ -43,6 +45,20 @@ public class StudentServiceImpl implements StudentService{
         log.debug("Request to get all Students");
         List<Student> result = studentRepository.findAll();
         return result;
+    }
+
+
+    /**
+     *  get all the students where Form is null.
+     *  @return the list of entities
+     */
+    @Transactional(readOnly = true) 
+    public List<Student> findAllWhereFormIsNull() {
+        log.debug("Request to get all students where Form is null");
+        return StreamSupport
+            .stream(studentRepository.findAll().spliterator(), false)
+            .filter(student -> student.getForm() == null)
+            .collect(Collectors.toList());
     }
 
     /**
