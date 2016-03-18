@@ -18,8 +18,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 /**
  * REST controller for managing Student.
@@ -76,11 +74,7 @@ public class StudentResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public List<Student> getAllStudents(@RequestParam(required = false) String filter) {
-        if ("form-is-null".equals(filter)) {
-            log.debug("REST request to get all Students where form is null");
-            return studentService.findAllWhereFormIsNull();
-        }
+    public List<Student> getAllStudents() {
         log.debug("REST request to get all Students");
         return studentService.findAll();
             }

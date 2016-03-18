@@ -1,5 +1,6 @@
 package edu.netcracker.center.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import java.time.ZonedDateTime;
@@ -26,12 +27,13 @@ public class Form implements Serializable {
     @NotNull
     @Column(name = "path_to_file", nullable = false)
     private String pathToFile;
-
+    
     @NotNull
     @Column(name = "creation_time", nullable = false)
     private ZonedDateTime creationTime;
-
-    @OneToOne
+    
+    @OneToOne(mappedBy = "form")
+    @JsonIgnore
     private Student student;
 
     public Long getId() {
@@ -45,7 +47,7 @@ public class Form implements Serializable {
     public String getPathToFile() {
         return pathToFile;
     }
-
+    
     public void setPathToFile(String pathToFile) {
         this.pathToFile = pathToFile;
     }
@@ -53,7 +55,7 @@ public class Form implements Serializable {
     public ZonedDateTime getCreationTime() {
         return creationTime;
     }
-
+    
     public void setCreationTime(ZonedDateTime creationTime) {
         this.creationTime = creationTime;
     }

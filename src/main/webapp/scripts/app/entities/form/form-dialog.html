@@ -42,12 +42,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <label translate="jeducenterApp.form.student" for="field_student">student</label>
-            <select class="form-control" id="field_student" name="student" ng-model="form.student" ng-options="student as student.email for student in students | orderBy:'id' track by student.id">
-                <option value=""></option>
-            </select>
-        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">

@@ -5,8 +5,7 @@
             "relationshipName": "student",
             "otherEntityName": "student",
             "relationshipType": "one-to-one",
-            "otherEntityField": "email",
-            "ownerSide": true,
+            "ownerSide": false,
             "otherEntityRelationshipName": "form"
         }
     ],
@@ -28,7 +27,7 @@
             ]
         }
     ],
-    "changelogDate": "20160314210335",
+    "changelogDate": "20160312174035",
     "dto": "no",
     "service": "no",
     "pagination": "no"

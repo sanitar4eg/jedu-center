@@ -18,6 +18,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * REST controller for managing Form.
@@ -74,7 +76,14 @@ public class FormResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public List<Form> getAllForms() {
+    public List<Form> getAllForms(@RequestParam(required = false) String filter) {
+        if ("student-is-null".equals(filter)) {
+            log.debug("REST request to get all Forms where student is null");
+            return StreamSupport
+                .stream(formRepository.findAll().spliterator(), false)
+                .filter(form -> form.getStudent() == null)
+                .collect(Collectors.toList());
+        }
         log.debug("REST request to get all Forms");
         return formRepository.findAll();
             }

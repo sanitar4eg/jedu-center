@@ -29,7 +29,8 @@
             "relationshipName": "form",
             "otherEntityName": "form",
             "relationshipType": "one-to-one",
-            "ownerSide": false,
+            "otherEntityField": "pathToFile",
+            "ownerSide": true,
             "otherEntityRelationshipName": "student"
         }
     ],

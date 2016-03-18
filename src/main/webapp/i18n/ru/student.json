@@ -32,7 +32,8 @@
             "isActive": "Активен",
             "user": "User",
             "groupOfStudent": "Группа",
-            "curator": "Куратор"
+            "curator": "Куратор",
+            "form": "Анкета"
         }
     }
 }

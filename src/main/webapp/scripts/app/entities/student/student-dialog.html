@@ -52,7 +52,7 @@
         </div>
         <div class="form-group">
             <label class="control-label" translate="jeducenterApp.student.email" for="field_email">Email</label>
-            <input type="email" class="form-control" name="email" id="field_email"
+            <input type="text" class="form-control" name="email" id="field_email"
                     ng-model="student.email"
                     required />
             <div ng-show="editForm.email.$invalid">
@@ -114,6 +114,12 @@
         <div class="form-group">
             <label translate="jeducenterApp.student.curator" for="field_curator">curator</label>
             <select class="form-control" id="field_curator" name="curator" ng-model="student.curator" ng-options="curator as curator.lastName for curator in curators track by curator.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="jeducenterApp.student.form" for="field_form">form</label>
+            <select class="form-control" id="field_form" name="form" ng-model="student.form" ng-options="form as form.pathToFile for form in forms | orderBy:'id' track by form.id">
                 <option value=""></option>
             </select>
         </div>

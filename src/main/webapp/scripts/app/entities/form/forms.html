@@ -21,7 +21,6 @@
                     <th><span translate="global.field.id">ID</span></th>
                     <th><span translate="jeducenterApp.form.pathToFile">PathToFile</span></th>
                     <th><span translate="jeducenterApp.form.creationTime">CreationTime</span></th>
-                    <th><span translate="jeducenterApp.form.student">student</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -30,9 +29,6 @@
                     <td><a ui-sref="form.detail({id:form.id})">{{form.id}}</a></td>
                     <td>{{form.pathToFile}}</td>
                     <td>{{form.creationTime | date:'medium'}}</td>
-                    <td>
-                        <a ui-sref="student.detail({id:form.student.id})">{{form.student.email}}</a>
-                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

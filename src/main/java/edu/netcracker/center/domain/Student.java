@@ -1,10 +1,8 @@
 package edu.netcracker.center.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import edu.netcracker.center.domain.enumeration.TypeEnumeration;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -40,7 +38,6 @@ public class Student implements Serializable {
 
     @NotNull
     @Column(name = "email", nullable = false)
-    @Email
     private String email;
 
     @Column(name = "phone")
@@ -70,8 +67,7 @@ public class Student implements Serializable {
     @JoinColumn(name = "curator_id")
     private Curator curator;
 
-    @OneToOne(mappedBy = "student")
-    @JsonIgnore
+    @OneToOne
     private Form form;
 
     public Long getId() {

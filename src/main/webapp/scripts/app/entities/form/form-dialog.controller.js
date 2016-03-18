@@ -1,19 +1,11 @@
 'use strict';
 
 angular.module('jeducenterApp').controller('FormDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'Form', 'Student',
-        function($scope, $stateParams, $uibModalInstance, $q, entity, Form, Student) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Form', 'Student',
+        function($scope, $stateParams, $uibModalInstance, entity, Form, Student) {
 
         $scope.form = entity;
-        $scope.students = Student.query({filter: 'form-is-null'});
-        $q.all([$scope.form.$promise, $scope.students.$promise]).then(function() {
-            if (!$scope.form.student || !$scope.form.student.id) {
-                return $q.reject();
-            }
-            return Student.get({id : $scope.form.student.id}).$promise;
-        }).then(function(student) {
-            $scope.students.push(student);
-        });
+        $scope.students = Student.query();
         $scope.load = function(id) {
             Form.get({id : id}, function(result) {
                 $scope.form = result;

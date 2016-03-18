@@ -8,7 +8,15 @@ angular.module('jeducenterApp').controller('StudentDialogController',
         $scope.users = User.query();
         $scope.groupofstudents = GroupOfStudent.query();
         $scope.curators = Curator.query();
-        $scope.forms = Form.query();
+        $scope.forms = Form.query({filter: 'student-is-null'});
+        $q.all([$scope.student.$promise, $scope.forms.$promise]).then(function() {
+            if (!$scope.student.form || !$scope.student.form.id) {
+                return $q.reject();
+            }
+            return Form.get({id : $scope.student.form.id}).$promise;
+        }).then(function(form) {
+            $scope.forms.push(form);
+        });
         $scope.load = function(id) {
             Student.get({id : id}, function(result) {
                 $scope.student = result;

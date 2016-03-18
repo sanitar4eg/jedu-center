@@ -10,9 +10,6 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 /**
  * Service Implementation for managing Student.
@@ -22,10 +19,10 @@ import java.util.stream.StreamSupport;
 public class StudentServiceImpl implements StudentService{
 
     private final Logger log = LoggerFactory.getLogger(StudentServiceImpl.class);
-    
+
     @Inject
     private StudentRepository studentRepository;
-    
+
     /**
      * Save a student.
      * @return the persisted entity
@@ -40,32 +37,18 @@ public class StudentServiceImpl implements StudentService{
      *  get all the students.
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<Student> findAll() {
         log.debug("Request to get all Students");
         List<Student> result = studentRepository.findAll();
         return result;
     }
 
-
-    /**
-     *  get all the students where Form is null.
-     *  @return the list of entities
-     */
-    @Transactional(readOnly = true) 
-    public List<Student> findAllWhereFormIsNull() {
-        log.debug("Request to get all students where Form is null");
-        return StreamSupport
-            .stream(studentRepository.findAll().spliterator(), false)
-            .filter(student -> student.getForm() == null)
-            .collect(Collectors.toList());
-    }
-
     /**
      *  get one student by id.
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Student findOne(Long id) {
         log.debug("Request to get Student : {}", id);
         Student student = studentRepository.findOne(id);

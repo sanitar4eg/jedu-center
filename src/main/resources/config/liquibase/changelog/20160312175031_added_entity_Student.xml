@@ -54,6 +54,9 @@
             </column>
             <column name="group_of_student_id" type="bigint"/>
             <column name="curator_id" type="bigint"/>
+            <column name="form_id" type="bigint">
+                <constraints unique="true"/>
+            </column>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         
@@ -74,6 +77,12 @@
                                  constraintName="fk_student_curator_id"
                                  referencedColumnNames="id"
                                  referencedTableName="curator"/>
+
+        <addForeignKeyConstraint baseColumnNames="form_id"
+                                 baseTableName="student"
+                                 constraintName="fk_student_form_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="form"/>
 
     </changeSet>
 </databaseChangeLog>
