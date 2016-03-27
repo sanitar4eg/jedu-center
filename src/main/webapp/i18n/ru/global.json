@@ -40,6 +40,10 @@
                 "database": "База данных",
                 "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
             },
+            "teacher": {
+                "main": "Управление",
+                "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
+            },
             "language": "Язык"
         },
         "form": {
