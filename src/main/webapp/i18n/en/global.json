@@ -123,5 +123,5 @@
         "emailexists": "E-mail is already in use!",
         "idexists": "A new {{ entityName }} cannot already have an ID"
     },
-    "footer": "This is your footer"
+    "footer": "Educational Research and Production Center \"Information and telecommunication systems\""
 }
