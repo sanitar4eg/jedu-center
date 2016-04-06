@@ -3,17 +3,17 @@
 angular.module('jeducenterApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('student', {
-                parent: 'entity',
-                url: '/students',
+            .state('teacher.student', {
+                parent: 'teacher',
+                url: '/teacher/student',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN'],
                     pageTitle: 'jeducenterApp.student.home.title'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/student/students.html',
-                        controller: 'StudentController'
+                        templateUrl: 'scripts/app/teacher/student/teacher.student.html',
+                        controller: 'TeacherStudentController'
                     }
                 },
                 resolve: {
@@ -25,17 +25,17 @@ angular.module('jeducenterApp')
                     }]
                 }
             })
-            .state('student.detail', {
-                parent: 'entity',
-                url: '/student/{id}',
+            .state('teacher.student.detail', {
+                parent: 'teacher',
+                url: '/teacher/student/{id}',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN'],
                     pageTitle: 'jeducenterApp.student.detail.title'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/student/student-detail.html',
-                        controller: 'StudentDetailController'
+                        templateUrl: 'scripts/app/teacher/student/teacher.student-detail.html',
+                        controller: 'TeacherStudentDetailController'
                     }
                 },
                 resolve: {
@@ -49,16 +49,16 @@ angular.module('jeducenterApp')
                     }]
                 }
             })
-            .state('student.new', {
-                parent: 'student',
-                url: '/new',
+            .state('teacher.student.new', {
+                parent: 'teacher.student',
+                url: '/teacher/new',
                 data: {
-                    authorities: ['ROLE_USER']
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/student/student-dialog.html',
-                        controller: 'StudentDialogController',
+                        templateUrl: 'scripts/app/teacher/student/teacher.student-dialog.html',
+                        controller: 'TeacherStudentDialogController',
                         size: 'lg',
                         resolve: {
                             entity: function () {
@@ -78,22 +78,22 @@ angular.module('jeducenterApp')
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('student', null, { reload: true });
+                        $state.go('teacher.student', null, { reload: true });
                     }, function() {
-                        $state.go('student');
+                        $state.go('teacher.student');
                     })
                 }]
             })
-            .state('student.edit', {
-                parent: 'student',
-                url: '/{id}/edit',
+            .state('teacher.student.edit', {
+                parent: 'teacher.student',
+                url: '/teacher/{id}/edit',
                 data: {
-                    authorities: ['ROLE_USER']
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/student/student-dialog.html',
-                        controller: 'StudentDialogController',
+                        templateUrl: 'scripts/app/teacher/student/teacher.student-dialog.html',
+                        controller: 'TeacherStudentDialogController',
                         size: 'lg',
                         resolve: {
                             entity: ['Student', function(Student) {
@@ -101,22 +101,22 @@ angular.module('jeducenterApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('student', null, { reload: true });
+                        $state.go('teacher.student', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })
                 }]
             })
-            .state('student.delete', {
-                parent: 'student',
-                url: '/{id}/delete',
+            .state('teacher.student.delete', {
+                parent: 'teacher.student',
+                url: '/teacher/{id}/delete',
                 data: {
-                    authorities: ['ROLE_USER']
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/student/student-delete-dialog.html',
-                        controller: 'StudentDeleteController',
+                        templateUrl: 'scripts/app/teacher/student/teacher.student-delete-dialog.html',
+                        controller: 'TeacherStudentDeleteController',
                         size: 'md',
                         resolve: {
                             entity: ['Student', function(Student) {
@@ -124,7 +124,7 @@ angular.module('jeducenterApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('student', null, { reload: true });
+                        $state.go('teacher.student', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })

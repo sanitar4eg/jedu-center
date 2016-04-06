@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jeducenterApp')
-	.controller('StudentDeleteController', function($scope, $uibModalInstance, entity, Student) {
+	.controller('TeacherStudentDeleteController', function($scope, $uibModalInstance, entity, Student) {
 
         $scope.student = entity;
         $scope.clear = function() {

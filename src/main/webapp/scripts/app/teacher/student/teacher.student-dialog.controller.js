@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('jeducenterApp').controller('StudentDialogController',
+angular.module('jeducenterApp').controller('TeacherStudentDialogController',
     ['$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'Student', 'User', 'GroupOfStudent', 'Curator', 'Form',
         function($scope, $stateParams, $uibModalInstance, $q, entity, Student, User, GroupOfStudent, Curator, Form) {
 
