@@ -7,7 +7,7 @@ angular.module('jeducenterApp')
                 parent: 'student',
                 url: '/history/students',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_ADMIN'],
                     pageTitle: 'jeducenterApp.student.home.title'
                 },
                 views: {
@@ -29,7 +29,7 @@ angular.module('jeducenterApp')
                 parent: 'student',
                 url: '/integration/students',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_ADMIN'],
                     pageTitle: 'jeducenterApp.student.home.title'
                 },
                 views: {
