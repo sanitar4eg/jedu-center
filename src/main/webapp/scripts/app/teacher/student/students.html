@@ -1,0 +1,102 @@
+<div>
+    <h2 translate="jeducenterApp.student.home.title">Students</h2>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-8 no-padding-left">
+                <button class="btn btn-primary" ui-sref="student.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span
+                        translate="jeducenterApp.student.home.createLabel">Create new Student
+                    </span>
+                </button>
+                <button class="btn btn-info" ui-sref="student.history" >
+                    <span class="glyphicon glyphicon-folder-open"></span>
+                    <span
+                        translate="jeducenterApp.student.home.historyLabel">History of students
+                    </span>
+                </button>
+                <button class="btn btn-info" ui-sref="student.integration" >
+                    <span class="glyphicon glyphicon-folder-open"></span>
+                    <span
+                        translate="jeducenterApp.student.home.integrationLabel">Import/Export
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span translate="global.field.id">ID</span></th>
+                    <th><span translate="jeducenterApp.student.firstName">FirstName</span></th>
+                    <th><span translate="jeducenterApp.student.lastName">LastName</span></th>
+                    <th><span translate="jeducenterApp.student.middleName">MiddleName</span></th>
+                    <th><span translate="jeducenterApp.student.type">Type</span></th>
+                    <th><span translate="jeducenterApp.student.email">Email</span></th>
+                    <th><span translate="jeducenterApp.student.phone">Phone</span></th>
+                    <th><span translate="jeducenterApp.student.university">University</span></th>
+                    <th><span translate="jeducenterApp.student.specialty">Specialty</span></th>
+                    <th><span translate="jeducenterApp.student.course">Course</span></th>
+                    <th><span translate="jeducenterApp.student.isActive">IsActive</span></th>
+                    <th><span translate="jeducenterApp.student.user">user</span></th>
+                    <th><span translate="jeducenterApp.student.groupOfStudent">groupOfStudent</span></th>
+                    <th><span translate="jeducenterApp.student.curator">curator</span></th>
+                    <th><span translate="jeducenterApp.student.form">form</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="student in students track by student.id">
+                    <td><a ui-sref="student.detail({id:student.id})">{{student.id}}</a></td>
+                    <td>{{student.firstName}}</td>
+                    <td>{{student.lastName}}</td>
+                    <td>{{student.middleName}}</td>
+                    <td translate="{{'jeducenterApp.TypeEnumeration.' + student.type}}">{{student.type}}</td>
+                    <td>{{student.email}}</td>
+                    <td>{{student.phone}}</td>
+                    <td>{{student.university}}</td>
+                    <td>{{student.specialty}}</td>
+                    <td>{{student.course}}</td>
+                    <td>{{student.isActive}}</td>
+                    <td>
+                        {{student.user.login}}
+                    </td>
+                    <td>
+                        <a ui-sref="groupOfStudent.detail({id:student.groupOfStudent.id})">{{student.groupOfStudent.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="curator.detail({id:student.curator.id})">{{student.curator.lastName}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="form.detail({id:student.form.id})">{{student.form.pathToFile}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="student.detail({id:student.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="student.edit({id:student.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="student.delete({id:student.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <jh-alert></jh-alert>
+</div>

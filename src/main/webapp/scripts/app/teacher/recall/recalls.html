@@ -1,0 +1,68 @@
+<div>
+    <h2 translate="jeducenterApp.recall.home.title">Recalls</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="recall.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                        translate="jeducenterApp.recall.home.createLabel">Create new Recall
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span translate="global.field.id">ID</span></th>
+                    <th><span translate="jeducenterApp.recall.type">Type</span></th>
+                    <th><span translate="jeducenterApp.recall.name">Name</span></th>
+                    <th><span translate="jeducenterApp.recall.description">Description</span></th>
+                    <th><span translate="jeducenterApp.recall.student">student</span></th>
+                    <th><span translate="jeducenterApp.recall.curator">curator</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="recall in recalls track by recall.id">
+                    <td><a ui-sref="recall.detail({id:recall.id})">{{recall.id}}</a></td>
+                    <td translate="{{'jeducenterApp.TypeRecallEnumeration.' + recall.type}}">{{recall.type}}</td>
+                    <td>{{recall.name}}</td>
+                    <td>{{recall.description}}</td>
+                    <td>
+                        <a ui-sref="student.detail({id:recall.student.id})">{{recall.student.lastName}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="curator.detail({id:recall.curator.id})">{{recall.curator.lastName}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="recall.detail({id:recall.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="recall.edit({id:recall.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="recall.delete({id:recall.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myGroupOfStudentLabel" translate="jeducenterApp.groupOfStudent.home.createOrEditLabel">Create or edit a GroupOfStudent</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id" translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="groupOfStudent.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="jeducenterApp.groupOfStudent.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="groupOfStudent.name"
+                    required />
+            <div ng-show="editForm.name.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.name.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="jeducenterApp.groupOfStudent.type" for="field_type">Type</label>
+            <select class="form-control" name="type" ng-model="groupOfStudent.type" id="field_type" required>
+                <option value="DEV" translate="jeducenterApp.TypeEnumeration.DEV">DEV</option>
+                <option value="QA" translate="jeducenterApp.TypeEnumeration.QA">QA</option>
+            </select>
+            <div ng-show="editForm.type.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.type.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="jeducenterApp.groupOfStudent.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="groupOfStudent.description"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="jeducenterApp.groupOfStudent.isActive" for="field_isActive">IsActive</label>
+            <input type="checkbox" class="form-control" name="isActive" id="field_isActive"
+                    ng-model="groupOfStudent.isActive"
+                     />
+            <div ng-show="editForm.isActive.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.isActive.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label translate="jeducenterApp.groupOfStudent.timeTable" for="field_timeTable">timeTable</label>
+            <select class="form-control" id="field_timeTable" name="timeTable" ng-model="groupOfStudent.timeTable" ng-options="timeTable as timeTable.id for timeTable in timetables | orderBy:'id' track by timeTable.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

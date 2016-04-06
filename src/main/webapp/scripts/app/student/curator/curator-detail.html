@@ -1,0 +1,70 @@
+
+<div>
+    <h2><span translate="jeducenterApp.curator.detail.title">Curator</span> {{curator.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th translate="entity.detail.field">Field</th>
+                <th translate="entity.detail.value">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span translate="jeducenterApp.curator.firstName">FirstName</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{curator.firstName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="jeducenterApp.curator.lastName">LastName</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{curator.lastName}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="jeducenterApp.curator.email">Email</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{curator.email}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="jeducenterApp.curator.department">Department</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{curator.department}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="jeducenterApp.curator.isActive">IsActive</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{curator.isActive}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="jeducenterApp.curator.user">user</span>
+                </td>
+                <td>
+                    {{curator.user.login}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+</div>

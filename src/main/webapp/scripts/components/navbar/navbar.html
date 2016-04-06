@@ -112,23 +112,20 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li ui-sref-active="active"><a ui-sref="user-management" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-user"></span>
-                            &#xA0;<span translate="global.menu.admin.user-management">User management</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="metrics" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-dashboard"></span>
-                            &#xA0;<span translate="global.menu.admin.metrics">Metrics</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="health" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-heart"></span>
-                            &#xA0;<span translate="global.menu.admin.health">Health</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="configuration" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-list-alt"></span>
-                            &#xA0;<span translate="global.menu.admin.configuration">Configuration</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="audits" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-bell"></span>
-                            &#xA0;<span translate="global.menu.admin.audits">Audits</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="logs" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-tasks"></span>
-                            &#xA0;<span translate="global.menu.admin.logs">Logs</span></a></li>
-                        <li ng-hide="inProduction" ui-sref-active="active"><a ui-sref="docs" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-book"></span>
-                            &#xA0;<span translate="global.menu.admin.apidocs">API</span></a></li>
-                        <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
-                        <li ng-hide="inProduction"><a href='/h2-console' target="_tab" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-hdd"></span>
-                            &#xA0;<span translate="global.menu.admin.database">Database</span></a></li>
+                        <li ui-sref-active="active" ><a ui-sref="student" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
+                            &#xA0;<span translate="global.menu.entities.student">Student</span></a></li>
+                        <li ui-sref-active="active" ><a ui-sref="groupOfStudent" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
+                            &#xA0;<span translate="global.menu.entities.groupOfStudent">Group of student</span></a></li>
+                        <li ui-sref-active="active" ><a ui-sref="curator" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
+                            &#xA0;<span translate="global.menu.entities.curator">Curator</span></a></li>
+                        <li ui-sref-active="active" ><a ui-sref="recall" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
+                            &#xA0;<span translate="global.menu.entities.recall">Recall</span></a></li>
+                        <li ui-sref-active="active" ><a ui-sref="timeTable" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
+                            &#xA0;<span translate="global.menu.entities.timeTable">Time table</span></a></li>
+                        <li ui-sref-active="active" ><a ui-sref="lesson" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
+                            &#xA0;<span translate="global.menu.entities.lesson">Lesson</span></a></li>
+                        <li ui-sref-active="active" ><a ui-sref="evaluation" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
+                            &#xA0;<span translate="global.menu.entities.evaluation">Evaluation</span></a></li>
                     </ul>
                 </li>
                 <li ui-sref-active="active" class="dropdown pointer" ng-controller="LanguageController">

@@ -1,0 +1,68 @@
+<div>
+    <h2 translate="jeducenterApp.curator.home.title">Curators</h2>
+    <jh-alert></jh-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="curator.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span 
+                        translate="jeducenterApp.curator.home.createLabel">Create new Curator
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span translate="global.field.id">ID</span></th>
+                    <th><span translate="jeducenterApp.curator.firstName">FirstName</span></th>
+                    <th><span translate="jeducenterApp.curator.lastName">LastName</span></th>
+                    <th><span translate="jeducenterApp.curator.email">Email</span></th>
+                    <th><span translate="jeducenterApp.curator.department">Department</span></th>
+                    <th><span translate="jeducenterApp.curator.isActive">IsActive</span></th>
+                    <th><span translate="jeducenterApp.curator.user">user</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="curator in curators track by curator.id">
+                    <td><a ui-sref="curator.detail({id:curator.id})">{{curator.id}}</a></td>
+                    <td>{{curator.firstName}}</td>
+                    <td>{{curator.lastName}}</td>
+                    <td>{{curator.email}}</td>
+                    <td>{{curator.department}}</td>
+                    <td>{{curator.isActive}}</td>
+                    <td>
+                        {{curator.user.login}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="curator.detail({id:curator.id})"
+                                    class="btn btn-info btn-sm"> 
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="curator.edit({id:curator.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="curator.delete({id:curator.id})"
+                                    class="btn btn-danger btn-sm">                                    
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
