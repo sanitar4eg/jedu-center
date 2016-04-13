@@ -233,3 +233,25 @@ ul#strengthBar {
 /* jhipster-needle-scss-add-main JHipster will add new css style */
 
 /* jhipster-needle-css-add-main JHipster will add new css style */
+
+/* Styles for not cut text from cells in ui-grid*/
+[ui-grid-row] {
+    display: table-row;
+}
+
+.ui-grid-row, .ui-grid-cell {
+    height: auto!important;
+}
+
+.ui-grid-cell {
+    float: none;
+    display: table-cell;
+    vertical-align: middle;
+
+}
+
+.ui-grid-header-cell, .ui-grid-cell-contents {
+    white-space: normal;
+    padding: 2px;
+    word-break: break-all;
+}
