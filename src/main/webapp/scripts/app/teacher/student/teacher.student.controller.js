@@ -1,37 +1,68 @@
 'use strict';
 
 angular.module('jeducenterApp')
-    .controller('TeacherStudentController', function ($scope, $state, Student) {
+    .controller('TeacherStudentController', function ($scope, $state, Student, tmhDynamicLocale,
+                                                      i18nService) {
 
         $scope.students = [];
-        $scope.myData = [];
         $scope.loadAll = function () {
             Student.query(function (result) {
                 $scope.students = result;
-                $scope.myData = result;
                 $scope.studentsGrid.data = result;
             });
         };
 
         $scope.loadAll();
 
+        /*Localization*/
+        i18nService.setCurrentLang(tmhDynamicLocale.get());
+
         $scope.studentsGrid = {
-            // enableSorting: false,
             enableGridMenu: true,
             enableColumnResizing: true,
             columnDefs: [
-                {name: 'Имя', field: 'firstName', width: '30%'},
-                {name: 'Фамилия', field: 'lastName'},
-                {name: 'Тип обучения', field: 'type'},
-                {name: 'Email', field: 'email'},
-                {name: 'Телефон', field: 'phone'},
-                {name: 'Университет', field: 'university'},
-                {name: 'Специальность', field: 'specialty'},
-                {name: 'Курс', field: 'course'},
-                {name: 'Активен', field: 'isActive'}
+                {
+                    field: 'firstName', width: '10%',
+                    headerCellTemplate: '<span translate="jeducenterApp.student.firstName"/>'
+                },
+                {
+                    field: 'middleName', width: '12%',
+                    headerCellTemplate: '<span translate="jeducenterApp.student.middleName"/>'
+                },
+                {
+                    field: 'lastName', width: '12%',
+                    headerCellTemplate: '<span translate="jeducenterApp.student.lastName"/>'
+                },
+                {
+                    field: 'type', width: '8%',
+                    headerCellTemplate: '<span translate="jeducenterApp.student.type"/>'
+                },
+                {
+                    field: 'email', width: '14%',
+                    headerCellTemplate: '<span translate="jeducenterApp.student.email"/>'
+                },
+                {
+                    field: 'phone', width: '11%',
+                    headerCellTemplate: '<span translate="jeducenterApp.student.phone"/>'
+                },
+                {
+                    field: 'university', width: '10%',
+                    headerCellTemplate: '<span translate="jeducenterApp.student.university"/>'
+                },
+                {
+                    field: 'specialty', width: '12%',
+                    headerCellTemplate: '<span translate="jeducenterApp.student.specialty"/>'
+                },
+                {
+                    field: 'course', width: '4%',
+                    headerCellTemplate: '<span translate="jeducenterApp.student.course"/>'
+                },
+                {
+                    field: 'isActive', width: '8%', type: 'boolean',
+                    headerCellTemplate: '<span translate="jeducenterApp.student.isActive"/>'
+                }
             ]
 
-            // columnDefs: [{name: 'Имя', field: 'firstName'}],
         };
 
 
