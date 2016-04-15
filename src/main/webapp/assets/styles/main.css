@@ -253,5 +253,5 @@ ul#strengthBar {
 .ui-grid-header-cell, .ui-grid-cell-contents {
     white-space: normal;
     padding: 2px;
-    word-break: break-all;
+    word-wrap: break-word;
 }
