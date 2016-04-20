@@ -78,7 +78,8 @@
         {
             "fieldId": 7,
             "fieldName": "university",
-            "fieldType": "String"
+            "fieldType": "UniversityEnumeration",
+            "fieldValues": "СГТУ,СГУ"
         },
         {
             "fieldId": 8,

@@ -31,6 +31,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import edu.netcracker.center.domain.enumeration.TypeEnumeration;
+import edu.netcracker.center.domain.enumeration.UniversityEnumeration;
 
 /**
  * Test class for the StudentResource REST controller.
@@ -56,8 +57,9 @@ public class StudentResourceIntTest {
     private static final String UPDATED_EMAIL = "BBBBB";
     private static final String DEFAULT_PHONE = "AAAAA";
     private static final String UPDATED_PHONE = "BBBBB";
-    private static final String DEFAULT_UNIVERSITY = "AAAAA";
-    private static final String UPDATED_UNIVERSITY = "BBBBB";
+    
+    private static final UniversityEnumeration DEFAULT_UNIVERSITY = UniversityEnumeration.СГТУ;
+    private static final UniversityEnumeration UPDATED_UNIVERSITY = UniversityEnumeration.СГУ;
     private static final String DEFAULT_SPECIALTY = "AAAAA";
     private static final String UPDATED_SPECIALTY = "BBBBB";
     private static final String DEFAULT_COURSE = "AAAAA";

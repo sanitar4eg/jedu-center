@@ -1,6 +1,7 @@
 package edu.netcracker.center.domain;
 
 import edu.netcracker.center.domain.enumeration.TypeEnumeration;
+import edu.netcracker.center.domain.enumeration.UniversityEnumeration;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -43,8 +44,9 @@ public class Student implements Serializable {
     @Column(name = "phone")
     private String phone;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "university")
-    private String university;
+    private UniversityEnumeration university;
 
     @Column(name = "specialty")
     private String specialty;
@@ -126,11 +128,11 @@ public class Student implements Serializable {
         this.phone = phone;
     }
 
-    public String getUniversity() {
+    public UniversityEnumeration getUniversity() {
         return university;
     }
 
-    public void setUniversity(String university) {
+    public void setUniversity(UniversityEnumeration university) {
         this.university = university;
     }
 
@@ -199,7 +201,7 @@ public class Student implements Serializable {
             return false;
         }
         Student student = (Student) o;
-        if (student.id == null || id == null) {
+        if(student.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, student.id);

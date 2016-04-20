@@ -20,6 +20,7 @@ angular.module('jeducenterApp')
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('student');
                         $translatePartialLoader.addPart('typeEnumeration');
+                        $translatePartialLoader.addPart('universityEnumeration');
                         $translatePartialLoader.addPart('global');
                         return $translate.refresh();
                     }]
@@ -29,7 +30,7 @@ angular.module('jeducenterApp')
                 parent: 'entity',
                 url: '/student/{id}',
                 data: {
-                    authorities: ['ROLE_ADMIN'],
+                    authorities: ['ROLE_USER'],
                     pageTitle: 'jeducenterApp.student.detail.title'
                 },
                 views: {
@@ -42,6 +43,7 @@ angular.module('jeducenterApp')
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('student');
                         $translatePartialLoader.addPart('typeEnumeration');
+                        $translatePartialLoader.addPart('universityEnumeration');
                         return $translate.refresh();
                     }],
                     entity: ['$stateParams', 'Student', function($stateParams, Student) {

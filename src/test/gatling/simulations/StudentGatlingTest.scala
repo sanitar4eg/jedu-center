@@ -67,7 +67,7 @@ class StudentGatlingTest extends Simulation {
             .exec(http("Create new student")
             .post("/api/students")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "firstName":"SAMPLE_TEXT", "lastName":"SAMPLE_TEXT", "middleName":"SAMPLE_TEXT", "type":null, "email":"SAMPLE_TEXT", "phone":"SAMPLE_TEXT", "university":"SAMPLE_TEXT", "specialty":"SAMPLE_TEXT", "course":"SAMPLE_TEXT", "isActive":null}""")).asJSON
+            .body(StringBody("""{"id":null, "firstName":"SAMPLE_TEXT", "lastName":"SAMPLE_TEXT", "middleName":"SAMPLE_TEXT", "type":null, "email":"SAMPLE_TEXT", "phone":"SAMPLE_TEXT", "university":null, "specialty":"SAMPLE_TEXT", "course":"SAMPLE_TEXT", "isActive":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_student_url")))
             .pause(10)
