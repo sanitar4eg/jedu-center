@@ -66,7 +66,7 @@ public class StudentXslView extends AbstractXlsView {
             setCellValueAndStyle(row.createCell(TYPE), student.getType().toString(), null);
             setCellValueAndStyle(row.createCell(EMAIL), student.getEmail(), null);
             setCellValueAndStyle(row.createCell(PHONE), student.getPhone(), null);
-            setCellValueAndStyle(row.createCell(UNIVER), student.getUniversity(), null);
+            setCellValueAndStyle(row.createCell(UNIVER), student.getUniversity().toString(), null);
             setCellValueAndStyle(row.createCell(SPECIALTY), student.getSpecialty(), null);
             setCellValueAndStyle(row.createCell(COURSE), student.getCourse(), null);
 //            setCellValueAndStyle(row.createCell(GROUP), student.getGroupName(), null);
