@@ -11,11 +11,11 @@
                 "createOrEditLabel": "Добавить или редактировать запись",
                 "search": "Искать"
             },
-            "created": "A new Student is created with identifier {{ param }}",
-            "updated": "A Student is updated with identifier {{ param }}",
-            "deleted": "A Student is deleted with identifier {{ param }}",
+            "created": "Новый студент создан, ID: {{ param }}",
+            "updated": "Студент обновлен, ID: {{ param }}",
+            "deleted": "Студент удален, ID: {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Student {{ id }}?"
+                "question": "Вы действительно хотите удалть студента с ID: {{ id }}?"
             },
             "detail": {
                 "title": "Студент"
