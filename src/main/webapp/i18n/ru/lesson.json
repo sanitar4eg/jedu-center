@@ -7,6 +7,9 @@
                 "createOrEditLabel": "Создать или редактировать урок",
                 "search": "Поиск урока"
             },
+            "created": "Новый урок создан, ID: {{ param }}",
+            "updated": "Урок обновлен, ID: {{ param }}",
+            "deleted": "Урок удален, ID: {{ param }}",
             "delete": {
                 "question": "Вы уверены что хотите удалить урок {{ id }}?"
             },
