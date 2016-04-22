@@ -7,7 +7,7 @@ angular.module('jeducenterApp')
                 parent: 'entity',
                 url: '/recalls',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_ADMIN'],
                     pageTitle: 'jeducenterApp.recall.home.title'
                 },
                 views: {
@@ -29,7 +29,7 @@ angular.module('jeducenterApp')
                 parent: 'entity',
                 url: '/recall/{id}',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_ADMIN'],
                     pageTitle: 'jeducenterApp.recall.detail.title'
                 },
                 views: {
@@ -53,7 +53,7 @@ angular.module('jeducenterApp')
                 parent: 'recall',
                 url: '/new',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_ADMIN'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -81,7 +81,7 @@ angular.module('jeducenterApp')
                 parent: 'recall',
                 url: '/{id}/edit',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_ADMIN'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -104,7 +104,7 @@ angular.module('jeducenterApp')
                 parent: 'recall',
                 url: '/{id}/delete',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_ADMIN'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({

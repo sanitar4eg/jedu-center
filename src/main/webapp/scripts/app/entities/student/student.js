@@ -30,7 +30,7 @@ angular.module('jeducenterApp')
                 parent: 'entity',
                 url: '/student/{id}',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_ADMIN'],
                     pageTitle: 'jeducenterApp.student.detail.title'
                 },
                 views: {

@@ -7,7 +7,7 @@ angular.module('jeducenterApp')
                 parent: 'entity',
                 url: '/timeTables',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_ADMIN'],
                     pageTitle: 'jeducenterApp.timeTable.home.title'
                 },
                 views: {
@@ -28,7 +28,7 @@ angular.module('jeducenterApp')
                 parent: 'entity',
                 url: '/timeTable/{id}',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_ADMIN'],
                     pageTitle: 'jeducenterApp.timeTable.detail.title'
                 },
                 views: {
@@ -51,7 +51,7 @@ angular.module('jeducenterApp')
                 parent: 'timeTable',
                 url: '/new',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_ADMIN'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -77,7 +77,7 @@ angular.module('jeducenterApp')
                 parent: 'timeTable',
                 url: '/{id}/edit',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_ADMIN'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -100,7 +100,7 @@ angular.module('jeducenterApp')
                 parent: 'timeTable',
                 url: '/{id}/delete',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_ADMIN'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
