@@ -70,9 +70,10 @@
         </div>
         <div class="form-group">
             <label class="control-label" translate="jeducenterApp.student.university" for="field_university">University</label>
-            <input type="text" class="form-control" name="university" id="field_university"
-                    ng-model="student.university"
-                     />
+            <select class="form-control" name="university" ng-model="student.university" id="field_university">
+                <option value="СГТУ" translate="jeducenterApp.UniversityEnumeration.СГТУ">СГТУ</option>
+                <option value="СГУ" translate="jeducenterApp.UniversityEnumeration.СГУ">СГУ</option>
+            </select>
         </div>
         <div class="form-group">
             <label class="control-label" translate="jeducenterApp.student.specialty" for="field_specialty">Specialty</label>
