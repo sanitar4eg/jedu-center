@@ -1,8 +1,11 @@
 'use strict';
 
-angular.module('jeducenterApp').controller('GroupOfStudentDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'GroupOfStudent', 'Student', 'TimeTable',
-        function($scope, $stateParams, $uibModalInstance, $q, entity, GroupOfStudent, Student, TimeTable) {
+angular.module('jeducenterApp').controller('TeacherGroupOfStudentDialogController',
+    ['$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'GroupOfStudent', 'Student', 'TimeTable', '$log',
+        function($scope, $stateParams, $uibModalInstance, $q, entity, GroupOfStudent, Student, TimeTable, $log) {
+
+            console.log("IM INITIALIZED: dfsdvzxvZ" );
+            alert ("INITIALIZED");
 
         $scope.groupOfStudent = entity;
         $scope.students = Student.query();
@@ -36,7 +39,14 @@ angular.module('jeducenterApp').controller('GroupOfStudentDialogController',
             if ($scope.groupOfStudent.id != null) {
                 GroupOfStudent.update($scope.groupOfStudent, onSaveSuccess, onSaveError);
             } else {
-                GroupOfStudent.save($scope.groupOfStudent, onSaveSuccess, onSaveError);
+                $log.error("Error: " + $scope.groupOfStudent.timeTable);
+                if ($scope.groupOfStudent.timeTable = null) {
+                    $scope.groupOfStudent.timeTable = new TimeTable();
+                    $scope.groupOfStudent.timeTable.name = $scope.groupOfStudent.name;
+                    GroupOfStudent.save($scope.groupOfStudent, onSaveSuccess, onSaveError);
+                } else {
+                    GroupOfStudent.save($scope.groupOfStudent, onSaveSuccess, onSaveError);
+                }
             }
         };
 
