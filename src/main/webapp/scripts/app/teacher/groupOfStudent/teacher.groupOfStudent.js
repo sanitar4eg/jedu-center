@@ -3,17 +3,17 @@
 angular.module('jeducenterApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('groupOfStudent', {
-                parent: 'entity',
-                url: '/groupOfStudents',
+            .state('teacher.groupOfStudent', {
+                parent: 'teacher',
+                url: '/teacher/groupOfStudents',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN'],
                     pageTitle: 'jeducenterApp.groupOfStudent.home.title'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/groupOfStudent/groupOfStudents.html',
-                        controller: 'GroupOfStudentController'
+                        templateUrl: 'scripts/app/teacher/groupOfStudent/teacher.groupOfStudents.html',
+                        controller: 'TeacherGroupOfStudentController'
                     }
                 },
                 resolve: {
@@ -25,17 +25,17 @@ angular.module('jeducenterApp')
                     }]
                 }
             })
-            .state('groupOfStudent.detail', {
-                parent: 'entity',
-                url: '/groupOfStudent/{id}',
+            .state('teacher.groupOfStudent.detail', {
+                parent: 'teacher',
+                url: '/teacher/groupOfStudent/{id}',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN'],
                     pageTitle: 'jeducenterApp.groupOfStudent.detail.title'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/groupOfStudent/groupOfStudent-detail.html',
-                        controller: 'GroupOfStudentDetailController'
+                        templateUrl: 'scripts/app/teacher/groupOfStudent/teacher.groupOfStudent-detail.html',
+                        controller: 'TeacherGroupOfStudentDetailController'
                     }
                 },
                 resolve: {
@@ -49,16 +49,16 @@ angular.module('jeducenterApp')
                     }]
                 }
             })
-            .state('groupOfStudent.new', {
-                parent: 'groupOfStudent',
-                url: '/new',
+            .state('teacher.groupOfStudent.new', {
+                parent: 'teacher.groupOfStudent',
+                url: '/teacher/new',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/groupOfStudent/groupOfStudent-dialog.html',
-                        controller: 'GroupOfStudentDialogController',
+                        templateUrl: 'scripts/app/teacher/groupOfStudent/teacher.groupOfStudent-dialog.html',
+                        controller: 'TeacherGroupOfStudentDialogController',
                         size: 'lg',
                         resolve: {
                             entity: function () {
@@ -72,22 +72,22 @@ angular.module('jeducenterApp')
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('groupOfStudent', null, { reload: true });
+                        $state.go('teacher.groupOfStudent', null, { reload: true });
                     }, function() {
-                        $state.go('groupOfStudent');
+                        $state.go('teacher.groupOfStudent');
                     })
                 }]
             })
-            .state('groupOfStudent.edit', {
-                parent: 'groupOfStudent',
-                url: '/{id}/edit',
+            .state('teacher.groupOfStudent.edit', {
+                parent: 'teacher.groupOfStudent',
+                url: '/teacher/{id}/edit',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/groupOfStudent/groupOfStudent-dialog.html',
-                        controller: 'GroupOfStudentDialogController',
+                        templateUrl: 'scripts/app/teacher/groupOfStudent/teacher.groupOfStudent-dialog.html',
+                        controller: 'TeacherGroupOfStudentDialogController',
                         size: 'lg',
                         resolve: {
                             entity: ['GroupOfStudent', function(GroupOfStudent) {
@@ -95,22 +95,22 @@ angular.module('jeducenterApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('groupOfStudent', null, { reload: true });
+                        $state.go('teacher.groupOfStudent', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })
                 }]
             })
-            .state('groupOfStudent.delete', {
-                parent: 'groupOfStudent',
-                url: '/{id}/delete',
+            .state('teacher.groupOfStudent.delete', {
+                parent: 'teacher.groupOfStudent',
+                url: '/teacher/{id}/delete',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/groupOfStudent/groupOfStudent-delete-dialog.html',
-                        controller: 'GroupOfStudentDeleteController',
+                        templateUrl: 'scripts/app/teacher/groupOfStudent/teacher.groupOfStudent-delete-dialog.html',
+                        controller: 'TeacherGroupOfStudentDeleteController',
                         size: 'md',
                         resolve: {
                             entity: ['GroupOfStudent', function(GroupOfStudent) {
@@ -118,7 +118,7 @@ angular.module('jeducenterApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('groupOfStudent', null, { reload: true });
+                        $state.go('teacher.groupOfStudent', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })

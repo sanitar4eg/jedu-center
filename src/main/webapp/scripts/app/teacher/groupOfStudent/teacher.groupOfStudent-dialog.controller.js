@@ -4,9 +4,6 @@ angular.module('jeducenterApp').controller('TeacherGroupOfStudentDialogControlle
     ['$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'GroupOfStudent', 'Student', 'TimeTable', '$log',
         function($scope, $stateParams, $uibModalInstance, $q, entity, GroupOfStudent, Student, TimeTable, $log) {
 
-            console.log("IM INITIALIZED: dfsdvzxvZ" );
-            alert ("INITIALIZED");
-
         $scope.groupOfStudent = entity;
         $scope.students = Student.query();
         $scope.timetables = TimeTable.query({filter: 'groupofstudent-is-null'});
@@ -39,10 +36,10 @@ angular.module('jeducenterApp').controller('TeacherGroupOfStudentDialogControlle
             if ($scope.groupOfStudent.id != null) {
                 GroupOfStudent.update($scope.groupOfStudent, onSaveSuccess, onSaveError);
             } else {
-                $log.error("Error: " + $scope.groupOfStudent.timeTable);
-                if ($scope.groupOfStudent.timeTable = null) {
-                    $scope.groupOfStudent.timeTable = new TimeTable();
-                    $scope.groupOfStudent.timeTable.name = $scope.groupOfStudent.name;
+                // $log.info("Error: " + JSON.stringify($scope.groupOfStudent));
+                if ($scope.groupOfStudent.timeTable == null) {
+                    // $scope.groupOfStudent.timeTable = {name: $scope.groupOfStudent.name};
+                    // $log.info("Error updated: " + JSON.stringify($scope.groupOfStudent.timeTable));
                     GroupOfStudent.save($scope.groupOfStudent, onSaveSuccess, onSaveError);
                 } else {
                     GroupOfStudent.save($scope.groupOfStudent, onSaveSuccess, onSaveError);

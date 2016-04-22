@@ -1,12 +1,11 @@
 <div>
     <h2 translate="jeducenterApp.groupOfStudent.home.title">GroupOfStudents</h2>
-    <jh-alert></jh-alert>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="groupOfStudent.new" >
+                <button class="btn btn-primary" ui-sref="teacher.groupOfStudent.new" >
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span 
+                    <span
                         translate="jeducenterApp.groupOfStudent.home.createLabel">Create new GroupOfStudent
                     </span>
                 </button>
@@ -29,7 +28,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="groupOfStudent in groupOfStudents track by groupOfStudent.id">
-                    <td><a ui-sref="groupOfStudent.detail({id:groupOfStudent.id})">{{groupOfStudent.id}}</a></td>
+                    <td><a ui-sref="teacher.groupOfStudent.detail({id:groupOfStudent.id})">{{groupOfStudent.id}}</a></td>
                     <td>{{groupOfStudent.name}}</td>
                     <td translate="{{'jeducenterApp.TypeEnumeration.' + groupOfStudent.type}}">{{groupOfStudent.type}}</td>
                     <td>{{groupOfStudent.description}}</td>
@@ -40,20 +39,20 @@
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
-                                    ui-sref="groupOfStudent.detail({id:groupOfStudent.id})"
-                                    class="btn btn-info btn-sm"> 
+                                    ui-sref="teacher.groupOfStudent.detail({id:groupOfStudent.id})"
+                                    class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="groupOfStudent.edit({id:groupOfStudent.id})"
+                                    ui-sref="teacher.groupOfStudent.edit({id:groupOfStudent.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="groupOfStudent.delete({id:groupOfStudent.id})"
-                                    class="btn btn-danger btn-sm">                                    
+                                    ui-sref="teacher.groupOfStudent.delete({id:groupOfStudent.id})"
+                                    class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
                             </button>
@@ -63,4 +62,5 @@
             </tbody>
         </table>
     </div>
+    <jh-alert></jh-alert>
 </div>

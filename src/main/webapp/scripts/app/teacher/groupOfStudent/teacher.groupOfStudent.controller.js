@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jeducenterApp')
-    .controller('GroupOfStudentController', function ($scope, $state, GroupOfStudent) {
+    .controller('TeacherGroupOfStudentController', function ($scope, $state, GroupOfStudent) {
 
         $scope.groupOfStudents = [];
         $scope.loadAll = function() {
