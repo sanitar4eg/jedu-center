@@ -1,17 +1,16 @@
 package edu.netcracker.center.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import edu.netcracker.center.domain.enumeration.TypeEnumeration;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
-
-import edu.netcracker.center.domain.enumeration.TypeEnumeration;
+import java.util.Set;
 
 /**
  * A GroupOfStudent.
@@ -28,25 +27,25 @@ public class GroupOfStudent implements Serializable {
     @NotNull
     @Column(name = "name", nullable = false)
     private String name;
-    
+
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
     private TypeEnumeration type;
-    
+
     @Column(name = "description")
     private String description;
-    
+
     @NotNull
     @Column(name = "is_active", nullable = false)
     private Boolean isActive;
-    
+
     @OneToMany(mappedBy = "groupOfStudent")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Student> students = new HashSet<>();
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private TimeTable timeTable;
 
     public Long getId() {
@@ -60,7 +59,7 @@ public class GroupOfStudent implements Serializable {
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
@@ -68,7 +67,7 @@ public class GroupOfStudent implements Serializable {
     public TypeEnumeration getType() {
         return type;
     }
-    
+
     public void setType(TypeEnumeration type) {
         this.type = type;
     }
@@ -76,7 +75,7 @@ public class GroupOfStudent implements Serializable {
     public String getDescription() {
         return description;
     }
-    
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -84,7 +83,7 @@ public class GroupOfStudent implements Serializable {
     public Boolean getIsActive() {
         return isActive;
     }
-    
+
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
     }
@@ -114,7 +113,7 @@ public class GroupOfStudent implements Serializable {
             return false;
         }
         GroupOfStudent groupOfStudent = (GroupOfStudent) o;
-        if(groupOfStudent.id == null || id == null) {
+        if (groupOfStudent.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, groupOfStudent.id);
