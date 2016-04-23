@@ -1,0 +1,9 @@
+<a ui-sref="teacher.curator.detail({id:{{
+row.entity.curator.id != null
+?
+row.entity.curator.id
+:
+-1
+}}})">
+    {{row.entity.curator.lastName}}
+</a>
