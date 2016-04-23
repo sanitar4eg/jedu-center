@@ -1,0 +1,9 @@
+<a ui-sref="teacher.groupOfStudent.detail({id:{{
+row.entity.groupOfStudent.id != null
+?
+row.entity.groupOfStudent.id
+:
+-1
+}}})">
+    {{row.entity.groupOfStudent.name}}
+</a>

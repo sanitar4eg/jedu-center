@@ -62,8 +62,13 @@ angular.module('jeducenterApp')
                     headerCellTemplate: '<span translate="jeducenterApp.student.isActive"/>'
                 },
                 {
+                    name: 'groupOfStudent', width: '8%', visible: false,
+                    headerCellTemplate: '<span translate="jeducenterApp.student.groupOfStudent"/>',
+                    cellTemplate: 'scripts/app/teacher/student/ui-grid/student.group.cell.html'
+                },
+                {
                     name: ' ', width: '10%',
-                    cellTemplate: 'scripts/app/teacher/student/ui-grid.student.buttons.html'
+                    cellTemplate: 'scripts/app/teacher/student/ui-grid/student.buttons.html'
                 }
             ]
 
