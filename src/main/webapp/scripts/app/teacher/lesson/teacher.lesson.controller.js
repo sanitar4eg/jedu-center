@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jeducenterApp')
-    .controller('LessonController', function ($scope, $state, Lesson, ParseLinks) {
+    .controller('TeacherLessonController', function ($scope, $state, Lesson, ParseLinks) {
 
         $scope.lessons = [];
         $scope.predicate = 'id';

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jeducenterApp')
-    .controller('LessonDetailController', function ($scope, $rootScope, $stateParams, entity, Lesson, TimeTable, Evaluation) {
+    .controller('TeacherLessonDetailController', function ($scope, $rootScope, $stateParams, entity, Lesson, TimeTable, Evaluation) {
         $scope.lesson = entity;
         $scope.load = function (id) {
             Lesson.get({id: id}, function(result) {
