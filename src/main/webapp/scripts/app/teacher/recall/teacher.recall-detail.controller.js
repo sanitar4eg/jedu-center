@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jeducenterApp')
-    .controller('RecallDetailController', function ($scope, $rootScope, $stateParams, DataUtils, entity, Recall, Student, Curator) {
+    .controller('TeacherRecallDetailController', function ($scope, $rootScope, $stateParams, DataUtils, entity, Recall, Student, Curator) {
         $scope.recall = entity;
         $scope.load = function (id) {
             Recall.get({id: id}, function(result) {

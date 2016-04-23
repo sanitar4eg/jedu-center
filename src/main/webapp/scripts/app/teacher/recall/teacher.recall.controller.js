@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jeducenterApp')
-    .controller('RecallController', function ($scope, $state, DataUtils, Recall) {
+    .controller('TeacherRecallController', function ($scope, $state, DataUtils, Recall) {
 
         $scope.recalls = [];
         $scope.loadAll = function() {
