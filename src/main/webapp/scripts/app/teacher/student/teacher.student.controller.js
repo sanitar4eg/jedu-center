@@ -35,7 +35,7 @@ angular.module('jeducenterApp')
                     headerCellFilter: "translate"
                 },
                 {
-                    displayName: 'jeducenterApp.student.type', field: 'type', width: '8%',
+                    displayName: 'jeducenterApp.student.type', field: 'type', width: '4%',
                     headerCellFilter: "translate"
                 },
                 {
