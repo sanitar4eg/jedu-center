@@ -3,17 +3,17 @@
 angular.module('jeducenterApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('curator', {
-                parent: 'entity',
-                url: '/curators',
+            .state('teacher.curator', {
+                parent: 'teacher',
+                url: '/teacher/curators',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN'],
                     pageTitle: 'jeducenterApp.curator.home.title'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/curator/curators.html',
-                        controller: 'CuratorController'
+                        templateUrl: 'scripts/app/teacher/curator/teacher.curators.html',
+                        controller: 'TeacherCuratorController'
                     }
                 },
                 resolve: {
@@ -24,17 +24,17 @@ angular.module('jeducenterApp')
                     }]
                 }
             })
-            .state('curator.detail', {
-                parent: 'entity',
-                url: '/curator/{id}',
+            .state('teacher.curator.detail', {
+                parent: 'teacher',
+                url: '/teacher/curator/{id}',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN'],
                     pageTitle: 'jeducenterApp.curator.detail.title'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/curator/curator-detail.html',
-                        controller: 'CuratorDetailController'
+                        templateUrl: 'scripts/app/teacher/curator/teacher.curator-detail.html',
+                        controller: 'TeacherCuratorDetailController'
                     }
                 },
                 resolve: {
@@ -47,16 +47,16 @@ angular.module('jeducenterApp')
                     }]
                 }
             })
-            .state('curator.new', {
-                parent: 'curator',
-                url: '/new',
+            .state('teacher.curator.new', {
+                parent: 'teacher.curator',
+                url: '/teacher/new',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN'],
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/curator/curator-dialog.html',
-                        controller: 'CuratorDialogController',
+                        templateUrl: 'scripts/app/teacher/curator/teacher.curator-dialog.html',
+                        controller: 'TeacherCuratorDialogController',
                         size: 'lg',
                         resolve: {
                             entity: function () {
@@ -71,22 +71,22 @@ angular.module('jeducenterApp')
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('curator', null, { reload: true });
+                        $state.go('teacher.curator', null, { reload: true });
                     }, function() {
-                        $state.go('curator');
+                        $state.go('teacher.curator');
                     })
                 }]
             })
-            .state('curator.edit', {
-                parent: 'curator',
-                url: '/{id}/edit',
+            .state('teacher.curator.edit', {
+                parent: 'teacher.curator',
+                url: '/teacher/{id}/edit',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/curator/curator-dialog.html',
-                        controller: 'CuratorDialogController',
+                        templateUrl: 'scripts/app/teacher/curator/teacher.curator-dialog.html',
+                        controller: 'TeacherCuratorDialogController',
                         size: 'lg',
                         resolve: {
                             entity: ['Curator', function(Curator) {
@@ -94,22 +94,22 @@ angular.module('jeducenterApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('curator', null, { reload: true });
+                        $state.go('teacher.curator', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })
                 }]
             })
-            .state('curator.delete', {
-                parent: 'curator',
-                url: '/{id}/delete',
+            .state('teacher.curator.delete', {
+                parent: 'teacher.curator',
+                url: '/teacher/{id}/delete',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/curator/curator-delete-dialog.html',
-                        controller: 'CuratorDeleteController',
+                        templateUrl: 'scripts/app/teacher/curator/teacher.curator-delete-dialog.html',
+                        controller: 'TeacherCuratorDeleteController',
                         size: 'md',
                         resolve: {
                             entity: ['Curator', function(Curator) {
@@ -117,7 +117,7 @@ angular.module('jeducenterApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('curator', null, { reload: true });
+                        $state.go('teacher.curator', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })

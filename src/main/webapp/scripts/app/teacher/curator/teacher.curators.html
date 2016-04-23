@@ -1,12 +1,11 @@
 <div>
     <h2 translate="jeducenterApp.curator.home.title">Curators</h2>
-    <jh-alert></jh-alert>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="curator.new" >
+                <button class="btn btn-primary" ui-sref="teacher.curator.new" >
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span 
+                    <span
                         translate="jeducenterApp.curator.home.createLabel">Create new Curator
                     </span>
                 </button>
@@ -30,7 +29,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="curator in curators track by curator.id">
-                    <td><a ui-sref="curator.detail({id:curator.id})">{{curator.id}}</a></td>
+                    <td><a ui-sref="teacher.curator.detail({id:curator.id})">{{curator.id}}</a></td>
                     <td>{{curator.firstName}}</td>
                     <td>{{curator.lastName}}</td>
                     <td>{{curator.email}}</td>
@@ -42,20 +41,20 @@
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
-                                    ui-sref="curator.detail({id:curator.id})"
-                                    class="btn btn-info btn-sm"> 
+                                    ui-sref="teacher.curator.detail({id:curator.id})"
+                                    class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="curator.edit({id:curator.id})"
+                                    ui-sref="teacher.curator.edit({id:curator.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="curator.delete({id:curator.id})"
-                                    class="btn btn-danger btn-sm">                                    
+                                    ui-sref="teacher.curator.delete({id:curator.id})"
+                                    class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
                             </button>
@@ -65,4 +64,5 @@
             </tbody>
         </table>
     </div>
+    <jh-alert></jh-alert>
 </div>

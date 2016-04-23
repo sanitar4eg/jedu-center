@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jeducenterApp')
-    .controller('CuratorDetailController', function ($scope, $rootScope, $stateParams, entity, Curator, User, Student, Recall) {
+    .controller('TeacherCuratorDetailController', function ($scope, $rootScope, $stateParams, entity, Curator, User, Student, Recall) {
         $scope.curator = entity;
         $scope.load = function (id) {
             Curator.get({id: id}, function(result) {

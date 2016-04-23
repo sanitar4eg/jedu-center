@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('jeducenterApp').controller('CuratorDialogController',
+angular.module('jeducenterApp').controller('TeacherCuratorDialogController',
     ['$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'Curator', 'User', 'Student', 'Recall',
         function($scope, $stateParams, $uibModalInstance, $q, entity, Curator, User, Student, Recall) {
 
