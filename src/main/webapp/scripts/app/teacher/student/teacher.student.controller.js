@@ -62,25 +62,8 @@ angular.module('jeducenterApp')
                     headerCellTemplate: '<span translate="jeducenterApp.student.isActive"/>'
                 },
                 {
-                    name: ' ', width: '8%'/*'8%'*/,
-                    cellTemplate:
-                    '<div class="btn-group flex-btn-group-container">' +
-                    '   <button type="submit"' +
-                    '   ui-sref="teacher.student.detail({id:{{row.entity.id}}})"' +
-                    '   class="btn btn-info btn-sm">' +
-                    '       <span class="glyphicon glyphicon-eye-open">' +
-                    '   </button>' +
-                    '   <button type="submit"' +
-                    '   ui-sref="teacher.student.edit({id:{{row.entity.id}}})"' +
-                    '   class="btn btn-primary btn-sm">' +
-                    '       <span class="glyphicon glyphicon-pencil">' +
-                    '   </button>' +
-                    '   <button type="submit"' +
-                    '   ui-sref="teacher.student.delete({id:{{row.entity.id}}})"' +
-                    '   class="btn btn-danger btn-sm">' +
-                    '       <span class="glyphicon glyphicon-remove-circle">' +
-                    '   </button>' +
-                    '</div>'
+                    name: ' ', width: '10%',
+                    cellTemplate: 'scripts/app/teacher/student/ui-grid.student.buttons.html'
                 }
             ]
 
