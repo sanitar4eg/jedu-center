@@ -3,6 +3,7 @@ package edu.netcracker.center.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -25,22 +26,23 @@ public class Curator implements Serializable {
 
     @Column(name = "first_name")
     private String firstName;
-    
+
     @NotNull
     @Column(name = "last_name", nullable = false)
     private String lastName;
-    
+
     @NotNull
+    @Email
     @Column(name = "email", nullable = false)
     private String email;
-    
+
     @Column(name = "department")
     private String department;
-    
+
     @NotNull
     @Column(name = "is_active", nullable = false)
     private Boolean isActive;
-    
+
     @OneToOne
     private User user;
 
@@ -65,7 +67,7 @@ public class Curator implements Serializable {
     public String getFirstName() {
         return firstName;
     }
-    
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -73,7 +75,7 @@ public class Curator implements Serializable {
     public String getLastName() {
         return lastName;
     }
-    
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -81,7 +83,7 @@ public class Curator implements Serializable {
     public String getEmail() {
         return email;
     }
-    
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -89,7 +91,7 @@ public class Curator implements Serializable {
     public String getDepartment() {
         return department;
     }
-    
+
     public void setDepartment(String department) {
         this.department = department;
     }
@@ -97,7 +99,7 @@ public class Curator implements Serializable {
     public Boolean getIsActive() {
         return isActive;
     }
-    
+
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
     }

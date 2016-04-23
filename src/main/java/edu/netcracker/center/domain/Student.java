@@ -4,6 +4,7 @@ import edu.netcracker.center.domain.enumeration.TypeEnumeration;
 import edu.netcracker.center.domain.enumeration.UniversityEnumeration;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -39,6 +40,7 @@ public class Student implements Serializable {
 
     @NotNull
     @Column(name = "email", nullable = false)
+    @Email
     private String email;
 
     @Column(name = "phone")
