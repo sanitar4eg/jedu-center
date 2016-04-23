@@ -3,17 +3,17 @@
 angular.module('jeducenterApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('recall', {
-                parent: 'entity',
-                url: '/recalls',
+            .state('teacher.recall', {
+                parent: 'teacher',
+                url: '/teacher/recalls',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN'],
                     pageTitle: 'jeducenterApp.recall.home.title'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/recall/recalls.html',
-                        controller: 'RecallController'
+                        templateUrl: 'scripts/app/teacher/recall/teacher.recalls.html',
+                        controller: 'TeacherRecallController'
                     }
                 },
                 resolve: {
@@ -25,17 +25,17 @@ angular.module('jeducenterApp')
                     }]
                 }
             })
-            .state('recall.detail', {
-                parent: 'entity',
-                url: '/recall/{id}',
+            .state('teacher.recall.detail', {
+                parent: 'teacher',
+                url: '/teacher/recall/{id}',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN'],
                     pageTitle: 'jeducenterApp.recall.detail.title'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/recall/recall-detail.html',
-                        controller: 'RecallDetailController'
+                        templateUrl: 'scripts/app/teacher/recall/teacher.recall-detail.html',
+                        controller: 'TeacherRecallDetailController'
                     }
                 },
                 resolve: {
@@ -49,16 +49,16 @@ angular.module('jeducenterApp')
                     }]
                 }
             })
-            .state('recall.new', {
-                parent: 'recall',
-                url: '/new',
+            .state('teacher.recall.new', {
+                parent: 'teacher.recall',
+                url: '/teacher/new',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/recall/recall-dialog.html',
-                        controller: 'RecallDialogController',
+                        templateUrl: 'scripts/app/teacher/recall/teacher.recall-dialog.html',
+                        controller: 'TeacherRecallDialogController',
                         size: 'lg',
                         resolve: {
                             entity: function () {
@@ -71,22 +71,22 @@ angular.module('jeducenterApp')
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('recall', null, { reload: true });
+                        $state.go('teacher.recall', null, { reload: true });
                     }, function() {
-                        $state.go('recall');
+                        $state.go('teacher.recall');
                     })
                 }]
             })
-            .state('recall.edit', {
-                parent: 'recall',
-                url: '/{id}/edit',
+            .state('teacher.recall.edit', {
+                parent: 'teacher.recall',
+                url: '/teacher/{id}/edit',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/recall/recall-dialog.html',
-                        controller: 'RecallDialogController',
+                        templateUrl: 'scripts/app/teacher/recall/teacher.recall-dialog.html',
+                        controller: 'TeacherRecallDialogController',
                         size: 'lg',
                         resolve: {
                             entity: ['Recall', function(Recall) {
@@ -94,22 +94,22 @@ angular.module('jeducenterApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('recall', null, { reload: true });
+                        $state.go('teacher.recall', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })
                 }]
             })
-            .state('recall.delete', {
-                parent: 'recall',
-                url: '/{id}/delete',
+            .state('teacher.recall.delete', {
+                parent: 'teacher.recall',
+                url: '/teacher/{id}/delete',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/recall/recall-delete-dialog.html',
-                        controller: 'RecallDeleteController',
+                        templateUrl: 'scripts/app/teacher/recall/teacher.recall-delete-dialog.html',
+                        controller: 'TeacherRecallDeleteController',
                         size: 'md',
                         resolve: {
                             entity: ['Recall', function(Recall) {
@@ -117,7 +117,7 @@ angular.module('jeducenterApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('recall', null, { reload: true });
+                        $state.go('teacher.recall', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })
