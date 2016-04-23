@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jeducenterApp')
-    .controller('TimeTableController', function ($scope, $state, TimeTable) {
+    .controller('TeacherTimeTableController', function ($scope, $state, TimeTable) {
 
         $scope.timeTables = [];
         $scope.loadAll = function() {

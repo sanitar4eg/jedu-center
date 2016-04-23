@@ -3,17 +3,17 @@
 angular.module('jeducenterApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('timeTable', {
-                parent: 'entity',
-                url: '/timeTables',
+            .state('teacher.timeTable', {
+                parent: 'teacher',
+                url: '/teacher/timeTables',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN'],
                     pageTitle: 'jeducenterApp.timeTable.home.title'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/timeTable/timeTables.html',
-                        controller: 'TimeTableController'
+                        templateUrl: 'scripts/app/teacher/timeTable/teacher.timeTables.html',
+                        controller: 'TeacherTimeTableController'
                     }
                 },
                 resolve: {
@@ -24,17 +24,17 @@ angular.module('jeducenterApp')
                     }]
                 }
             })
-            .state('timeTable.detail', {
-                parent: 'entity',
-                url: '/timeTable/{id}',
+            .state('teacher.timeTable.detail', {
+                parent: 'teacher',
+                url: '/teacher/timeTable/{id}',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN'],
                     pageTitle: 'jeducenterApp.timeTable.detail.title'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/timeTable/timeTable-detail.html',
-                        controller: 'TimeTableDetailController'
+                        templateUrl: 'scripts/app/teacher/timeTable/teacher.timeTable-detail.html',
+                        controller: 'TeacherTimeTableDetailController'
                     }
                 },
                 resolve: {
@@ -47,16 +47,16 @@ angular.module('jeducenterApp')
                     }]
                 }
             })
-            .state('timeTable.new', {
-                parent: 'timeTable',
-                url: '/new',
+            .state('teacher.timeTable.new', {
+                parent: 'teacher.timeTable',
+                url: '/teacher/new',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/timeTable/timeTable-dialog.html',
-                        controller: 'TimeTableDialogController',
+                        templateUrl: 'scripts/app/teacher/timeTable/teacher.timeTable-dialog.html',
+                        controller: 'TeacherTimeTableDialogController',
                         size: 'lg',
                         resolve: {
                             entity: function () {
@@ -67,22 +67,22 @@ angular.module('jeducenterApp')
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('timeTable', null, { reload: true });
+                        $state.go('teacher.timeTable', null, { reload: true });
                     }, function() {
-                        $state.go('timeTable');
+                        $state.go('teacher.timeTable');
                     })
                 }]
             })
-            .state('timeTable.edit', {
-                parent: 'timeTable',
-                url: '/{id}/edit',
+            .state('teacher.timeTable.edit', {
+                parent: 'teacher.timeTable',
+                url: '/teacher/{id}/edit',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/timeTable/timeTable-dialog.html',
-                        controller: 'TimeTableDialogController',
+                        templateUrl: 'scripts/app/teacher/timeTable/teacher.timeTable-dialog.html',
+                        controller: 'TeacherTimeTableDialogController',
                         size: 'lg',
                         resolve: {
                             entity: ['TimeTable', function(TimeTable) {
@@ -90,22 +90,22 @@ angular.module('jeducenterApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('timeTable', null, { reload: true });
+                        $state.go('teacher.timeTable', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })
                 }]
             })
-            .state('timeTable.delete', {
-                parent: 'timeTable',
-                url: '/{id}/delete',
+            .state('teacher.timeTable.delete', {
+                parent: 'teacher.timeTable',
+                url: '/teacher/{id}/delete',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/timeTable/timeTable-delete-dialog.html',
-                        controller: 'TimeTableDeleteController',
+                        templateUrl: 'scripts/app/teacher/timeTable/teacher.timeTable-delete-dialog.html',
+                        controller: 'TeacherTimeTableDeleteController',
                         size: 'md',
                         resolve: {
                             entity: ['TimeTable', function(TimeTable) {
@@ -113,7 +113,7 @@ angular.module('jeducenterApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('timeTable', null, { reload: true });
+                        $state.go('teacher.timeTable', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })

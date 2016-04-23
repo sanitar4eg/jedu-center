@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jeducenterApp')
-	.controller('TimeTableDeleteController', function($scope, $uibModalInstance, entity, TimeTable) {
+	.controller('TeacherTimeTableDeleteController', function($scope, $uibModalInstance, entity, TimeTable) {
 
         $scope.timeTable = entity;
         $scope.clear = function() {
