@@ -23,7 +23,7 @@
             "firstName": "Имя",
             "lastName": "Фамилия",
             "middleName": "Отчество",
-            "type": "Тип обучения",
+            "type": "Тип",
             "email": "Email",
             "phone": "Телефон",
             "university": "Университет",
