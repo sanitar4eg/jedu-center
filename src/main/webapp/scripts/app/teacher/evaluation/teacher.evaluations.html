@@ -1,12 +1,11 @@
 <div>
     <h2 translate="jeducenterApp.evaluation.home.title">Evaluations</h2>
-    <jh-alert></jh-alert>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="evaluation.new" >
+                <button class="btn btn-primary" ui-sref="teacher.evaluation.new" >
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span 
+                    <span
                         translate="jeducenterApp.evaluation.home.createLabel">Create new Evaluation
                     </span>
                 </button>
@@ -27,31 +26,31 @@
             </thead>
             <tbody>
                 <tr ng-repeat="evaluation in evaluations track by evaluation.id">
-                    <td><a ui-sref="evaluation.detail({id:evaluation.id})">{{evaluation.id}}</a></td>
+                    <td><a ui-sref="teacher.evaluation.detail({id:evaluation.id})">{{evaluation.id}}</a></td>
                     <td>{{evaluation.value}}</td>
                     <td>
-                        <a ui-sref="lesson.detail({id:evaluation.lesson.id})">{{evaluation.lesson.topic}}</a>
+                        <a ui-sref="teacher.lesson.detail({id:evaluation.lesson.id})">{{evaluation.lesson.topic}}</a>
                     </td>
                     <td>
-                        <a ui-sref="student.detail({id:evaluation.student.id})">{{evaluation.student.lastName}}</a>
+                        <a ui-sref="teacher.student.detail({id:evaluation.student.id})">{{evaluation.student.lastName}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
-                                    ui-sref="evaluation.detail({id:evaluation.id})"
-                                    class="btn btn-info btn-sm"> 
+                                    ui-sref="teacher.evaluation.detail({id:evaluation.id})"
+                                    class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="evaluation.edit({id:evaluation.id})"
+                                    ui-sref="teacher.evaluation.edit({id:evaluation.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="evaluation.delete({id:evaluation.id})"
-                                    class="btn btn-danger btn-sm">                                    
+                                    ui-sref="teacher.evaluation.delete({id:evaluation.id})"
+                                    class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
                             </button>
@@ -64,4 +63,5 @@
     <div class="text-center">
         <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pagination>
     </div>
+    <jh-alert></jh-alert>
 </div>

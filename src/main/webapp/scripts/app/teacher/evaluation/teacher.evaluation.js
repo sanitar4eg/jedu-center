@@ -3,17 +3,17 @@
 angular.module('jeducenterApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('evaluation', {
-                parent: 'entity',
-                url: '/evaluations',
+            .state('teacher.evaluation', {
+                parent: 'teacher',
+                url: '/teacher/evaluations',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN'],
                     pageTitle: 'jeducenterApp.evaluation.home.title'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/evaluation/evaluations.html',
-                        controller: 'EvaluationController'
+                        templateUrl: 'scripts/app/teacher/evaluation/teacher.evaluations.html',
+                        controller: 'TeacherEvaluationController'
                     }
                 },
                 resolve: {
@@ -24,17 +24,17 @@ angular.module('jeducenterApp')
                     }]
                 }
             })
-            .state('evaluation.detail', {
-                parent: 'entity',
-                url: '/evaluation/{id}',
+            .state('teacher.evaluation.detail', {
+                parent: 'teacher',
+                url: '/teacher/evaluation/{id}',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN'],
                     pageTitle: 'jeducenterApp.evaluation.detail.title'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/evaluation/evaluation-detail.html',
-                        controller: 'EvaluationDetailController'
+                        templateUrl: 'scripts/app/teacher/evaluation/teacher.evaluation-detail.html',
+                        controller: 'TeacherEvaluationDetailController'
                     }
                 },
                 resolve: {
@@ -47,16 +47,16 @@ angular.module('jeducenterApp')
                     }]
                 }
             })
-            .state('evaluation.new', {
-                parent: 'evaluation',
-                url: '/new',
+            .state('teacher.evaluation.new', {
+                parent: 'teacher.evaluation',
+                url: '/teacher/new',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/evaluation/evaluation-dialog.html',
-                        controller: 'EvaluationDialogController',
+                        templateUrl: 'scripts/app/teacher/evaluation/teacher.evaluation-dialog.html',
+                        controller: 'TeacherEvaluationDialogController',
                         size: 'lg',
                         resolve: {
                             entity: function () {
@@ -67,22 +67,22 @@ angular.module('jeducenterApp')
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('evaluation', null, { reload: true });
+                        $state.go('teacher.evaluation', null, { reload: true });
                     }, function() {
-                        $state.go('evaluation');
+                        $state.go('teacher.evaluation');
                     })
                 }]
             })
-            .state('evaluation.edit', {
-                parent: 'evaluation',
-                url: '/{id}/edit',
+            .state('teacher.evaluation.edit', {
+                parent: 'teacher.evaluation',
+                url: '/teacher/{id}/edit',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/evaluation/evaluation-dialog.html',
-                        controller: 'EvaluationDialogController',
+                        templateUrl: 'scripts/app/teacher/evaluation/teacher.evaluation-dialog.html',
+                        controller: 'TeacherEvaluationDialogController',
                         size: 'lg',
                         resolve: {
                             entity: ['Evaluation', function(Evaluation) {
@@ -90,22 +90,22 @@ angular.module('jeducenterApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('evaluation', null, { reload: true });
+                        $state.go('teacher.evaluation', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })
                 }]
             })
-            .state('evaluation.delete', {
-                parent: 'evaluation',
-                url: '/{id}/delete',
+            .state('teacher.evaluation.delete', {
+                parent: 'teacher.evaluation',
+                url: '/teacher/{id}/delete',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/evaluation/evaluation-delete-dialog.html',
-                        controller: 'EvaluationDeleteController',
+                        templateUrl: 'scripts/app/teacher/evaluation/teacher.evaluation-delete-dialog.html',
+                        controller: 'TeacherEvaluationDeleteController',
                         size: 'md',
                         resolve: {
                             entity: ['Evaluation', function(Evaluation) {
@@ -113,7 +113,7 @@ angular.module('jeducenterApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('evaluation', null, { reload: true });
+                        $state.go('teacher.evaluation', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })
