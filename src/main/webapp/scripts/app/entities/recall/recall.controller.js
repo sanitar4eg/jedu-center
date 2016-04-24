@@ -22,7 +22,7 @@ angular.module('jeducenterApp')
                 type: null,
                 name: null,
                 description: null,
-                pathToFile: null,
+                file: null,
                 id: null
             };
         };

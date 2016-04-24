@@ -35,14 +35,11 @@
             "fieldId": 3,
             "fieldName": "description",
             "fieldType": "byte[]",
-            "fieldTypeBlobContent": "text",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldTypeBlobContent": "text"
         },
         {
             "fieldId": 4,
-            "fieldName": "pathToFile",
+            "fieldName": "file",
             "fieldType": "String"
         }
     ],

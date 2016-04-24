@@ -1,8 +1,10 @@
 'use strict';
 
 angular.module('jeducenterApp').controller('RecallDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Recall', 'Student', 'Curator', 'fileService',
-        function($scope, $stateParams, $uibModalInstance, DataUtils, entity, Recall, Student, Curator, fileService) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Recall', 'Student', 'Curator', 
+        'fileService',
+        function($scope, $stateParams, $uibModalInstance, DataUtils, entity, Recall, Student, Curator, 
+                 fileService) {
 
         $scope.recall = entity;
         $scope.students = Student.query();

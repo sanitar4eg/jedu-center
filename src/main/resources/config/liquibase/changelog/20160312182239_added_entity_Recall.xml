@@ -27,11 +27,9 @@
             
             <column name="name" type="varchar(255)"/>
             
-            <column name="description" type="clob">
-                <constraints nullable="false" />
-            </column>
+            <column name="description" type="clob"/>
             
-            <column name="path_to_file" type="varchar(255)"/>
+            <column name="file" type="varchar(255)"/>
             
             <column name="student_id" type="bigint"/>
             <column name="curator_id" type="bigint"/>

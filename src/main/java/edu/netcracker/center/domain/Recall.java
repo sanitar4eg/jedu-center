@@ -32,13 +32,12 @@ public class Recall implements Serializable {
     @Column(name = "name")
     private String name;
     
-    @NotNull
     @Lob
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     private String description;
     
-    @Column(name = "path_to_file")
-    private String pathToFile;
+    @Column(name = "file")
+    private String file;
     
     @ManyToOne
     @JoinColumn(name = "student_id")
@@ -80,12 +79,12 @@ public class Recall implements Serializable {
         this.description = description;
     }
 
-    public String getPathToFile() {
-        return pathToFile;
+    public String getFile() {
+        return file;
     }
     
-    public void setPathToFile(String pathToFile) {
-        this.pathToFile = pathToFile;
+    public void setFile(String file) {
+        this.file = file;
     }
 
     public Student getStudent() {
@@ -131,7 +130,7 @@ public class Recall implements Serializable {
             ", type='" + type + "'" +
             ", name='" + name + "'" +
             ", description='" + description + "'" +
-            ", pathToFile='" + pathToFile + "'" +
+            ", file='" + file + "'" +
             '}';
     }
 }

@@ -19,7 +19,7 @@
             "type": "Type",
             "name": "Name",
             "description": "Description",
-            "pathToFile": "PathToFile",
+            "file": "File",
             "student": "Student",
             "curator": "Curator"
         }

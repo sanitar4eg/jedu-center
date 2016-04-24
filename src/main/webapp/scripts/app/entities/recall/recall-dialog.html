@@ -1,6 +1,3 @@
-<form method="post"
-      ng-submit="uploadExportFile()">
-</form>
 
 <form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
 
@@ -39,23 +36,17 @@
         <div class="form-group">
             <label class="control-label" translate="jeducenterApp.recall.description" for="field_description">Description</label>
                 <textarea class="form-control" name="description" id="field_description"
-                    ng-model="recall.description" required />
-            <div ng-show="editForm.description.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.description.$error.required" translate="entity.validation.required">
-                    This field is required.
-                </p>
-            </div>
+                    ng-model="recall.description"  />
         </div>
         <div class="form-group">
-            <label class="control-label" translate="jeducenterApp.recall.pathToFile" for="field_pathToFile">PathToFile</label>
-            <input type="text" class="form-control" name="pathToFile" id="field_pathToFile"
-                    ng-model="recall.pathToFile"
+            <label class="control-label" translate="jeducenterApp.recall.file" for="field_file">File</label>
+            <input type="text" class="form-control" name="file" id="field_file"
+                    ng-model="recall.file"
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" translate="global.file.selectFile" for="field_pathToFile">Select File</label>
-            <input id="recall-input-file" name="file" type="file" bfi class="file" data-show-preview="false" ng-model="recall.file"
+            <label class="control-label" translate="global.file.selectFile" for="recall-input-file">Select File</label>
+            <input id="recall-input-file" name="file" type="file" bfi-for-form class="file" data-show-preview="false"
                    data-rule-required="true" accept=".doc,.docx" file-uploader>
         </div>
         <div class="form-group">
