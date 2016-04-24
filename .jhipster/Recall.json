@@ -39,6 +39,11 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "pathToFile",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20160312182239",

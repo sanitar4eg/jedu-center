@@ -22,6 +22,7 @@
                     <th><span translate="jeducenterApp.recall.type">Type</span></th>
                     <th><span translate="jeducenterApp.recall.name">Name</span></th>
                     <th><span translate="jeducenterApp.recall.description">Description</span></th>
+                    <th><span translate="jeducenterApp.recall.pathToFile">PathToFile</span></th>
                     <th><span translate="jeducenterApp.recall.student">student</span></th>
                     <th><span translate="jeducenterApp.recall.curator">curator</span></th>
                     <th></th>
@@ -33,6 +34,7 @@
                     <td translate="{{'jeducenterApp.TypeRecallEnumeration.' + recall.type}}">{{recall.type}}</td>
                     <td>{{recall.name}}</td>
                     <td>{{recall.description}}</td>
+                    <td>{{recall.pathToFile}}</td>
                     <td>
                         <a ui-sref="student.detail({id:recall.student.id})">{{recall.student.lastName}}</a>
                     </td>

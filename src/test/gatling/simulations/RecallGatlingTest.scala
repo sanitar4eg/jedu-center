@@ -67,7 +67,7 @@ class RecallGatlingTest extends Simulation {
             .exec(http("Create new recall")
             .post("/api/recalls")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "type":null, "name":"SAMPLE_TEXT", "description":null}""")).asJSON
+            .body(StringBody("""{"id":null, "type":null, "name":"SAMPLE_TEXT", "description":null, "pathToFile":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_recall_url")))
             .pause(10)

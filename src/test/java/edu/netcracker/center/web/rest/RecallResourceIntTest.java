@@ -51,6 +51,8 @@ public class RecallResourceIntTest {
     
     private static final String DEFAULT_DESCRIPTION = "AAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBB";
+    private static final String DEFAULT_PATH_TO_FILE = "AAAAA";
+    private static final String UPDATED_PATH_TO_FILE = "BBBBB";
 
     @Inject
     private RecallRepository recallRepository;
@@ -81,6 +83,7 @@ public class RecallResourceIntTest {
         recall.setType(DEFAULT_TYPE);
         recall.setName(DEFAULT_NAME);
         recall.setDescription(DEFAULT_DESCRIPTION);
+        recall.setPathToFile(DEFAULT_PATH_TO_FILE);
     }
 
     @Test
@@ -102,6 +105,7 @@ public class RecallResourceIntTest {
         assertThat(testRecall.getType()).isEqualTo(DEFAULT_TYPE);
         assertThat(testRecall.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testRecall.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testRecall.getPathToFile()).isEqualTo(DEFAULT_PATH_TO_FILE);
     }
 
     @Test
@@ -153,7 +157,8 @@ public class RecallResourceIntTest {
                 .andExpect(jsonPath("$.[*].id").value(hasItem(recall.getId().intValue())))
                 .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
                 .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-                .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
+                .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+                .andExpect(jsonPath("$.[*].pathToFile").value(hasItem(DEFAULT_PATH_TO_FILE.toString())));
     }
 
     @Test
@@ -169,7 +174,8 @@ public class RecallResourceIntTest {
             .andExpect(jsonPath("$.id").value(recall.getId().intValue()))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
+            .andExpect(jsonPath("$.pathToFile").value(DEFAULT_PATH_TO_FILE.toString()));
     }
 
     @Test
@@ -192,6 +198,7 @@ public class RecallResourceIntTest {
         recall.setType(UPDATED_TYPE);
         recall.setName(UPDATED_NAME);
         recall.setDescription(UPDATED_DESCRIPTION);
+        recall.setPathToFile(UPDATED_PATH_TO_FILE);
 
         restRecallMockMvc.perform(put("/api/recalls")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -205,6 +212,7 @@ public class RecallResourceIntTest {
         assertThat(testRecall.getType()).isEqualTo(UPDATED_TYPE);
         assertThat(testRecall.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testRecall.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testRecall.getPathToFile()).isEqualTo(UPDATED_PATH_TO_FILE);
     }
 
     @Test

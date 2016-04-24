@@ -37,6 +37,9 @@ public class Recall implements Serializable {
     @Column(name = "description", nullable = false)
     private String description;
     
+    @Column(name = "path_to_file")
+    private String pathToFile;
+    
     @ManyToOne
     @JoinColumn(name = "student_id")
     private Student student;
@@ -75,6 +78,14 @@ public class Recall implements Serializable {
     
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getPathToFile() {
+        return pathToFile;
+    }
+    
+    public void setPathToFile(String pathToFile) {
+        this.pathToFile = pathToFile;
     }
 
     public Student getStudent() {
@@ -120,6 +131,7 @@ public class Recall implements Serializable {
             ", type='" + type + "'" +
             ", name='" + name + "'" +
             ", description='" + description + "'" +
+            ", pathToFile='" + pathToFile + "'" +
             '}';
     }
 }
