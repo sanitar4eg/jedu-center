@@ -1,14 +1,11 @@
 <div>
     <h2 translate="jeducenterApp.recall.home.title">Recalls</h2>
-    <jh-alert></jh-alert>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="recall.new" >
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span 
-                        translate="jeducenterApp.recall.home.createLabel">Create new Recall
-                    </span>
+                    <span translate="jeducenterApp.recall.home.createLabel">Create new Recall</span>
                 </button>
             </div>
         </div>
@@ -45,7 +42,7 @@
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="recall.detail({id:recall.id})"
-                                    class="btn btn-info btn-sm"> 
+                                    class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
                             </button>
@@ -57,7 +54,7 @@
                             </button>
                             <button type="submit"
                                     ui-sref="recall.delete({id:recall.id})"
-                                    class="btn btn-danger btn-sm">                                    
+                                    class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
                             </button>
@@ -67,4 +64,5 @@
             </tbody>
         </table>
     </div>
+    <jh-alert></jh-alert>
 </div>
