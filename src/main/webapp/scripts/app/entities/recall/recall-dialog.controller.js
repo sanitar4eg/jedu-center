@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('jeducenterApp').controller('RecallDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Recall', 'Student', 'Curator',
-        function($scope, $stateParams, $uibModalInstance, DataUtils, entity, Recall, Student, Curator) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Recall', 'Student', 'Curator', 'fileService',
+        function($scope, $stateParams, $uibModalInstance, DataUtils, entity, Recall, Student, Curator, fileService) {
 
         $scope.recall = entity;
         $scope.students = Student.query();
@@ -24,6 +24,7 @@ angular.module('jeducenterApp').controller('RecallDialogController',
         };
 
         $scope.save = function () {
+            var file = fileService.getFile();
             $scope.isSaving = true;
             if ($scope.recall.id != null) {
                 Recall.update($scope.recall, onSaveSuccess, onSaveError);

@@ -86,6 +86,10 @@
         },
         "field": {
             "id" : "ID"
+        },
+        "file": {
+            "selectFile": "Выберете файл",
+            "downloadFile": "Скачать файл"
         }
     },
     "entity": {
