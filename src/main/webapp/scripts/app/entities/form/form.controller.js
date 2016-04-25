@@ -19,8 +19,9 @@ angular.module('jeducenterApp')
 
         $scope.clear = function () {
             $scope.form = {
-                pathToFile: null,
+                file: null,
                 creationTime: null,
+                isActive: false,
                 id: null
             };
         };

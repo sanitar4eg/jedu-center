@@ -67,7 +67,7 @@ class FormGatlingTest extends Simulation {
             .exec(http("Create new form")
             .post("/api/forms")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "pathToFile":"SAMPLE_TEXT", "creationTime":"2020-01-01T00:00:00.000Z"}""")).asJSON
+            .body(StringBody("""{"id":null, "file":"SAMPLE_TEXT", "creationTime":"2020-01-01T00:00:00.000Z", "isActive":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_form_url")))
             .pause(10)

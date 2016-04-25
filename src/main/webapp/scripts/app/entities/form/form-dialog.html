@@ -14,13 +14,13 @@
                     ng-model="form.id" readonly />
         </div>
         <div class="form-group">
-            <label class="control-label" translate="jeducenterApp.form.pathToFile" for="field_pathToFile">PathToFile</label>
-            <input type="text" class="form-control" name="pathToFile" id="field_pathToFile"
-                    ng-model="form.pathToFile"
+            <label class="control-label" translate="jeducenterApp.form.file" for="field_file">File</label>
+            <input type="text" class="form-control" name="file" id="field_file"
+                    ng-model="form.file"
                     required />
-            <div ng-show="editForm.pathToFile.$invalid">
+            <div ng-show="editForm.file.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.pathToFile.$error.required" translate="entity.validation.required">
+                    ng-show="editForm.file.$error.required" translate="entity.validation.required">
                     This field is required.
                 </p>
             </div>
@@ -38,6 +38,18 @@
                 <p class="help-block"
                     ng-show="editForm.creationTime.$error.ZonedDateTimelocal" translate="entity.validation.ZonedDateTimelocal">
                     This field should be a date and time.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="jeducenterApp.form.isActive" for="field_isActive">IsActive</label>
+            <input type="checkbox" class="form-control" name="isActive" id="field_isActive"
+                    ng-model="form.isActive"
+                     />
+            <div ng-show="editForm.isActive.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.isActive.$error.required" translate="entity.validation.required">
+                    This field is required.
                 </p>
             </div>
         </div>

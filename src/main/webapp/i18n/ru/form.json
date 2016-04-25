@@ -16,8 +16,9 @@
             "detail": {
                 "title": "Анкета"
             },
-            "pathToFile": "Путь до файла",
+            "file": "Файл",
             "creationTime": "Время создания",
+            "isActive": "Активен",
             "student": "Студент"
         }
     }

@@ -51,7 +51,7 @@ angular.module('jeducenterApp')
                 parent: 'form',
                 url: '/new',
                 data: {
-                    authorities: ['ROLE_ADMIN'],
+                    authorities: ['ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -61,8 +61,9 @@ angular.module('jeducenterApp')
                         resolve: {
                             entity: function () {
                                 return {
-                                    pathToFile: null,
+                                    file: null,
                                     creationTime: null,
+                                    isActive: false,
                                     id: null
                                 };
                             }
@@ -78,7 +79,7 @@ angular.module('jeducenterApp')
                 parent: 'form',
                 url: '/{id}/edit',
                 data: {
-                    authorities: ['ROLE_ADMIN'],
+                    authorities: ['ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -101,7 +102,7 @@ angular.module('jeducenterApp')
                 parent: 'form',
                 url: '/{id}/delete',
                 data: {
-                    authorities: ['ROLE_ADMIN'],
+                    authorities: ['ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({

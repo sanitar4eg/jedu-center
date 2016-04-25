@@ -25,12 +25,16 @@ public class Form implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "path_to_file", nullable = false)
-    private String pathToFile;
+    @Column(name = "file", nullable = false)
+    private String file;
     
     @NotNull
     @Column(name = "creation_time", nullable = false)
     private ZonedDateTime creationTime;
+    
+    @NotNull
+    @Column(name = "is_active", nullable = false)
+    private Boolean isActive;
     
     @OneToOne(mappedBy = "form")
     @JsonIgnore
@@ -44,12 +48,12 @@ public class Form implements Serializable {
         this.id = id;
     }
 
-    public String getPathToFile() {
-        return pathToFile;
+    public String getFile() {
+        return file;
     }
     
-    public void setPathToFile(String pathToFile) {
-        this.pathToFile = pathToFile;
+    public void setFile(String file) {
+        this.file = file;
     }
 
     public ZonedDateTime getCreationTime() {
@@ -58,6 +62,14 @@ public class Form implements Serializable {
     
     public void setCreationTime(ZonedDateTime creationTime) {
         this.creationTime = creationTime;
+    }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+    
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 
     public Student getStudent() {
@@ -92,8 +104,9 @@ public class Form implements Serializable {
     public String toString() {
         return "Form{" +
             "id=" + id +
-            ", pathToFile='" + pathToFile + "'" +
+            ", file='" + file + "'" +
             ", creationTime='" + creationTime + "'" +
+            ", isActive='" + isActive + "'" +
             '}';
     }
 }

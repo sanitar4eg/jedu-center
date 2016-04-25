@@ -16,8 +16,9 @@
             "detail": {
                 "title": "Form"
             },
-            "pathToFile": "PathToFile",
+            "file": "File",
             "creationTime": "CreationTime",
+            "isActive": "IsActive",
             "student": "Student"
         }
     }

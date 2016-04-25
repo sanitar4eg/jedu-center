@@ -47,12 +47,15 @@ public class FormResourceIntTest {
 
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneId.of("Z"));
 
-    private static final String DEFAULT_PATH_TO_FILE = "AAAAA";
-    private static final String UPDATED_PATH_TO_FILE = "BBBBB";
+    private static final String DEFAULT_FILE = "AAAAA";
+    private static final String UPDATED_FILE = "BBBBB";
 
     private static final ZonedDateTime DEFAULT_CREATION_TIME = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
     private static final ZonedDateTime UPDATED_CREATION_TIME = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
     private static final String DEFAULT_CREATION_TIME_STR = dateTimeFormatter.format(DEFAULT_CREATION_TIME);
+
+    private static final Boolean DEFAULT_IS_ACTIVE = false;
+    private static final Boolean UPDATED_IS_ACTIVE = true;
 
     @Inject
     private FormRepository formRepository;
@@ -80,8 +83,9 @@ public class FormResourceIntTest {
     @Before
     public void initTest() {
         form = new Form();
-        form.setPathToFile(DEFAULT_PATH_TO_FILE);
+        form.setFile(DEFAULT_FILE);
         form.setCreationTime(DEFAULT_CREATION_TIME);
+        form.setIsActive(DEFAULT_IS_ACTIVE);
     }
 
     @Test
@@ -100,16 +104,17 @@ public class FormResourceIntTest {
         List<Form> forms = formRepository.findAll();
         assertThat(forms).hasSize(databaseSizeBeforeCreate + 1);
         Form testForm = forms.get(forms.size() - 1);
-        assertThat(testForm.getPathToFile()).isEqualTo(DEFAULT_PATH_TO_FILE);
+        assertThat(testForm.getFile()).isEqualTo(DEFAULT_FILE);
         assertThat(testForm.getCreationTime()).isEqualTo(DEFAULT_CREATION_TIME);
+        assertThat(testForm.getIsActive()).isEqualTo(DEFAULT_IS_ACTIVE);
     }
 
     @Test
     @Transactional
-    public void checkPathToFileIsRequired() throws Exception {
+    public void checkFileIsRequired() throws Exception {
         int databaseSizeBeforeTest = formRepository.findAll().size();
         // set the field null
-        form.setPathToFile(null);
+        form.setFile(null);
 
         // Create the Form, which fails.
 
@@ -142,6 +147,24 @@ public class FormResourceIntTest {
 
     @Test
     @Transactional
+    public void checkIsActiveIsRequired() throws Exception {
+        int databaseSizeBeforeTest = formRepository.findAll().size();
+        // set the field null
+        form.setIsActive(null);
+
+        // Create the Form, which fails.
+
+        restFormMockMvc.perform(post("/api/forms")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(form)))
+                .andExpect(status().isBadRequest());
+
+        List<Form> forms = formRepository.findAll();
+        assertThat(forms).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllForms() throws Exception {
         // Initialize the database
         formRepository.saveAndFlush(form);
@@ -151,8 +174,9 @@ public class FormResourceIntTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(form.getId().intValue())))
-                .andExpect(jsonPath("$.[*].pathToFile").value(hasItem(DEFAULT_PATH_TO_FILE.toString())))
-                .andExpect(jsonPath("$.[*].creationTime").value(hasItem(DEFAULT_CREATION_TIME_STR)));
+                .andExpect(jsonPath("$.[*].file").value(hasItem(DEFAULT_FILE.toString())))
+                .andExpect(jsonPath("$.[*].creationTime").value(hasItem(DEFAULT_CREATION_TIME_STR)))
+                .andExpect(jsonPath("$.[*].isActive").value(hasItem(DEFAULT_IS_ACTIVE.booleanValue())));
     }
 
     @Test
@@ -166,8 +190,9 @@ public class FormResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(form.getId().intValue()))
-            .andExpect(jsonPath("$.pathToFile").value(DEFAULT_PATH_TO_FILE.toString()))
-            .andExpect(jsonPath("$.creationTime").value(DEFAULT_CREATION_TIME_STR));
+            .andExpect(jsonPath("$.file").value(DEFAULT_FILE.toString()))
+            .andExpect(jsonPath("$.creationTime").value(DEFAULT_CREATION_TIME_STR))
+            .andExpect(jsonPath("$.isActive").value(DEFAULT_IS_ACTIVE.booleanValue()));
     }
 
     @Test
@@ -187,8 +212,9 @@ public class FormResourceIntTest {
 		int databaseSizeBeforeUpdate = formRepository.findAll().size();
 
         // Update the form
-        form.setPathToFile(UPDATED_PATH_TO_FILE);
+        form.setFile(UPDATED_FILE);
         form.setCreationTime(UPDATED_CREATION_TIME);
+        form.setIsActive(UPDATED_IS_ACTIVE);
 
         restFormMockMvc.perform(put("/api/forms")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -199,8 +225,9 @@ public class FormResourceIntTest {
         List<Form> forms = formRepository.findAll();
         assertThat(forms).hasSize(databaseSizeBeforeUpdate);
         Form testForm = forms.get(forms.size() - 1);
-        assertThat(testForm.getPathToFile()).isEqualTo(UPDATED_PATH_TO_FILE);
+        assertThat(testForm.getFile()).isEqualTo(UPDATED_FILE);
         assertThat(testForm.getCreationTime()).isEqualTo(UPDATED_CREATION_TIME);
+        assertThat(testForm.getIsActive()).isEqualTo(UPDATED_IS_ACTIVE);
     }
 
     @Test
