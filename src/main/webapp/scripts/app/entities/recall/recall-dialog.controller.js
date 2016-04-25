@@ -16,6 +16,12 @@ angular.module('jeducenterApp').controller('RecallDialogController',
         };
 
         var onSaveSuccess = function (result) {
+            var file = fileService.getFile();
+            if (file != null && $scope.recall.id == null) {
+                var formData = new FormData();
+                formData.append("file", file);
+                RecallFile.uploadFile({id: result.id}, formData);
+            }
             $scope.$emit('jeducenterApp:recallUpdate', result);
             $uibModalInstance.close(result);
             $scope.isSaving = false;
@@ -33,7 +39,7 @@ angular.module('jeducenterApp').controller('RecallDialogController',
             } else {
                 Recall.save($scope.recall, onSaveSuccess, onSaveError);
             }
-            if (file != null) {
+            if (file != null && $scope.recall.id != null) {
                 var formData = new FormData();
                 formData.append("file", file);
                 RecallFile.uploadFile({id: $scope.recall.id}, formData);
