@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('jeducenterApp').controller('RecallDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Recall', 'Student', 'Curator', 
-        'fileService',
-        function($scope, $stateParams, $uibModalInstance, DataUtils, entity, Recall, Student, Curator, 
-                 fileService) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Recall', 'Student', 'Curator',
+        'fileService', 'RecallFile',
+        function($scope, $stateParams, $uibModalInstance, DataUtils, entity, Recall, Student, Curator,
+                 fileService, RecallFile) {
 
         $scope.recall = entity;
         $scope.students = Student.query();
@@ -32,6 +32,11 @@ angular.module('jeducenterApp').controller('RecallDialogController',
                 Recall.update($scope.recall, onSaveSuccess, onSaveError);
             } else {
                 Recall.save($scope.recall, onSaveSuccess, onSaveError);
+            }
+            if (file != null) {
+                var formData = new FormData();
+                formData.append("file", file);
+                RecallFile.uploadFile({id: $scope.recall.id}, formData);
             }
         };
 
