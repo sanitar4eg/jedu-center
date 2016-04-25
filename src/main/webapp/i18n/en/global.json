@@ -127,5 +127,5 @@
         "emailexists": "E-mail is already in use!",
         "idexists": "A new {{ entityName }} cannot already have an ID"
     },
-    "footer": "Educational Research and Production Center \"Information and telecommunication systems\""
+    "footer": "Educational Research and Production Center<br/>\"Information and telecommunication systems\""
 }
