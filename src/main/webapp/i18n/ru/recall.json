@@ -19,7 +19,7 @@
             "type": "Тип",
             "name": "Имя",
             "description": "Описание",
-            "file": "File",
+            "file": "Файл",
             "student": "Студент",
             "curator": "Куратор"
         }
