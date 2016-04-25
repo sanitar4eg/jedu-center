@@ -22,9 +22,9 @@ public class FileServerServiceImpl implements FileServerService {
 
     @PostConstruct
     public void init() {
-        path = jHipsterProperties.getWorkdir().getPath();
-        File dir = new File(path);
-        log.debug("Check working directory: {}", dir.getAbsolutePath());
+        File dir = new File(jHipsterProperties.getWorkdir().getPath());
+        path = dir.getAbsolutePath();
+        log.debug("Check working directory: {}", path);
         if (!dir.exists()) {
             log.info("Created working directory: {}, path {}", dir.mkdir(), dir.getAbsolutePath());
         }
