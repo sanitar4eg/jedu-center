@@ -7,6 +7,8 @@ import edu.netcracker.center.service.FileServerService;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,7 +34,7 @@ public class ApplyFormResource {
     private final Logger log = LoggerFactory.getLogger(ApplyFormResource.class);
 
     private static final String FORMS_PATH = "/forms/";
-    private static final String APPLY_FORM_PATH = "/documents/apply-form/Lastname_Firstname.docx";
+    private static final String APPLY_FORM_PATH = "documents/apply-form/Lastname_Firstname.docx";
     private static final String APPLY_FORM_NAME = "Lastname_Firstname.docx";
     private static final Boolean IS_ACTIVE = true;
 
@@ -74,9 +76,9 @@ public class ApplyFormResource {
     @Timed
     public void getForm(HttpServletResponse response) {
         log.debug("REST request to get Form to fill");
-        String filePath = fileServerService.getPath() + APPLY_FORM_PATH;
-        log.debug("File path: {}", filePath);
-        try (InputStream is = new FileInputStream(filePath)) {
+        Resource resource = new ClassPathResource(APPLY_FORM_PATH);
+        log.debug("File name: {}", resource.getFilename());
+        try (InputStream is = resource.getInputStream()) {
             response.setContentType("application/msword");
             response.setHeader("Content-Disposition", "attachment; filename=" + APPLY_FORM_NAME);
             IOUtils.copy(is, response.getOutputStream());
