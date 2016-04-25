@@ -27,7 +27,7 @@ import java.io.InputStream;
 public class RecallFileResource {
 
     private final Logger log = LoggerFactory.getLogger(RecallFileResource.class);
-    private final static String RECALL_PATH = "/recall/students/";
+    private final static String RECALL_PATH = "/recalls/";
 
     @Inject
     RecallRepository recallRepository;
