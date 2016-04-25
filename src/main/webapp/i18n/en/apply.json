@@ -3,6 +3,7 @@
         "title": "Apply",
         "dialog": "Please use the following form:",
         "form": "Form",
-        "uploadLabel": "Upload form:"
+        "uploadLabel": "Upload form:",
+        "completed": "Thank you very much, you will be contacted soon"
     }
 }
