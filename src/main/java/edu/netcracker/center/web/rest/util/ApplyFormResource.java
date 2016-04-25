@@ -10,10 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.inject.Inject;
@@ -61,7 +59,7 @@ public class ApplyFormResource {
             log.debug("Dirs Created: {}", result);
             file.transferTo(new File(dirPath + "/" + fileName));
         } catch (IOException e) {
-            log.error("Error saving file for recall: {}, file:{}", form.getId(), fileName, e);
+            log.error("Error saving file for form: {}, file:{}", form.getId(), fileName, e);
             formRepository.delete(form);
             throw new RuntimeException(e);
         }
@@ -87,6 +85,55 @@ public class ApplyFormResource {
             log.info("Error getting form to fill:{}", APPLY_FORM_NAME);
             throw new RuntimeException(e);
         }
+    }    /**
+     * GET  /forms/file/:id -> get forms file by "id".
+     */
+    @RequestMapping(value = "forms/file/{id}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Transactional
+    public void downloadFile(@PathVariable Long id, HttpServletResponse response) {
+        log.debug("REST request to get file of Form by id: {}", id);
+        Form form = formRepository.getOne(id);
+        String filePath = fileServerService.getPath() + FORMS_PATH + form.getId() + "/" + form.getFile();
+        log.debug("File path: {}", filePath);
+        try (InputStream is = new FileInputStream(filePath)) {
+            response.setContentType("application/msword");
+            response.setHeader("Content-Disposition", "attachment; filename=" + form.getFile());
+            IOUtils.copy(is, response.getOutputStream());
+            response.flushBuffer();
+        } catch (IOException e) {
+            log.info("Error getting file for form: {}, file:{}", form.getId(), form.getFile());
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * POST  /froms/file/{id} -> upload file for form with "id".
+     */
+    @RequestMapping(value = "/forms/file/{id}",
+        method = RequestMethod.POST,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Transactional
+    public void saveFile(@RequestParam("file") MultipartFile file, @PathVariable Long id) {
+        Form form = formRepository.getOne(id);
+        String fileName = file.getOriginalFilename();
+        String dirPath = fileServerService.getPath() + FORMS_PATH + id;
+        log.debug("REST request to save file of Form by id: {}, to path: {}, fileName: {}", id, dirPath,
+            fileName);
+        try {
+            File directory = new File(dirPath);
+            boolean result = directory.mkdirs();
+            log.debug("Dirs Created: {}", result);
+            file.transferTo(new File(dirPath + "/" + fileName));
+        } catch (IOException e) {
+            log.error("Error saving file for form: {}, file:{}", id, fileName, e);
+            throw new RuntimeException(e);
+        }
+        form.setFile(fileName);
+        formRepository.save(form);
     }
 
     private Form createForm(String fileName) {

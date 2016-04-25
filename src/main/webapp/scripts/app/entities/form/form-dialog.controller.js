@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('jeducenterApp').controller('FormDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Form', 'Student',
-        function($scope, $stateParams, $uibModalInstance, entity, Form, Student) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Form', 'Student', 'fileService', 'FormFile',
+        function($scope, $stateParams, $uibModalInstance, entity, Form, Student, fileService, FormFile) {
 
         $scope.form = entity;
         $scope.students = Student.query();
@@ -13,6 +13,12 @@ angular.module('jeducenterApp').controller('FormDialogController',
         };
 
         var onSaveSuccess = function (result) {
+            var file = fileService.getFile();
+            if (file != null && $scope.form.id == null) {
+                var formData = new FormData();
+                formData.append("file", file);
+                FormFile.uploadFile({id: result.id}, formData);
+            }
             $scope.$emit('jeducenterApp:formUpdate', result);
             $uibModalInstance.close(result);
             $scope.isSaving = false;
@@ -23,11 +29,20 @@ angular.module('jeducenterApp').controller('FormDialogController',
         };
 
         $scope.save = function () {
+            var file = fileService.getFile();
+            // TODO: REMOVE THIS!!!!!!
+            $scope.form.file = "temp";
+            //
             $scope.isSaving = true;
             if ($scope.form.id != null) {
                 Form.update($scope.form, onSaveSuccess, onSaveError);
             } else {
                 Form.save($scope.form, onSaveSuccess, onSaveError);
+            }
+            if (file != null && $scope.form.id != null) {
+                var formData = new FormData();
+                formData.append("file", file);
+                FormFile.uploadFile({id: $scope.form.id}, formData);
             }
         };
 
