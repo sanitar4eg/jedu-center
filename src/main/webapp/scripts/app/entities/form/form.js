@@ -62,7 +62,7 @@ angular.module('jeducenterApp')
                             entity: function () {
                                 return {
                                     file: null,
-                                    creationTime: null,
+                                    creationTime: new Date,
                                     isActive: false,
                                     id: null
                                 };
