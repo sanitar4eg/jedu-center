@@ -42,11 +42,15 @@ public class RecallFileResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
+    @Transactional
     public void downloadFile(@PathVariable Long id, HttpServletResponse response) {
         log.debug("REST request to get file of Recall by id: {}", id);
         Recall recall = recallRepository.getOne(id);
         String filePath = fileServerService.getPath() + RECALL_PATH + recall.getId() + "/" + recall.getFile();
+        log.debug("File path: {}", filePath);
         try (InputStream is = new FileInputStream(filePath)) {
+            response.setContentType("application/msword");
+            response.setHeader("Content-Disposition", "attachment; filename=" + recall.getFile());
             IOUtils.copy(is, response.getOutputStream());
             response.flushBuffer();
         } catch (IOException e) {
