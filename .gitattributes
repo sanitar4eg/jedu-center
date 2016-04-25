@@ -20,3 +20,5 @@
 *.ai binary
 *.eps binary
 *.swf binary
+*.doc binary
+*.docx binary
