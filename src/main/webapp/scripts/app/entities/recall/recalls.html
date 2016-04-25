@@ -31,7 +31,8 @@
                     <td translate="{{'jeducenterApp.TypeRecallEnumeration.' + recall.type}}">{{recall.type}}</td>
                     <td>{{recall.name}}</td>
                     <td>{{recall.description}}</td>
-                    <td>{{recall.file}}</td>
+                    <td>
+                        <a href="/api/recalls/file/{{recall.id}}">{{recall.file}}</a>
                     <td>
                         <a ui-sref="student.detail({id:recall.student.id})">{{recall.student.lastName}}</a>
                     </td>
