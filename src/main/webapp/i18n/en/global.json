@@ -40,6 +40,13 @@
                 "database": "Database",
                 "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
             },
+            "ec": {
+                "main": "EC",
+                "apply": "Apply",
+                "faq": "FAQ",
+                "specialties": "Specialties",
+                "contacts": "Contacts"
+            },
             "teacher": {
                 "main": "Manage",
                 "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
