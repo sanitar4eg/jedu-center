@@ -13,10 +13,7 @@
         {
             "fieldId": 1,
             "fieldName": "file",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldType": "String"
         },
         {
             "fieldId": 2,

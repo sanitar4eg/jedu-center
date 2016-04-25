@@ -111,24 +111,6 @@ public class FormResourceIntTest {
 
     @Test
     @Transactional
-    public void checkFileIsRequired() throws Exception {
-        int databaseSizeBeforeTest = formRepository.findAll().size();
-        // set the field null
-        form.setFile(null);
-
-        // Create the Form, which fails.
-
-        restFormMockMvc.perform(post("/api/forms")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(form)))
-                .andExpect(status().isBadRequest());
-
-        List<Form> forms = formRepository.findAll();
-        assertThat(forms).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void checkCreationTimeIsRequired() throws Exception {
         int databaseSizeBeforeTest = formRepository.findAll().size();
         // set the field null

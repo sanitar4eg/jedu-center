@@ -24,8 +24,7 @@ public class Form implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
-    @Column(name = "file", nullable = false)
+    @Column(name = "file")
     private String file;
     
     @NotNull

@@ -30,9 +30,6 @@ angular.module('jeducenterApp').controller('FormDialogController',
 
         $scope.save = function () {
             var file = fileService.getFile();
-            // TODO: REMOVE THIS!!!!!!
-            $scope.form.file = "temp";
-            //
             $scope.isSaving = true;
             if ($scope.form.id != null) {
                 Form.update($scope.form, onSaveSuccess, onSaveError);
