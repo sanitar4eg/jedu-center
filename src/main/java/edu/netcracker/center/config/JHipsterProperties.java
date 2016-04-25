@@ -31,6 +31,8 @@ public class JHipsterProperties {
 
     private final Metrics metrics = new Metrics();
 
+    private final Workdir workdir = new Workdir();
+
     private final CorsConfiguration cors = new CorsConfiguration();
 
 
@@ -65,6 +67,10 @@ public class JHipsterProperties {
 
     public Metrics getMetrics() {
         return metrics;
+    }
+
+    public Workdir getWorkdir() {
+        return workdir;
     }
 
     public CorsConfiguration getCors() {
@@ -418,6 +424,19 @@ public class JHipsterProperties {
             public void setPrefix(String prefix) {
                 this.prefix = prefix;
             }
+        }
+    }
+
+    public static class Workdir {
+
+        private String path = "/workDir";
+
+        public String getPath() {
+            return path;
+        }
+
+        public void setPath(String path) {
+            this.path = path;
         }
     }
 }
