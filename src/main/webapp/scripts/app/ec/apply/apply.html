@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h2 translate="apply.title">Apply</h2>
+        <br/>
+
+        <div class="form-group">
+            <label class="control-label" translate="apply.dialog">Please use the following form:</label>
+            <br/>
+            <a class="form-control-static" href="/api/apply/form/" translate="apply.form">Form</a>
+        </div>
+
+        <form name="uploadApply" role="form" ng-submit="uploadApply()">
+            <div class="form-group">
+                <label class="control-label" translate="apply.uploadLabel" for="apply-input-file">Select File</label>
+                <input id="apply-input-file" name="file" type="file" bfi class="file" data-show-preview="false"
+                       data-rule-required="true" accept=".doc,.docx" file-uploader>
+            </div>
+        </form>
+
+        <jh-alert></jh-alert>
+    </div>
+</div>

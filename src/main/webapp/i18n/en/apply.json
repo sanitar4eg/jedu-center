@@ -1,0 +1,8 @@
+{
+    "apply": {
+        "title": "Apply",
+        "dialog": "Please use the following form:",
+        "form": "Form",
+        "uploadLabel": "Upload form:"
+    }
+}
