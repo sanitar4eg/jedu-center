@@ -11,6 +11,19 @@
             "specialties": "Fields of study",
             "contacts": "Contacts"
         },
+        "order": {
+            "title": "The procedure of admission to EC",
+            "p1": "The selection is carried out on a competitive basis. Candidate training center must meet the following criteria:",
+            "ul1": "Age 18 years and older.",
+            "ul2": "Have completed higher education or studying at the university at the moment (the third year of age and older).",
+            "p2": "The decision to invite a candidate for the training is carried out by results of interview. Invitation to the interview is carried out in a timely manner in accordance with the available summaries and questionnaires.",
+            "p3": "The order of the activities carried out by the training center and the training of candidates interested in the following:",
+            "ol1": "Prior to the interviews, EC disseminates information about the conduct set its terms and conditions as the electronic media, as well as with partner departments in SGU and SSTU (details can be clarified in the posted placards, the dean, and the representatives of the EC).",
+            "ol2": "In all partner departments held the official presentation of the EC and the training center. These presentations are invited to attend. At these meetings, you can learn more training, ask additional questions. As a result of this meeting the representatives of the CA can help a candidate to fill out and submit a form to the training center (it is available <a ui-sref=\"apply\">electronic version</a>).",
+            "ol3": "Available in the training center application form and resume are the basis for the call to the candidate. Each candidate is invited for an interview. The time and date are selected according to the capabilities of the candidate.",
+            "ol4": "Applicants are requested to arrive at the specified time and have an interview. The interview is 25 minutes.",
+            "ol5": "By the time mentioned on this page (p. 3) <span style=\"text-decoration: underline;\">to each</span> available candidates will be decided and answered in written form or call. There will also be agreed upon plan of action."
+        },
         "like": "Follow us on social media ",
         "vk": "Vk"
     }
