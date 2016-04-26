@@ -1,3 +1,6 @@
-/**
- * Created by Denis on 25.04.2016.
- */
+'use strict';
+
+angular.module('jeducenterApp')
+    .controller('ContactsController', function ($scope, $state, $translate) {
+
+    });
