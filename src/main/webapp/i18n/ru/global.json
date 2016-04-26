@@ -65,7 +65,7 @@
         },
         "messages": {
             "info": {
-                "authenticated": "Если вы хотите <a class=\"alert-link\" href=\"#/login\">авторизироваться</a>, вы можете попробовать аккаунты по умолчанию:<br/>- Администратор (логин=\"admin\" и пароль=\"admin\") <br/>- Пользователь (логин=\"user\" и пароль=\"user\").",
+                "authenticated": "Если у вас есть аккаунт, попробуйте <a class=\"alert-link\" href=\"#/login\">авторизироваться</a>.",
                 "register": "У вас нет аккаунта? <a class=\"alert-link\" href=\"#/register\">Создать новый аккаунт</a>"
             },
             "error": {

@@ -6,32 +6,74 @@
             <p class="lead" translate="main.subtitle">Welcome!</p>
 
             <div ng-switch="isAuthenticated()">
-                <div class="alert alert-success" ng-switch-when="true" translate="main.logged.message" translate-values="{username: '{{account.login}}'}">
+                <div class="alert alert-success" ng-switch-when="true" translate="main.logged.message"
+                     translate-values="{username: '{{account.login}}'}">
                     You are logged in as user "{{account.login}}".
                 </div>
 
-                <div class="alert alert-warning" ng-switch-when="false" translate="global.messages.info.authenticated">
-                    If you want to <a class="alert-link" href="#/login">sign in</a>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").
+                <div class="alert alert-dismissable" ng-switch-when="false">
+                    <h4>Порядок приема на обучение в УНПЦ</h4>
+                    <br/>
+                    <p>Отбор осуществляется на конкурсной основе. Кандидат в учебный центр должен соответствовать
+                        следующим критериям:
+                    </p>
+                    <ul>
+                        <li>Возраст 18 лет и старше.</li>
+                        <li>Наличие оконченного высшего образования, либо учеба в ВУЗе на текущий момент (третий курс и
+                            старше).
+                        </li>
+                    </ul>
+                    <p>
+                        Решение о приглашении кандидата на обучение осуществляется по результатам собеседования.
+                        Приглашение на собеседование осуществляется в установленные сроки в соответствии с имеющимися
+                        резюме и анкетами.
+                    </p>
+                    <br/>
+                    <p>
+                        Порядок мерпориятий, выполняемых учебным центром и заинтересованными в обучении кандидатами
+                        следующий:</p>
+                    <ol>
+                        <li>До начала собеседований УЦ осуществляет распространение информации о проведении набора, его
+                            сроках и условиях как электронными средствами, так и совместно с партнерскими факультетами в
+                            СГУ и СГТУ (подробности могут быть уточнены на вывешенных плакатах, в деканате, и у
+                            представителей УЦ).
+                        <li>На всех партнерских факультетах проводятся официальные презентации УЦ и учебного
+                            центра. На эти презентации приглашаются все желающие. На этих встречах можно узнать
+                            подробности обучения, задать дополнительные вопросы. По результатам этой встречи
+                            представители УЦ могут помочь кандидату заполнить и подать анкету в учебный центр (доступна
+                            её <a ui-sref="apply">электронная версия</a>).
+                        <li>Имеющиеся в учебном центре анкеты и резюме являются основанием для звонка кандидату. Каждый
+                            кандидат приглашается на собеседование. Время и дата выбираются в соответствии с
+                            возможностями кандидата.
+                        <li>Кандидату необходимо прийти в указанное время и пройти собеседование. Собеседование занимает
+                            25 минут.
+                        <li>К моменту указанному на этой странице (п. 3) по
+                            <span style="text-decoration: underline;">каждому</span>
+                            имеющемуся кандидату будет принято
+                            решение и дан ответ в письменной форме, либо звонком. Также будет согласован план дальнейших
+                            действий.
+                    </ol>
+                    <p translate="main.question">
+                        If you have any question:
+                    </p>
+
+                    <ul>
+                        <li><a ui-sref="faq" translate="main.link.faq">FAQ for admission to EC</a></li>
+                        <li><a ui-sref="specialties" translate="main.link.specialties">Fields of study</a></li>
+                        <li><a ui-sref="contacts" translate="main.link.contacts">Contacts</a></li>
+                    </ul>
                 </div>
 
-                <div class="alert alert-warning" ng-switch-when="false" translate="global.messages.info.register">
-                    You don't have an account yet? <a class="alert-link" href="#/register">Register a new account</a>
+                <div class="alert alert-warning" ng-switch-when="false" translate="global.messages.info.authenticated">
+                    If you have an account, please try to <a class="alert-link" href="#/login">sign in</a>.
                 </div>
             </div>
 
-            <p translate="main.question">
-                If you have any question:
-            </p>
-
-            <ul>
-                <li><a ui-sref="faq" target="_blank" translate="main.link.faq">FAQ for admission to EC</a></li>
-                <li><a ui-sref="specialties" target="_blank" translate="main.link.specialties">Fields of study</a></li>
-                <li><a ui-sref="contacts" target="_blank"  translate="main.link.contacts">Contacts</a></li>
-            </ul>
-
             <p>
-             <span translate="main.like">Follow us on social media </span>&nbsp;<a href="https://vk.com/jeduCenter" target="_blank" translate="main.vk">Vk</a>!
+                <span translate="main.like">Follow us on social media </span>
+                <a href="https://vk.com/jeduCenter" target="_blank" translate="main.vk">Vk</a>!
             </p>
         </div>
     </div>
 </div>
+
