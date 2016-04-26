@@ -5,13 +5,11 @@
         "logged": {
             "message": "Вы вошли как пользователь \"{{username}}\"."
         },
-        "question": "Если у Вас возникли вопросы по JHipster:",
+        "question": "Если у Вас возникли вопросы:",
         "link": {
-            "homepage": "JHipster домашняя страница",
-            "stackoverflow": "JHipster на Stack Overflow",
-            "bugtracker": "JHipster баг трекер",
-            "chat": "JHipster public chat room",
-            "contact": "пользователь @java_hipster в Twitter"
+            "faq": "FAQ по поступлению в УЦ",
+            "specialties": "Направляения обучения",
+            "contacts": "Контакты"
         },
         "like": "Следите за нами в социальных сетях ",
         "vk": "Vk"

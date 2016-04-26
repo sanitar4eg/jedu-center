@@ -5,13 +5,11 @@
         "logged": {
             "message": "You are logged in as user \"{{username}}\"."
         },
-        "question": "If you have any question on JHipster:",
+        "question": "If you have any question:",
         "link": {
-            "homepage": "JHipster homepage",
-            "stackoverflow": "JHipster on Stack Overflow",
-            "bugtracker": "JHipster bug tracker",
-            "chat": "JHipster public chat room",
-            "contact": "contact @java_hipster on Twitter"
+            "faq": "FAQ for admission to EC",
+            "specialties": "Fields of study",
+            "contacts": "Contacts"
         },
         "like": "Follow us on social media ",
         "vk": "Vk"
