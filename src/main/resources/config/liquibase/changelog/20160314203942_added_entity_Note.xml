@@ -24,19 +24,26 @@
             <column name="title" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="content" type="clob">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="date" type="timestamp">
                 <constraints nullable="false" />
             </column>
-            
+
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="note" columnName="date" columnDataType="datetime"/>
 
-        
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/note.csv"
+                  separator=";"
+                  tableName="note">
+            <column name="date" type="timestamp"/>
+        </loadData>
+
+
     </changeSet>
 </databaseChangeLog>
