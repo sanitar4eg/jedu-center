@@ -79,6 +79,15 @@
                 </div>
             </div>
 
+            <p class="lead" translate="main.notes">Last news:</p>
+
+            <div infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+                <div class="thumbnail" ng-repeat="note in notes track by note.id">
+                    <h3>{{note.title}}</h3>
+                    <p ng-bind-html="note.content | unsafe"></p>
+                </div>
+            </div>
+
             <p>
                 <span translate="main.like">Follow us on social media </span>
                 <a href="https://vk.com/jeduCenter" target="_blank" translate="main.vk">Vk</a>!

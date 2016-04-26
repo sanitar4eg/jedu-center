@@ -14,7 +14,7 @@ angular.module('jeducenterApp')
             $scope.loadAll = function () {
                 MainNote.query({
                     page: $scope.page,
-                    size: 20,
+                    size: 10,
                     sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'date']
                 }, function (result, headers) {
                     $scope.links = ParseLinks.parse(headers('link'));
@@ -22,6 +22,15 @@ angular.module('jeducenterApp')
                         $scope.notes.push(result[i]);
                     }
                 });
+            };
+            $scope.reset = function() {
+                $scope.page = 0;
+                $scope.notes = [];
+                $scope.loadAll();
+            };
+            $scope.loadPage = function(page) {
+                $scope.page = page;
+                $scope.loadAll();
             };
 
             $scope.loadAll();
