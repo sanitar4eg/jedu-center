@@ -1,13 +1,8 @@
 package edu.netcracker.center.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 import java.time.ZonedDateTime;
 
 import javax.persistence.*;
@@ -39,11 +34,10 @@ public class Lesson implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "time_table_id")
-    @JsonBackReference
     private TimeTable timeTable;
 
-    @OneToMany(mappedBy = "lesson", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "lesson")
+    @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Evaluation> evaluations = new HashSet<>();
 

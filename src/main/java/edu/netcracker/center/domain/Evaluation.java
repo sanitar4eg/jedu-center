@@ -1,6 +1,5 @@
 package edu.netcracker.center.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -31,10 +30,9 @@ public class Evaluation implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "lesson_id")
-    @JsonBackReference
     private Lesson lesson;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "student_id")
     private Student student;
 

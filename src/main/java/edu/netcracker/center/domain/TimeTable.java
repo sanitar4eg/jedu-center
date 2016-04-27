@@ -1,14 +1,10 @@
 package edu.netcracker.center.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -35,9 +31,9 @@ public class TimeTable implements Serializable {
     @JsonIgnore
     private GroupOfStudent groupOfStudent;
 
-    @OneToMany(mappedBy = "timeTable", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "timeTable")
+    @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JsonManagedReference
     private Set<Lesson> lessons = new HashSet<>();
 
     public Long getId() {
