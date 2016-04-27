@@ -4,8 +4,11 @@ import com.codahale.metrics.annotation.Timed;
 import edu.netcracker.center.domain.Student;
 import edu.netcracker.center.service.StudentService;
 import edu.netcracker.center.web.rest.util.HeaderUtil;
+import edu.netcracker.center.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -74,10 +77,13 @@ public class StudentResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public List<Student> getAllStudents() {
-        log.debug("REST request to get all Students");
-        return studentService.findAll();
-            }
+    public ResponseEntity<List<Student>> getAllStudents(Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Students");
+        Page<Student> page = studentService.findAll(pageable); 
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/students");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 
     /**
      * GET  /students/:id -> get the "id" student.

@@ -103,6 +103,6 @@
     "changelogDate": "20160312175031",
     "dto": "no",
     "service": "serviceImpl",
-    "pagination": "no",
+    "pagination": "pagination",
     "enableEntityAudit": true
 }

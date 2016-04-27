@@ -28,11 +28,11 @@
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
-                <tr>
-                    <th><span translate="global.field.id">ID</span></th>
+                <tr jh-sort="predicate" ascending="reverse" callback="loadAll()">
+                    <th><span translate="global.field.id">ID</span></span></th>
                     <th><span translate="jeducenterApp.student.firstName">FirstName</span></th>
                     <th><span translate="jeducenterApp.student.lastName">LastName</span></th>
-                    <th><span translate="jeducenterApp.student.middleName">MiddleName</span></th>
+                    <th><span translate="jeducenterApp.student.middleName">MiddleName</span></th >
                     <th><span translate="jeducenterApp.student.type">Type</span></th>
                     <th><span translate="jeducenterApp.student.email">Email</span></th>
                     <th><span translate="jeducenterApp.student.phone">Phone</span></th>
@@ -97,6 +97,9 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div class="text-center">
+        <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pagination>
     </div>
     <jh-alert></jh-alert>
 </div>

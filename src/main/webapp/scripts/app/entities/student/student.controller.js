@@ -1,13 +1,22 @@
 'use strict';
 
 angular.module('jeducenterApp')
-    .controller('StudentController', function ($scope, $state, Student) {
+    .controller('StudentController', function ($scope, $state, Student, ParseLinks) {
 
         $scope.students = [];
+        $scope.predicate = 'id';
+        $scope.reverse = true;
+        $scope.page = 1;
         $scope.loadAll = function() {
-            Student.query(function(result) {
-               $scope.students = result;
+            Student.query({page: $scope.page - 1, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                $scope.totalItems = headers('X-Total-Count');
+                $scope.students = result;
             });
+        };
+        $scope.loadPage = function(page) {
+            $scope.page = page;
+            $scope.loadAll();
         };
         $scope.loadAll();
 
