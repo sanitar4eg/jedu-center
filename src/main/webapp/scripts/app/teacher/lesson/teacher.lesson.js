@@ -62,7 +62,7 @@ angular.module('jeducenterApp')
                             entity: function () {
                                 return {
                                     topic: null,
-                                    time: null,
+                                    time: new Date,
                                     id: null
                                 };
                             }
