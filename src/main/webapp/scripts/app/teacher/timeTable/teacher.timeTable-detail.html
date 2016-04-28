@@ -1,4 +1,3 @@
-
 <div>
     <h2><span translate="jeducenterApp.timeTable.detail.title">TimeTable</span> {{timeTable.id}}</h2>
     <div class="table-responsive">
@@ -26,14 +25,17 @@
                 <thead>
                 <tr>
                     <th>Студент</th>
-                    <th ng-repeat="lesson in lessons track by lesson.id">{{lesson.topic}}</th>
+                    <th class="rotate" ng-repeat="lesson in lessons track by lesson.id">
+                        <div><span>{{lesson.topic}}</span></div>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="student in students track by student.id">
                     <td>{{student.lastName}}</td>
                     <td ng-repeat="lesson in lessons track by lesson.id">
-                        <input ng-model="searchEvaluation(student,lesson).value" ng-change="newEvaluation(searchEvaluation(student,lesson))"/>
+                        <input ng-model="searchEvaluation(student,lesson).value"
+                               ng-change="evaluationChanged(searchEvaluation(student,lesson))"/>
                     </td>
                 </tr>
                 </tbody>

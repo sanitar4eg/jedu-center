@@ -23,24 +23,17 @@ angular.module('jeducenterApp')
         ];
 
 
-        $scope.newEvaluation = function (evaluation) {
+        $scope.evaluationChanged = function (evaluation) {
             console.log("CHANGED!!!!!!");
             $scope.isSaving = true;
-            var index = $scope.evaluations.indexOf(evaluation);
-            console.log("Index is " + index);
-            if (index > -1) {
-                $scope.evaluations.splice(index, 1);
-                console.log("Spliced");
-            }
-            if ($scope.timeTable.id != null) {
+            if (evaluation.id != null) {
                 Evaluation.update(evaluation, onSaveSuccess, onSaveError);
             } else {
                 Evaluation.save(evaluation, onSaveSuccess, onSaveError);
             }
         };
         var onSaveSuccess = function (result) {
-            console.log("Result is :" + JSON.stringify(result));
-            $scope.evaluations.push(result);
+            $scope.searchEvaluation(result.student, result.lesson).id = result.id;
             $scope.$emit('jeducenterApp:evaluationUpdate', result);
             $scope.isSaving = false;
         };
