@@ -21,8 +21,23 @@
             </tbody>
         </table>
 
-        <div>
-            <div ui-grid="timeTableGrid" class="ui-grid" ui-grid-resize-columns></div>
+        <div class="table-responsive">
+            <table class="jh-table table table-striped">
+                <thead>
+                <tr>
+                    <th>Студент</th>
+                    <th ng-repeat="lesson in lessons track by lesson.id">{{lesson.topic}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="student in students track by student.id">
+                    <td>{{student.lastName}}</td>
+                    <td ng-repeat="lesson in lessons track by lesson.id">
+                        <input ng-model="searchEvaluation(student,lesson).value" ng-change="newEvaluation(searchEvaluation(student,lesson))"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -31,4 +46,5 @@
             class="btn btn-info">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
     </button>
+    <jh-alert></jh-alert>
 </div>

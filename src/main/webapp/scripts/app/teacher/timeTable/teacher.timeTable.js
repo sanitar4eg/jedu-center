@@ -41,6 +41,7 @@ angular.module('jeducenterApp')
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('timeTable');
                         $translatePartialLoader.addPart('student');
+                        $translatePartialLoader.addPart('evaluation');
                         return $translate.refresh();
                     }],
                     entity: ['$stateParams', 'TimeTable', function($stateParams, TimeTable) {
