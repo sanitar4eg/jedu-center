@@ -30,10 +30,10 @@ import java.util.Optional;
 public class LessonResource {
 
     private final Logger log = LoggerFactory.getLogger(LessonResource.class);
-        
+
     @Inject
     private LessonRepository lessonRepository;
-    
+
     /**
      * POST  /lessons -> Create a new lesson.
      */
@@ -77,10 +77,19 @@ public class LessonResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<Lesson>> getAllLessons(Pageable pageable)
+    public ResponseEntity<List<Lesson>> getAllLessons(Pageable pageable,
+                                                      @RequestParam(required = false) Optional<Long> timeTable)
         throws URISyntaxException {
+        if (timeTable.isPresent()) {
+            log.debug("REST request to get a page of Lessons for timeTale: {}", timeTable);
+            Page<Lesson> page = lessonRepository.findByTimeTableId(timeTable.get(), pageable);
+            HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/lessons");
+            return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        } else {
+            log.debug("TimeTable is not present");
+        }
         log.debug("REST request to get a page of Lessons");
-        Page<Lesson> page = lessonRepository.findAll(pageable); 
+        Page<Lesson> page = lessonRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/lessons");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

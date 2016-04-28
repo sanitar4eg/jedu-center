@@ -30,10 +30,10 @@ import java.util.Optional;
 public class EvaluationResource {
 
     private final Logger log = LoggerFactory.getLogger(EvaluationResource.class);
-        
+
     @Inject
     private EvaluationRepository evaluationRepository;
-    
+
     /**
      * POST  /evaluations -> Create a new evaluation.
      */
@@ -80,7 +80,7 @@ public class EvaluationResource {
     public ResponseEntity<List<Evaluation>> getAllEvaluations(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Evaluations");
-        Page<Evaluation> page = evaluationRepository.findAll(pageable); 
+        Page<Evaluation> page = evaluationRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/evaluations");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
