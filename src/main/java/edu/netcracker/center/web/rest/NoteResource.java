@@ -2,7 +2,7 @@ package edu.netcracker.center.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import edu.netcracker.center.domain.Note;
-import edu.netcracker.center.repository.NoteRepository;
+import edu.netcracker.center.service.NoteService;
 import edu.netcracker.center.web.rest.util.HeaderUtil;
 import edu.netcracker.center.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -32,7 +32,7 @@ public class NoteResource {
     private final Logger log = LoggerFactory.getLogger(NoteResource.class);
         
     @Inject
-    private NoteRepository noteRepository;
+    private NoteService noteService;
     
     /**
      * POST  /notes -> Create a new note.
@@ -46,7 +46,7 @@ public class NoteResource {
         if (note.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("note", "idexists", "A new note cannot already have an ID")).body(null);
         }
-        Note result = noteRepository.save(note);
+        Note result = noteService.save(note);
         return ResponseEntity.created(new URI("/api/notes/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("note", result.getId().toString()))
             .body(result);
@@ -64,7 +64,7 @@ public class NoteResource {
         if (note.getId() == null) {
             return createNote(note);
         }
-        Note result = noteRepository.save(note);
+        Note result = noteService.save(note);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("note", note.getId().toString()))
             .body(result);
@@ -80,7 +80,7 @@ public class NoteResource {
     public ResponseEntity<List<Note>> getAllNotes(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Notes");
-        Page<Note> page = noteRepository.findAll(pageable); 
+        Page<Note> page = noteService.findAll(pageable); 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/notes");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -94,7 +94,7 @@ public class NoteResource {
     @Timed
     public ResponseEntity<Note> getNote(@PathVariable Long id) {
         log.debug("REST request to get Note : {}", id);
-        Note note = noteRepository.findOne(id);
+        Note note = noteService.findOne(id);
         return Optional.ofNullable(note)
             .map(result -> new ResponseEntity<>(
                 result,
@@ -111,7 +111,7 @@ public class NoteResource {
     @Timed
     public ResponseEntity<Void> deleteNote(@PathVariable Long id) {
         log.debug("REST request to delete Note : {}", id);
-        noteRepository.delete(id);
+        noteService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("note", id.toString())).build();
     }
 }

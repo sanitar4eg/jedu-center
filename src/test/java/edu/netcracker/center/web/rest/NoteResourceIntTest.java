@@ -3,6 +3,7 @@ package edu.netcracker.center.web.rest;
 import edu.netcracker.center.Application;
 import edu.netcracker.center.domain.Note;
 import edu.netcracker.center.repository.NoteRepository;
+import edu.netcracker.center.service.NoteService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -62,6 +63,9 @@ public class NoteResourceIntTest {
     private NoteRepository noteRepository;
 
     @Inject
+    private NoteService noteService;
+
+    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Inject
@@ -75,7 +79,7 @@ public class NoteResourceIntTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         NoteResource noteResource = new NoteResource();
-        ReflectionTestUtils.setField(noteResource, "noteRepository", noteRepository);
+        ReflectionTestUtils.setField(noteResource, "noteService", noteService);
         this.restNoteMockMvc = MockMvcBuilders.standaloneSetup(noteResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
