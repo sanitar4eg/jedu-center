@@ -24,19 +24,27 @@
             <table class="jh-table table table-striped">
                 <thead>
                 <tr>
-                    <th>Студент</th>
+                    <th>Студенты</th>
                     <th class="rotate" ng-repeat="lesson in lessons track by lesson.id">
                         <div><span>{{lesson.topic}}</span></div>
                     </th>
+                    <th>Студенты</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="student in students track by student.id">
-                    <td>{{student.lastName}}</td>
+                    <td>{{student.lastName}} {{student.firstName}} {{student.middleName}}</td>
                     <td ng-repeat="lesson in lessons track by lesson.id">
-                        <input ng-model="searchEvaluation(student,lesson).value"
-                               ng-change="evaluationChanged(searchEvaluation(student,lesson))"/>
+                        <form role="form" novalidate show-validation>
+                            <div class="form-group">
+                                <input class="form-control" type="number" min="0" max="6" required
+                                       tabindex="{{lesson.id}}"
+                                       ng-model="searchEvaluation(student,lesson).value"
+                                       ng-change="evaluationChanged(searchEvaluation(student,lesson))"/>
+                            </div>
+                        </form>
                     </td>
+                    <td>{{student.lastName}} {{student.firstName}} {{student.middleName}}</td>
                 </tr>
                 </tbody>
             </table>
@@ -48,8 +56,5 @@
             class="btn btn-info">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
     </button>
-    <div class="hide">
-        <jh-alert-error></jh-alert-error>
-    </div>
     <jh-alert></jh-alert>
 </div>
