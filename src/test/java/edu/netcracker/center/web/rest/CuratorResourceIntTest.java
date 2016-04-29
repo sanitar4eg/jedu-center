@@ -3,6 +3,7 @@ package edu.netcracker.center.web.rest;
 import edu.netcracker.center.Application;
 import edu.netcracker.center.domain.Curator;
 import edu.netcracker.center.repository.CuratorRepository;
+import edu.netcracker.center.service.CuratorService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -57,6 +58,9 @@ public class CuratorResourceIntTest {
     private CuratorRepository curatorRepository;
 
     @Inject
+    private CuratorService curatorService;
+
+    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Inject
@@ -70,7 +74,7 @@ public class CuratorResourceIntTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         CuratorResource curatorResource = new CuratorResource();
-        ReflectionTestUtils.setField(curatorResource, "curatorRepository", curatorRepository);
+        ReflectionTestUtils.setField(curatorResource, "curatorService", curatorService);
         this.restCuratorMockMvc = MockMvcBuilders.standaloneSetup(curatorResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();

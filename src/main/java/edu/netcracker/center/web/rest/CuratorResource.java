@@ -2,7 +2,7 @@ package edu.netcracker.center.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import edu.netcracker.center.domain.Curator;
-import edu.netcracker.center.repository.CuratorRepository;
+import edu.netcracker.center.service.CuratorService;
 import edu.netcracker.center.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +29,7 @@ public class CuratorResource {
     private final Logger log = LoggerFactory.getLogger(CuratorResource.class);
         
     @Inject
-    private CuratorRepository curatorRepository;
+    private CuratorService curatorService;
     
     /**
      * POST  /curators -> Create a new curator.
@@ -43,7 +43,7 @@ public class CuratorResource {
         if (curator.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("curator", "idexists", "A new curator cannot already have an ID")).body(null);
         }
-        Curator result = curatorRepository.save(curator);
+        Curator result = curatorService.save(curator);
         return ResponseEntity.created(new URI("/api/curators/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("curator", result.getId().toString()))
             .body(result);
@@ -61,7 +61,7 @@ public class CuratorResource {
         if (curator.getId() == null) {
             return createCurator(curator);
         }
-        Curator result = curatorRepository.save(curator);
+        Curator result = curatorService.save(curator);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("curator", curator.getId().toString()))
             .body(result);
@@ -76,7 +76,7 @@ public class CuratorResource {
     @Timed
     public List<Curator> getAllCurators() {
         log.debug("REST request to get all Curators");
-        return curatorRepository.findAll();
+        return curatorService.findAll();
             }
 
     /**
@@ -88,7 +88,7 @@ public class CuratorResource {
     @Timed
     public ResponseEntity<Curator> getCurator(@PathVariable Long id) {
         log.debug("REST request to get Curator : {}", id);
-        Curator curator = curatorRepository.findOne(id);
+        Curator curator = curatorService.findOne(id);
         return Optional.ofNullable(curator)
             .map(result -> new ResponseEntity<>(
                 result,
@@ -105,7 +105,7 @@ public class CuratorResource {
     @Timed
     public ResponseEntity<Void> deleteCurator(@PathVariable Long id) {
         log.debug("REST request to delete Curator : {}", id);
-        curatorRepository.delete(id);
+        curatorService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("curator", id.toString())).build();
     }
 }
