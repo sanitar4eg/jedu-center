@@ -3,6 +3,7 @@ package edu.netcracker.center.web.rest;
 import edu.netcracker.center.Application;
 import edu.netcracker.center.domain.GroupOfStudent;
 import edu.netcracker.center.repository.GroupOfStudentRepository;
+import edu.netcracker.center.service.GroupOfStudentService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -57,6 +58,9 @@ public class GroupOfStudentResourceIntTest {
     private GroupOfStudentRepository groupOfStudentRepository;
 
     @Inject
+    private GroupOfStudentService groupOfStudentService;
+
+    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Inject
@@ -70,7 +74,7 @@ public class GroupOfStudentResourceIntTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         GroupOfStudentResource groupOfStudentResource = new GroupOfStudentResource();
-        ReflectionTestUtils.setField(groupOfStudentResource, "groupOfStudentRepository", groupOfStudentRepository);
+        ReflectionTestUtils.setField(groupOfStudentResource, "groupOfStudentService", groupOfStudentService);
         this.restGroupOfStudentMockMvc = MockMvcBuilders.standaloneSetup(groupOfStudentResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();

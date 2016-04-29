@@ -2,7 +2,7 @@ package edu.netcracker.center.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import edu.netcracker.center.domain.GroupOfStudent;
-import edu.netcracker.center.repository.GroupOfStudentRepository;
+import edu.netcracker.center.service.GroupOfStudentService;
 import edu.netcracker.center.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +29,7 @@ public class GroupOfStudentResource {
     private final Logger log = LoggerFactory.getLogger(GroupOfStudentResource.class);
         
     @Inject
-    private GroupOfStudentRepository groupOfStudentRepository;
+    private GroupOfStudentService groupOfStudentService;
     
     /**
      * POST  /groupOfStudents -> Create a new groupOfStudent.
@@ -43,7 +43,7 @@ public class GroupOfStudentResource {
         if (groupOfStudent.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("groupOfStudent", "idexists", "A new groupOfStudent cannot already have an ID")).body(null);
         }
-        GroupOfStudent result = groupOfStudentRepository.save(groupOfStudent);
+        GroupOfStudent result = groupOfStudentService.save(groupOfStudent);
         return ResponseEntity.created(new URI("/api/groupOfStudents/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("groupOfStudent", result.getId().toString()))
             .body(result);
@@ -61,7 +61,7 @@ public class GroupOfStudentResource {
         if (groupOfStudent.getId() == null) {
             return createGroupOfStudent(groupOfStudent);
         }
-        GroupOfStudent result = groupOfStudentRepository.save(groupOfStudent);
+        GroupOfStudent result = groupOfStudentService.save(groupOfStudent);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("groupOfStudent", groupOfStudent.getId().toString()))
             .body(result);
@@ -76,7 +76,7 @@ public class GroupOfStudentResource {
     @Timed
     public List<GroupOfStudent> getAllGroupOfStudents() {
         log.debug("REST request to get all GroupOfStudents");
-        return groupOfStudentRepository.findAll();
+        return groupOfStudentService.findAll();
             }
 
     /**
@@ -88,7 +88,7 @@ public class GroupOfStudentResource {
     @Timed
     public ResponseEntity<GroupOfStudent> getGroupOfStudent(@PathVariable Long id) {
         log.debug("REST request to get GroupOfStudent : {}", id);
-        GroupOfStudent groupOfStudent = groupOfStudentRepository.findOne(id);
+        GroupOfStudent groupOfStudent = groupOfStudentService.findOne(id);
         return Optional.ofNullable(groupOfStudent)
             .map(result -> new ResponseEntity<>(
                 result,
@@ -105,7 +105,7 @@ public class GroupOfStudentResource {
     @Timed
     public ResponseEntity<Void> deleteGroupOfStudent(@PathVariable Long id) {
         log.debug("REST request to delete GroupOfStudent : {}", id);
-        groupOfStudentRepository.delete(id);
+        groupOfStudentService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("groupOfStudent", id.toString())).build();
     }
 }
