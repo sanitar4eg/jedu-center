@@ -2,8 +2,8 @@ package edu.netcracker.center.web.rest.util;
 
 import com.codahale.metrics.annotation.Timed;
 import edu.netcracker.center.domain.Form;
-import edu.netcracker.center.repository.FormRepository;
 import edu.netcracker.center.service.FileServerService;
+import edu.netcracker.center.service.FormService;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,12 +32,12 @@ public class ApplyFormResource {
     private final Logger log = LoggerFactory.getLogger(ApplyFormResource.class);
 
     private static final String FORMS_PATH = "/forms/";
-    private static final String APPLY_FORM_PATH = "documents/apply-form/Lastname_Firstname.docx";
     private static final String APPLY_FORM_NAME = "Lastname_Firstname.docx";
+    private static final String APPLY_FORM_PATH = "documents/apply-form/" + APPLY_FORM_NAME;
     private static final Boolean IS_ACTIVE = true;
 
     @Inject
-    private FormRepository formRepository;
+    private FormService formService;
 
     @Inject
     FileServerService fileServerService;
@@ -53,6 +53,8 @@ public class ApplyFormResource {
         String fileName = file.getOriginalFilename();
         Form form = createForm(fileName);
         String dirPath = fileServerService.getPath() + FORMS_PATH + form.getId();
+        log.debug("REST request to save Apply with id: {}, to path: {}, fileName: {}", form.getId(), dirPath,
+            fileName);
         try {
             File directory = new File(dirPath);
             boolean result = directory.mkdirs();
@@ -60,7 +62,7 @@ public class ApplyFormResource {
             file.transferTo(new File(dirPath + "/" + fileName));
         } catch (IOException e) {
             log.error("Error saving file for form: {}, file:{}", form.getId(), fileName, e);
-            formRepository.delete(form);
+            formService.delete(form);
             throw new RuntimeException(e);
         }
     }
@@ -85,7 +87,9 @@ public class ApplyFormResource {
             log.info("Error getting form to fill:{}", APPLY_FORM_NAME);
             throw new RuntimeException(e);
         }
-    }    /**
+    }
+
+    /**
      * GET  /forms/file/:id -> get forms file by "id".
      */
     @RequestMapping(value = "forms/file/{id}",
@@ -95,7 +99,7 @@ public class ApplyFormResource {
     @Transactional
     public void downloadFile(@PathVariable Long id, HttpServletResponse response) {
         log.debug("REST request to get file of Form by id: {}", id);
-        Form form = formRepository.getOne(id);
+        Form form = formService.findOne(id);
         String filePath = fileServerService.getPath() + FORMS_PATH + form.getId() + "/" + form.getFile();
         log.debug("File path: {}", filePath);
         try (InputStream is = new FileInputStream(filePath)) {
@@ -118,7 +122,7 @@ public class ApplyFormResource {
     @Timed
     @Transactional
     public void saveFile(@RequestParam("file") MultipartFile file, @PathVariable Long id) {
-        Form form = formRepository.getOne(id);
+        Form form = formService.findOne(id);
         String fileName = file.getOriginalFilename();
         String dirPath = fileServerService.getPath() + FORMS_PATH + id;
         log.debug("REST request to save file of Form by id: {}, to path: {}, fileName: {}", id, dirPath,
@@ -133,7 +137,7 @@ public class ApplyFormResource {
             throw new RuntimeException(e);
         }
         form.setFile(fileName);
-        formRepository.save(form);
+        formService.save(form);
     }
 
     private Form createForm(String fileName) {
@@ -141,8 +145,7 @@ public class ApplyFormResource {
         form.setFile(fileName);
         form.setCreationTime(ZonedDateTime.now());
         form.setIsActive(IS_ACTIVE);
-        formRepository.save(form);
-        formRepository.flush();
+        formService.save(form);
         return form;
     }
 

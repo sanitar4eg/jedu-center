@@ -22,10 +22,10 @@ import java.util.stream.StreamSupport;
 public class FormServiceImpl implements FormService{
 
     private final Logger log = LoggerFactory.getLogger(FormServiceImpl.class);
-    
+
     @Inject
     private FormRepository formRepository;
-    
+
     /**
      * Save a form.
      * @return the persisted entity
@@ -40,7 +40,7 @@ public class FormServiceImpl implements FormService{
      *  get all the forms.
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<Form> findAll() {
         log.debug("Request to get all Forms");
         List<Form> result = formRepository.findAll();
@@ -52,7 +52,7 @@ public class FormServiceImpl implements FormService{
      *  get all the forms where Student is null.
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<Form> findAllWhereStudentIsNull() {
         log.debug("Request to get all forms where Student is null");
         return StreamSupport
@@ -65,7 +65,7 @@ public class FormServiceImpl implements FormService{
      *  get one form by id.
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Form findOne(Long id) {
         log.debug("Request to get Form : {}", id);
         Form form = formRepository.findOne(id);
@@ -78,5 +78,11 @@ public class FormServiceImpl implements FormService{
     public void delete(Long id) {
         log.debug("Request to delete Form : {}", id);
         formRepository.delete(id);
+    }
+
+    @Override
+    public void delete(Form form) {
+        log.debug("Request to delete Form : {}", form);
+        formRepository.delete(form);
     }
 }

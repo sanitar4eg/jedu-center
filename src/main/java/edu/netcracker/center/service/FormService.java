@@ -36,4 +36,9 @@ public interface FormService {
      *  delete the "id" form.
      */
     public void delete(Long id);
+
+    /**
+     *  delete the form.
+     */
+    public void delete(Form form);
 }
