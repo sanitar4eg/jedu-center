@@ -3,14 +3,14 @@ package edu.netcracker.center.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import java.time.ZonedDateTime;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A Lesson.
@@ -90,7 +90,7 @@ public class Lesson implements Serializable {
             return false;
         }
         Lesson lesson = (Lesson) o;
-        if(lesson.id == null || id == null) {
+        if (lesson.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, lesson.id);

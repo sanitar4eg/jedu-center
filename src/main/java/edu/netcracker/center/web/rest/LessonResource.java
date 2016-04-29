@@ -2,7 +2,7 @@ package edu.netcracker.center.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import edu.netcracker.center.domain.Lesson;
-import edu.netcracker.center.repository.LessonRepository;
+import edu.netcracker.center.service.LessonService;
 import edu.netcracker.center.web.rest.util.HeaderUtil;
 import edu.netcracker.center.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -32,7 +32,7 @@ public class LessonResource {
     private final Logger log = LoggerFactory.getLogger(LessonResource.class);
 
     @Inject
-    private LessonRepository lessonRepository;
+    private LessonService lessonService;
 
     /**
      * POST  /lessons -> Create a new lesson.
@@ -46,7 +46,7 @@ public class LessonResource {
         if (lesson.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("lesson", "idexists", "A new lesson cannot already have an ID")).body(null);
         }
-        Lesson result = lessonRepository.save(lesson);
+        Lesson result = lessonService.save(lesson);
         return ResponseEntity.created(new URI("/api/lessons/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("lesson", result.getId().toString()))
             .body(result);
@@ -64,7 +64,7 @@ public class LessonResource {
         if (lesson.getId() == null) {
             return createLesson(lesson);
         }
-        Lesson result = lessonRepository.save(lesson);
+        Lesson result = lessonService.save(lesson);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("lesson", lesson.getId().toString()))
             .body(result);
@@ -82,14 +82,14 @@ public class LessonResource {
         throws URISyntaxException {
         if (timeTable.isPresent()) {
             log.debug("REST request to get a page of Lessons for timeTale: {}", timeTable);
-            Page<Lesson> page = lessonRepository.findByTimeTableId(timeTable.get(), pageable);
+            Page<Lesson> page = lessonService.findByTimeTableId(timeTable.get(), pageable);
             HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/lessons");
             return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
         } else {
             log.debug("TimeTable is not present");
         }
         log.debug("REST request to get a page of Lessons");
-        Page<Lesson> page = lessonRepository.findAll(pageable);
+        Page<Lesson> page = lessonService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/lessons");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -103,7 +103,7 @@ public class LessonResource {
     @Timed
     public ResponseEntity<Lesson> getLesson(@PathVariable Long id) {
         log.debug("REST request to get Lesson : {}", id);
-        Lesson lesson = lessonRepository.findOne(id);
+        Lesson lesson = lessonService.findOne(id);
         return Optional.ofNullable(lesson)
             .map(result -> new ResponseEntity<>(
                 result,
@@ -120,7 +120,7 @@ public class LessonResource {
     @Timed
     public ResponseEntity<Void> deleteLesson(@PathVariable Long id) {
         log.debug("REST request to delete Lesson : {}", id);
-        lessonRepository.delete(id);
+        lessonService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("lesson", id.toString())).build();
     }
 }
