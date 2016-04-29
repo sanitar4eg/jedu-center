@@ -27,9 +27,9 @@ import java.time.ZonedDateTime;
  */
 @RestController
 @RequestMapping("/api")
-public class ApplyFormResource {
+public class FormFileResource {
 
-    private final Logger log = LoggerFactory.getLogger(ApplyFormResource.class);
+    private final Logger log = LoggerFactory.getLogger(FormFileResource.class);
 
     private static final String FORMS_PATH = "/forms/";
     private static final String APPLY_FORM_NAME = "Lastname_Firstname.docx";
