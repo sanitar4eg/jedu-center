@@ -115,6 +115,7 @@ angular.module('jeducenterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pas
         });
 
         $translateProvider.preferredLanguage('ru');
+        $translateProvider.usePostCompiling(true);
         $translateProvider.useCookieStorage();
         $translateProvider.useSanitizeValueStrategy('escaped');
         $translateProvider.addInterpolation('$translateMessageFormatInterpolation');
