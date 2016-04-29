@@ -2,11 +2,10 @@ package edu.netcracker.center.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import edu.netcracker.center.domain.Form;
-import edu.netcracker.center.repository.FormRepository;
+import edu.netcracker.center.service.FormService;
 import edu.netcracker.center.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +17,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 /**
  * REST controller for managing Form.
@@ -29,10 +26,10 @@ import java.util.stream.StreamSupport;
 public class FormResource {
 
     private final Logger log = LoggerFactory.getLogger(FormResource.class);
-        
+
     @Inject
-    private FormRepository formRepository;
-    
+    private FormService formService;
+
     /**
      * POST  /forms -> Create a new form.
      */
@@ -45,7 +42,7 @@ public class FormResource {
         if (form.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("form", "idexists", "A new form cannot already have an ID")).body(null);
         }
-        Form result = formRepository.save(form);
+        Form result = formService.save(form);
         return ResponseEntity.created(new URI("/api/forms/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("form", result.getId().toString()))
             .body(result);
@@ -63,7 +60,7 @@ public class FormResource {
         if (form.getId() == null) {
             return createForm(form);
         }
-        Form result = formRepository.save(form);
+        Form result = formService.save(form);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("form", form.getId().toString()))
             .body(result);
@@ -79,14 +76,11 @@ public class FormResource {
     public List<Form> getAllForms(@RequestParam(required = false) String filter) {
         if ("student-is-null".equals(filter)) {
             log.debug("REST request to get all Forms where student is null");
-            return StreamSupport
-                .stream(formRepository.findAll().spliterator(), false)
-                .filter(form -> form.getStudent() == null)
-                .collect(Collectors.toList());
+            return formService.findAllWhereStudentIsNull();
         }
         log.debug("REST request to get all Forms");
-        return formRepository.findAll();
-            }
+        return formService.findAll();
+    }
 
     /**
      * GET  /forms/:id -> get the "id" form.
@@ -97,7 +91,7 @@ public class FormResource {
     @Timed
     public ResponseEntity<Form> getForm(@PathVariable Long id) {
         log.debug("REST request to get Form : {}", id);
-        Form form = formRepository.findOne(id);
+        Form form = formService.findOne(id);
         return Optional.ofNullable(form)
             .map(result -> new ResponseEntity<>(
                 result,
@@ -114,7 +108,7 @@ public class FormResource {
     @Timed
     public ResponseEntity<Void> deleteForm(@PathVariable Long id) {
         log.debug("REST request to delete Form : {}", id);
-        formRepository.delete(id);
+        formService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("form", id.toString())).build();
     }
 }

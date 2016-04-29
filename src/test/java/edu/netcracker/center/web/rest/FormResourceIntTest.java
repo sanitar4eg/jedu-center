@@ -3,6 +3,7 @@ package edu.netcracker.center.web.rest;
 import edu.netcracker.center.Application;
 import edu.netcracker.center.domain.Form;
 import edu.netcracker.center.repository.FormRepository;
+import edu.netcracker.center.service.FormService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -61,6 +62,9 @@ public class FormResourceIntTest {
     private FormRepository formRepository;
 
     @Inject
+    private FormService formService;
+
+    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Inject
@@ -74,7 +78,7 @@ public class FormResourceIntTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         FormResource formResource = new FormResource();
-        ReflectionTestUtils.setField(formResource, "formRepository", formRepository);
+        ReflectionTestUtils.setField(formResource, "formService", formService);
         this.restFormMockMvc = MockMvcBuilders.standaloneSetup(formResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
