@@ -137,7 +137,7 @@ public class Curator implements Serializable {
             return false;
         }
         Curator curator = (Curator) o;
-        if(curator.id == null || id == null) {
+        if (curator.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, curator.id);
