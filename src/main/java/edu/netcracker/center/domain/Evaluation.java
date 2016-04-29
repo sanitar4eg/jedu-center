@@ -4,10 +4,10 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -77,7 +77,7 @@ public class Evaluation implements Serializable {
             return false;
         }
         Evaluation evaluation = (Evaluation) o;
-        if(evaluation.id == null || id == null) {
+        if (evaluation.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, evaluation.id);

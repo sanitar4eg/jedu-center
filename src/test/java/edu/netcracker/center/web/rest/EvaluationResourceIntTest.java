@@ -3,6 +3,7 @@ package edu.netcracker.center.web.rest;
 import edu.netcracker.center.Application;
 import edu.netcracker.center.domain.Evaluation;
 import edu.netcracker.center.repository.EvaluationRepository;
+import edu.netcracker.center.service.EvaluationService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,6 +50,9 @@ public class EvaluationResourceIntTest {
     private EvaluationRepository evaluationRepository;
 
     @Inject
+    private EvaluationService evaluationService;
+
+    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Inject
@@ -62,7 +66,7 @@ public class EvaluationResourceIntTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         EvaluationResource evaluationResource = new EvaluationResource();
-        ReflectionTestUtils.setField(evaluationResource, "evaluationRepository", evaluationRepository);
+        ReflectionTestUtils.setField(evaluationResource, "evaluationService", evaluationService);
         this.restEvaluationMockMvc = MockMvcBuilders.standaloneSetup(evaluationResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();

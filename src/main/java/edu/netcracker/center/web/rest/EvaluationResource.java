@@ -2,7 +2,7 @@ package edu.netcracker.center.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import edu.netcracker.center.domain.Evaluation;
-import edu.netcracker.center.repository.EvaluationRepository;
+import edu.netcracker.center.service.EvaluationService;
 import edu.netcracker.center.web.rest.util.HeaderUtil;
 import edu.netcracker.center.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -32,7 +32,7 @@ public class EvaluationResource {
     private final Logger log = LoggerFactory.getLogger(EvaluationResource.class);
 
     @Inject
-    private EvaluationRepository evaluationRepository;
+    private EvaluationService evaluationService;
 
     /**
      * POST  /evaluations -> Create a new evaluation.
@@ -46,7 +46,7 @@ public class EvaluationResource {
         if (evaluation.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("evaluation", "idexists", "A new evaluation cannot already have an ID")).body(null);
         }
-        Evaluation result = evaluationRepository.save(evaluation);
+        Evaluation result = evaluationService.save(evaluation);
         return ResponseEntity.created(new URI("/api/evaluations/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("evaluation", result.getId().toString()))
             .body(result);
@@ -64,7 +64,7 @@ public class EvaluationResource {
         if (evaluation.getId() == null) {
             return createEvaluation(evaluation);
         }
-        Evaluation result = evaluationRepository.save(evaluation);
+        Evaluation result = evaluationService.save(evaluation);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("evaluation", evaluation.getId().toString()))
             .body(result);
@@ -80,7 +80,7 @@ public class EvaluationResource {
     public ResponseEntity<List<Evaluation>> getAllEvaluations(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Evaluations");
-        Page<Evaluation> page = evaluationRepository.findAll(pageable);
+        Page<Evaluation> page = evaluationService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/evaluations");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -94,7 +94,7 @@ public class EvaluationResource {
     @Timed
     public ResponseEntity<Evaluation> getEvaluation(@PathVariable Long id) {
         log.debug("REST request to get Evaluation : {}", id);
-        Evaluation evaluation = evaluationRepository.findOne(id);
+        Evaluation evaluation = evaluationService.findOne(id);
         return Optional.ofNullable(evaluation)
             .map(result -> new ResponseEntity<>(
                 result,
@@ -111,7 +111,7 @@ public class EvaluationResource {
     @Timed
     public ResponseEntity<Void> deleteEvaluation(@PathVariable Long id) {
         log.debug("REST request to delete Evaluation : {}", id);
-        evaluationRepository.delete(id);
+        evaluationService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("evaluation", id.toString())).build();
     }
 }
