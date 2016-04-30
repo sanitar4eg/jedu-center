@@ -1,13 +1,22 @@
 'use strict';
 
 angular.module('jeducenterApp')
-    .controller('TimeTableController', function ($scope, $state, TimeTable) {
+    .controller('TimeTableController', function ($scope, $state, TimeTable, ParseLinks) {
 
         $scope.timeTables = [];
+        $scope.predicate = 'id';
+        $scope.reverse = true;
+        $scope.page = 1;
         $scope.loadAll = function() {
-            TimeTable.query(function(result) {
-               $scope.timeTables = result;
+            TimeTable.query({page: $scope.page - 1, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+                $scope.links = ParseLinks.parse(headers('link'));
+                $scope.totalItems = headers('X-Total-Count');
+                $scope.timeTables = result;
             });
+        };
+        $scope.loadPage = function(page) {
+            $scope.page = page;
+            $scope.loadAll();
         };
         $scope.loadAll();
 

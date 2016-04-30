@@ -4,8 +4,11 @@ import com.codahale.metrics.annotation.Timed;
 import edu.netcracker.center.domain.TimeTable;
 import edu.netcracker.center.service.TimeTableService;
 import edu.netcracker.center.web.rest.util.HeaderUtil;
+import edu.netcracker.center.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -76,14 +79,18 @@ public class TimeTableResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public List<TimeTable> getAllTimeTables(@RequestParam(required = false) String filter) {
+    public ResponseEntity<List<TimeTable>> getAllTimeTables(Pageable pageable, @RequestParam(required = false) String filter)
+        throws URISyntaxException {
         if ("groupofstudent-is-null".equals(filter)) {
             log.debug("REST request to get all TimeTables where groupOfStudent is null");
-            return timeTableService.findAllWhereGroupOfStudentIsNull();
+            return new ResponseEntity<>(timeTableService.findAllWhereGroupOfStudentIsNull(),
+                    HttpStatus.OK);
         }
-        log.debug("REST request to get all TimeTables");
-        return timeTableService.findAll();
-            }
+        log.debug("REST request to get a page of TimeTables");
+        Page<TimeTable> page = timeTableService.findAll(pageable); 
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/timeTables");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 
     /**
      * GET  /timeTables/:id -> get the "id" timeTable.

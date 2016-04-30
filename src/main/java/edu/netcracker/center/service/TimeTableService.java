@@ -1,6 +1,8 @@
 package edu.netcracker.center.service;
 
 import edu.netcracker.center.domain.TimeTable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -19,7 +21,7 @@ public interface TimeTableService {
      *  get all the timeTables.
      *  @return the list of entities
      */
-    public List<TimeTable> findAll();
+    public Page<TimeTable> findAll(Pageable pageable);
     /**
      *  get all the timeTables where GroupOfStudent is null.
      *  @return the list of entities

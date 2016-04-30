@@ -5,6 +5,8 @@ import edu.netcracker.center.domain.TimeTable;
 import edu.netcracker.center.repository.TimeTableRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -41,9 +43,9 @@ public class TimeTableServiceImpl implements TimeTableService{
      *  @return the list of entities
      */
     @Transactional(readOnly = true) 
-    public List<TimeTable> findAll() {
+    public Page<TimeTable> findAll(Pageable pageable) {
         log.debug("Request to get all TimeTables");
-        List<TimeTable> result = timeTableRepository.findAll();
+        Page<TimeTable> result = timeTableRepository.findAll(pageable); 
         return result;
     }
 
