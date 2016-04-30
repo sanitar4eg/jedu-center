@@ -5,6 +5,8 @@ import edu.netcracker.center.domain.Form;
 import edu.netcracker.center.repository.FormRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -41,9 +43,9 @@ public class FormServiceImpl implements FormService{
      *  @return the list of entities
      */
     @Transactional(readOnly = true)
-    public List<Form> findAll() {
+    public Page<Form> findAll(Pageable pageable) {
         log.debug("Request to get all Forms");
-        List<Form> result = formRepository.findAll();
+        Page<Form> result = formRepository.findAll(pageable);
         return result;
     }
 

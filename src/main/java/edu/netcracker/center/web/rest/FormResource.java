@@ -4,8 +4,12 @@ import com.codahale.metrics.annotation.Timed;
 import edu.netcracker.center.domain.Form;
 import edu.netcracker.center.service.FormService;
 import edu.netcracker.center.web.rest.util.HeaderUtil;
+import edu.netcracker.center.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +21,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * REST controller for managing Form.
@@ -26,10 +32,10 @@ import java.util.Optional;
 public class FormResource {
 
     private final Logger log = LoggerFactory.getLogger(FormResource.class);
-
+        
     @Inject
     private FormService formService;
-
+    
     /**
      * POST  /forms -> Create a new form.
      */
@@ -73,13 +79,17 @@ public class FormResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public List<Form> getAllForms(@RequestParam(required = false) String filter) {
+    public ResponseEntity<List<Form>> getAllForms(Pageable pageable, @RequestParam(required = false) String filter)
+        throws URISyntaxException {
         if ("student-is-null".equals(filter)) {
             log.debug("REST request to get all Forms where student is null");
-            return formService.findAllWhereStudentIsNull();
+            return new ResponseEntity<>(formService.findAllWhereStudentIsNull(),
+                    HttpStatus.OK);
         }
-        log.debug("REST request to get all Forms");
-        return formService.findAll();
+        log.debug("REST request to get a page of Forms");
+        Page<Form> page = formService.findAll(pageable); 
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/forms");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
