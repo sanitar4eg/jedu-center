@@ -96,7 +96,6 @@ public class FormFileResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @Transactional
     public void downloadFile(@PathVariable Long id, HttpServletResponse response) {
         log.debug("REST request to get file of Form by id: {}", id);
         Form form = formService.findOne(id);
@@ -120,7 +119,6 @@ public class FormFileResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @Transactional
     public void saveFile(@RequestParam("file") MultipartFile file, @PathVariable Long id) {
         Form form = formService.findOne(id);
         String fileName = file.getOriginalFilename();
