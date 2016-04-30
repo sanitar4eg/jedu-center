@@ -5,6 +5,8 @@ import edu.netcracker.center.domain.Recall;
 import edu.netcracker.center.repository.RecallRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -39,9 +41,9 @@ public class RecallServiceImpl implements RecallService{
      *  @return the list of entities
      */
     @Transactional(readOnly = true) 
-    public List<Recall> findAll() {
+    public Page<Recall> findAll(Pageable pageable) {
         log.debug("Request to get all Recalls");
-        List<Recall> result = recallRepository.findAll();
+        Page<Recall> result = recallRepository.findAll(pageable); 
         return result;
     }
 

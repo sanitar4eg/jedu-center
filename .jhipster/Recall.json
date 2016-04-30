@@ -46,5 +46,5 @@
     "changelogDate": "20160312182239",
     "dto": "no",
     "service": "serviceImpl",
-    "pagination": "no"
+    "pagination": "pagination"
 }
