@@ -3,6 +3,7 @@ package edu.netcracker.center.web.rest;
 import edu.netcracker.center.Application;
 import edu.netcracker.center.domain.TimeTable;
 import edu.netcracker.center.repository.TimeTableRepository;
+import edu.netcracker.center.service.TimeTableService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,6 +49,9 @@ public class TimeTableResourceIntTest {
     private TimeTableRepository timeTableRepository;
 
     @Inject
+    private TimeTableService timeTableService;
+
+    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Inject
@@ -61,7 +65,7 @@ public class TimeTableResourceIntTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         TimeTableResource timeTableResource = new TimeTableResource();
-        ReflectionTestUtils.setField(timeTableResource, "timeTableRepository", timeTableRepository);
+        ReflectionTestUtils.setField(timeTableResource, "timeTableService", timeTableService);
         this.restTimeTableMockMvc = MockMvcBuilders.standaloneSetup(timeTableResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();

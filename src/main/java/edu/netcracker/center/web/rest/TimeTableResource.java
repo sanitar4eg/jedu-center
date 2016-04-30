@@ -2,7 +2,7 @@ package edu.netcracker.center.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import edu.netcracker.center.domain.TimeTable;
-import edu.netcracker.center.repository.TimeTableRepository;
+import edu.netcracker.center.service.TimeTableService;
 import edu.netcracker.center.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +31,7 @@ public class TimeTableResource {
     private final Logger log = LoggerFactory.getLogger(TimeTableResource.class);
         
     @Inject
-    private TimeTableRepository timeTableRepository;
+    private TimeTableService timeTableService;
     
     /**
      * POST  /timeTables -> Create a new timeTable.
@@ -45,7 +45,7 @@ public class TimeTableResource {
         if (timeTable.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("timeTable", "idexists", "A new timeTable cannot already have an ID")).body(null);
         }
-        TimeTable result = timeTableRepository.save(timeTable);
+        TimeTable result = timeTableService.save(timeTable);
         return ResponseEntity.created(new URI("/api/timeTables/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("timeTable", result.getId().toString()))
             .body(result);
@@ -63,7 +63,7 @@ public class TimeTableResource {
         if (timeTable.getId() == null) {
             return createTimeTable(timeTable);
         }
-        TimeTable result = timeTableRepository.save(timeTable);
+        TimeTable result = timeTableService.save(timeTable);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("timeTable", timeTable.getId().toString()))
             .body(result);
@@ -79,13 +79,10 @@ public class TimeTableResource {
     public List<TimeTable> getAllTimeTables(@RequestParam(required = false) String filter) {
         if ("groupofstudent-is-null".equals(filter)) {
             log.debug("REST request to get all TimeTables where groupOfStudent is null");
-            return StreamSupport
-                .stream(timeTableRepository.findAll().spliterator(), false)
-                .filter(timeTable -> timeTable.getGroupOfStudent() == null)
-                .collect(Collectors.toList());
+            return timeTableService.findAllWhereGroupOfStudentIsNull();
         }
         log.debug("REST request to get all TimeTables");
-        return timeTableRepository.findAll();
+        return timeTableService.findAll();
             }
 
     /**
@@ -97,7 +94,7 @@ public class TimeTableResource {
     @Timed
     public ResponseEntity<TimeTable> getTimeTable(@PathVariable Long id) {
         log.debug("REST request to get TimeTable : {}", id);
-        TimeTable timeTable = timeTableRepository.findOne(id);
+        TimeTable timeTable = timeTableService.findOne(id);
         return Optional.ofNullable(timeTable)
             .map(result -> new ResponseEntity<>(
                 result,
@@ -114,7 +111,7 @@ public class TimeTableResource {
     @Timed
     public ResponseEntity<Void> deleteTimeTable(@PathVariable Long id) {
         log.debug("REST request to delete TimeTable : {}", id);
-        timeTableRepository.delete(id);
+        timeTableService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("timeTable", id.toString())).build();
     }
 }

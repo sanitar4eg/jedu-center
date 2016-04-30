@@ -28,6 +28,6 @@
     ],
     "changelogDate": "20160312173231",
     "dto": "no",
-    "service": "no",
+    "service": "serviceImpl",
     "pagination": "no"
 }

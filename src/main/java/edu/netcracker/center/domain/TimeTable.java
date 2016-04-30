@@ -5,11 +5,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A TimeTable.
@@ -77,7 +77,7 @@ public class TimeTable implements Serializable {
             return false;
         }
         TimeTable timeTable = (TimeTable) o;
-        if(timeTable.id == null || id == null) {
+        if (timeTable.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, timeTable.id);
