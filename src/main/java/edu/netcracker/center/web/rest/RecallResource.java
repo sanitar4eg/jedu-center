@@ -2,7 +2,7 @@ package edu.netcracker.center.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import edu.netcracker.center.domain.Recall;
-import edu.netcracker.center.repository.RecallRepository;
+import edu.netcracker.center.service.RecallService;
 import edu.netcracker.center.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +29,7 @@ public class RecallResource {
     private final Logger log = LoggerFactory.getLogger(RecallResource.class);
         
     @Inject
-    private RecallRepository recallRepository;
+    private RecallService recallService;
     
     /**
      * POST  /recalls -> Create a new recall.
@@ -43,7 +43,7 @@ public class RecallResource {
         if (recall.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("recall", "idexists", "A new recall cannot already have an ID")).body(null);
         }
-        Recall result = recallRepository.save(recall);
+        Recall result = recallService.save(recall);
         return ResponseEntity.created(new URI("/api/recalls/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("recall", result.getId().toString()))
             .body(result);
@@ -61,7 +61,7 @@ public class RecallResource {
         if (recall.getId() == null) {
             return createRecall(recall);
         }
-        Recall result = recallRepository.save(recall);
+        Recall result = recallService.save(recall);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("recall", recall.getId().toString()))
             .body(result);
@@ -76,7 +76,7 @@ public class RecallResource {
     @Timed
     public List<Recall> getAllRecalls() {
         log.debug("REST request to get all Recalls");
-        return recallRepository.findAll();
+        return recallService.findAll();
             }
 
     /**
@@ -88,7 +88,7 @@ public class RecallResource {
     @Timed
     public ResponseEntity<Recall> getRecall(@PathVariable Long id) {
         log.debug("REST request to get Recall : {}", id);
-        Recall recall = recallRepository.findOne(id);
+        Recall recall = recallService.findOne(id);
         return Optional.ofNullable(recall)
             .map(result -> new ResponseEntity<>(
                 result,
@@ -105,7 +105,7 @@ public class RecallResource {
     @Timed
     public ResponseEntity<Void> deleteRecall(@PathVariable Long id) {
         log.debug("REST request to delete Recall : {}", id);
-        recallRepository.delete(id);
+        recallService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("recall", id.toString())).build();
     }
 }

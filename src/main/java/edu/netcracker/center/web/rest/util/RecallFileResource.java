@@ -2,8 +2,8 @@ package edu.netcracker.center.web.rest.util;
 
 import com.codahale.metrics.annotation.Timed;
 import edu.netcracker.center.domain.Recall;
-import edu.netcracker.center.repository.RecallRepository;
 import edu.netcracker.center.service.FileServerService;
+import edu.netcracker.center.service.RecallService;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +30,7 @@ public class RecallFileResource {
     private final static String RECALL_PATH = "/recalls/";
 
     @Inject
-    RecallRepository recallRepository;
+    RecallService recallService;
 
     @Inject
     FileServerService fileServerService;
@@ -42,10 +42,9 @@ public class RecallFileResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @Transactional
     public void downloadFile(@PathVariable Long id, HttpServletResponse response) {
         log.debug("REST request to get file of Recall by id: {}", id);
-        Recall recall = recallRepository.getOne(id);
+        Recall recall = recallService.findOne(id);
         String filePath = fileServerService.getPath() + RECALL_PATH + recall.getId() + "/" + recall.getFile();
         log.debug("File path: {}", filePath);
         try (InputStream is = new FileInputStream(filePath)) {
@@ -66,9 +65,8 @@ public class RecallFileResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    @Transactional
     public void saveFile(@RequestParam("file") MultipartFile file, @PathVariable Long id) {
-        Recall recall = recallRepository.getOne(id);
+        Recall recall = recallService.findOne(id);
         String fileName = file.getOriginalFilename();
         String dirPath = fileServerService.getPath() + RECALL_PATH + id;
         log.debug("REST request to save file of Recall by id: {}, to path: {}, fileName: {}", id, dirPath,
@@ -83,7 +81,7 @@ public class RecallFileResource {
             throw new RuntimeException(e);
         }
         recall.setFile(fileName);
-        recallRepository.save(recall);
+        recallService.save(recall);
     }
 
 

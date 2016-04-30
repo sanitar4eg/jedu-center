@@ -3,6 +3,7 @@ package edu.netcracker.center.web.rest;
 import edu.netcracker.center.Application;
 import edu.netcracker.center.domain.Recall;
 import edu.netcracker.center.repository.RecallRepository;
+import edu.netcracker.center.service.RecallService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -58,6 +59,9 @@ public class RecallResourceIntTest {
     private RecallRepository recallRepository;
 
     @Inject
+    private RecallService recallService;
+
+    @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Inject
@@ -71,7 +75,7 @@ public class RecallResourceIntTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         RecallResource recallResource = new RecallResource();
-        ReflectionTestUtils.setField(recallResource, "recallRepository", recallRepository);
+        ReflectionTestUtils.setField(recallResource, "recallService", recallService);
         this.restRecallMockMvc = MockMvcBuilders.standaloneSetup(recallResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
