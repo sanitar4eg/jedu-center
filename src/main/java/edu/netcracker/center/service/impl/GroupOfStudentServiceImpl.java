@@ -5,6 +5,8 @@ import edu.netcracker.center.domain.GroupOfStudent;
 import edu.netcracker.center.repository.GroupOfStudentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -39,9 +41,9 @@ public class GroupOfStudentServiceImpl implements GroupOfStudentService{
      *  @return the list of entities
      */
     @Transactional(readOnly = true) 
-    public List<GroupOfStudent> findAll() {
+    public Page<GroupOfStudent> findAll(Pageable pageable) {
         log.debug("Request to get all GroupOfStudents");
-        List<GroupOfStudent> result = groupOfStudentRepository.findAll();
+        Page<GroupOfStudent> result = groupOfStudentRepository.findAll(pageable); 
         return result;
     }
 
