@@ -46,8 +46,8 @@ public class CuratorResourceIntTest {
     private static final String UPDATED_FIRST_NAME = "BBBBB";
     private static final String DEFAULT_LAST_NAME = "AAAAA";
     private static final String UPDATED_LAST_NAME = "BBBBB";
-    private static final String DEFAULT_EMAIL = "AAAAA";
-    private static final String UPDATED_EMAIL = "BBBBB";
+    private static final String DEFAULT_EMAIL = "AAAAA@CCCC";
+    private static final String UPDATED_EMAIL = "BBBBB@DDDD";
     private static final String DEFAULT_DEPARTMENT = "AAAAA";
     private static final String UPDATED_DEPARTMENT = "BBBBB";
 
