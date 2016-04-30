@@ -5,6 +5,8 @@ import edu.netcracker.center.domain.Curator;
 import edu.netcracker.center.repository.CuratorRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -39,9 +41,9 @@ public class CuratorServiceImpl implements CuratorService{
      *  @return the list of entities
      */
     @Transactional(readOnly = true) 
-    public List<Curator> findAll() {
+    public Page<Curator> findAll(Pageable pageable) {
         log.debug("Request to get all Curators");
-        List<Curator> result = curatorRepository.findAll();
+        Page<Curator> result = curatorRepository.findAll(pageable); 
         return result;
     }
 

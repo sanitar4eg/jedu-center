@@ -1,6 +1,8 @@
 package edu.netcracker.center.service;
 
 import edu.netcracker.center.domain.Curator;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -19,7 +21,7 @@ public interface CuratorService {
      *  get all the curators.
      *  @return the list of entities
      */
-    public List<Curator> findAll();
+    public Page<Curator> findAll(Pageable pageable);
 
     /**
      *  get the "id" curator.
