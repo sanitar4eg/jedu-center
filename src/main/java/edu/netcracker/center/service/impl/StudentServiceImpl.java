@@ -1,5 +1,6 @@
 package edu.netcracker.center.service.impl;
 
+import com.mysema.query.types.Predicate;
 import edu.netcracker.center.service.StudentService;
 import edu.netcracker.center.domain.Student;
 import edu.netcracker.center.repository.StudentRepository;
@@ -45,6 +46,11 @@ public class StudentServiceImpl implements StudentService{
         log.debug("Request to get all Students");
         Page<Student> result = studentRepository.findAll(pageable);
         return result;
+    }
+
+    @Override
+    public Page<Student> findAll(Predicate predicate, Pageable pageable) {
+        return studentRepository.findAll(predicate, pageable);
     }
 
     /**
