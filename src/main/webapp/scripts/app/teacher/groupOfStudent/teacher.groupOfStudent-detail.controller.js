@@ -5,6 +5,7 @@ angular.module('jeducenterApp')
                                                                    GroupOfStudent, Student, TimeTable) {
         $scope.groupOfStudent = entity;
         $scope.students = [];
+        $scope.checked = [];
         $scope.load = function (id) {
             GroupOfStudent.get({id: id}, function(result) {
                 $scope.groupOfStudent = result;
@@ -13,7 +14,19 @@ angular.module('jeducenterApp')
                 $scope.students = result;
             });
         };
-        $scope.load($scope.groupOfStudent.id);
+        $scope.load($stateParams.id);
+
+        $scope.deleteFromGroup = function () {
+            $scope.checked.forEach(function (student) {
+                var index = $scope.students.indexOf(student);
+                if(index > -1) {
+                    $scope.students.splice(index, 1);
+                }
+                student.groupOfStudent = null;
+                Student.update(student);
+            });
+        };
+
         var unsubscribe = $rootScope.$on('jeducenterApp:groupOfStudentUpdate', function(event, result) {
             $scope.groupOfStudent = result;
         });

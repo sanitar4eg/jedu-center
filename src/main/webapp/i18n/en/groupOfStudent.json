@@ -5,7 +5,10 @@
                 "title": "GroupOfStudents",
                 "createLabel": "Create a new GroupOfStudent",
                 "createOrEditLabel": "Create or edit a GroupOfStudent",
-                "search": "Search for GroupOfStudent"
+                "search": "Search for GroupOfStudent",
+                "register": "Register",
+                "deleteFormGroup": "Delete from group",
+                "addStudent": "Add Student"
             },
             "created": "A new GroupOfStudent is created with identifier {{ param }}",
             "updated": "A GroupOfStudent is updated with identifier {{ param }}",
