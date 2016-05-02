@@ -56,11 +56,11 @@
     <br/>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-8 no-padding-left">
-                <button class="btn btn-primary" ui-sref="student.new">
+            <div class="col-xs-10 no-padding-left">
+                <button class="btn btn-primary" ui-sref="teacher.groupOfStudent.students({id:groupOfStudent.id})">
                     <span class="glyphicon glyphicon-plus"></span>
                     <span
-                        translate="jeducenterApp.groupOfStudent.home.addStudent">Add Student
+                        translate="jeducenterApp.groupOfStudent.home.addStudent">Add Students
                     </span>
                 </button>
                 <button class="btn btn-info" ui-sref="student.history">
@@ -78,6 +78,7 @@
             </div>
         </div>
     </div>
+    <br/>
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
@@ -104,17 +105,17 @@
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                ui-sref="student.detail({id:student.id})"
+                                ui-sref="teacher.student.detail({id:student.id})"
                                 class="btn btn-info btn-sm">
                             <span class="glyphicon glyphicon-eye-open"></span>
                         </button>
                         <button type="submit"
-                                ui-sref="student.edit({id:student.id})"
+                                ui-sref="teacher.student.edit({id:student.id})"
                                 class="btn btn-primary btn-sm">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </button>
                         <button type="submit"
-                                ui-sref="student.delete({id:student.id})"
+                                ui-sref="teacher.student.delete({id:student.id})"
                                 class="btn btn-danger btn-sm">
                             <span class="glyphicon glyphicon-remove-circle"></span>
                         </button>

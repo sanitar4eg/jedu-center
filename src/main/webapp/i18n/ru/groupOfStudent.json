@@ -8,7 +8,7 @@
                 "search": "Искать группу",
                 "register": "Зарегистрировать",
                 "deleteFormGroup": "Удалить из группы",
-                "addStudent": "Добавить студента"
+                "addStudent": "Добавить студентов"
             },
             "created": "Новая группа создана, ID: {{ param }}",
             "updated": "Группа обновлена, ID: {{ param }}",

@@ -2,7 +2,7 @@
 
 angular.module('jeducenterApp')
     .controller('TeacherGroupOfStudentDetailController', function ($scope, $rootScope, $stateParams, entity,
-                                                                   GroupOfStudent, Student, TimeTable) {
+                                                                   GroupOfStudent, Student) {
         $scope.groupOfStudent = entity;
         $scope.students = [];
         $scope.checked = [];
@@ -10,7 +10,7 @@ angular.module('jeducenterApp')
             GroupOfStudent.get({id: id}, function(result) {
                 $scope.groupOfStudent = result;
             });
-            Student.query({groupOfStudent: $scope.groupOfStudent.id}, function (result) {
+            Student.query({groupOfStudent: id}, function (result) {
                 $scope.students = result;
             });
         };
