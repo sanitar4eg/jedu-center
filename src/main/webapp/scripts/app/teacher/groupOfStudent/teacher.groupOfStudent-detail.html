@@ -83,7 +83,7 @@
         <table class="jh-table table table-striped">
             <thead>
             <tr>
-                <th></th>
+                <th><input type="checkbox" ng-model="master" ng-change="changeAll()"/></th>
                 <th><span translate="jeducenterApp.student.lastName">LastName</span></th>
                 <th><span translate="jeducenterApp.student.firstName">FirstName</span></th>
                 <th><span translate="jeducenterApp.student.middleName">MiddleName</span></th>
@@ -113,11 +113,6 @@
                                 ui-sref="teacher.student.edit({id:student.id})"
                                 class="btn btn-primary btn-sm">
                             <span class="glyphicon glyphicon-pencil"></span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="teacher.student.delete({id:student.id})"
-                                class="btn btn-danger btn-sm">
-                            <span class="glyphicon glyphicon-remove-circle"></span>
                         </button>
                     </div>
                 </td>

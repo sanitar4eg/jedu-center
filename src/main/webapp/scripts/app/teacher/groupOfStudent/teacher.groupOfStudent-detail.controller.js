@@ -5,6 +5,7 @@ angular.module('jeducenterApp')
                                                                    GroupOfStudent, Student) {
         $scope.groupOfStudent = entity;
         $scope.students = [];
+        $scope.master = false;
         $scope.checked = [];
         $scope.load = function (id) {
             GroupOfStudent.get({id: id}, function(result) {
@@ -25,6 +26,15 @@ angular.module('jeducenterApp')
                 student.groupOfStudent = null;
                 Student.update(student);
             });
+        };
+
+        $scope.changeAll = function () {
+            $scope.checked.splice(0, $scope.checked.length);
+            if ($scope.master) {
+                $scope.students.forEach(function (student) {
+                    $scope.checked.push(student);
+                });
+            }
         };
 
         var unsubscribe = $rootScope.$on('jeducenterApp:groupOfStudentUpdate', function(event, result) {
