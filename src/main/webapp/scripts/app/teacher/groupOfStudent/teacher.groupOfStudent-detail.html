@@ -53,7 +53,50 @@
             </tbody>
         </table>
     </div>
-
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+            <tr>
+                <th><span translate="jeducenterApp.student.lastName">LastName</span></th>
+                <th><span translate="jeducenterApp.student.firstName">FirstName</span></th>
+                <th><span translate="jeducenterApp.student.middleName">MiddleName</span></th>
+                <th><span translate="jeducenterApp.student.phone">Phone</span></th>
+                <th><span translate="jeducenterApp.student.user">user</span></th>
+                <th><span translate="jeducenterApp.student.curator">curator</span></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="student in students track by student.id">
+                <td>{{student.lastName}}</td>
+                <td>{{student.firstName}}</td>
+                <td>{{student.middleName}}</td>
+                <td>{{student.phone}}</td>
+                <td> {{student.user.login}}</td>
+                <td><a ui-sref="curator.detail({id:student.curator.id})">{{student.curator.lastName}}</a></td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                ui-sref="student.detail({id:student.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="student.edit({id:student.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="student.delete({id:student.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
     <button type="submit"
             onclick="window.history.back()"
             class="btn btn-info">
