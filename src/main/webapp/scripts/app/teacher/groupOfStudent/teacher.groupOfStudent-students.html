@@ -54,7 +54,7 @@
         <table class="jh-table table table-striped">
             <thead>
             <tr>
-                <th></th>
+                <th><input type="checkbox" ng-model="master" ng-change="changeAll()"/></th>
                 <th><span translate="jeducenterApp.student.lastName">LastName</span></th>
                 <th><span translate="jeducenterApp.student.firstName">FirstName</span></th>
                 <th><span translate="jeducenterApp.student.middleName">MiddleName</span></th>
@@ -64,7 +64,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="student in students">
+            <tr ng-repeat="student in students track by student.id">
                 <td><input type="checkbox" data-checklist-model="checked" data-checklist-value="student"/></td>
                 <td>{{student.lastName}}</td>
                 <td>{{student.firstName}}</td>
