@@ -1,7 +1,9 @@
 package edu.netcracker.center.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.mysema.query.BooleanBuilder;
 import com.mysema.query.types.Predicate;
+import edu.netcracker.center.domain.QStudent;
 import edu.netcracker.center.domain.Student;
 import edu.netcracker.center.service.StudentService;
 import edu.netcracker.center.web.rest.util.HeaderUtil;
@@ -80,9 +82,16 @@ public class StudentResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<List<Student>> getAllStudents(@QuerydslPredicate(root = Student.class) Predicate predicate,
-                                                        Pageable pageable)
+                                                        Pageable pageable,
+                                                        @RequestParam(required = false) String filter)
         throws URISyntaxException {
         log.debug("REST request to get a page of Students");
+        if ("groupOfStudent-is-null".equals(filter)) {
+            log.debug("REST add filter: ", filter);
+            BooleanBuilder builder = new BooleanBuilder(predicate);
+            QStudent student = QStudent.student;
+            predicate = builder.and(student.groupOfStudent.isNull());
+        }
         Page<Student> page = studentService.findAll(predicate, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/students");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
