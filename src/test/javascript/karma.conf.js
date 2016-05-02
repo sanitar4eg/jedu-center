@@ -38,6 +38,7 @@ module.exports = function (config) {
             'main/webapp/bower_components/moment-timezone/builds/moment-timezone-with-data-2010-2020.js',
             'main/webapp/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
             'main/webapp/bower_components/bootstrap-fileinput/js/fileinput.min.js',
+            'main/webapp/bower_components/checklist-model/checklist-model.js',
             'main/webapp/bower_components/angular-mocks/angular-mocks.js',
             // endbower
             'main/webapp/scripts/app/app.js',
