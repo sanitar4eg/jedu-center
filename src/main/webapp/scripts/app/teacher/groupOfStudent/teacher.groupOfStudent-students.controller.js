@@ -1,14 +1,13 @@
 'use strict';
 
 angular.module('jeducenterApp')
-    .controller('TeacherGroupOfStudentStudentsController', function ($scope, $rootScope, $stateParams, entity,
+    .controller('TeacherGroupOfStudentStudentsController', function ($scope, $state, $rootScope, $stateParams, entity,
                                                                      GroupOfStudent, Student) {
         $scope.groupOfStudent = entity;
         $scope.students = [];
         $scope.master = false;
         $scope.checked = [];
         $scope.load = function (id) {
-            console.log(JSON.stringify(entity));
             GroupOfStudent.get({id: id}, function (result) {
                 $scope.groupOfStudent = result;
                 Student.query({
@@ -24,8 +23,9 @@ angular.module('jeducenterApp')
 
         $scope.addStudents = function () {
             $scope.checked.forEach(function (student, id) {
-                // console.log("Item is :" + JSON.stringify(student.id));
-                // Student.update(student);
+                student.groupOfStudent  = $scope.groupOfStudent;
+                Student.update(student);
+                $state.go('teacher.groupOfStudent.detail', {id: $scope.groupOfStudent.id});
             });
         };
 
