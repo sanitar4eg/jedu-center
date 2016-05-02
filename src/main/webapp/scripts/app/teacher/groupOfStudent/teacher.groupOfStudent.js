@@ -124,5 +124,30 @@ angular.module('jeducenterApp')
                         $state.go('^');
                     })
                 }]
-            });
+            })
+            .state('teacher.groupOfStudent.students', {
+            parent: 'teacher.groupOfStudent.detail',
+            url: '/teacher/groupOfStudent/students/{id}',
+            data: {
+                authorities: ['ROLE_TEACHER', 'ROLE_ADMIN'],
+                pageTitle: 'jeducenterApp.groupOfStudent.detail.title'
+            },
+            views: {
+                'content@': {
+                    templateUrl: 'scripts/app/teacher/groupOfStudent/teacher.groupOfStudent-students.html',
+                    controller: 'TeacherGroupOfStudentStudentsController'
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('groupOfStudent');
+                    $translatePartialLoader.addPart('typeEnumeration');
+                    $translatePartialLoader.addPart('student');
+                    return $translate.refresh();
+                }],
+                entity: ['$stateParams', 'GroupOfStudent', function($stateParams, GroupOfStudent) {
+                    return GroupOfStudent.get({id : $stateParams.id});
+                }]
+            }
+        });
     });
