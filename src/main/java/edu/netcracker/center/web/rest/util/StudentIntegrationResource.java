@@ -67,6 +67,7 @@ public class StudentIntegrationResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public String handleImport(@RequestParam("file") MultipartFile file) {
+        log.debug("REST request to upload XSL of Students");
         importService.handleImportOfStudents(file);
         return null;
     }
