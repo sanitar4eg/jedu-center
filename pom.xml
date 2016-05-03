@@ -414,7 +414,7 @@
                             <goal>process</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>target/generated-sources/java</outputDirectory>
+                            <outputDirectory>target/generated-sources</outputDirectory>
                             <processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
                             <logOnlyOnError>true</logOnlyOnError>
                         </configuration>
@@ -552,7 +552,7 @@
                     </defaultOutputDirectory>
                     <additionalSourceDirectories>
                         <additionalSourceDirectory>
-                            ${project.build.directory}/generated-sources/java
+                            ${project.build.directory}/generated-sources
                         </additionalSourceDirectory>
                     </additionalSourceDirectories>
                     <processors>
