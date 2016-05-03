@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('jeducenterApp')
-    .controller('TeacherGroupOfStudentDetailController', function ($scope, $rootScope, $stateParams, entity,
+    .controller('TeacherGroupOfStudentDetailController', function ($scope, $state, $rootScope, $stateParams, entity,
                                                                    GroupOfStudent, Student, RegisterStudents) {
         $scope.groupOfStudent = entity;
         $scope.students = [];
         $scope.master = false;
         $scope.checked = [];
         $scope.load = function (id) {
-            GroupOfStudent.get({id: id}, function(result) {
+            GroupOfStudent.get({id: id}, function (result) {
                 $scope.groupOfStudent = result;
             });
             Student.query({groupOfStudent: id}, function (result) {
@@ -20,7 +20,7 @@ angular.module('jeducenterApp')
         $scope.deleteFromGroup = function () {
             $scope.checked.forEach(function (student) {
                 var index = $scope.students.indexOf(student);
-                if(index > -1) {
+                if (index > -1) {
                     $scope.students.splice(index, 1);
                 }
                 student.groupOfStudent = null;
@@ -28,8 +28,12 @@ angular.module('jeducenterApp')
             });
         };
 
+        var onUpdateSuccess = function (result) {
+            $state.go('report.result', {results: result});
+        };
+
         $scope.register = function () {
-            RegisterStudents.update($scope.checked);
+            RegisterStudents.update($scope.checked, onUpdateSuccess);
         };
 
         $scope.changeAll = function () {
@@ -41,7 +45,7 @@ angular.module('jeducenterApp')
             }
         };
 
-        var unsubscribe = $rootScope.$on('jeducenterApp:groupOfStudentUpdate', function(event, result) {
+        var unsubscribe = $rootScope.$on('jeducenterApp:groupOfStudentUpdate', function (event, result) {
             $scope.groupOfStudent = result;
         });
         $scope.$on('$destroy', unsubscribe);
