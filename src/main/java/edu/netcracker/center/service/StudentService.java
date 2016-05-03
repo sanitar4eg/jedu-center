@@ -2,9 +2,11 @@ package edu.netcracker.center.service;
 
 import com.mysema.query.types.Predicate;
 import edu.netcracker.center.domain.Student;
+import edu.netcracker.center.domain.util.OperationResult;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -46,4 +48,9 @@ public interface StudentService {
      *  delete the "id" student.
      */
     public void delete(Long id);
+
+    /**
+     *  register students.
+     */
+    Collection<OperationResult> registerStudents(Collection<Student> students, String baseUrl);
 }

@@ -7,13 +7,16 @@ import edu.netcracker.center.service.StudentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * REST controller for managing integrations of Student.
@@ -34,23 +37,22 @@ public class StudentRegistrationResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public String register(@ModelAttribute("students") StudentList students) {
-        log.debug("REST request to register Students: {}", students.size());
-//        Collection<OperationResult> results = studentService.registerStudents(students);
+    public Collection<OperationResult> register(@RequestBody List<Student> students, HttpServletRequest request) {
+        log.debug("REST request to register Students: {}", students);
+        String baseUrl = getBaseUrl(request);
+        if (Optional.of(students).isPresent()) {
+            return studentService.registerStudents(students, baseUrl);
+        }
         return null;
     }
 
-    public static class Constraints {
-        private List<Student> items = new ArrayList<Student>();
-
-        public List<Student> getItems() {
-            return items;
-        }
-
-        public void setItems(List<Student> items) {
-            this.items = items;
-        }
+    private String getBaseUrl(HttpServletRequest request) {
+        return
+            request.getScheme() + // "http"
+            "://" +                                // "://"
+            request.getServerName() +              // "myhost"
+            ":" +                                  // ":"
+            request.getServerPort() +              // "80"
+            request.getContextPath();              // "/myContextPath" or "" if deployed in root context
     }
-
-    public class StudentList extends ArrayList<Student> { }
 }
