@@ -6,11 +6,14 @@ import edu.netcracker.center.domain.User;
 import edu.netcracker.center.repository.AuthorityRepository;
 import edu.netcracker.center.repository.PersistentTokenRepository;
 import edu.netcracker.center.repository.UserRepository;
+import edu.netcracker.center.security.AuthoritiesConstants;
 import edu.netcracker.center.security.SecurityUtils;
 import edu.netcracker.center.service.util.RandomUtil;
 import edu.netcracker.center.web.rest.dto.ManagedUserDTO;
 import java.time.ZonedDateTime;
 import java.time.LocalDate;
+
+import org.apache.commons.lang.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -110,6 +113,30 @@ public class UserService {
         return newUser;
     }
 
+    public User createUserForStudent(String firstName, String lastName, String email, String password) {
+        User newUser = new User();
+        Set<Authority> authorities = new HashSet<>();
+        String encryptedPassword = passwordEncoder.encode(password);
+        newUser.setLogin(email);
+        // new user gets initially a generated password
+        newUser.setPassword(encryptedPassword);
+        newUser.setFirstName(firstName);
+        newUser.setLastName(lastName);
+        newUser.setEmail(email);
+        newUser.setLangKey("ru");
+        // new user is not active
+        newUser.setActivated(false);
+        // new user gets registration key
+        newUser.setActivationKey(RandomUtil.generateActivationKey());
+        authorities.add(authorityRepository.findOne(AuthoritiesConstants.USER));
+        authorities.add(authorityRepository.findOne(AuthoritiesConstants.STUDENT));
+        newUser.setAuthorities(authorities);
+//        TODO: UNCOMMENT!!!
+//        userRepository.save(newUser);
+        log.debug("Created Information for User: {}", newUser);
+        return newUser;
+    }
+
     public User createUser(ManagedUserDTO managedUserDTO) {
         User user = new User();
         user.setLogin(managedUserDTO.getLogin());
@@ -117,7 +144,7 @@ public class UserService {
         user.setLastName(managedUserDTO.getLastName());
         user.setEmail(managedUserDTO.getEmail());
         if (managedUserDTO.getLangKey() == null) {
-            user.setLangKey("en"); // default language is English
+            user.setLangKey("ru"); // default language is Russian
         } else {
             user.setLangKey(managedUserDTO.getLangKey());
         }
