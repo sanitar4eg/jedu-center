@@ -123,6 +123,8 @@ public class StudentServiceImpl implements StudentService {
                         .orElseGet(() -> {
                             User user = createUser(student, password);
                             mailService.sendCenterActivationEmail(user, baseUrl, password);
+                            student.setUser(user);
+                            studentRepository.save(student);
                             return createResult(id, "Пользователь создан", email);
                         })
                     );

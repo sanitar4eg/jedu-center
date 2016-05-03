@@ -131,8 +131,7 @@ public class UserService {
         authorities.add(authorityRepository.findOne(AuthoritiesConstants.USER));
         authorities.add(authorityRepository.findOne(AuthoritiesConstants.STUDENT));
         newUser.setAuthorities(authorities);
-//        TODO: UNCOMMENT!!!
-//        userRepository.save(newUser);
+        userRepository.save(newUser);
         log.debug("Created Information for User: {}", newUser);
         return newUser;
     }
