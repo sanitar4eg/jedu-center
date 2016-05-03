@@ -65,7 +65,7 @@ angular.module('jeducenterApp')
                                     lastName: null,
                                     email: null,
                                     department: null,
-                                    isActive: false,
+                                    isActive: true,
                                     id: null
                                 };
                             }

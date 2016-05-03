@@ -67,7 +67,7 @@ angular.module('jeducenterApp')
                                     name: null,
                                     type: null,
                                     description: null,
-                                    isActive: false,
+                                    isActive: true,
                                     id: null
                                 };
                             }
