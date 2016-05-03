@@ -2,7 +2,7 @@
 
 angular.module('jeducenterApp')
     .controller('TeacherGroupOfStudentDetailController', function ($scope, $rootScope, $stateParams, entity,
-                                                                   GroupOfStudent, Student) {
+                                                                   GroupOfStudent, Student, RegisterStudents) {
         $scope.groupOfStudent = entity;
         $scope.students = [];
         $scope.master = false;
@@ -26,6 +26,10 @@ angular.module('jeducenterApp')
                 student.groupOfStudent = null;
                 Student.update(student);
             });
+        };
+
+        $scope.register = function () {
+            RegisterStudents.update($scope.checked);
         };
 
         $scope.changeAll = function () {
