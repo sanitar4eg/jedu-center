@@ -1,0 +1,29 @@
+<div>
+    <h2>Результаты операции:</h2>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+            <tr>
+                <th>Идентификатор</th>
+                <th>Сообщение</th>
+                <th>Описание</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="result in results">
+                <td>{{result.identifier}}</td>
+                <td>{{result.message}}</td>
+                <td>{{result.description}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+    <jh-alert></jh-alert>
+</div>
