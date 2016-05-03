@@ -4,6 +4,8 @@ import edu.netcracker.center.config.JHipsterProperties;
 import edu.netcracker.center.domain.User;
 
 import org.apache.commons.lang.CharEncoding;
+import org.apache.commons.lang.ObjectUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -82,6 +84,20 @@ public class MailService {
     }
 
     @Async
+    public void sendCenterActivationEmail(User user, String baseUrl, String password) {
+        log.debug("Sending center activation e-mail to '{}'", user.getEmail());
+        Locale locale = Locale.forLanguageTag(user.getLangKey());
+        Context context = new Context(locale);
+        context.setVariable("user", user);
+        context.setVariable("name", user.getLastName() + " " + ObjectUtils.toString(user.getFirstName(), ""));
+        context.setVariable("password", password);
+        context.setVariable("baseUrl", baseUrl);
+        String content = templateEngine.process("activationCenterEmail", context);
+        String subject = messageSource.getMessage("email.activation.title", null, locale);
+        sendEmail(user.getEmail(), subject, content, false, true);
+    }
+
+    @Async
     public void sendCreationEmail(User user, String baseUrl) {
         log.debug("Sending creation e-mail to '{}'", user.getEmail());
         Locale locale = Locale.forLanguageTag(user.getLangKey());
@@ -104,5 +120,5 @@ public class MailService {
         String subject = messageSource.getMessage("email.reset.title", null, locale);
         sendEmail(user.getEmail(), subject, content, false, true);
     }
-    
+
 }
