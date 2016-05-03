@@ -125,7 +125,58 @@
             </tbody>
         </table>
     </div>
-
+    <br/>
+    <h4 translate="jeducenterApp.recall.home.title">Recalls</h4>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+            <tr>
+                <th><span translate="global.field.id">ID</span></th>
+                <th><span translate="jeducenterApp.recall.type">Type</span></th>
+                <th><span translate="jeducenterApp.recall.name">Name</span></th>
+                <th><span translate="jeducenterApp.recall.description">Description</span></th>
+                <th><span translate="jeducenterApp.recall.file">File</span></th>
+                <th><span translate="jeducenterApp.recall.curator">curator</span></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="recall in recalls track by recall.id">
+                <td><a ui-sref="teacher.recall.detail({id:recall.id})">{{recall.id}}</a></td>
+                <td translate="{{'jeducenterApp.TypeRecallEnumeration.' + recall.type}}">{{recall.type}}</td>
+                <td>{{recall.name}}</td>
+                <td>{{recall.description}}</td>
+                <td>
+                    <a href="/api/recalls/file/{{recall.id}}">{{recall.file}}</a>
+                </td>
+                <td>
+                    <a ui-sref="teacher.curator.detail({id:recall.curator.id})">{{recall.curator.lastName}}</a>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                ui-sref="teacher.recall.detail({id:recall.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="teacher.recall.edit({id:recall.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="teacher.recall.delete({id:recall.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <br/>
     <button type="submit"
             onclick="window.history.back()"
             class="btn btn-info">

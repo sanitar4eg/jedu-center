@@ -44,6 +44,8 @@ angular.module('jeducenterApp')
                         $translatePartialLoader.addPart('student');
                         $translatePartialLoader.addPart('typeEnumeration');
                         $translatePartialLoader.addPart('universityEnumeration');
+                        $translatePartialLoader.addPart('recall');
+                        $translatePartialLoader.addPart('typeRecallEnumeration');
                         return $translate.refresh();
                     }],
                     entity: ['$stateParams', 'Student', function($stateParams, Student) {
