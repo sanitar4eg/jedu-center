@@ -58,6 +58,8 @@
         <spring-security.version>4.0.2.RELEASE</spring-security.version>
         <springfox.version>2.0.3</springfox.version>
         <apache-poi.version>3.13</apache-poi.version>
+        <apt.version>1.0.4</apt.version>
+        <querydsl.version>3.6.9</querydsl.version>
         <!-- Sonar properties -->
         <project.testresult.directory>${project.build.directory}/test-results</project.testresult.directory>
         <sonar-maven-plugin.version>2.6</sonar-maven-plugin.version>
@@ -369,17 +371,17 @@
         <dependency>
             <groupId>com.mysema.querydsl</groupId>
             <artifactId>querydsl-core</artifactId>
-            <version>3.7.2</version>
+            <version>${querydsl.version}</version>
         </dependency>
         <dependency>
             <groupId>com.mysema.querydsl</groupId>
             <artifactId>querydsl-jpa</artifactId>
-            <version>3.7.2</version>
+            <version>${querydsl.version}</version>
         </dependency>
         <dependency>
             <groupId>com.mysema.querydsl</groupId>
             <artifactId>querydsl-apt</artifactId>
-            <version>3.7.2</version>
+            <version>${querydsl.version}</version>
         </dependency>
     </dependencies>
     <build>
@@ -401,6 +403,45 @@
             </resource>
         </resources>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                            <goal>add-test-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>target/generated-sources/java</source>
+                                <source>src/main/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.mysema.maven</groupId>
+                <artifactId>maven-apt-plugin</artifactId>
+                <version>${apt.version}</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/generated-sources/java</outputDirectory>
+                            <processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
+                            <logOnlyOnError>true</logOnlyOnError>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>com.google.code.sortpom</groupId>
                 <artifactId>maven-sortpom-plugin</artifactId>
@@ -601,23 +642,6 @@
                 </configuration>
             </plugin>
             <!-- jhipster-needle-maven-add-plugin -->
-            <plugin>
-                <groupId>com.mysema.maven</groupId>
-                <artifactId>maven-apt-plugin</artifactId>
-                <version>1.0</version>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>process</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>target/generated-sources</outputDirectory>
-                            <processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
         <pluginManagement>
             <plugins>
