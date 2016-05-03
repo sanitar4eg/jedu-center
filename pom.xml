@@ -404,33 +404,12 @@
         </resources>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.7</version>
-                <executions>
-                    <execution>
-                        <id>add-source</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                            <goal>add-test-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>target/generated-sources/java</source>
-                                <source>src/main/java</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>com.mysema.maven</groupId>
                 <artifactId>maven-apt-plugin</artifactId>
                 <version>${apt.version}</version>
                 <executions>
                     <execution>
-                        <phase>generate-resources</phase>
+                        <phase>generate-sources</phase>
                         <goals>
                             <goal>process</goal>
                         </goals>
@@ -571,6 +550,11 @@
                     <defaultOutputDirectory>
                         ${project.build.directory}/generated-sources
                     </defaultOutputDirectory>
+                    <additionalSourceDirectories>
+                        <additionalSourceDirectory>
+                            ${project.build.directory}/generated-sources/java
+                        </additionalSourceDirectory>
+                    </additionalSourceDirectories>
                     <processors>
                         <processor>org.mapstruct.ap.MappingProcessor</processor>
                     </processors>
