@@ -1,5 +1,6 @@
 package edu.netcracker.center.service.impl;
 
+import com.mysema.query.types.Predicate;
 import edu.netcracker.center.service.RecallService;
 import edu.netcracker.center.domain.Recall;
 import edu.netcracker.center.repository.RecallRepository;
@@ -22,10 +23,10 @@ import java.util.Optional;
 public class RecallServiceImpl implements RecallService{
 
     private final Logger log = LoggerFactory.getLogger(RecallServiceImpl.class);
-    
+
     @Inject
     private RecallRepository recallRepository;
-    
+
     /**
      * Save a recall.
      * @return the persisted entity
@@ -40,18 +41,28 @@ public class RecallServiceImpl implements RecallService{
      *  get all the recalls.
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<Recall> findAll(Pageable pageable) {
         log.debug("Request to get all Recalls");
-        Page<Recall> result = recallRepository.findAll(pageable); 
+        Page<Recall> result = recallRepository.findAll(pageable);
         return result;
+    }
+
+    /**
+     *  get all the recalls.
+     *  @return the list of entities
+     */
+    @Transactional(readOnly = true)
+    public Page<Recall> findAll(Predicate predicate, Pageable pageable) {
+        log.debug("Request to get all Recalls by predicate");
+        return recallRepository.findAll(predicate, pageable);
     }
 
     /**
      *  get one recall by id.
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Recall findOne(Long id) {
         log.debug("Request to get Recall : {}", id);
         Recall recall = recallRepository.findOne(id);

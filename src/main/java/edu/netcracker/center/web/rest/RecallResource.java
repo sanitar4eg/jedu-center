@@ -1,6 +1,7 @@
 package edu.netcracker.center.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.mysema.query.types.Predicate;
 import edu.netcracker.center.domain.Recall;
 import edu.netcracker.center.service.RecallService;
 import edu.netcracker.center.web.rest.util.HeaderUtil;
@@ -9,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -30,10 +32,10 @@ import java.util.Optional;
 public class RecallResource {
 
     private final Logger log = LoggerFactory.getLogger(RecallResource.class);
-        
+
     @Inject
     private RecallService recallService;
-    
+
     /**
      * POST  /recalls -> Create a new recall.
      */
@@ -77,10 +79,11 @@ public class RecallResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<Recall>> getAllRecalls(Pageable pageable)
+    public ResponseEntity<List<Recall>> getAllRecalls(@QuerydslPredicate(root = Recall.class) Predicate predicate,
+                                                      Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Recalls");
-        Page<Recall> page = recallService.findAll(pageable); 
+        Page<Recall> page = recallService.findAll(predicate, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/recalls");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

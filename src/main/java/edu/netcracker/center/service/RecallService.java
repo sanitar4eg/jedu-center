@@ -1,5 +1,6 @@
 package edu.netcracker.center.service;
 
+import com.mysema.query.types.Predicate;
 import edu.netcracker.center.domain.Recall;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +23,12 @@ public interface RecallService {
      *  @return the list of entities
      */
     public Page<Recall> findAll(Pageable pageable);
+
+    /**
+     *  get all the recalls.
+     *  @return the list of entities
+     */
+    public Page<Recall> findAll(Predicate predicate,Pageable pageable);
 
     /**
      *  get the "id" recall.

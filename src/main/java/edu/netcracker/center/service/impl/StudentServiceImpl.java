@@ -68,6 +68,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Page<Student> findAll(Predicate predicate, Pageable pageable) {
+        log.debug("Request to get all Students by predicate");
         return studentRepository.findAll(predicate, pageable);
     }
 
