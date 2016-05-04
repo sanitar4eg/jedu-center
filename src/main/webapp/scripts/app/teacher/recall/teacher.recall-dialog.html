@@ -36,15 +36,19 @@
         <div class="form-group">
             <label class="control-label" translate="jeducenterApp.recall.description" for="field_description">Description</label>
                 <textarea class="form-control" name="description" id="field_description"
-                    ng-model="recall.description" required />
-            <div ng-show="editForm.description.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.description.$error.required" translate="entity.validation.required">
-                    This field is required.
-                </p>
-            </div>
+                          ng-model="recall.description"  />
         </div>
-
+        <!--<div class="form-group">
+            <label class="control-label" translate="jeducenterApp.recall.file" for="field_file">File</label>
+            <input type="text" class="form-control" name="file" id="field_file"
+                    ng-model="recall.file"
+                     />
+        </div>-->
+        <div class="form-group">
+            <label class="control-label" translate="global.file.selectFile" for="recall-input-file">Select File</label>
+            <input id="recall-input-file" name="file" type="file" bfi-for-form class="file" data-show-preview="false"
+                   data-rule-required="true" accept=".doc,.docx" file-uploader>
+        </div>
         <div class="form-group">
             <label translate="jeducenterApp.recall.student" for="field_student">student</label>
             <select class="form-control" id="field_student" name="student" ng-model="recall.student" ng-options="student as student.lastName for student in students track by student.id">

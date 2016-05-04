@@ -67,6 +67,7 @@ angular.module('jeducenterApp')
                                     type: null,
                                     name: null,
                                     description: null,
+                                    file: null,
                                     id: null,
                                     student: $stateParams.student
                                 };

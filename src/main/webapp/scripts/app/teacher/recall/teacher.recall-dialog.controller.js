@@ -2,7 +2,9 @@
 
 angular.module('jeducenterApp').controller('TeacherRecallDialogController',
     ['$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Recall', 'Student', 'Curator',
-        function($scope, $stateParams, $uibModalInstance, DataUtils, entity, Recall, Student, Curator) {
+        'fileService', 'RecallFile',
+        function($scope, $stateParams, $uibModalInstance, DataUtils, entity, Recall, Student, Curator,
+                 fileService, RecallFile) {
 
         $scope.recall = entity;
         $scope.students = Student.query();
@@ -14,6 +16,12 @@ angular.module('jeducenterApp').controller('TeacherRecallDialogController',
         };
 
         var onSaveSuccess = function (result) {
+            var file = fileService.getFile();
+            if (file != null && $scope.recall.id == null) {
+                var formData = new FormData();
+                formData.append("file", file);
+                RecallFile.uploadFile({id: result.id}, formData);
+            }
             $scope.$emit('jeducenterApp:recallUpdate', result);
             $uibModalInstance.close(result);
             $scope.isSaving = false;
@@ -24,11 +32,17 @@ angular.module('jeducenterApp').controller('TeacherRecallDialogController',
         };
 
         $scope.save = function () {
+            var file = fileService.getFile();
             $scope.isSaving = true;
             if ($scope.recall.id != null) {
                 Recall.update($scope.recall, onSaveSuccess, onSaveError);
             } else {
                 Recall.save($scope.recall, onSaveSuccess, onSaveError);
+            }
+            if (file != null && $scope.recall.id != null) {
+                var formData = new FormData();
+                formData.append("file", file);
+                RecallFile.uploadFile({id: $scope.recall.id}, formData);
             }
         };
 
