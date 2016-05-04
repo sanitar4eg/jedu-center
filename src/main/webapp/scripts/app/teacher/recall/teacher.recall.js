@@ -44,8 +44,8 @@ angular.module('jeducenterApp')
                         $translatePartialLoader.addPart('typeRecallEnumeration');
                         return $translate.refresh();
                     }],
-                    entity: ['$stateParams', 'Recall', function($stateParams, Recall) {
-                        return Recall.get({id : $stateParams.id});
+                    entity: ['$stateParams', 'Recall', function ($stateParams, Recall) {
+                        return Recall.get({id: $stateParams.id});
                     }]
                 }
             })
@@ -55,7 +55,8 @@ angular.module('jeducenterApp')
                 data: {
                     authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
-                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                params: {student: null},
+                onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
                     $uibModal.open({
                         templateUrl: 'scripts/app/teacher/recall/teacher.recall-dialog.html',
                         controller: 'TeacherRecallDialogController',
@@ -66,13 +67,14 @@ angular.module('jeducenterApp')
                                     type: null,
                                     name: null,
                                     description: null,
-                                    id: null
+                                    id: null,
+                                    student: $stateParams.student
                                 };
                             }
                         }
-                    }).result.then(function(result) {
-                        $state.go('teacher.recall', null, { reload: true });
-                    }, function() {
+                    }).result.then(function (result) {
+                        $state.go('teacher.recall', null, {reload: true});
+                    }, function () {
                         $state.go('teacher.recall');
                     })
                 }]
@@ -83,19 +85,19 @@ angular.module('jeducenterApp')
                 data: {
                     authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
-                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
                     $uibModal.open({
                         templateUrl: 'scripts/app/teacher/recall/teacher.recall-dialog.html',
                         controller: 'TeacherRecallDialogController',
                         size: 'lg',
                         resolve: {
-                            entity: ['Recall', function(Recall) {
-                                return Recall.get({id : $stateParams.id});
+                            entity: ['Recall', function (Recall) {
+                                return Recall.get({id: $stateParams.id});
                             }]
                         }
-                    }).result.then(function(result) {
-                        $state.go('teacher.recall', null, { reload: true });
-                    }, function() {
+                    }).result.then(function (result) {
+                        $state.go('teacher.recall', null, {reload: true});
+                    }, function () {
                         $state.go('^');
                     })
                 }]
@@ -106,19 +108,19 @@ angular.module('jeducenterApp')
                 data: {
                     authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
-                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
                     $uibModal.open({
                         templateUrl: 'scripts/app/teacher/recall/teacher.recall-delete-dialog.html',
                         controller: 'TeacherRecallDeleteController',
                         size: 'md',
                         resolve: {
-                            entity: ['Recall', function(Recall) {
-                                return Recall.get({id : $stateParams.id});
+                            entity: ['Recall', function (Recall) {
+                                return Recall.get({id: $stateParams.id});
                             }]
                         }
-                    }).result.then(function(result) {
-                        $state.go('teacher.recall', null, { reload: true });
-                    }, function() {
+                    }).result.then(function (result) {
+                        $state.go('teacher.recall', null, {reload: true});
+                    }, function () {
                         $state.go('^');
                     })
                 }]
