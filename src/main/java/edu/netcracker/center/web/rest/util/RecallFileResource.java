@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import edu.netcracker.center.domain.Recall;
 import edu.netcracker.center.service.FileServerService;
 import edu.netcracker.center.service.RecallService;
+import org.apache.catalina.util.URLEncoder;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,8 +49,9 @@ public class RecallFileResource {
         String filePath = fileServerService.getPath() + RECALL_PATH + recall.getId() + "/" + recall.getFile();
         log.debug("File path: {}", filePath);
         try (InputStream is = new FileInputStream(filePath)) {
+            String fileName = java.net.URLEncoder.encode(recall.getFile(),"UTF-8");
             response.setContentType("application/msword");
-            response.setHeader("Content-Disposition", "attachment; filename=" + recall.getFile());
+            response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
             IOUtils.copy(is, response.getOutputStream());
             response.flushBuffer();
         } catch (IOException e) {

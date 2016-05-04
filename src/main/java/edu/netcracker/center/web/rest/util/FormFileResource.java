@@ -102,8 +102,9 @@ public class FormFileResource {
         String filePath = fileServerService.getPath() + FORMS_PATH + form.getId() + "/" + form.getFile();
         log.debug("File path: {}", filePath);
         try (InputStream is = new FileInputStream(filePath)) {
+            String fileName = java.net.URLEncoder.encode(form.getFile(),"UTF-8");
             response.setContentType("application/msword");
-            response.setHeader("Content-Disposition", "attachment; filename=" + form.getFile());
+            response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
             IOUtils.copy(is, response.getOutputStream());
             response.flushBuffer();
         } catch (IOException e) {
