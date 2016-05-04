@@ -2,6 +2,7 @@ package edu.netcracker.center.web.rest.util;
 
 import com.codahale.metrics.annotation.Timed;
 import edu.netcracker.center.domain.Student;
+import edu.netcracker.center.domain.util.OperationResult;
 import edu.netcracker.center.service.HistoryService;
 import edu.netcracker.center.service.ImportService;
 import edu.netcracker.center.service.StudentService;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.inject.Inject;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -66,10 +68,9 @@ public class StudentIntegrationResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public String handleImport(@RequestParam("file") MultipartFile file) {
+    public @ResponseBody Collection<OperationResult> handleImport(@RequestParam("file") MultipartFile file) {
         log.debug("REST request to upload XSL of Students");
-        importService.handleImportOfStudents(file);
-        return null;
+        return importService.handleImportOfStudents(file);
     }
 
 }
