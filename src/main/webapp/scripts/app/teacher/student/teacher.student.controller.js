@@ -5,12 +5,23 @@ angular.module('jeducenterApp')
                                                       i18nService, $translate, $log) {
 
         $scope.students = [];
-        $scope.loadAll = function () {
-            Student.query(function (result) {
+        $scope.options = [
+            {text:"Все", predicate: {}},
+            {text:"DEV", predicate: {type: "DEV"}},
+            {text:"QA", predicate: {type: "QA"}}
+        ];
+
+        $scope.loadAll = function (predicate) {
+            Student.query(predicate, function (result) {
                 $scope.students = result;
                 $scope.studentsGrid.data = result;
             });
         };
+
+        $scope.updateSelect = function (option) {
+            $scope.loadAll($scope.option.predicate);
+        };
+
 
         $scope.loadAll();
 
