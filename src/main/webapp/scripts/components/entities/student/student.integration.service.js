@@ -9,6 +9,11 @@ angular.module('jeducenterApp')
                     headers: {'Content-Type': undefined},
                     transformRequest: function (data) {
                         return data;
+                    },
+                    isArray: true,
+                    transformResponse: function (data) {
+                        data = angular.fromJson(data);
+                        return data;
                     }
                 }
             });
