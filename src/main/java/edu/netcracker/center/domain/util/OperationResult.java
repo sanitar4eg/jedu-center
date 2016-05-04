@@ -4,6 +4,14 @@ import java.util.Objects;
 
 public class OperationResult {
 
+    public OperationResult () {}
+
+    public OperationResult(String identifier, String message, String description) {
+        this.identifier = identifier;
+        this.message = message;
+        this.description = description;
+    }
+
     private String identifier;
 
     private String message;

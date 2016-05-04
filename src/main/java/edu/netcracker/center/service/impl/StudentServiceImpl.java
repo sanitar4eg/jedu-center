@@ -144,10 +144,6 @@ public class StudentServiceImpl implements StudentService {
     }
 
     private OperationResult createResult(Long id, String message, String description) {
-        OperationResult result = new OperationResult();
-        result.setIdentifier(id.toString());
-        result.setMessage(message);
-        result.setDescription(description);
-        return result;
+        return new OperationResult(id.toString(), message, description);
     }
 }
