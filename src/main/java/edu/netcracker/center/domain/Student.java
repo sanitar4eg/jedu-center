@@ -4,6 +4,8 @@ import edu.netcracker.center.domain.enumeration.TypeEnumeration;
 import edu.netcracker.center.domain.enumeration.UniversityEnumeration;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
@@ -15,6 +17,7 @@ import java.util.Objects;
  * A Student.
  */
 @Entity
+@Audited
 @Table(name = "student")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Student implements Serializable {
@@ -61,17 +64,21 @@ public class Student implements Serializable {
     private Boolean isActive;
 
     @OneToOne
+    @NotAudited
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "group_of_student_id")
+    @NotAudited
     private GroupOfStudent groupOfStudent;
 
     @ManyToOne
     @JoinColumn(name = "curator_id")
+    @NotAudited
     private Curator curator;
 
     @OneToOne
+    @NotAudited
     private Form form;
 
     public Long getId() {
