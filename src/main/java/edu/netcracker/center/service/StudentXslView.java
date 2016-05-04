@@ -29,7 +29,7 @@ public class StudentXslView extends AbstractXlsView {
     public static final int UNIVER = 7;
     public static final int SPECIALTY = 8;
     public static final int COURSE = 9;
-    public static final int GROUP = 10;
+//    public static final int GROUP = 10;
 
     @Override
     protected void buildExcelDocument(Map<String, Object> model,
@@ -87,7 +87,7 @@ public class StudentXslView extends AbstractXlsView {
         setCellValueAndStyle(header.createCell(UNIVER), "Университет", style);
         setCellValueAndStyle(header.createCell(SPECIALTY), "Специальность", style);
         setCellValueAndStyle(header.createCell(COURSE), "Курс", style);
-        setCellValueAndStyle(header.createCell(GROUP), "Группа", style);
+//        setCellValueAndStyle(header.createCell(GROUP), "Группа", style);
     }
 
     private CellStyle createHeaderStyle(Workbook workbook) {
