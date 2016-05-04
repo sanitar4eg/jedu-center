@@ -30,6 +30,12 @@ public interface StudentService {
      *  get all the students.
      *  @return the list of entities
      */
+    public Iterable<Student> findAll(Predicate predicate);
+
+    /**
+     *  get all the students.
+     *  @return the list of entities
+     */
     public Page<Student> findAll(Predicate predicate, Pageable pageable);
 
     /**

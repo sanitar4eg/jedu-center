@@ -66,7 +66,23 @@ public class StudentServiceImpl implements StudentService {
         return result;
     }
 
-    @Override
+    /**
+     * get all the students by predicate.
+     *
+     * @return the list of entities
+     */
+    @Transactional(readOnly = true)
+    public Iterable<Student> findAll(Predicate predicate) {
+        log.debug("Request to get all Students by predicate");
+        return studentRepository.findAll(predicate);
+    }
+
+    /**
+     * get all the students by predicate.
+     *
+     * @return the list of entities
+     */
+    @Transactional(readOnly = true)
     public Page<Student> findAll(Predicate predicate, Pageable pageable) {
         log.debug("Request to get all Students by predicate");
         return studentRepository.findAll(predicate, pageable);

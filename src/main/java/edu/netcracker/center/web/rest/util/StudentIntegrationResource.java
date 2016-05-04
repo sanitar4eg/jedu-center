@@ -1,6 +1,9 @@
 package edu.netcracker.center.web.rest.util;
 
 import com.codahale.metrics.annotation.Timed;
+import com.mysema.query.types.Predicate;
+import com.mysema.query.types.expr.BooleanExpression;
+import edu.netcracker.center.domain.QStudent;
 import edu.netcracker.center.domain.Student;
 import edu.netcracker.center.domain.util.OperationResult;
 import edu.netcracker.center.service.HistoryService;
@@ -9,6 +12,7 @@ import edu.netcracker.center.service.StudentService;
 import edu.netcracker.center.service.StudentXslView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -58,7 +62,8 @@ public class StudentIntegrationResource {
     @Timed
     public ModelAndView getXslOfStudents() {
         log.debug("REST request to get XSL of Students");
-        return new ModelAndView(new StudentXslView(), "students", studentService.findAll());
+        Predicate predicate = QStudent.student.isActive.eq(true);
+        return new ModelAndView(new StudentXslView(), "students", studentService.findAll(predicate));
     }
 
     /**
