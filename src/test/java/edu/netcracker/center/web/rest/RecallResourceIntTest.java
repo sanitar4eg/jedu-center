@@ -12,6 +12,7 @@ import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.data.web.querydsl.QuerydslPredicateArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
@@ -44,12 +45,12 @@ import edu.netcracker.center.domain.enumeration.TypeRecallEnumeration;
 @IntegrationTest
 public class RecallResourceIntTest {
 
-    
+
     private static final TypeRecallEnumeration DEFAULT_TYPE = TypeRecallEnumeration.Technical;
     private static final TypeRecallEnumeration UPDATED_TYPE = TypeRecallEnumeration.Interview;
     private static final String DEFAULT_NAME = "AAAAA";
     private static final String UPDATED_NAME = "BBBBB";
-    
+
     private static final String DEFAULT_DESCRIPTION = "AAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBB";
     private static final String DEFAULT_FILE = "AAAAA";
@@ -67,6 +68,9 @@ public class RecallResourceIntTest {
     @Inject
     private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
 
+    @Inject
+    private QuerydslPredicateArgumentResolver querydslPredicateArgumentResolver;
+
     private MockMvc restRecallMockMvc;
 
     private Recall recall;
@@ -77,7 +81,7 @@ public class RecallResourceIntTest {
         RecallResource recallResource = new RecallResource();
         ReflectionTestUtils.setField(recallResource, "recallService", recallService);
         this.restRecallMockMvc = MockMvcBuilders.standaloneSetup(recallResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setCustomArgumentResolvers(pageableArgumentResolver, querydslPredicateArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
     }
 
