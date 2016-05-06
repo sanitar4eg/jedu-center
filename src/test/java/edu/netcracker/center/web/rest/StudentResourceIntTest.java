@@ -1,15 +1,20 @@
 package edu.netcracker.center.web.rest;
 
 import edu.netcracker.center.Application;
+import edu.netcracker.center.domain.Evaluation;
 import edu.netcracker.center.domain.Student;
+import edu.netcracker.center.repository.EvaluationRepository;
 import edu.netcracker.center.repository.StudentRepository;
 import edu.netcracker.center.service.StudentService;
 
+import org.hibernate.cfg.beanvalidation.HibernateTraversableResolver;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.data.web.querydsl.QuerydslPredicateArgumentResolver;
@@ -21,10 +26,12 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,7 +50,10 @@ import edu.netcracker.center.domain.enumeration.UniversityEnumeration;
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest
+@EnableTransactionManagement
 public class StudentResourceIntTest {
+
+    private final Logger log = LoggerFactory.getLogger(StudentResourceIntTest.class);
 
     private static final String DEFAULT_FIRST_NAME = "AAAAA";
     private static final String UPDATED_FIRST_NAME = "BBBBB";
@@ -66,11 +76,14 @@ public class StudentResourceIntTest {
     private static final String DEFAULT_COURSE = "AAAAA";
     private static final String UPDATED_COURSE = "BBBBB";
 
-    private static final Boolean DEFAULT_IS_ACTIVE = false;
-    private static final Boolean UPDATED_IS_ACTIVE = true;
+    private static final Boolean DEFAULT_IS_ACTIVE = true;
+    private static final Boolean UPDATED_IS_ACTIVE = false;
 
     @Inject
     private StudentRepository studentRepository;
+
+    @Inject
+    private EvaluationRepository evaluationRepository;
 
     @Inject
     private StudentService studentService;
@@ -87,6 +100,8 @@ public class StudentResourceIntTest {
     private MockMvc restStudentMockMvc;
 
     private Student student;
+
+    private Evaluation evaluation;
 
     @PostConstruct
     public void setup() {
@@ -111,6 +126,10 @@ public class StudentResourceIntTest {
         student.setSpecialty(DEFAULT_SPECIALTY);
         student.setCourse(DEFAULT_COURSE);
         student.setIsActive(DEFAULT_IS_ACTIVE);
+
+        evaluation = new Evaluation();
+        evaluation.setValue(4f);
+        evaluation.setStudent(student);
     }
 
     @Test
@@ -320,6 +339,36 @@ public class StudentResourceIntTest {
         restStudentMockMvc.perform(delete("/api/students/{id}", student.getId())
                 .accept(TestUtil.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk());
+
+        // Validate the database is empty
+        List<Student> students = studentRepository.findAll();
+        assertThat(students).hasSize(databaseSizeBeforeDelete - 1);
+    }
+
+    @Test
+    @Transactional
+    public void deleteStudentWithEvaluation() throws Exception {
+        // Initialize the database
+//        studentRepository.saveAndFlush(student);
+
+        log.info("Before-Eval: {}, Stud: {}, Stud-Source: {}", evaluation, evaluation.getStudent(), student);
+
+        evaluationRepository.saveAndFlush(evaluation);
+
+        log.info("After-Eval: {}, Stud: {}, Stud-Source: {}", evaluation, evaluation.getStudent(), student);
+
+        int databaseSizeBeforeDelete = studentRepository.findAll().size();
+
+        // Get the student
+        restStudentMockMvc.perform(delete("/api/students/{id}", student.getId())
+            .accept(TestUtil.APPLICATION_JSON_UTF8))
+            .andExpect(status().isOk());
+        studentRepository.flush();
+//        evaluationRepository.delete(evaluation);
+
+        log.info("Students: {}", studentRepository.findAll());
+
+        log.info("Evaluations: {}", evaluationRepository.findAll());
 
         // Validate the database is empty
         List<Student> students = studentRepository.findAll();

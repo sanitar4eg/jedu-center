@@ -1,17 +1,23 @@
 package edu.netcracker.center.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import edu.netcracker.center.domain.enumeration.TypeEnumeration;
 import edu.netcracker.center.domain.enumeration.UniversityEnumeration;
+import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A Student.
@@ -76,6 +82,12 @@ public class Student implements Serializable {
     @JoinColumn(name = "curator_id")
     @NotAudited
     private Curator curator;
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonIgnore
+    @NotAudited
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Evaluation> evaluations = new HashSet<>();
 
     @OneToOne
     @NotAudited
@@ -236,5 +248,13 @@ public class Student implements Serializable {
             ", course='" + course + "'" +
             ", isActive='" + isActive + "'" +
             '}';
+    }
+
+    public Set<Evaluation> getEvaluations() {
+        return evaluations;
+    }
+
+    public void setEvaluations(Set<Evaluation> evaluations) {
+        this.evaluations = evaluations;
     }
 }
