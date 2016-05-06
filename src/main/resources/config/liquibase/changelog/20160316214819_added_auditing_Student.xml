@@ -41,7 +41,7 @@
     <changeSet author="jhipster" id="1453366677087-4">
         <addForeignKeyConstraint baseColumnNames="rev"
                                  baseTableName="student_aud"
-                                 constraintName="FK_h4i1o350meftdjp06n3ck0x3g"
+                                 constraintName="fk_student_aud_revinfo_rev"
                                  deferrable="false"
                                  initiallyDeferred="false"
                                  referencedColumnNames="rev"
