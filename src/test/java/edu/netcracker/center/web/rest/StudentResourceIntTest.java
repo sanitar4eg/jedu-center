@@ -344,34 +344,4 @@ public class StudentResourceIntTest {
         List<Student> students = studentRepository.findAll();
         assertThat(students).hasSize(databaseSizeBeforeDelete - 1);
     }
-
-    @Test
-    @Transactional
-    public void deleteStudentWithEvaluation() throws Exception {
-        // Initialize the database
-//        studentRepository.saveAndFlush(student);
-
-        log.info("Before-Eval: {}, Stud: {}, Stud-Source: {}", evaluation, evaluation.getStudent(), student);
-
-        evaluationRepository.saveAndFlush(evaluation);
-
-        log.info("After-Eval: {}, Stud: {}, Stud-Source: {}", evaluation, evaluation.getStudent(), student);
-
-        int databaseSizeBeforeDelete = studentRepository.findAll().size();
-
-        // Get the student
-        restStudentMockMvc.perform(delete("/api/students/{id}", student.getId())
-            .accept(TestUtil.APPLICATION_JSON_UTF8))
-            .andExpect(status().isOk());
-        studentRepository.flush();
-//        evaluationRepository.delete(evaluation);
-
-        log.info("Students: {}", studentRepository.findAll());
-
-        log.info("Evaluations: {}", evaluationRepository.findAll());
-
-        // Validate the database is empty
-        List<Student> students = studentRepository.findAll();
-        assertThat(students).hasSize(databaseSizeBeforeDelete - 1);
-    }
 }
