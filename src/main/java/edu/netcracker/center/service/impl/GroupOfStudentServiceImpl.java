@@ -22,10 +22,10 @@ import java.util.Optional;
 public class GroupOfStudentServiceImpl implements GroupOfStudentService{
 
     private final Logger log = LoggerFactory.getLogger(GroupOfStudentServiceImpl.class);
-    
+
     @Inject
     private GroupOfStudentRepository groupOfStudentRepository;
-    
+
     /**
      * Save a groupOfStudent.
      * @return the persisted entity
@@ -40,10 +40,10 @@ public class GroupOfStudentServiceImpl implements GroupOfStudentService{
      *  get all the groupOfStudents.
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<GroupOfStudent> findAll(Pageable pageable) {
         log.debug("Request to get all GroupOfStudents");
-        Page<GroupOfStudent> result = groupOfStudentRepository.findAll(pageable); 
+        Page<GroupOfStudent> result = groupOfStudentRepository.findAll(pageable);
         return result;
     }
 
@@ -51,7 +51,7 @@ public class GroupOfStudentServiceImpl implements GroupOfStudentService{
      *  get one groupOfStudent by id.
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public GroupOfStudent findOne(Long id) {
         log.debug("Request to get GroupOfStudent : {}", id);
         GroupOfStudent groupOfStudent = groupOfStudentRepository.findOne(id);
@@ -63,6 +63,9 @@ public class GroupOfStudentServiceImpl implements GroupOfStudentService{
      */
     public void delete(Long id) {
         log.debug("Request to delete GroupOfStudent : {}", id);
-        groupOfStudentRepository.delete(id);
+        GroupOfStudent group = groupOfStudentRepository.findOne(id);
+        group.getStudents().forEach(student -> student.setGroupOfStudent(null));
+        group.getStudents().clear();
+        groupOfStudentRepository.delete(group);
     }
 }
