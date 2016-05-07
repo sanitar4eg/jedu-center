@@ -83,15 +83,21 @@ public class Student implements Serializable {
     @NotAudited
     private Curator curator;
 
+    @OneToOne
+    @NotAudited
+    private Form form;
+
     @OneToMany(mappedBy = "student", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonIgnore
     @NotAudited
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Evaluation> evaluations = new HashSet<>();
 
-    @OneToOne
+    @OneToMany(mappedBy = "student", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonIgnore
     @NotAudited
-    private Form form;
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Recall> recalls = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -213,6 +219,22 @@ public class Student implements Serializable {
         this.form = form;
     }
 
+    public Set<Evaluation> getEvaluations() {
+        return evaluations;
+    }
+
+    public void setEvaluations(Set<Evaluation> evaluations) {
+        this.evaluations = evaluations;
+    }
+
+    public Set<Recall> getRecalls() {
+        return recalls;
+    }
+
+    public void setRecalls(Set<Recall> recalls) {
+        this.recalls = recalls;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -248,13 +270,5 @@ public class Student implements Serializable {
             ", course='" + course + "'" +
             ", isActive='" + isActive + "'" +
             '}';
-    }
-
-    public Set<Evaluation> getEvaluations() {
-        return evaluations;
-    }
-
-    public void setEvaluations(Set<Evaluation> evaluations) {
-        this.evaluations = evaluations;
     }
 }
