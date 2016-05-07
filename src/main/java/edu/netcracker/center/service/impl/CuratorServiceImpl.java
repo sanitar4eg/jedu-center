@@ -22,10 +22,10 @@ import java.util.Optional;
 public class CuratorServiceImpl implements CuratorService{
 
     private final Logger log = LoggerFactory.getLogger(CuratorServiceImpl.class);
-    
+
     @Inject
     private CuratorRepository curatorRepository;
-    
+
     /**
      * Save a curator.
      * @return the persisted entity
@@ -40,10 +40,10 @@ public class CuratorServiceImpl implements CuratorService{
      *  get all the curators.
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<Curator> findAll(Pageable pageable) {
         log.debug("Request to get all Curators");
-        Page<Curator> result = curatorRepository.findAll(pageable); 
+        Page<Curator> result = curatorRepository.findAll(pageable);
         return result;
     }
 
@@ -51,7 +51,7 @@ public class CuratorServiceImpl implements CuratorService{
      *  get one curator by id.
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Curator findOne(Long id) {
         log.debug("Request to get Curator : {}", id);
         Curator curator = curatorRepository.findOne(id);
@@ -63,6 +63,9 @@ public class CuratorServiceImpl implements CuratorService{
      */
     public void delete(Long id) {
         log.debug("Request to delete Curator : {}", id);
+        Curator curator = curatorRepository.findOne(id);
+        curator.getRecalls().forEach(recall -> recall.setCurator(null));
+        curator.getRecalls().clear();
         curatorRepository.delete(id);
     }
 }
