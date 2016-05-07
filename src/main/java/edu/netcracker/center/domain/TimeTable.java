@@ -31,7 +31,7 @@ public class TimeTable implements Serializable {
     @JsonIgnore
     private GroupOfStudent groupOfStudent;
 
-    @OneToMany(mappedBy = "timeTable")
+    @OneToMany(mappedBy = "timeTable", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Lesson> lessons = new HashSet<>();
