@@ -36,7 +36,7 @@ public class Lesson implements Serializable {
     @JoinColumn(name = "time_table_id")
     private TimeTable timeTable;
 
-    @OneToMany(mappedBy = "lesson")
+    @OneToMany(mappedBy = "lesson", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Evaluation> evaluations = new HashSet<>();
