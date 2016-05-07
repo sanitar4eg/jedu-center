@@ -24,10 +24,10 @@ import java.util.stream.StreamSupport;
 public class TimeTableServiceImpl implements TimeTableService{
 
     private final Logger log = LoggerFactory.getLogger(TimeTableServiceImpl.class);
-    
+
     @Inject
     private TimeTableRepository timeTableRepository;
-    
+
     /**
      * Save a timeTable.
      * @return the persisted entity
@@ -42,10 +42,10 @@ public class TimeTableServiceImpl implements TimeTableService{
      *  get all the timeTables.
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<TimeTable> findAll(Pageable pageable) {
         log.debug("Request to get all TimeTables");
-        Page<TimeTable> result = timeTableRepository.findAll(pageable); 
+        Page<TimeTable> result = timeTableRepository.findAll(pageable);
         return result;
     }
 
@@ -54,7 +54,7 @@ public class TimeTableServiceImpl implements TimeTableService{
      *  get all the timeTables where GroupOfStudent is null.
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<TimeTable> findAllWhereGroupOfStudentIsNull() {
         log.debug("Request to get all timeTables where GroupOfStudent is null");
         return StreamSupport
@@ -67,7 +67,7 @@ public class TimeTableServiceImpl implements TimeTableService{
      *  get one timeTable by id.
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public TimeTable findOne(Long id) {
         log.debug("Request to get TimeTable : {}", id);
         TimeTable timeTable = timeTableRepository.findOne(id);
@@ -79,6 +79,9 @@ public class TimeTableServiceImpl implements TimeTableService{
      */
     public void delete(Long id) {
         log.debug("Request to delete TimeTable : {}", id);
+        TimeTable table = timeTableRepository.findOne(id);
+        Optional.ofNullable(table.getGroupOfStudent()).ifPresent(group -> group.setTimeTable(null));
+        table.setGroupOfStudent(null);
         timeTableRepository.delete(id);
     }
 }
