@@ -92,7 +92,7 @@ public class FormServiceImpl implements FormService{
     }
 
     private void deleteRelationFromStudent(Form form) {
-        form.getStudent().setForm(null);
+        Optional.ofNullable(form.getStudent()).ifPresent(student -> student.setForm(null));
         form.setStudent(null);
     }
 }
