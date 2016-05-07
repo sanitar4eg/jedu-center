@@ -1,6 +1,7 @@
 package edu.netcracker.center.service.impl;
 
 import edu.netcracker.center.domain.TimeTable;
+import edu.netcracker.center.repository.TimeTableRepository;
 import edu.netcracker.center.service.GroupOfStudentService;
 import edu.netcracker.center.domain.GroupOfStudent;
 import edu.netcracker.center.repository.GroupOfStudentRepository;
@@ -27,12 +28,16 @@ public class GroupOfStudentServiceImpl implements GroupOfStudentService{
     @Inject
     private GroupOfStudentRepository groupOfStudentRepository;
 
+    @Inject
+    private TimeTableRepository timeTableRepository;
+
     /**
      * Save a groupOfStudent.
      * @return the persisted entity
      */
+    @Transactional
     public GroupOfStudent save(GroupOfStudent groupOfStudent) {
-        log.debug("Request to save GroupOfStudent : {}", groupOfStudent);
+        log.debug("Request to save GroupOfStudent : {}, TimeTable: {}", groupOfStudent, groupOfStudent.getTimeTable());
         createTimeTableIfNotExist(groupOfStudent);
         GroupOfStudent result = groupOfStudentRepository.save(groupOfStudent);
         return result;
@@ -75,6 +80,7 @@ public class GroupOfStudentServiceImpl implements GroupOfStudentService{
         if (groupOfStudent.getTimeTable() == null) {
             TimeTable timeTable = new TimeTable();
             timeTable.setName(groupOfStudent.getName());
+            timeTableRepository.save(timeTable);
             groupOfStudent.setTimeTable(timeTable);
         }
     }
