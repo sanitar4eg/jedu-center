@@ -66,6 +66,8 @@ public class CuratorServiceImpl implements CuratorService{
         Curator curator = curatorRepository.findOne(id);
         curator.getRecalls().forEach(recall -> recall.setCurator(null));
         curator.getRecalls().clear();
+        curator.getStudents().forEach(student -> student.setCurator(null));
+        curator.getStudents().clear();
         curatorRepository.delete(id);
     }
 }
