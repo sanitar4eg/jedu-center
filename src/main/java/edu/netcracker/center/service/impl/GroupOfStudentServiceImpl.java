@@ -1,5 +1,6 @@
 package edu.netcracker.center.service.impl;
 
+import edu.netcracker.center.domain.TimeTable;
 import edu.netcracker.center.service.GroupOfStudentService;
 import edu.netcracker.center.domain.GroupOfStudent;
 import edu.netcracker.center.repository.GroupOfStudentRepository;
@@ -32,6 +33,7 @@ public class GroupOfStudentServiceImpl implements GroupOfStudentService{
      */
     public GroupOfStudent save(GroupOfStudent groupOfStudent) {
         log.debug("Request to save GroupOfStudent : {}", groupOfStudent);
+        createTimeTableIfNotExist(groupOfStudent);
         GroupOfStudent result = groupOfStudentRepository.save(groupOfStudent);
         return result;
     }
@@ -67,5 +69,13 @@ public class GroupOfStudentServiceImpl implements GroupOfStudentService{
         group.getStudents().forEach(student -> student.setGroupOfStudent(null));
         group.getStudents().clear();
         groupOfStudentRepository.delete(group);
+    }
+
+    private void createTimeTableIfNotExist(GroupOfStudent groupOfStudent) {
+        if (groupOfStudent.getTimeTable() == null) {
+            TimeTable timeTable = new TimeTable();
+            timeTable.setName(groupOfStudent.getName());
+            groupOfStudent.setTimeTable(timeTable);
+        }
     }
 }

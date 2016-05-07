@@ -45,7 +45,7 @@ public class GroupOfStudent implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Student> students = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     private TimeTable timeTable;
 
     public Long getId() {

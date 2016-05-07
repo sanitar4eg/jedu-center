@@ -36,12 +36,7 @@ angular.module('jeducenterApp').controller('TeacherGroupOfStudentDialogControlle
             if ($scope.groupOfStudent.id != null) {
                 GroupOfStudent.update($scope.groupOfStudent, onSaveSuccess, onSaveError);
             } else {
-                if ($scope.groupOfStudent.timeTable == null) {
-                    $scope.groupOfStudent.timeTable = {name: $scope.groupOfStudent.name};
-                    GroupOfStudent.save($scope.groupOfStudent, onSaveSuccess, onSaveError);
-                } else {
-                    GroupOfStudent.save($scope.groupOfStudent, onSaveSuccess, onSaveError);
-                }
+                GroupOfStudent.save($scope.groupOfStudent, onSaveSuccess, onSaveError);
             }
         };
 
