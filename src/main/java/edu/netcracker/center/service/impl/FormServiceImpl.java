@@ -79,12 +79,20 @@ public class FormServiceImpl implements FormService{
      */
     public void delete(Long id) {
         log.debug("Request to delete Form : {}", id);
-        formRepository.delete(id);
+        Form form = formRepository.findOne(id);
+        deleteRelationFromStudent(form);
+        formRepository.delete(form);
     }
 
     @Override
     public void delete(Form form) {
         log.debug("Request to delete Form : {}", form);
+        deleteRelationFromStudent(form);
         formRepository.delete(form);
+    }
+
+    private void deleteRelationFromStudent(Form form) {
+        form.getStudent().setForm(null);
+        form.setStudent(null);
     }
 }
