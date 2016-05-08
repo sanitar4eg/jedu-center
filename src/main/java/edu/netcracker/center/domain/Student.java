@@ -69,7 +69,7 @@ public class Student implements Serializable {
     @Column(name = "is_active", nullable = false)
     private Boolean isActive;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @NotAudited
     private User user;
 

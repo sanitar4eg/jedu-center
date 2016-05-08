@@ -43,7 +43,7 @@ public class Curator implements Serializable {
     @Column(name = "is_active", nullable = false)
     private Boolean isActive;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     private User user;
 
     @OneToMany(mappedBy = "curator")
