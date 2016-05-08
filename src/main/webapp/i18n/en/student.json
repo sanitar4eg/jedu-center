@@ -11,7 +11,8 @@
             "updated": "A Student is updated with identifier {{ param }}",
             "deleted": "A Student is deleted with identifier {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Student {{ id }}?"
+                "question": "Are you sure you want to delete Student &laquo;{{name}}&raquo; with ID: {{ id }}?",
+                "alert": "Danger! Also will be deleted evaluations and recalls of student."
             },
             "detail": {
                 "title": "Student"
