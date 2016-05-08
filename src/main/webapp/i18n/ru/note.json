@@ -2,19 +2,19 @@
     "jeducenterApp": {
         "note" : {
             "home": {
-                "title": "Заметки",
-                "createLabel": "Создать новую заметку",
-                "createOrEditLabel": "Создать или редактировать заметку",
-                "search": "Поиск заметок"
+                "title": "Новости",
+                "createLabel": "Создать новую новость",
+                "createOrEditLabel": "Создать или редактировать новость",
+                "search": "Поиск новостей"
             },
-            "created": "Новая заметка создана, ID: {{ param }}",
-            "updated": "Заметка обновлена, ID: {{ param }}",
-            "deleted": "Заметка удалена, ID: {{ param }}",
+            "created": "Новая новость создана, ID: {{ param }}",
+            "updated": "Новость обновлена, ID: {{ param }}",
+            "deleted": "Новость удалена, ID: {{ param }}",
             "delete": {
-                "question": "Вы уверены, что хотите удалить заметку {{ id }}?"
+                "question": "Вы уверены, что хотите удалить новость {{ id }}?"
             },
             "detail": {
-                "title": "Заметка"
+                "title": "Новость"
             },
             "title": "Заголовок",
             "content": "Контент",
