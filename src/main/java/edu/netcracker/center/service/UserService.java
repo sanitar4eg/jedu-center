@@ -1,11 +1,11 @@
 package edu.netcracker.center.service;
 
+import com.mysema.query.types.Predicate;
 import edu.netcracker.center.domain.Authority;
-import edu.netcracker.center.domain.PersistentToken;
+import edu.netcracker.center.domain.QCurator;
+import edu.netcracker.center.domain.QStudent;
 import edu.netcracker.center.domain.User;
-import edu.netcracker.center.repository.AuthorityRepository;
-import edu.netcracker.center.repository.PersistentTokenRepository;
-import edu.netcracker.center.repository.UserRepository;
+import edu.netcracker.center.repository.*;
 import edu.netcracker.center.security.AuthoritiesConstants;
 import edu.netcracker.center.security.SecurityUtils;
 import edu.netcracker.center.service.util.RandomUtil;
@@ -13,7 +13,6 @@ import edu.netcracker.center.web.rest.dto.ManagedUserDTO;
 import java.time.ZonedDateTime;
 import java.time.LocalDate;
 
-import org.apache.commons.lang.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -21,7 +20,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.ZonedDateTime;
 import javax.inject.Inject;
 import java.util.*;
 
@@ -45,6 +43,12 @@ public class UserService {
 
     @Inject
     private AuthorityRepository authorityRepository;
+
+    @Inject
+    private StudentRepository studentRepository;
+
+    @Inject
+    CuratorRepository curatorRepository;
 
     public Optional<User> activateRegistration(String key) {
         log.debug("Activating user for activation key {}", key);
@@ -177,6 +181,7 @@ public class UserService {
 
     public void deleteUserInformation(String login) {
         userRepository.findOneByLogin(login).ifPresent(u -> {
+            removeRelationOnUser(u);
             userRepository.delete(u);
             log.debug("Deleted User: {}", u);
         });
@@ -245,7 +250,23 @@ public class UserService {
         List<User> users = userRepository.findAllByActivatedIsFalseAndCreatedDateBefore(now.minusDays(3));
         for (User user : users) {
             log.debug("Deleting not activated user {}", user.getLogin());
+            removeRelationOnUser(user);
             userRepository.delete(user);
         }
+    }
+
+    private void removeRelationOnUser(User user) {
+        Predicate studentPredicate = QStudent.student.user.eq(user);
+        Optional.ofNullable(studentRepository.findOne(studentPredicate)).ifPresent(student -> {
+            student.setUser(null);
+            studentRepository.save(student);
+            }
+        );
+        Predicate curatorPredicate = QCurator.curator.user.eq(user);
+        Optional.ofNullable(curatorRepository.findOne(curatorPredicate)).ifPresent(curator -> {
+            curator.setUser(null);
+            curatorRepository.save(curator);
+            }
+        );
     }
 }
