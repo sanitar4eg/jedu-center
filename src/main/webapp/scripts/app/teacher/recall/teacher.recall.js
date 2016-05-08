@@ -111,8 +111,8 @@ angular.module('jeducenterApp')
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/teacher/recall/teacher.recall-delete-dialog.html',
-                        controller: 'TeacherRecallDeleteController',
+                        templateUrl: 'scripts/app/entities/recall/recall-delete-dialog.html',
+                        controller: 'RecallDeleteController',
                         size: 'md',
                         resolve: {
                             entity: ['Recall', function (Recall) {
