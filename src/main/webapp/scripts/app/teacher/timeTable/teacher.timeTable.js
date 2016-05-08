@@ -106,8 +106,8 @@ angular.module('jeducenterApp')
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/teacher/timeTable/teacher.timeTable-delete-dialog.html',
-                        controller: 'TeacherTimeTableDeleteController',
+                        templateUrl: 'scripts/app/entities/timeTable/timeTable-delete-dialog.html',
+                        controller: 'TimeTableDeleteController',
                         size: 'md',
                         resolve: {
                             entity: ['TimeTable', function(TimeTable) {

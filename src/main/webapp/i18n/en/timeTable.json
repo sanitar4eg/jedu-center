@@ -11,7 +11,8 @@
             "updated": "A TimeTable is updated with identifier {{ param }}",
             "deleted": "A TimeTable is deleted with identifier {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete TimeTable {{ id }}?"
+                "question": "Are you sure you want to delete TimeTable &laquo;{{name}}&raquo;?",
+                "alert": "Внимание! Also will be deleted lessons and evaluations."
             },
             "detail": {
                 "title": "TimeTable"
