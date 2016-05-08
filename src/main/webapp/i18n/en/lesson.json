@@ -11,7 +11,8 @@
             "updated": "A Lesson is updated with identifier {{ param }}",
             "deleted": "A Lesson is deleted with identifier {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Lesson {{ id }}?"
+                "question": "Are you sure you want to delete Lesson &laquo;{{topic}}&raquo;?",
+                "alert": "Danger! Also will be deleted all evaluations."
             },
             "detail": {
                 "title": "Lesson"

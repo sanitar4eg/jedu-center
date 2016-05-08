@@ -6,14 +6,22 @@
     </div>
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
-        <p translate="jeducenterApp.lesson.delete.question" translate-values="{id: '{{lesson.id}}'}">Are you sure you want to delete this Lesson?</p>
+        <p translate="jeducenterApp.lesson.delete.question"
+           translate-values="{topic: '{{lesson.topic}}'}">
+            Are you sure you want to delete this Lesson?
+        </p>
+        <div class="alert alert-danger">
+            <p translate="jeducenterApp.lesson.delete.alert">Danger!</p>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
+            translate="entity.action.cancel">Cancel</span>
         </button>
         <button type="submit" ng-disabled="deleteForm.$invalid" class="btn btn-danger">
-            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete">Delete</span>
+            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span
+            translate="entity.action.delete">Delete</span>
         </button>
     </div>
 </form>
