@@ -104,8 +104,8 @@ angular.module('jeducenterApp')
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/teacher/evaluation/teacher.evaluation-delete-dialog.html',
-                        controller: 'TeacherEvaluationDeleteController',
+                        templateUrl: 'scripts/app/entities/evaluation/evaluation-delete-dialog.html',
+                        controller: 'EvaluationDeleteController',
                         size: 'md',
                         resolve: {
                             entity: ['Evaluation', function(Evaluation) {
