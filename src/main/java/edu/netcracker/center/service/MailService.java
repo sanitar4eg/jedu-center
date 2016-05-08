@@ -84,26 +84,13 @@ public class MailService {
     }
 
     @Async
-    public void sendCenterActivationEmail(User user, String baseUrl, String password) {
-        log.debug("Sending center activation e-mail to '{}'", user.getEmail());
-        Locale locale = Locale.forLanguageTag(user.getLangKey());
-        Context context = new Context(locale);
-        context.setVariable("user", user);
-        context.setVariable("name", user.getLastName() + " " + ObjectUtils.toString(user.getFirstName(), ""));
-        context.setVariable("password", password);
-        context.setVariable("baseUrl", baseUrl);
-        String content = templateEngine.process("activationCenterEmail", context);
-        String subject = messageSource.getMessage("email.activation.title", null, locale);
-        sendEmail(user.getEmail(), subject, content, false, true);
-    }
-
-    @Async
     public void sendCreationEmail(User user, String baseUrl) {
         log.debug("Sending creation e-mail to '{}'", user.getEmail());
         Locale locale = Locale.forLanguageTag(user.getLangKey());
         Context context = new Context(locale);
         context.setVariable("user", user);
         context.setVariable("baseUrl", baseUrl);
+        context.setVariable("name", user.getLastName() + " " + ObjectUtils.toString(user.getFirstName(), ""));
         String content = templateEngine.process("creationEmail", context);
         String subject = messageSource.getMessage("email.activation.title", null, locale);
         sendEmail(user.getEmail(), subject, content, false, true);
