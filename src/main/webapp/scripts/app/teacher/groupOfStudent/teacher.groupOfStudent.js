@@ -110,8 +110,8 @@ angular.module('jeducenterApp')
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/teacher/groupOfStudent/teacher.groupOfStudent-delete-dialog.html',
-                        controller: 'TeacherGroupOfStudentDeleteController',
+                        templateUrl: 'scripts/app/entities/groupOfStudent/groupOfStudent-delete-dialog.html',
+                        controller: 'GroupOfStudentDeleteController',
                         size: 'md',
                         resolve: {
                             entity: ['GroupOfStudent', function(GroupOfStudent) {
