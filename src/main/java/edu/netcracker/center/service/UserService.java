@@ -117,27 +117,22 @@ public class UserService {
         return newUser;
     }
 
-    public User createUserForStudent(String firstName, String lastName, String email, String password) {
-        User newUser = new User();
-        Set<Authority> authorities = new HashSet<>();
-        String encryptedPassword = passwordEncoder.encode(password);
-        newUser.setLogin(email);
-        // new user gets initially a generated password
-        newUser.setPassword(encryptedPassword);
-        newUser.setFirstName(firstName);
-        newUser.setLastName(lastName);
-        newUser.setEmail(email);
-        newUser.setLangKey("ru");
-        // new user is not active
-        newUser.setActivated(false);
-        // new user gets registration key
-        newUser.setActivationKey(RandomUtil.generateActivationKey());
-        authorities.add(authorityRepository.findOne(AuthoritiesConstants.USER));
-        authorities.add(authorityRepository.findOne(AuthoritiesConstants.STUDENT));
-        newUser.setAuthorities(authorities);
-        userRepository.save(newUser);
-        log.debug("Created Information for User: {}", newUser);
-        return newUser;
+    public User createUserForEC(String firstName, String lastName, String email, Set<Authority> authorities) {
+        User user = new User();
+        String encryptedPassword = passwordEncoder.encode(RandomUtil.generatePassword());;
+        user.setLogin(email);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEmail(email);
+        user.setLangKey("ru");
+        user.setAuthorities(authorities);
+        user.setPassword(encryptedPassword);
+        user.setResetKey(RandomUtil.generateResetKey());
+        user.setResetDate(ZonedDateTime.now());
+        user.setActivated(true);
+        userRepository.save(user);
+        log.debug("Created Information for EC's User: {}", user);
+        return user;
     }
 
     public User createUser(ManagedUserDTO managedUserDTO) {

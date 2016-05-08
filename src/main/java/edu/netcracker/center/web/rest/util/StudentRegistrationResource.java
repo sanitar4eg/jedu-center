@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,19 +41,19 @@ public class StudentRegistrationResource {
     public Collection<OperationResult> register(@RequestBody List<Student> students, HttpServletRequest request) {
         log.debug("REST request to register Students: {}", students);
         String baseUrl = getBaseUrl(request);
-        if (Optional.of(students).isPresent()) {
+        if (Optional.ofNullable(students).isPresent() && !students.isEmpty()) {
             return studentService.registerStudents(students, baseUrl);
         }
-        return null;
+        return Collections.singletonList(new OperationResult("-1", "Студенты не выбраны", ""));
     }
 
     private String getBaseUrl(HttpServletRequest request) {
         return
-            request.getScheme() + // "http"
-            "://" +                                // "://"
-            request.getServerName() +              // "myhost"
-            ":" +                                  // ":"
-            request.getServerPort() +              // "80"
-            request.getContextPath();              // "/myContextPath" or "" if deployed in root context
+            request.getScheme() +                   // "http"
+            "://" +                                 // "://"
+            request.getServerName() +               // "myhost"
+            ":" +                                   // ":"
+            request.getServerPort() +               // "80"
+            request.getContextPath();               // "/myContextPath" or "" if deployed in root context
     }
 }

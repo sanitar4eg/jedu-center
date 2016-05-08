@@ -1,15 +1,17 @@
 package edu.netcracker.center.service.impl;
 
 import com.mysema.query.types.Predicate;
+import edu.netcracker.center.domain.Authority;
 import edu.netcracker.center.domain.Student;
 import edu.netcracker.center.domain.User;
 import edu.netcracker.center.domain.util.OperationResult;
+import edu.netcracker.center.repository.AuthorityRepository;
 import edu.netcracker.center.repository.StudentRepository;
 import edu.netcracker.center.repository.UserRepository;
+import edu.netcracker.center.security.AuthoritiesConstants;
 import edu.netcracker.center.service.MailService;
 import edu.netcracker.center.service.StudentService;
 import edu.netcracker.center.service.UserService;
-import org.apache.commons.lang.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -18,9 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Service Implementation for managing Student.
@@ -35,13 +35,16 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
 
     @Inject
-    MailService mailService;
+    private MailService mailService;
 
     @Inject
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Inject
     UserService userService;
+
+    @Inject
+    private AuthorityRepository authorityRepository;
 
     /**
      * Save a student.
@@ -131,15 +134,14 @@ public class StudentServiceImpl implements StudentService {
             OperationResult result;
             Long id = student.getId();
             String email = student.getEmail();
-            String password = RandomStringUtils.random(10, true, true);
             try {
                 result = userRepository.findOneByLogin(email)
                     .map(user -> createResult(id, "Пользователь с таким логином уже зарегистрирован", email))
                     .orElseGet(() -> userRepository.findOneByEmail(email)
                         .map(user -> createResult(id, "Пользователь с таким e-mail уже зарегистрирован", email))
                         .orElseGet(() -> {
-                            User user = createUser(student, password);
-                            mailService.sendCenterActivationEmail(user, baseUrl, password);
+                            User user = createUser(student);
+                            mailService.sendCreationEmail(user, baseUrl);
                             student.setUser(user);
                             studentRepository.save(student);
                             return createResult(id, "Пользователь создан", email);
@@ -154,9 +156,12 @@ public class StudentServiceImpl implements StudentService {
         return results;
     }
 
-    private User createUser(Student student, String password) {
-        return userService.createUserForStudent(student.getFirstName(), student.getLastName(), student.getEmail(),
-            password);
+    private User createUser(Student student) {
+        Set<Authority> authorities = new HashSet<>();
+        authorities.add(authorityRepository.findOne(AuthoritiesConstants.USER));
+        authorities.add(authorityRepository.findOne(AuthoritiesConstants.STUDENT));
+        return userService.createUserForEC(student.getFirstName(), student.getLastName(),
+            student.getEmail(), authorities);
     }
 
     private OperationResult createResult(Long id, String message, String description) {
