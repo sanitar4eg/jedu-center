@@ -108,8 +108,8 @@ angular.module('jeducenterApp')
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/teacher/curator/teacher.curator-delete-dialog.html',
-                        controller: 'TeacherCuratorDeleteController',
+                        templateUrl: 'scripts/app/entities/curator/curator-delete-dialog.html',
+                        controller: 'CuratorDeleteController',
                         size: 'md',
                         resolve: {
                             entity: ['Curator', function(Curator) {

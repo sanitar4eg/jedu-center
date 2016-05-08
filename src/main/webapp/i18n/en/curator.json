@@ -11,7 +11,8 @@
             "updated": "A Curator is updated with identifier {{ param }}",
             "deleted": "A Curator is deleted with identifier {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Curator {{ id }}?"
+                "question": "Are you sure you want to delete Curator &laquo;{{name}}&raquo;?",
+                "alert": "Danger! Relation with students and recalls will be lost."
             },
             "detail": {
                 "title": "Curator"
