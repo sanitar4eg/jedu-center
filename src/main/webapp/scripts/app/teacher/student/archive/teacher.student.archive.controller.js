@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('jeducenterApp')
-    .controller('TeacherStudentController', function ($scope, $state, Student, tmhDynamicLocale,
-                                                      i18nService, $translate, $log) {
+    .controller('TeacherStudentArchiveController', function ($scope, $state, Student, tmhDynamicLocale,
+                                                      i18nService, $translate) {
 
         $scope.students = [];
         $scope.options = [
@@ -10,11 +10,9 @@ angular.module('jeducenterApp')
             {text:"DEV", predicate: {type: "DEV"}},
             {text:"QA", predicate: {type: "QA"}}
         ];
-        $scope.studentsPredicate = {isActive: true};
 
         $scope.loadAll = function (predicate) {
-            var resultPredicate = $.extend($scope.studentsPredicate, predicate);
-            Student.query(resultPredicate, function (result) {
+            Student.query(predicate, function (result) {
                 $scope.students = result;
                 $scope.studentsGrid.data = result;
             });
@@ -23,7 +21,6 @@ angular.module('jeducenterApp')
         $scope.updateSelect = function (option) {
             $scope.loadAll($scope.option.predicate);
         };
-
 
         $scope.loadAll();
 
@@ -34,6 +31,8 @@ angular.module('jeducenterApp')
             enableGridMenu: true,
             enableColumnResizing: true,
             gridMenuTitleFilter: $translate,
+            enableFiltering: true,
+            useExternalFiltering: true,
             columnDefs: [
                 {
                     displayName: 'jeducenterApp.student.firstName', field: 'firstName', width: '10%',
@@ -93,25 +92,7 @@ angular.module('jeducenterApp')
 
         };
 
-
         $scope.refresh = function () {
             $scope.loadAll();
-            $scope.clear();
-        };
-
-        $scope.clear = function () {
-            $scope.student = {
-                firstName: null,
-                lastName: null,
-                middleName: null,
-                type: null,
-                email: null,
-                phone: null,
-                university: null,
-                specialty: null,
-                course: null,
-                isActive: false,
-                id: null
-            };
         };
     });

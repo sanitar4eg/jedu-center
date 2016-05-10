@@ -9,6 +9,7 @@
                 "exportLabel": "Скачать файл импорта",
                 "integrationLabel": "Импорт/Экспорт",
                 "createOrEditLabel": "Добавить или редактировать запись",
+                "archive": "Архив",
                 "search": "Искать"
             },
             "created": "Новый студент создан, ID: {{ param }}",

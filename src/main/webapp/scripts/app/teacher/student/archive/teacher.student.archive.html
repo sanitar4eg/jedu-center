@@ -1,0 +1,16 @@
+<div>
+    <h2 translate="jeducenterApp.student.home.archive">Archive</h2>
+    <br/>
+    <div>
+        <select class="form-control" ng-options="option.text for option in options"
+                ng-change="updateSelect(option)"
+                ng-model="option" ng-init="option=options[0]">
+        </select>
+    </div>
+    <br/>
+    <div>
+        <div ui-grid="studentsGrid" class="ui-grid" ui-grid-resize-columns></div>
+    </div>
+    <br/>
+    <jh-alert></jh-alert>
+</div>
