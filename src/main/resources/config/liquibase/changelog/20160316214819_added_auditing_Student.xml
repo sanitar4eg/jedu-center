@@ -30,6 +30,7 @@
             <column name="specialty" type="VARCHAR(255)"/>
             <column name="type" type="VARCHAR(255)"/>
             <column name="university" type="VARCHAR(255)"/>
+            <column name="faculty" type="VARCHAR(255)"/>
             <column name="is_active" type="bit"/>
         </createTable>
     </changeSet>

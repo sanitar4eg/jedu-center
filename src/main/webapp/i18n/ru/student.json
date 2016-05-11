@@ -22,14 +22,15 @@
             "detail": {
                 "title": "Студент"
             },
-            "firstName": "Имя",
             "lastName": "Фамилия",
+            "firstName": "Имя",
             "middleName": "Отчество",
             "type": "Тип",
             "email": "Email",
             "phone": "Телефон",
             "university": "Университет",
             "specialty": "Специальность",
+            "faculty": "Факультет",
             "course": "Курс",
             "isActive": "Активен",
             "user": "User",

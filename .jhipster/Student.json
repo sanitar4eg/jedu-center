@@ -37,16 +37,16 @@
     "fields": [
         {
             "fieldId": 1,
-            "fieldName": "firstName",
-            "fieldType": "String"
-        },
-        {
-            "fieldId": 2,
             "fieldName": "lastName",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "firstName",
+            "fieldType": "String"
         },
         {
             "fieldId": 3,
@@ -88,11 +88,16 @@
         },
         {
             "fieldId": 9,
-            "fieldName": "course",
+            "fieldName": "faculty",
             "fieldType": "String"
         },
         {
             "fieldId": 10,
+            "fieldName": "course",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 11,
             "fieldName": "isActive",
             "fieldType": "Boolean",
             "fieldValidateRules": [

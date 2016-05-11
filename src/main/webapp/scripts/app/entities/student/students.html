@@ -38,6 +38,7 @@
                     <th><span translate="jeducenterApp.student.phone">Phone</span></th>
                     <th><span translate="jeducenterApp.student.university">University</span></th>
                     <th><span translate="jeducenterApp.student.specialty">Specialty</span></th>
+                    <th><span translate="jeducenterApp.student.faculty">Faculty</span></th>
                     <th><span translate="jeducenterApp.student.course">Course</span></th>
                     <th><span translate="jeducenterApp.student.isActive">IsActive</span></th>
                     <th><span translate="jeducenterApp.student.user">user</span></th>
@@ -50,14 +51,15 @@
             <tbody>
                 <tr ng-repeat="student in students track by student.id">
                     <td><a ui-sref="student.detail({id:student.id})">{{student.id}}</a></td>
-                    <td>{{student.firstName}}</td>
                     <td>{{student.lastName}}</td>
+                    <td>{{student.firstName}}</td>
                     <td>{{student.middleName}}</td>
                     <td translate="{{'jeducenterApp.TypeEnumeration.' + student.type}}">{{student.type}}</td>
                     <td>{{student.email}}</td>
                     <td>{{student.phone}}</td>
                     <td translate="{{'jeducenterApp.UniversityEnumeration.' + student.university}}">{{student.university}}</td>
                     <td>{{student.specialty}}</td>
+                    <td>{{student.faculty}}</td>
                     <td>{{student.course}}</td>
                     <td>{{student.isActive}}</td>
                     <td>

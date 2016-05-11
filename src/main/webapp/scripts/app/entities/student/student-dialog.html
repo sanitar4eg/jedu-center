@@ -14,12 +14,6 @@
                     ng-model="student.id" readonly />
         </div>
         <div class="form-group">
-            <label class="control-label" translate="jeducenterApp.student.firstName" for="field_firstName">FirstName</label>
-            <input type="text" class="form-control" name="firstName" id="field_firstName"
-                    ng-model="student.firstName"
-                     />
-        </div>
-        <div class="form-group">
             <label class="control-label" translate="jeducenterApp.student.lastName" for="field_lastName">LastName</label>
             <input type="text" class="form-control" name="lastName" id="field_lastName"
                     ng-model="student.lastName"
@@ -30,6 +24,12 @@
                     This field is required.
                 </p>
             </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="jeducenterApp.student.firstName" for="field_firstName">FirstName</label>
+            <input type="text" class="form-control" name="firstName" id="field_firstName"
+                    ng-model="student.firstName"
+                     />
         </div>
         <div class="form-group">
             <label class="control-label" translate="jeducenterApp.student.middleName" for="field_middleName">MiddleName</label>
@@ -79,6 +79,12 @@
             <label class="control-label" translate="jeducenterApp.student.specialty" for="field_specialty">Specialty</label>
             <input type="text" class="form-control" name="specialty" id="field_specialty"
                     ng-model="student.specialty"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="jeducenterApp.student.faculty" for="field_faculty">Faculty</label>
+            <input type="text" class="form-control" name="faculty" id="field_faculty"
+                    ng-model="student.faculty"
                      />
         </div>
         <div class="form-group">

@@ -28,14 +28,15 @@ angular.module('jeducenterApp')
 
         $scope.clear = function () {
             $scope.student = {
-                firstName: null,
                 lastName: null,
+                firstName: null,
                 middleName: null,
                 type: null,
                 email: null,
                 phone: null,
                 university: null,
                 specialty: null,
+                faculty: null,
                 course: null,
                 isActive: false,
                 id: null

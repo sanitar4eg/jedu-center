@@ -1,18 +1,15 @@
 package edu.netcracker.center.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import edu.netcracker.center.domain.enumeration.TypeEnumeration;
 import edu.netcracker.center.domain.enumeration.UniversityEnumeration;
-import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 import org.hibernate.validator.constraints.Email;
+import org.springframework.cloud.cloudfoundry.com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -32,12 +29,12 @@ public class Student implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "first_name")
-    private String firstName;
-
     @NotNull
     @Column(name = "last_name", nullable = false)
     private String lastName;
+
+    @Column(name = "first_name")
+    private String firstName;
 
     @Column(name = "middle_name")
     private String middleName;
@@ -61,6 +58,9 @@ public class Student implements Serializable {
 
     @Column(name = "specialty")
     private String specialty;
+
+    @Column(name = "faculty")
+    private String faculty;
 
     @Column(name = "course")
     private String course;
@@ -107,20 +107,20 @@ public class Student implements Serializable {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getLastName() {
         return lastName;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getMiddleName() {
@@ -169,6 +169,14 @@ public class Student implements Serializable {
 
     public void setSpecialty(String specialty) {
         this.specialty = specialty;
+    }
+
+    public String getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
     }
 
     public String getCourse() {
@@ -244,7 +252,7 @@ public class Student implements Serializable {
             return false;
         }
         Student student = (Student) o;
-        if(student.id == null || id == null) {
+        if (student.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, student.id);
@@ -259,14 +267,15 @@ public class Student implements Serializable {
     public String toString() {
         return "Student{" +
             "id=" + id +
-            ", firstName='" + firstName + "'" +
             ", lastName='" + lastName + "'" +
+            ", firstName='" + firstName + "'" +
             ", middleName='" + middleName + "'" +
             ", type='" + type + "'" +
             ", email='" + email + "'" +
             ", phone='" + phone + "'" +
             ", university='" + university + "'" +
             ", specialty='" + specialty + "'" +
+            ", faculty='" + faculty + "'" +
             ", course='" + course + "'" +
             ", isActive='" + isActive + "'" +
             '}';

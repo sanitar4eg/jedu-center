@@ -65,14 +65,15 @@ angular.module('jeducenterApp')
                         resolve: {
                             entity: function () {
                                 return {
-                                    firstName: null,
                                     lastName: null,
+                                    firstName: null,
                                     middleName: null,
                                     type: null,
                                     email: null,
                                     phone: null,
                                     university: null,
                                     specialty: null,
+                                    faculty: null,
                                     course: null,
                                     isActive: false,
                                     id: null

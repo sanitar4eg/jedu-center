@@ -17,14 +17,15 @@
             "detail": {
                 "title": "Student"
             },
-            "firstName": "FirstName",
             "lastName": "LastName",
+            "firstName": "FirstName",
             "middleName": "MiddleName",
             "type": "Type",
             "email": "Email",
             "phone": "Phone",
             "university": "University",
             "specialty": "Specialty",
+            "faculty": "Faculty",
             "course": "Course",
             "isActive": "IsActive",
             "user": "User",
