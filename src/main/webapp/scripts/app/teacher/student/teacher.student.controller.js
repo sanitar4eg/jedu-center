@@ -36,15 +36,15 @@ angular.module('jeducenterApp')
             gridMenuTitleFilter: $translate,
             columnDefs: [
                 {
+                    displayName: 'jeducenterApp.student.lastName', field: 'lastName', width: '12%',
+                    headerCellFilter: "translate"
+                },
+                {
                     displayName: 'jeducenterApp.student.firstName', field: 'firstName', width: '10%',
                     headerCellFilter: "translate"
                 },
                 {
                     displayName: 'jeducenterApp.student.middleName', field: 'middleName', width: '12%',
-                    headerCellFilter: "translate"
-                },
-                {
-                    displayName: 'jeducenterApp.student.lastName', field: 'lastName', width: '12%',
                     headerCellFilter: "translate"
                 },
                 {
@@ -70,10 +70,6 @@ angular.module('jeducenterApp')
                 {
                     displayName: 'jeducenterApp.student.course', field: 'course', width: '4%', visible: false,
                     headerCellFilter: "translate"
-                },
-                {
-                    displayName: 'jeducenterApp.student.isActive', field: 'isActive', width: '8%', type: 'boolean',
-                    headerCellTemplate: '<span translate="jeducenterApp.student.isActive"/>'
                 },
                 {
                     displayName: 'jeducenterApp.student.groupOfStudent', name: 'groupOfStudent', width: '8%', visible: false,
