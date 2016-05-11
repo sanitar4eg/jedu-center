@@ -133,5 +133,36 @@ angular.module('jeducenterApp')
                         $state.go('^');
                     })
                 }]
+            })
+            .state('teacher.student.detail.recall', {
+                parent: 'teacher.student.detail',
+                url: '/teacher/student/new',
+                data: {
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
+                },
+                params: {student: null},
+                onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'scripts/app/teacher/recall/teacher.recall-dialog.html',
+                        controller: 'TeacherRecallDialogController',
+                        size: 'lg',
+                        resolve: {
+                            entity: function () {
+                                return {
+                                    type: null,
+                                    name: null,
+                                    description: null,
+                                    file: null,
+                                    id: null,
+                                    student: $stateParams.student
+                                };
+                            }
+                        }
+                    }).result.then(function (result) {
+                        $state.go('teacher.student.detail', null, {reload: true});
+                    }, function () {
+                        $state.go('teacher.student.detail');
+                    })
+                }]
             });
     });
