@@ -12,6 +12,7 @@ import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.data.web.querydsl.QuerydslPredicateArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
@@ -45,7 +46,7 @@ public class GroupOfStudentResourceIntTest {
 
     private static final String DEFAULT_NAME = "AAAAA";
     private static final String UPDATED_NAME = "BBBBB";
-    
+
     private static final TypeEnumeration DEFAULT_TYPE = TypeEnumeration.DEV;
     private static final TypeEnumeration UPDATED_TYPE = TypeEnumeration.QA;
     private static final String DEFAULT_DESCRIPTION = "AAAAA";
@@ -66,6 +67,9 @@ public class GroupOfStudentResourceIntTest {
     @Inject
     private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
 
+    @Inject
+    private QuerydslPredicateArgumentResolver querydslPredicateArgumentResolver;
+
     private MockMvc restGroupOfStudentMockMvc;
 
     private GroupOfStudent groupOfStudent;
@@ -76,7 +80,7 @@ public class GroupOfStudentResourceIntTest {
         GroupOfStudentResource groupOfStudentResource = new GroupOfStudentResource();
         ReflectionTestUtils.setField(groupOfStudentResource, "groupOfStudentService", groupOfStudentService);
         this.restGroupOfStudentMockMvc = MockMvcBuilders.standaloneSetup(groupOfStudentResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setCustomArgumentResolvers(pageableArgumentResolver, querydslPredicateArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
     }
 

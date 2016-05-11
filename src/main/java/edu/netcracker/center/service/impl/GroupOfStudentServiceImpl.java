@@ -1,5 +1,6 @@
 package edu.netcracker.center.service.impl;
 
+import com.mysema.query.types.Predicate;
 import edu.netcracker.center.domain.TimeTable;
 import edu.netcracker.center.repository.TimeTableRepository;
 import edu.netcracker.center.service.GroupOfStudentService;
@@ -13,8 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * Service Implementation for managing GroupOfStudent.
@@ -48,9 +47,9 @@ public class GroupOfStudentServiceImpl implements GroupOfStudentService{
      *  @return the list of entities
      */
     @Transactional(readOnly = true)
-    public Page<GroupOfStudent> findAll(Pageable pageable) {
+    public Page<GroupOfStudent> findAll(Predicate predicate, Pageable pageable) {
         log.debug("Request to get all GroupOfStudents");
-        Page<GroupOfStudent> result = groupOfStudentRepository.findAll(pageable);
+        Page<GroupOfStudent> result = groupOfStudentRepository.findAll(predicate, pageable);
         return result;
     }
 
