@@ -5,7 +5,6 @@ angular.module('jeducenterApp').controller('TeacherStudentDialogController',
         function($scope, $stateParams, $uibModalInstance, $q, entity, Student, User, GroupOfStudent, Curator, Form) {
 
         $scope.student = entity;
-        $scope.users = User.query();
         $scope.groupofstudents = GroupOfStudent.query();
         $scope.curators = Curator.query();
         $scope.forms = Form.query({filter: 'student-is-null'});
