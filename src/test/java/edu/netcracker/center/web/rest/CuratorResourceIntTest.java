@@ -12,6 +12,7 @@ import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.data.web.querydsl.QuerydslPredicateArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
@@ -66,6 +67,9 @@ public class CuratorResourceIntTest {
     @Inject
     private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
 
+    @Inject
+    private QuerydslPredicateArgumentResolver querydslPredicateArgumentResolver;
+
     private MockMvc restCuratorMockMvc;
 
     private Curator curator;
@@ -76,7 +80,7 @@ public class CuratorResourceIntTest {
         CuratorResource curatorResource = new CuratorResource();
         ReflectionTestUtils.setField(curatorResource, "curatorService", curatorService);
         this.restCuratorMockMvc = MockMvcBuilders.standaloneSetup(curatorResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setCustomArgumentResolvers(pageableArgumentResolver, querydslPredicateArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
     }
 

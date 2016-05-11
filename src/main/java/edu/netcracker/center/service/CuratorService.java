@@ -1,10 +1,9 @@
 package edu.netcracker.center.service;
 
+import com.mysema.query.types.Predicate;
 import edu.netcracker.center.domain.Curator;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import java.util.List;
 
 /**
  * Service Interface for managing Curator.
@@ -21,7 +20,7 @@ public interface CuratorService {
      *  get all the curators.
      *  @return the list of entities
      */
-    public Page<Curator> findAll(Pageable pageable);
+    public Page<Curator> findAll(Predicate predicate, Pageable pageable);
 
     /**
      *  get the "id" curator.

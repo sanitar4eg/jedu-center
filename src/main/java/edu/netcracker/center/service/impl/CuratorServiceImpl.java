@@ -1,5 +1,6 @@
 package edu.netcracker.center.service.impl;
 
+import com.mysema.query.types.Predicate;
 import edu.netcracker.center.service.CuratorService;
 import edu.netcracker.center.domain.Curator;
 import edu.netcracker.center.repository.CuratorRepository;
@@ -11,8 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * Service Implementation for managing Curator.
@@ -41,9 +40,9 @@ public class CuratorServiceImpl implements CuratorService{
      *  @return the list of entities
      */
     @Transactional(readOnly = true)
-    public Page<Curator> findAll(Pageable pageable) {
+    public Page<Curator> findAll(Predicate predicate, Pageable pageable) {
         log.debug("Request to get all Curators");
-        Page<Curator> result = curatorRepository.findAll(pageable);
+        Page<Curator> result = curatorRepository.findAll(predicate, pageable);
         return result;
     }
 
