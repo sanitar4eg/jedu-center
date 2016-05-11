@@ -1,5 +1,6 @@
 package edu.netcracker.center.service.impl;
 
+import com.mysema.query.types.Predicate;
 import edu.netcracker.center.service.FormService;
 import edu.netcracker.center.domain.Form;
 import edu.netcracker.center.repository.FormRepository;
@@ -43,9 +44,9 @@ public class FormServiceImpl implements FormService{
      *  @return the list of entities
      */
     @Transactional(readOnly = true)
-    public Page<Form> findAll(Pageable pageable) {
+    public Page<Form> findAll(Predicate predicate, Pageable pageable) {
         log.debug("Request to get all Forms");
-        Page<Form> result = formRepository.findAll(pageable);
+        Page<Form> result = formRepository.findAll(predicate, pageable);
         return result;
     }
 

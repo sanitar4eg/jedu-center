@@ -1,7 +1,10 @@
 package edu.netcracker.center.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.mysema.query.BooleanBuilder;
+import com.mysema.query.types.Predicate;
 import edu.netcracker.center.domain.Form;
+import edu.netcracker.center.domain.QForm;
 import edu.netcracker.center.service.FormService;
 import edu.netcracker.center.web.rest.util.HeaderUtil;
 import edu.netcracker.center.web.rest.util.PaginationUtil;
@@ -9,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -32,10 +36,10 @@ import java.util.stream.StreamSupport;
 public class FormResource {
 
     private final Logger log = LoggerFactory.getLogger(FormResource.class);
-        
+
     @Inject
     private FormService formService;
-    
+
     /**
      * POST  /forms -> Create a new form.
      */
@@ -79,15 +83,16 @@ public class FormResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<Form>> getAllForms(Pageable pageable, @RequestParam(required = false) String filter)
+    public ResponseEntity<List<Form>> getAllForms(Pageable pageable, @RequestParam(required = false) String filter,
+                                                  @QuerydslPredicate(root = Form.class) Predicate predicate)
         throws URISyntaxException {
-        if ("student-is-null".equals(filter)) {
-            log.debug("REST request to get all Forms where student is null");
-            return new ResponseEntity<>(formService.findAllWhereStudentIsNull(),
-                    HttpStatus.OK);
-        }
         log.debug("REST request to get a page of Forms");
-        Page<Form> page = formService.findAll(pageable); 
+        if ("student-is-null".equals(filter)) {
+            log.debug("REST forms add filter: ", filter);
+            BooleanBuilder builder = new BooleanBuilder(predicate);
+            predicate = builder.and(QForm.form.student.isNull());
+        }
+        Page<Form> page = formService.findAll(predicate, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/forms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

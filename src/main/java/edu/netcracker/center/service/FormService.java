@@ -1,5 +1,6 @@
 package edu.netcracker.center.service;
 
+import com.mysema.query.types.Predicate;
 import edu.netcracker.center.domain.Form;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +22,7 @@ public interface FormService {
      *  get all the forms.
      *  @return the list of entities
      */
-    public Page<Form> findAll(Pageable pageable);
+    public Page<Form> findAll(Predicate predicate, Pageable pageable);
     /**
      *  get all the forms where Student is null.
      *  @return the list of entities
