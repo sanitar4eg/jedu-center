@@ -2,9 +2,13 @@ package edu.netcracker.center.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.mysema.query.BooleanBuilder;
+import com.mysema.query.jpa.JPASubQuery;
+import com.mysema.query.types.CollectionExpression;
 import com.mysema.query.types.Predicate;
+import com.mysema.query.types.Visitor;
 import edu.netcracker.center.domain.Form;
 import edu.netcracker.center.domain.QForm;
+import edu.netcracker.center.domain.QStudent;
 import edu.netcracker.center.service.FormService;
 import edu.netcracker.center.web.rest.util.HeaderUtil;
 import edu.netcracker.center.web.rest.util.PaginationUtil;
@@ -19,10 +23,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -35,7 +41,12 @@ import java.util.stream.StreamSupport;
 @RequestMapping("/api")
 public class FormResource {
 
-    private final Logger log = LoggerFactory.getLogger(FormResource.class);
+    private static final Logger log = LoggerFactory.getLogger(FormResource.class);
+
+    private static final Predicate studentIsNull = QForm.form.notIn(new JPASubQuery()
+        .from(QStudent.student)
+        .where(QStudent.student.form.isNotNull())
+        .list(QStudent.student.form));
 
     @Inject
     private FormService formService;
@@ -83,14 +94,15 @@ public class FormResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<Form>> getAllForms(Pageable pageable, @RequestParam(required = false) String filter,
+    public ResponseEntity<List<Form>> getAllForms(Pageable pageable,
+                                                  @RequestParam(required = false) String filter,
                                                   @QuerydslPredicate(root = Form.class) Predicate predicate)
         throws URISyntaxException {
         log.debug("REST request to get a page of Forms");
         if ("student-is-null".equals(filter)) {
-            log.debug("REST forms add filter: ", filter);
+            log.debug("REST forms add filter: {}", filter);
             BooleanBuilder builder = new BooleanBuilder(predicate);
-            predicate = builder.and(QForm.form.student.isNull());
+            predicate = builder.and(studentIsNull);
         }
         Page<Form> page = formService.findAll(predicate, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/forms");

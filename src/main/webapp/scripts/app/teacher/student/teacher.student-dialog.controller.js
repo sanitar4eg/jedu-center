@@ -7,7 +7,7 @@ angular.module('jeducenterApp').controller('TeacherStudentDialogController',
         $scope.student = entity;
         $scope.groupofstudents = GroupOfStudent.query();
         $scope.curators = Curator.query();
-        $scope.forms = Form.query({filter: 'student-is-null'});
+        $scope.forms = Form.query({filter: 'student-is-null', isActive: true});
         $q.all([$scope.student.$promise, $scope.forms.$promise]).then(function() {
             if (!$scope.student.form || !$scope.student.form.id) {
                 return $q.reject();
