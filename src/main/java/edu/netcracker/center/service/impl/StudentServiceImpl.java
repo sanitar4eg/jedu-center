@@ -6,6 +6,7 @@ import edu.netcracker.center.domain.Student;
 import edu.netcracker.center.domain.User;
 import edu.netcracker.center.domain.util.OperationResult;
 import edu.netcracker.center.repository.AuthorityRepository;
+import edu.netcracker.center.repository.LearningResultRepository;
 import edu.netcracker.center.repository.StudentRepository;
 import edu.netcracker.center.repository.UserRepository;
 import edu.netcracker.center.security.AuthoritiesConstants;
@@ -41,10 +42,13 @@ public class StudentServiceImpl implements StudentService {
     private UserRepository userRepository;
 
     @Inject
-    UserService userService;
+    private UserService userService;
 
     @Inject
     private AuthorityRepository authorityRepository;
+
+    @Inject
+    private LearningResultRepository learningResultRepository;
 
     /**
      * Save a student.
@@ -154,6 +158,13 @@ public class StudentServiceImpl implements StudentService {
             results.add(result);
         }
         return results;
+    }
+
+    @Override
+    public Student archive(Student student) {
+        learningResultRepository.save(student.getLearningResult());
+        student.setIsActive(false);
+        return studentRepository.save(student);
     }
 
     private User createUser(Student student) {

@@ -59,4 +59,9 @@ public interface StudentService {
      *  register students.
      */
     Collection<OperationResult> registerStudents(Collection<Student> students, String baseUrl);
+
+    /**
+     *  archive student.
+     */
+    Student archive(Student student);
 }
