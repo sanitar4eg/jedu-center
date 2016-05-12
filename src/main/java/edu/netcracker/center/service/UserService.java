@@ -6,13 +6,9 @@ import edu.netcracker.center.domain.QCurator;
 import edu.netcracker.center.domain.QStudent;
 import edu.netcracker.center.domain.User;
 import edu.netcracker.center.repository.*;
-import edu.netcracker.center.security.AuthoritiesConstants;
 import edu.netcracker.center.security.SecurityUtils;
 import edu.netcracker.center.service.util.RandomUtil;
 import edu.netcracker.center.web.rest.dto.ManagedUserDTO;
-import java.time.ZonedDateTime;
-import java.time.LocalDate;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -21,7 +17,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
-import java.util.*;
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * Service class for managing users.
@@ -65,20 +66,20 @@ public class UserService {
     }
 
     public Optional<User> completePasswordReset(String newPassword, String key) {
-       log.debug("Reset user password for reset key {}", key);
+        log.debug("Reset user password for reset key {}", key);
 
-       return userRepository.findOneByResetKey(key)
+        return userRepository.findOneByResetKey(key)
             .filter(user -> {
                 ZonedDateTime oneDayAgo = ZonedDateTime.now().minusHours(24);
                 return user.getResetDate().isAfter(oneDayAgo);
-           })
-           .map(user -> {
+            })
+            .map(user -> {
                 user.setPassword(passwordEncoder.encode(newPassword));
                 user.setResetKey(null);
                 user.setResetDate(null);
                 userRepository.save(user);
                 return user;
-           });
+            });
     }
 
     public Optional<User> requestPasswordReset(String mail) {
@@ -93,7 +94,7 @@ public class UserService {
     }
 
     public User createUserInformation(String login, String password, String firstName, String lastName, String email,
-        String langKey) {
+                                      String langKey) {
 
         User newUser = new User();
         Authority authority = authorityRepository.findOne("ROLE_USER");
@@ -119,7 +120,7 @@ public class UserService {
 
     public User createUserForEC(String firstName, String lastName, String email, Set<Authority> authorities) {
         User user = new User();
-        String encryptedPassword = passwordEncoder.encode(RandomUtil.generatePassword());;
+        String encryptedPassword = passwordEncoder.encode(RandomUtil.generatePassword());
         user.setLogin(email);
         user.setFirstName(firstName);
         user.setLastName(lastName);
@@ -253,14 +254,12 @@ public class UserService {
     private void removeRelationOnUser(User user) {
         Predicate studentPredicate = QStudent.student.user.eq(user);
         Optional.ofNullable(studentRepository.findOne(studentPredicate)).ifPresent(student -> {
-            student.setUser(null);
-            studentRepository.save(student);
+                student.setUser(null);
             }
         );
         Predicate curatorPredicate = QCurator.curator.user.eq(user);
         Optional.ofNullable(curatorRepository.findOne(curatorPredicate)).ifPresent(curator -> {
-            curator.setUser(null);
-            curatorRepository.save(curator);
+                curator.setUser(null);
             }
         );
     }
