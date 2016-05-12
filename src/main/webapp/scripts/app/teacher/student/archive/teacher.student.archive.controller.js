@@ -2,24 +2,11 @@
 
 angular.module('jeducenterApp')
     .controller('TeacherStudentArchiveController', function ($scope, $state, Student, tmhDynamicLocale,
-                                                      i18nService, $translate) {
-
-        $scope.students = [];
-        $scope.options = [
-            {text:"Все", predicate: {}},
-            {text:"DEV", predicate: {type: "DEV"}},
-            {text:"QA", predicate: {type: "QA"}}
-        ];
-
+                                                             i18nService, $translate, uiGridConstants) {
         $scope.loadAll = function (predicate) {
             Student.query(predicate, function (result) {
-                $scope.students = result;
                 $scope.studentsGrid.data = result;
             });
-        };
-
-        $scope.updateSelect = function (option) {
-            $scope.loadAll($scope.option.predicate);
         };
 
         $scope.loadAll();
@@ -47,8 +34,12 @@ angular.module('jeducenterApp')
                     headerCellFilter: "translate"
                 },
                 {
-                    displayName: 'jeducenterApp.student.type', field: 'type', width: '4%',
-                    headerCellFilter: "translate"
+                    displayName: 'jeducenterApp.student.type', field: 'type', width: '6%',
+                    headerCellFilter: "translate",
+                    filter: {
+                        type: uiGridConstants.filter.SELECT,
+                        selectOptions: [{value: 'QA', label: 'QA'}, {value: 'DEV', label:'DEV'}]
+                    }
                 },
                 {
                     displayName: 'jeducenterApp.student.email', field: 'email', width: '14%',
@@ -60,10 +51,18 @@ angular.module('jeducenterApp')
                 },
                 {
                     displayName: 'jeducenterApp.student.university', field: 'university', width: '10%',
-                    headerCellFilter: "translate"
+                    headerCellFilter: "translate",
+                    filter: {
+                        type: uiGridConstants.filter.SELECT,
+                        selectOptions: [{value: 'СГУ', label: 'СГУ'}, {value: 'СГТУ', label:'СГТУ'}]
+                    }
                 },
                 {
                     displayName: 'jeducenterApp.student.specialty', field: 'specialty', width: '12%', visible: false,
+                    headerCellFilter: "translate"
+                },
+                {
+                    displayName: 'jeducenterApp.student.faculty', field: 'faculty', width: '12%', visible: false,
                     headerCellFilter: "translate"
                 },
                 {
@@ -72,25 +71,49 @@ angular.module('jeducenterApp')
                 },
                 {
                     displayName: 'jeducenterApp.student.isActive', field: 'isActive', width: '8%', type: 'boolean',
-                    visible: false,
-                    headerCellTemplate: '<span translate="jeducenterApp.student.isActive"/>'
+                    visible: false, headerCellFilter: "translate",
+                    filter: {
+                        type: uiGridConstants.filter.SELECT,
+                        selectOptions: [{value: 'true', label: 'true'}, {value: 'false', label:'false'}]
+                    }
                 },
                 {
-                    displayName: 'jeducenterApp.student.groupOfStudent', name: 'groupOfStudent', width: '8%', visible: false,
-                    headerCellFilter: "translate",
+                    displayName: 'jeducenterApp.student.groupOfStudent', name: 'groupOfStudent', width: '8%',
+                    visible: false, enableFiltering: false, headerCellFilter: "translate",
                     cellTemplate: 'scripts/app/teacher/student/ui-grid/student.group.cell.html'
                 },
                 {
-                    displayName: 'jeducenterApp.student.curator', name: 'curator', width: '8%', visible: false,
-                    headerCellFilter: "translate",
+                    displayName: 'jeducenterApp.student.curator', name: 'curator', width: '8%',
+                    visible: false, enableFiltering: false, headerCellFilter: "translate",
                     cellTemplate: 'scripts/app/teacher/student/ui-grid/student.curator.cell.html'
                 },
                 {
                     name: ' ', width: '14%', enableSorting: false, enableFiltering: false,
                     cellTemplate: 'scripts/app/teacher/student/archive/ui-grid/student.archive.buttons.html'
                 }
-            ]
-
+            ],
+            onRegisterApi: function (gridApi) {
+                $scope.gridApi = gridApi;
+                $scope.gridApi.core.on.filterChanged($scope, function () {
+                    var grid = this.grid;
+                    var predicate = {};
+                    $.extend(predicate, {lastName: grid.columns[0].filters[0].term});
+                    $.extend(predicate, {firstName: grid.columns[1].filters[0].term});
+                    $.extend(predicate, {middleName: grid.columns[2].filters[0].term});
+                    $.extend(predicate, {type: grid.columns[3].filters[0].term});
+                    $.extend(predicate, {email: grid.columns[4].filters[0].term});
+                    $.extend(predicate, {phone: grid.columns[5].filters[0].term});
+                    $.extend(predicate, {university: grid.columns[6].filters[0].term});
+                    $.extend(predicate, {specialty: grid.columns[7].filters[0].term});
+                    $.extend(predicate, {faculty: grid.columns[8].filters[0].term});
+                    $.extend(predicate, {course: grid.columns[9].filters[0].term});
+                    $.extend(predicate, {isActive: grid.columns[10].filters[0].term});
+                    // $.extend(predicate, {groupOfStudent: grid.columns[11].filters[0].term});
+                    // $.extend(predicate, {curator: grid.columns[12].filters[0].term});
+                    // console.log("predicate is " + JSON.stringify(predicate));
+                    $scope.loadAll(predicate);
+                });
+            }
         };
 
         $scope.refresh = function () {
