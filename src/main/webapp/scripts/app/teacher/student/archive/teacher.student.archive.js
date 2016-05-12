@@ -7,7 +7,7 @@ angular.module('jeducenterApp')
                 parent: 'teacher.student',
                 url: '/teacher/student/archive',
                 data: {
-                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
                 views: {
                     'content@': {

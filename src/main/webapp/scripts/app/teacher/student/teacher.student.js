@@ -21,6 +21,8 @@ angular.module('jeducenterApp')
                         $translatePartialLoader.addPart('student');
                         $translatePartialLoader.addPart('typeEnumeration');
                         $translatePartialLoader.addPart('universityEnumeration');
+                        $translatePartialLoader.addPart('learningResult');
+                        $translatePartialLoader.addPart('typeOfResult');
                         $translatePartialLoader.addPart('global');
                         return $translate.refresh();
                     }]
@@ -122,6 +124,29 @@ angular.module('jeducenterApp')
                         templateUrl: 'scripts/app/entities/student/student-delete-dialog.html',
                         controller: 'StudentDeleteController',
                         size: 'md',
+                        resolve: {
+                            entity: ['Student', function(Student) {
+                                return Student.get({id : $stateParams.id});
+                            }]
+                        }
+                    }).result.then(function(result) {
+                        $state.go('teacher.student', null, { reload: true });
+                    }, function() {
+                        $state.go('^');
+                    })
+                }]
+            })
+            .state('teacher.student.archiving', {
+                parent: 'teacher.student',
+                url: '/teacher/{id}/archiving',
+                data: {
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'scripts/app/teacher/student/archive/teacher.student.archiving.html',
+                        controller: 'TeacherStudentArchivingController',
+                        size: 'lg',
                         resolve: {
                             entity: ['Student', function(Student) {
                                 return Student.get({id : $stateParams.id});
