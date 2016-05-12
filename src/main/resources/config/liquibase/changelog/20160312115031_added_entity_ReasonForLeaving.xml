@@ -16,7 +16,7 @@
     <!--
         Added the entity ReasonForLeaving.
     -->
-    <changeSet id="20160512100201" author="jhipster">
+    <changeSet id="20160312115031" author="jhipster">
         <createTable tableName="reason_for_leaving">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
