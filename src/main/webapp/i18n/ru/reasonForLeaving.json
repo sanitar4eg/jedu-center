@@ -1,0 +1,24 @@
+{
+    "jeducenterApp": {
+        "reasonForLeaving" : {
+            "home": {
+                "title": "Причина отчисления",
+                "createLabel": "Создать новую",
+                "createOrEditLabel": "Создать или редактировать",
+                "search": "Поиск"
+            },
+            "created": "Новая причина создана, ID: {{ param }}",
+            "updated": "Причина обновлена, ID: {{ param }}",
+            "deleted": "Причина удалена, ID: {{ param }}",
+            "delete": {
+                "question": "Вы действительно хотите удалить причину {{ id }}?"
+            },
+            "detail": {
+                "title": "Причина отчисления"
+            },
+            "type": "Тип",
+            "description": "Описание",
+            "student": "Студент"
+        }
+    }
+}

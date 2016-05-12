@@ -1,0 +1,10 @@
+{
+    "jeducenterApp": {
+        "TypeOfReason" : {
+            "null": "",
+            "Dismissed": "Отчислен",
+            "GotJob": "Устроился на работу",
+            "TookDocuments": "Забрал документы"
+        }
+    }
+}

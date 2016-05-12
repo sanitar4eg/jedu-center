@@ -1,0 +1,10 @@
+{
+    "jeducenterApp": {
+        "TypeOfReason" : {
+            "null": "",
+            "Dismissed": "Dismissed",
+            "GotJob": "GotJob",
+            "TookDocuments": "TookDocuments"
+        }
+    }
+}

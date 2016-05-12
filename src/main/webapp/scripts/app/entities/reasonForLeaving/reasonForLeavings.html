@@ -1,0 +1,65 @@
+<div>
+    <h2 translate="jeducenterApp.reasonForLeaving.home.title">ReasonForLeavings</h2>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="reasonForLeaving.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span
+                        translate="jeducenterApp.reasonForLeaving.home.createLabel">Create new ReasonForLeaving
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="predicate" ascending="reverse" callback="loadAll()">
+                    <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="type"><span translate="jeducenterApp.reasonForLeaving.type">Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="description"><span translate="jeducenterApp.reasonForLeaving.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="student.lastName"><span translate="jeducenterApp.reasonForLeaving.student">student</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="reasonForLeaving in reasonForLeavings track by reasonForLeaving.id">
+                    <td><a ui-sref="reasonForLeaving.detail({id:reasonForLeaving.id})">{{reasonForLeaving.id}}</a></td>
+                    <td translate="{{'jeducenterApp.TypeOfReason.' + reasonForLeaving.type}}">{{reasonForLeaving.type}}</td>
+                    <td>{{reasonForLeaving.description}}</td>
+                    <td>
+                        <a ui-sref="student.detail({id:reasonForLeaving.student.id})">{{reasonForLeaving.student.lastName}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="reasonForLeaving.detail({id:reasonForLeaving.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="reasonForLeaving.edit({id:reasonForLeaving.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="reasonForLeaving.delete({id:reasonForLeaving.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pagination>
+    </div>
+    <jh-alert></jh-alert>
+</div>
