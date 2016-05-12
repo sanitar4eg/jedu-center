@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('jeducenterApp').controller('TeacherStudentArchivingController',
-    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'StudentArchive',
-        function ($scope, $stateParams, $uibModalInstance, entity, StudentArchive) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'StudentArchiving',
+        function ($scope, $stateParams, $uibModalInstance, entity, StudentArchiving) {
 
             $scope.student = entity;
 
@@ -18,7 +18,7 @@ angular.module('jeducenterApp').controller('TeacherStudentArchivingController',
 
             $scope.save = function () {
                 $scope.isSaving = true;
-                StudentArchive.update($scope.student, onSaveSuccess, onSaveError);
+                StudentArchiving.update($scope.student, onSaveSuccess, onSaveError);
             };
 
             $scope.clear = function () {

@@ -35,15 +35,15 @@ angular.module('jeducenterApp')
             useExternalFiltering: true,
             columnDefs: [
                 {
+                    displayName: 'jeducenterApp.student.lastName', field: 'lastName', width: '12%',
+                    headerCellFilter: "translate"
+                },
+                {
                     displayName: 'jeducenterApp.student.firstName', field: 'firstName', width: '10%',
                     headerCellFilter: "translate"
                 },
                 {
                     displayName: 'jeducenterApp.student.middleName', field: 'middleName', width: '12%',
-                    headerCellFilter: "translate"
-                },
-                {
-                    displayName: 'jeducenterApp.student.lastName', field: 'lastName', width: '12%',
                     headerCellFilter: "translate"
                 },
                 {
@@ -72,6 +72,7 @@ angular.module('jeducenterApp')
                 },
                 {
                     displayName: 'jeducenterApp.student.isActive', field: 'isActive', width: '8%', type: 'boolean',
+                    visible: false,
                     headerCellTemplate: '<span translate="jeducenterApp.student.isActive"/>'
                 },
                 {
@@ -85,8 +86,8 @@ angular.module('jeducenterApp')
                     cellTemplate: 'scripts/app/teacher/student/ui-grid/student.curator.cell.html'
                 },
                 {
-                    name: ' ', width: '10%',
-                    cellTemplate: 'scripts/app/teacher/student/ui-grid/student.buttons.html'
+                    name: ' ', width: '14%', enableSorting: false, enableFiltering: false,
+                    cellTemplate: 'scripts/app/teacher/student/archive/ui-grid/student.archive.buttons.html'
                 }
             ]
 
