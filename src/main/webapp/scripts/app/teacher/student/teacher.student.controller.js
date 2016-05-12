@@ -82,7 +82,7 @@ angular.module('jeducenterApp')
                     cellTemplate: 'scripts/app/teacher/student/ui-grid/student.curator.cell.html'
                 },
                 {
-                    name: ' ', width: '10%',
+                    name: ' ', width: '10%', enableSorting: false,
                     cellTemplate: 'scripts/app/teacher/student/ui-grid/student.buttons.html'
                 }
             ]
