@@ -35,8 +35,8 @@
         },
         {
             "relationshipId": 5,
-            "relationshipName": "reasonForLeaving",
-            "otherEntityName": "reasonForLeaving",
+            "relationshipName": "learningResult",
+            "otherEntityName": "learningResult",
             "relationshipType": "one-to-one",
             "otherEntityField": "type",
             "ownerSide": true,

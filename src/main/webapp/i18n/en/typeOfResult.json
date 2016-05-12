@@ -1,6 +1,6 @@
 {
     "jeducenterApp": {
-        "TypeOfReason" : {
+        "TypeOfResult" : {
             "null": "",
             "Dismissed": "Dismissed",
             "GotJob": "GotJob",

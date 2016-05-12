@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('jeducenterApp')
-	.controller('ReasonForLeavingDeleteController', function($scope, $uibModalInstance, entity, ReasonForLeaving) {
+	.controller('LearningResultDeleteController', function($scope, $uibModalInstance, entity, LearningResult) {
 
-        $scope.reasonForLeaving = entity;
+        $scope.learningResult = entity;
         $scope.clear = function() {
             $uibModalInstance.dismiss('cancel');
         };
         $scope.confirmDelete = function (id) {
-            ReasonForLeaving.delete({id: id},
+            LearningResult.delete({id: id},
                 function () {
                     $uibModalInstance.close(true);
                 });

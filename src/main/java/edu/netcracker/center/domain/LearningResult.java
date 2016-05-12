@@ -11,15 +11,15 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 
-import edu.netcracker.center.domain.enumeration.TypeOfReason;
+import edu.netcracker.center.domain.enumeration.TypeOfResult;
 
 /**
- * A ReasonForLeaving.
+ * A LearningResult.
  */
 @Entity
-@Table(name = "reason_for_leaving")
+@Table(name = "learning_result")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class ReasonForLeaving implements Serializable {
+public class LearningResult implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,12 +28,12 @@ public class ReasonForLeaving implements Serializable {
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
-    private TypeOfReason type;
-    
+    private TypeOfResult type;
+
     @Column(name = "description")
     private String description;
-    
-    @OneToOne(mappedBy = "reasonForLeaving")
+
+    @OneToOne(mappedBy = "learningResult")
     @JsonIgnore
     private Student student;
 
@@ -45,18 +45,18 @@ public class ReasonForLeaving implements Serializable {
         this.id = id;
     }
 
-    public TypeOfReason getType() {
+    public TypeOfResult getType() {
         return type;
     }
-    
-    public void setType(TypeOfReason type) {
+
+    public void setType(TypeOfResult type) {
         this.type = type;
     }
 
     public String getDescription() {
         return description;
     }
-    
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -77,11 +77,11 @@ public class ReasonForLeaving implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        ReasonForLeaving reasonForLeaving = (ReasonForLeaving) o;
-        if(reasonForLeaving.id == null || id == null) {
+        LearningResult learningResult = (LearningResult) o;
+        if (learningResult.id == null || id == null) {
             return false;
         }
-        return Objects.equals(id, reasonForLeaving.id);
+        return Objects.equals(id, learningResult.id);
     }
 
     @Override
@@ -91,7 +91,7 @@ public class ReasonForLeaving implements Serializable {
 
     @Override
     public String toString() {
-        return "ReasonForLeaving{" +
+        return "LearningResult{" +
             "id=" + id +
             ", type='" + type + "'" +
             ", description='" + description + "'" +

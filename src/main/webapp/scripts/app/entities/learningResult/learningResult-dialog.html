@@ -4,21 +4,21 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="clear()">&times;</button>
-        <h4 class="modal-title" id="myReasonForLeavingLabel" translate="jeducenterApp.reasonForLeaving.home.createOrEditLabel">Create or edit a ReasonForLeaving</h4>
+        <h4 class="modal-title" id="myLearningResultLabel" translate="jeducenterApp.learningResult.home.createOrEditLabel">Create or edit a LearningResult</h4>
     </div>
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
         <div class="form-group">
             <label for="id" translate="global.field.id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
-                    ng-model="reasonForLeaving.id" readonly />
+                    ng-model="learningResult.id" readonly />
         </div>
         <div class="form-group">
-            <label class="control-label" translate="jeducenterApp.reasonForLeaving.type" for="field_type">Type</label>
-            <select class="form-control" name="type" ng-model="reasonForLeaving.type" id="field_type" required>
-                <option value="Dismissed" translate="jeducenterApp.TypeOfReason.Dismissed">Dismissed</option>
-                <option value="GotJob" translate="jeducenterApp.TypeOfReason.GotJob">GotJob</option>
-                <option value="TookDocuments" translate="jeducenterApp.TypeOfReason.TookDocuments">TookDocuments</option>
+            <label class="control-label" translate="jeducenterApp.learningResult.type" for="field_type">Type</label>
+            <select class="form-control" name="type" ng-model="learningResult.type" id="field_type" required>
+                <option value="Dismissed" translate="jeducenterApp.TypeOfResult.Dismissed">Dismissed</option>
+                <option value="GotJob" translate="jeducenterApp.TypeOfResult.GotJob">GotJob</option>
+                <option value="TookDocuments" translate="jeducenterApp.TypeOfResult.TookDocuments">TookDocuments</option>
             </select>
             <div ng-show="editForm.type.$invalid">
                 <p class="help-block"
@@ -28,9 +28,9 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label" translate="jeducenterApp.reasonForLeaving.description" for="field_description">Description</label>
+            <label class="control-label" translate="jeducenterApp.learningResult.description" for="field_description">Description</label>
             <input type="text" class="form-control" name="description" id="field_description"
-                    ng-model="reasonForLeaving.description"
+                    ng-model="learningResult.description"
                      />
         </div>
 

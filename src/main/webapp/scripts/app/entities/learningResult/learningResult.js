@@ -3,62 +3,62 @@
 angular.module('jeducenterApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('reasonForLeaving', {
+            .state('learningResult', {
                 parent: 'entity',
-                url: '/reasonForLeavings',
+                url: '/learningResults',
                 data: {
-                    authorities: ['ROLE_USER'],
-                    pageTitle: 'jeducenterApp.reasonForLeaving.home.title'
+                    authorities: ['ROLE_ADMIN'],
+                    pageTitle: 'jeducenterApp.learningResult.home.title'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/reasonForLeaving/reasonForLeavings.html',
-                        controller: 'ReasonForLeavingController'
+                        templateUrl: 'scripts/app/entities/learningResult/learningResults.html',
+                        controller: 'LearningResultController'
                     }
                 },
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('reasonForLeaving');
-                        $translatePartialLoader.addPart('typeOfReason');
+                        $translatePartialLoader.addPart('learningResult');
+                        $translatePartialLoader.addPart('typeOfResult');
                         $translatePartialLoader.addPart('global');
                         return $translate.refresh();
                     }]
                 }
             })
-            .state('reasonForLeaving.detail', {
+            .state('learningResult.detail', {
                 parent: 'entity',
-                url: '/reasonForLeaving/{id}',
+                url: '/learningResult/{id}',
                 data: {
-                    authorities: ['ROLE_USER'],
-                    pageTitle: 'jeducenterApp.reasonForLeaving.detail.title'
+                    authorities: ['ROLE_ADMIN'],
+                    pageTitle: 'jeducenterApp.learningResult.detail.title'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/reasonForLeaving/reasonForLeaving-detail.html',
-                        controller: 'ReasonForLeavingDetailController'
+                        templateUrl: 'scripts/app/entities/learningResult/learningResult-detail.html',
+                        controller: 'LearningResultDetailController'
                     }
                 },
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('reasonForLeaving');
-                        $translatePartialLoader.addPart('typeOfReason');
+                        $translatePartialLoader.addPart('learningResult');
+                        $translatePartialLoader.addPart('typeOfResult');
                         return $translate.refresh();
                     }],
-                    entity: ['$stateParams', 'ReasonForLeaving', function($stateParams, ReasonForLeaving) {
-                        return ReasonForLeaving.get({id : $stateParams.id});
+                    entity: ['$stateParams', 'LearningResult', function($stateParams, LearningResult) {
+                        return LearningResult.get({id : $stateParams.id});
                     }]
                 }
             })
-            .state('reasonForLeaving.new', {
-                parent: 'reasonForLeaving',
+            .state('learningResult.new', {
+                parent: 'learningResult',
                 url: '/new',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/reasonForLeaving/reasonForLeaving-dialog.html',
-                        controller: 'ReasonForLeavingDialogController',
+                        templateUrl: 'scripts/app/entities/learningResult/learningResult-dialog.html',
+                        controller: 'LearningResultDialogController',
                         size: 'lg',
                         resolve: {
                             entity: function () {
@@ -70,53 +70,53 @@ angular.module('jeducenterApp')
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('reasonForLeaving', null, { reload: true });
+                        $state.go('learningResult', null, { reload: true });
                     }, function() {
-                        $state.go('reasonForLeaving');
+                        $state.go('learningResult');
                     })
                 }]
             })
-            .state('reasonForLeaving.edit', {
-                parent: 'reasonForLeaving',
+            .state('learningResult.edit', {
+                parent: 'learningResult',
                 url: '/{id}/edit',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/reasonForLeaving/reasonForLeaving-dialog.html',
-                        controller: 'ReasonForLeavingDialogController',
+                        templateUrl: 'scripts/app/entities/learningResult/learningResult-dialog.html',
+                        controller: 'LearningResultDialogController',
                         size: 'lg',
                         resolve: {
-                            entity: ['ReasonForLeaving', function(ReasonForLeaving) {
-                                return ReasonForLeaving.get({id : $stateParams.id});
+                            entity: ['LearningResult', function(LearningResult) {
+                                return LearningResult.get({id : $stateParams.id});
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('reasonForLeaving', null, { reload: true });
+                        $state.go('learningResult', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })
                 }]
             })
-            .state('reasonForLeaving.delete', {
-                parent: 'reasonForLeaving',
+            .state('learningResult.delete', {
+                parent: 'learningResult',
                 url: '/{id}/delete',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/entities/reasonForLeaving/reasonForLeaving-delete-dialog.html',
-                        controller: 'ReasonForLeavingDeleteController',
+                        templateUrl: 'scripts/app/entities/learningResult/learningResult-delete-dialog.html',
+                        controller: 'LearningResultDeleteController',
                         size: 'md',
                         resolve: {
-                            entity: ['ReasonForLeaving', function(ReasonForLeaving) {
-                                return ReasonForLeaving.get({id : $stateParams.id});
+                            entity: ['LearningResult', function(LearningResult) {
+                                return LearningResult.get({id : $stateParams.id});
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('reasonForLeaving', null, { reload: true });
+                        $state.go('learningResult', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })

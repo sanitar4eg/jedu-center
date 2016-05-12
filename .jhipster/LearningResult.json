@@ -6,14 +6,14 @@
             "otherEntityName": "student",
             "relationshipType": "one-to-one",
             "ownerSide": false,
-            "otherEntityRelationshipName": "reasonForLeaving"
+            "otherEntityRelationshipName": "learningResult"
         }
     ],
     "fields": [
         {
             "fieldId": 1,
             "fieldName": "type",
-            "fieldType": "TypeOfReason",
+            "fieldType": "TypeOfResult",
             "fieldValues": "Dismissed,GotJob,TookDocuments",
             "fieldValidateRules": [
                 "required"

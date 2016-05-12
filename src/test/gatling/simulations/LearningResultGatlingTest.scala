@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the ReasonForLeaving entity.
+ * Performance test for the LearningResult entity.
  */
-class ReasonForLeavingGatlingTest extends Simulation {
+class LearningResultGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -37,7 +37,7 @@ class ReasonForLeavingGatlingTest extends Simulation {
         "X-CSRF-TOKEN" -> "${csrf_token}"
     )
 
-    val scn = scenario("Test the ReasonForLeaving entity")
+    val scn = scenario("Test the LearningResult entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -59,26 +59,26 @@ class ReasonForLeavingGatlingTest extends Simulation {
         .check(headerRegex("Set-Cookie", "CSRF-TOKEN=(.*); [P,p]ath=/").saveAs("csrf_token")))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all reasonForLeavings")
-            .get("/api/reasonForLeavings")
+            exec(http("Get all learningResults")
+            .get("/api/learningResults")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new reasonForLeaving")
-            .post("/api/reasonForLeavings")
+            .exec(http("Create new learningResult")
+            .post("/api/learningResults")
             .headers(headers_http_authenticated)
             .body(StringBody("""{"id":null, "type":null, "description":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_reasonForLeaving_url")))
+            .check(headerRegex("Location", "(.*)").saveAs("new_learningResult_url")))
             .pause(10)
             .repeat(5) {
-                exec(http("Get created reasonForLeaving")
-                .get("${new_reasonForLeaving_url}")
+                exec(http("Get created learningResult")
+                .get("${new_learningResult_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created reasonForLeaving")
-            .delete("${new_reasonForLeaving_url}")
+            .exec(http("Delete created learningResult")
+            .delete("${new_learningResult_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

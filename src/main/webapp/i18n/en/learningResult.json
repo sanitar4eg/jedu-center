@@ -1,0 +1,24 @@
+{
+    "jeducenterApp": {
+        "learningResult" : {
+            "home": {
+                "title": "LearningResults",
+                "createLabel": "Create a new LearningResult",
+                "createOrEditLabel": "Create or edit a LearningResult",
+                "search": "Search for LearningResult"
+            },
+            "created": "A new LearningResult is created with identifier {{ param }}",
+            "updated": "A LearningResult is updated with identifier {{ param }}",
+            "deleted": "A LearningResult is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete LearningResult {{ id }}?"
+            },
+            "detail": {
+                "title": "LearningResult"
+            },
+            "type": "Type",
+            "description": "Description",
+            "student": "Student"
+        }
+    }
+}

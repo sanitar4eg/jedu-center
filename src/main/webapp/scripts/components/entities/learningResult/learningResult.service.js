@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('jeducenterApp')
-    .factory('ReasonForLeaving', function ($resource, DateUtils) {
-        return $resource('api/reasonForLeavings/:id', {}, {
+    .factory('LearningResult', function ($resource, DateUtils) {
+        return $resource('api/learningResults/:id', {}, {
             'query': { method: 'GET', isArray: true},
             'get': {
                 method: 'GET',

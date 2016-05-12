@@ -1,8 +1,8 @@
 package edu.netcracker.center.domain.enumeration;
 
 /**
- * The TypeOfReason enumeration.
+ * The TypeOfResult enumeration.
  */
-public enum TypeOfReason {
+public enum TypeOfResult {
     Dismissed,GotJob,TookDocuments
 }

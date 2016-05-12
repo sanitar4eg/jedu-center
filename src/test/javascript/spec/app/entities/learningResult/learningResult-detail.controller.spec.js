@@ -2,16 +2,16 @@
 
 describe('Controller Tests', function() {
 
-    describe('ReasonForLeaving Detail Controller', function() {
+    describe('LearningResult Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockReasonForLeaving, MockStudent;
+        var MockEntity, MockLearningResult, MockStudent;
         var createController;
 
         beforeEach(inject(function($injector) {
             $rootScope = $injector.get('$rootScope');
             $scope = $rootScope.$new();
             MockEntity = jasmine.createSpy('MockEntity');
-            MockReasonForLeaving = jasmine.createSpy('MockReasonForLeaving');
+            MockLearningResult = jasmine.createSpy('MockLearningResult');
             MockStudent = jasmine.createSpy('MockStudent');
             
 
@@ -19,18 +19,18 @@ describe('Controller Tests', function() {
                 '$scope': $scope,
                 '$rootScope': $rootScope,
                 'entity': MockEntity ,
-                'ReasonForLeaving': MockReasonForLeaving,
+                'LearningResult': MockLearningResult,
                 'Student': MockStudent
             };
             createController = function() {
-                $injector.get('$controller')("ReasonForLeavingDetailController", locals);
+                $injector.get('$controller')("LearningResultDetailController", locals);
             };
         }));
 
 
         describe('Root Scope Listening', function() {
             it('Unregisters root scope listener upon scope destruction', function() {
-                var eventType = 'jeducenterApp:reasonForLeavingUpdate';
+                var eventType = 'jeducenterApp:learningResultUpdate';
 
                 createController();
                 expect($rootScope.$$listenerCount[eventType]).toEqual(1);

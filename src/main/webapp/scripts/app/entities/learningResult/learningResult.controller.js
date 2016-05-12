@@ -1,17 +1,17 @@
 'use strict';
 
 angular.module('jeducenterApp')
-    .controller('ReasonForLeavingController', function ($scope, $state, ReasonForLeaving, ParseLinks) {
+    .controller('LearningResultController', function ($scope, $state, LearningResult, ParseLinks) {
 
-        $scope.reasonForLeavings = [];
+        $scope.learningResults = [];
         $scope.predicate = 'id';
         $scope.reverse = true;
         $scope.page = 1;
         $scope.loadAll = function() {
-            ReasonForLeaving.query({page: $scope.page - 1, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
+            LearningResult.query({page: $scope.page - 1, size: 20, sort: [$scope.predicate + ',' + ($scope.reverse ? 'asc' : 'desc'), 'id']}, function(result, headers) {
                 $scope.links = ParseLinks.parse(headers('link'));
                 $scope.totalItems = headers('X-Total-Count');
-                $scope.reasonForLeavings = result;
+                $scope.learningResults = result;
             });
         };
         $scope.loadPage = function(page) {
@@ -27,7 +27,7 @@ angular.module('jeducenterApp')
         };
 
         $scope.clear = function () {
-            $scope.reasonForLeaving = {
+            $scope.learningResult = {
                 type: null,
                 description: null,
                 id: null
