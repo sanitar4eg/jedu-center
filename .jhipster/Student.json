@@ -32,6 +32,15 @@
             "otherEntityField": "file",
             "ownerSide": true,
             "otherEntityRelationshipName": "student"
+        },
+        {
+            "relationshipId": 5,
+            "relationshipName": "reasonForLeaving",
+            "otherEntityName": "reasonForLeaving",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "type",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "student"
         }
     ],
     "fields": [

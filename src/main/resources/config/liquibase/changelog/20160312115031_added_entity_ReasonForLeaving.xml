@@ -27,17 +27,8 @@
             
             <column name="description" type="varchar(255)"/>
             
-            <column name="student_id" type="bigint">
-                <constraints unique="true"/>
-            </column>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         
-        <addForeignKeyConstraint baseColumnNames="student_id"
-                                 baseTableName="reason_for_leaving"
-                                 constraintName="fk_reasonforleaving_student_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="student"/>
-
     </changeSet>
 </databaseChangeLog>

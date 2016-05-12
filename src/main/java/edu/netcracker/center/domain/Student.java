@@ -87,11 +87,9 @@ public class Student implements Serializable {
     @NotAudited
     private Form form;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JsonIgnore
+    @OneToOne
     @NotAudited
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Evaluation> evaluations = new HashSet<>();
+    private ReasonForLeaving reasonForLeaving;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonIgnore
@@ -227,20 +225,12 @@ public class Student implements Serializable {
         this.form = form;
     }
 
-    public Set<Evaluation> getEvaluations() {
-        return evaluations;
+    public ReasonForLeaving getReasonForLeaving() {
+        return reasonForLeaving;
     }
 
-    public void setEvaluations(Set<Evaluation> evaluations) {
-        this.evaluations = evaluations;
-    }
-
-    public Set<Recall> getRecalls() {
-        return recalls;
-    }
-
-    public void setRecalls(Set<Recall> recalls) {
-        this.recalls = recalls;
+    public void setReasonForLeaving(ReasonForLeaving reasonForLeaving) {
+        this.reasonForLeaving = reasonForLeaving;
     }
 
     @Override
