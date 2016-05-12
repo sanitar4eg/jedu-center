@@ -6,9 +6,9 @@ angular.module('jeducenterApp')
 
         $scope.students = [];
         $scope.options = [
-            {text:"Все", predicate: {}},
-            {text:"DEV", predicate: {type: "DEV"}},
-            {text:"QA", predicate: {type: "QA"}}
+            {text: "Все", predicate: {}},
+            {text: "DEV", predicate: {type: "DEV"}},
+            {text: "QA", predicate: {type: "QA"}}
         ];
         $scope.studentsPredicate = {isActive: true};
 
@@ -76,21 +76,32 @@ angular.module('jeducenterApp')
                     headerCellFilter: "translate"
                 },
                 {
-                    displayName: 'jeducenterApp.student.groupOfStudent', name: 'groupOfStudent', width: '8%', visible: false,
-                    headerCellFilter: "translate",
+                    displayName: 'jeducenterApp.student.groupOfStudent',
+                    name: 'groupOfStudent', width: '8%', visible: false, headerCellFilter: "translate",
+                    enableCellEdit: false,
                     cellTemplate: 'scripts/app/teacher/student/ui-grid/student.group.cell.html'
                 },
                 {
                     displayName: 'jeducenterApp.student.curator', name: 'curator', width: '8%', visible: false,
-                    headerCellFilter: "translate",
+                    headerCellFilter: "translate", enableCellEdit: false,
                     cellTemplate: 'scripts/app/teacher/student/ui-grid/student.curator.cell.html'
                 },
                 {
-                    name: ' ', width: '10%', enableSorting: false,
+                    name: ' ', width: '10%', enableSorting: false, enableCellEdit: false,
                     cellTemplate: 'scripts/app/teacher/student/ui-grid/student.buttons.html'
                 }
             ]
+        };
 
+        $scope.studentsGrid.onRegisterApi = function (gridApi) {
+            $scope.gridApi = gridApi;
+            gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+                Student.update(rowEntity, onSaveSuccess);
+            });
+        };
+
+        var onSaveSuccess = function (result) {
+            $scope.$emit('jeducenterApp:studentUpdate', result);
         };
 
 
