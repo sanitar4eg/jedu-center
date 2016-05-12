@@ -4,7 +4,7 @@ angular.module('jeducenterApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pas
     'ngResource', 'ngCookies', 'ngAria', 'ngCacheBuster', 'ngFileUpload',
     // jhipster-needle-angularjs-add-module JHipster will add new module here
     'ui.bootstrap', 'ui.router', 'infinite-scroll', 'angular-loading-bar', 'ui.grid', 'ui.grid.resizeColumns',
-    'checklist-model'])
+    'ui.grid.moveColumns', 'checklist-model'])
     .run(function ($rootScope, $location, $window, $http, $state, $translate, Language, Auth, Principal, ENV, VERSION) {
         // update the window title using params in the following
         // precendence
