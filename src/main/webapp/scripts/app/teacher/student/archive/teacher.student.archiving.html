@@ -6,6 +6,7 @@
                 ng-click="clear()">&times;</button>
         <h4 class="modal-title" id="myLearningResultLabel"
             translate="jeducenterApp.learningResult.home.createFor"
+            translate-values="{name: '{{[student.lastName, student.firstName, student.middleName].join(' ')}}'}"
             >
             Create or edit a LearningResult
         </h4>

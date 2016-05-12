@@ -5,6 +5,7 @@
                 "title": "LearningResults",
                 "createLabel": "Create a new LearningResult",
                 "createOrEditLabel": "Create or edit a LearningResult",
+                "createFor": "Create a new LearningResult for '{{name}}'",
                 "search": "Search for LearningResult"
             },
             "created": "A new LearningResult is created with identifier {{ param }}",
