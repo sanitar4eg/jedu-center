@@ -1,12 +1,15 @@
 
 <div>
-    <h2><span translate="jeducenterApp.student.detail.title">Student</span> {{student.id}}</h2>
+    <h2>
+        <span translate="jeducenterApp.student.detail.title">Student</span>
+        {{[student.lastName, student.firstName, student.middleName].join(' ')}}
+    </h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
             <tr>
-                <th translate="entity.detail.field">Field</th>
-                <th translate="entity.detail.value">Value</th>
+                <th width="18%"></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -72,6 +75,14 @@
                 </td>
                 <td>
                     <span class="form-control-static">{{student.specialty}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="jeducenterApp.student.faculty">Faculty</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{student.faculty}}</span>
                 </td>
             </tr>
             <tr>
