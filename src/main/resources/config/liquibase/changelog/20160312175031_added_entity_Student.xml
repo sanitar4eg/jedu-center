@@ -24,33 +24,33 @@
             <column name="last_name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="first_name" type="varchar(255)"/>
-            
+
             <column name="middle_name" type="varchar(255)"/>
-            
+
             <column name="type" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="email" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="phone" type="varchar(255)"/>
-            
+
             <column name="university" type="varchar(255)"/>
-            
+
             <column name="specialty" type="varchar(255)"/>
-            
+
             <column name="faculty" type="varchar(255)"/>
-            
+
             <column name="course" type="varchar(255)"/>
-            
+
             <column name="is_active" type="bit">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="user_id" type="bigint">
                 <constraints unique="true"/>
             </column>
@@ -59,12 +59,12 @@
             <column name="form_id" type="bigint">
                 <constraints unique="true"/>
             </column>
-            <column name="reason_for_leaving_id" type="bigint">
+            <column name="learning_result_id" type="bigint">
                 <constraints unique="true"/>
             </column>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        
+
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="student"
                                  constraintName="fk_student_user_id"
@@ -89,11 +89,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="form"/>
 
-        <addForeignKeyConstraint baseColumnNames="reason_for_leaving_id"
+        <addForeignKeyConstraint baseColumnNames="learning_result_id"
                                  baseTableName="student"
-                                 constraintName="fk_student_reasonforleaving_id"
+                                 constraintName="fk_student_learningresult_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="reason_for_leaving"/>
+                                 referencedTableName="learning_result"/>
 
     </changeSet>
 </databaseChangeLog>

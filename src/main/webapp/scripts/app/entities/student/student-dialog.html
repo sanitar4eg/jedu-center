@@ -1,4 +1,3 @@
-
 <form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
 
     <div class="modal-header">
@@ -131,8 +130,8 @@
             </select>
         </div>
         <div class="form-group">
-            <label translate="jeducenterApp.student.reasonForLeaving" for="field_reasonForLeaving">reasonForLeaving</label>
-            <select class="form-control" id="field_reasonForLeaving" name="reasonForLeaving" ng-model="student.reasonForLeaving" ng-options="reasonForLeaving as reasonForLeaving.type for reasonForLeaving in reasonforleavings | orderBy:'id' track by reasonForLeaving.id">
+            <label translate="jeducenterApp.student.learningResult" for="field_learningResult">learningResult</label>
+            <select class="form-control" id="field_learningResult" name="learningResult" ng-model="student.learningResult" ng-options="learningResult as learningResult.type for learningResult in learningresults | orderBy:'id' track by learningResult.id">
                 <option value=""></option>
             </select>
         </div>

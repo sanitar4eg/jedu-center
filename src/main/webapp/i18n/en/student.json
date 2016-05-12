@@ -32,7 +32,7 @@
             "groupOfStudent": "GroupOfStudent",
             "curator": "Curator",
             "form": "Form",
-            "reasonForLeaving": "ReasonForLeaving"
+            "learningResult": "LearningResult"
         }
     }
 }

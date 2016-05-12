@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('jeducenterApp').controller('StudentDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'Student', 'User', 'GroupOfStudent', 'Curator', 'Form', 'ReasonForLeaving',
-        function($scope, $stateParams, $uibModalInstance, $q, entity, Student, User, GroupOfStudent, Curator, Form, ReasonForLeaving) {
+    ['$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'Student', 'User', 'GroupOfStudent', 'Curator', 'Form', 'LearningResult',
+        function($scope, $stateParams, $uibModalInstance, $q, entity, Student, User, GroupOfStudent, Curator, Form, LearningResult) {
 
         $scope.student = entity;
         $scope.users = User.query();
@@ -17,14 +17,14 @@ angular.module('jeducenterApp').controller('StudentDialogController',
         }).then(function(form) {
             $scope.forms.push(form);
         });
-        $scope.reasonforleavings = ReasonForLeaving.query({filter: 'student-is-null'});
-        $q.all([$scope.student.$promise, $scope.reasonforleavings.$promise]).then(function() {
-            if (!$scope.student.reasonForLeaving || !$scope.student.reasonForLeaving.id) {
+        $scope.learningresults = LearningResult.query({filter: 'student-is-null'});
+        $q.all([$scope.student.$promise, $scope.learningresults.$promise]).then(function() {
+            if (!$scope.student.learningResult || !$scope.student.learningResult.id) {
                 return $q.reject();
             }
-            return ReasonForLeaving.get({id : $scope.student.reasonForLeaving.id}).$promise;
-        }).then(function(reasonForLeaving) {
-            $scope.reasonforleavings.push(reasonForLeaving);
+            return LearningResult.get({id : $scope.student.learningResult.id}).$promise;
+        }).then(function(learningResult) {
+            $scope.learningresults.push(learningResult);
         });
         $scope.load = function(id) {
             Student.get({id : id}, function(result) {

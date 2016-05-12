@@ -89,13 +89,7 @@ public class Student implements Serializable {
 
     @OneToOne
     @NotAudited
-    private ReasonForLeaving reasonForLeaving;
-
-    @OneToMany(mappedBy = "student", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JsonIgnore
-    @NotAudited
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Recall> recalls = new HashSet<>();
+    private LearningResult learningResult;
 
     public Long getId() {
         return id;
@@ -225,12 +219,12 @@ public class Student implements Serializable {
         this.form = form;
     }
 
-    public ReasonForLeaving getReasonForLeaving() {
-        return reasonForLeaving;
+    public LearningResult getLearningResult() {
+        return learningResult;
     }
 
-    public void setReasonForLeaving(ReasonForLeaving reasonForLeaving) {
-        this.reasonForLeaving = reasonForLeaving;
+    public void setLearningResult(LearningResult learningResult) {
+        this.learningResult = learningResult;
     }
 
     @Override
