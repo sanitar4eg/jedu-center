@@ -87,7 +87,7 @@ public class Student implements Serializable {
     @NotAudited
     private Form form;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @NotAudited
     private LearningResult learningResult;
 

@@ -79,6 +79,13 @@ public class LearningResultServiceImpl implements LearningResultService{
      */
     public void delete(Long id) {
         log.debug("Request to delete LearningResult : {}", id);
-        learningResultRepository.delete(id);
+        LearningResult result = learningResultRepository.findOne(id);
+        deleteRelationFromStudent(result);
+        learningResultRepository.delete(result);
+    }
+
+    private void deleteRelationFromStudent(LearningResult result) {
+        Optional.ofNullable(result.getStudent()).ifPresent(student -> student.setForm(null));
+        result.setStudent(null);
     }
 }
