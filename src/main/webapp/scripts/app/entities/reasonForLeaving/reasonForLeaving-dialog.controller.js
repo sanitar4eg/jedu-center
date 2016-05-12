@@ -1,19 +1,11 @@
 'use strict';
 
 angular.module('jeducenterApp').controller('ReasonForLeavingDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'ReasonForLeaving', 'Student',
-        function($scope, $stateParams, $uibModalInstance, $q, entity, ReasonForLeaving, Student) {
+    ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'ReasonForLeaving', 'Student',
+        function($scope, $stateParams, $uibModalInstance, entity, ReasonForLeaving, Student) {
 
         $scope.reasonForLeaving = entity;
-        $scope.students = Student.query({filter: 'reasonforleaving-is-null'});
-        $q.all([$scope.reasonForLeaving.$promise, $scope.students.$promise]).then(function() {
-            if (!$scope.reasonForLeaving.student || !$scope.reasonForLeaving.student.id) {
-                return $q.reject();
-            }
-            return Student.get({id : $scope.reasonForLeaving.student.id}).$promise;
-        }).then(function(student) {
-            $scope.students.push(student);
-        });
+        $scope.students = Student.query();
         $scope.load = function(id) {
             ReasonForLeaving.get({id : id}, function(result) {
                 $scope.reasonForLeaving = result;

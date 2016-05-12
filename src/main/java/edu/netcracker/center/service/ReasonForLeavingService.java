@@ -22,6 +22,11 @@ public interface ReasonForLeavingService {
      *  @return the list of entities
      */
     public Page<ReasonForLeaving> findAll(Pageable pageable);
+    /**
+     *  get all the reasonForLeavings where Student is null.
+     *  @return the list of entities
+     */
+    public List<ReasonForLeaving> findAllWhereStudentIsNull();
 
     /**
      *  get the "id" reasonForLeaving.

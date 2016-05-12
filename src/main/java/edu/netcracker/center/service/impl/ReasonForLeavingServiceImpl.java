@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * Service Implementation for managing ReasonForLeaving.
@@ -45,6 +47,20 @@ public class ReasonForLeavingServiceImpl implements ReasonForLeavingService{
         log.debug("Request to get all ReasonForLeavings");
         Page<ReasonForLeaving> result = reasonForLeavingRepository.findAll(pageable); 
         return result;
+    }
+
+
+    /**
+     *  get all the reasonForLeavings where Student is null.
+     *  @return the list of entities
+     */
+    @Transactional(readOnly = true) 
+    public List<ReasonForLeaving> findAllWhereStudentIsNull() {
+        log.debug("Request to get all reasonForLeavings where Student is null");
+        return StreamSupport
+            .stream(reasonForLeavingRepository.findAll().spliterator(), false)
+            .filter(reasonForLeaving -> reasonForLeaving.getStudent() == null)
+            .collect(Collectors.toList());
     }
 
     /**

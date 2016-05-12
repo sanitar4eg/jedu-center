@@ -1,5 +1,6 @@
 package edu.netcracker.center.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -32,7 +33,8 @@ public class ReasonForLeaving implements Serializable {
     @Column(name = "description")
     private String description;
     
-    @OneToOne
+    @OneToOne(mappedBy = "reasonForLeaving")
+    @JsonIgnore
     private Student student;
 
     public Long getId() {

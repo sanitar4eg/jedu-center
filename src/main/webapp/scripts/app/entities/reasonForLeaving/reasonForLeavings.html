@@ -20,7 +20,6 @@
                     <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="type"><span translate="jeducenterApp.reasonForLeaving.type">Type</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="description"><span translate="jeducenterApp.reasonForLeaving.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="student.lastName"><span translate="jeducenterApp.reasonForLeaving.student">student</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -29,9 +28,6 @@
                     <td><a ui-sref="reasonForLeaving.detail({id:reasonForLeaving.id})">{{reasonForLeaving.id}}</a></td>
                     <td translate="{{'jeducenterApp.TypeOfReason.' + reasonForLeaving.type}}">{{reasonForLeaving.type}}</td>
                     <td>{{reasonForLeaving.description}}</td>
-                    <td>
-                        <a ui-sref="student.detail({id:reasonForLeaving.student.id})">{{reasonForLeaving.student.lastName}}</a>
-                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

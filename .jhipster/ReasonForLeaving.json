@@ -5,8 +5,7 @@
             "relationshipName": "student",
             "otherEntityName": "student",
             "relationshipType": "one-to-one",
-            "otherEntityField": "lastName",
-            "ownerSide": true,
+            "ownerSide": false,
             "otherEntityRelationshipName": "reasonForLeaving"
         }
     ],
@@ -26,7 +25,7 @@
             "fieldType": "String"
         }
     ],
-    "changelogDate": "20160512100201",
+    "changelogDate": "20160312115031",
     "dto": "no",
     "service": "serviceImpl",
     "pagination": "pagination"
