@@ -130,6 +130,12 @@
                 <option value=""></option>
             </select>
         </div>
+        <div class="form-group">
+            <label translate="jeducenterApp.student.reasonForLeaving" for="field_reasonForLeaving">reasonForLeaving</label>
+            <select class="form-control" id="field_reasonForLeaving" name="reasonForLeaving" ng-model="student.reasonForLeaving" ng-options="reasonForLeaving as reasonForLeaving.type for reasonForLeaving in reasonforleavings | orderBy:'id' track by reasonForLeaving.id">
+                <option value=""></option>
+            </select>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">

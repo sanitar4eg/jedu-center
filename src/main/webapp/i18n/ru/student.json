@@ -36,7 +36,8 @@
             "user": "User",
             "groupOfStudent": "Группа",
             "curator": "Куратор",
-            "form": "Анкета"
+            "form": "Анкета",
+            "reasonForLeaving": "Причина отчисления"
         }
     }
 }
