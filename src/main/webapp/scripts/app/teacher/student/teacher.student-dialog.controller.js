@@ -5,8 +5,8 @@ angular.module('jeducenterApp').controller('TeacherStudentDialogController',
         function($scope, $stateParams, $uibModalInstance, $q, entity, Student, User, GroupOfStudent, Curator, Form) {
 
         $scope.student = entity;
-        $scope.groupofstudents = GroupOfStudent.query();
-        $scope.curators = Curator.query();
+        $scope.groupofstudents = GroupOfStudent.query({isActive: true});
+        $scope.curators = Curator.query({isActive: true});
         $scope.forms = Form.query({filter: 'student-is-null', isActive: true});
         $q.all([$scope.student.$promise, $scope.forms.$promise]).then(function() {
             if (!$scope.student.form || !$scope.student.form.id) {

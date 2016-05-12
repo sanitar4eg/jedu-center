@@ -8,11 +8,6 @@
     </div>
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
-        <!--<div class="form-group">
-            <label for="id" translate="global.field.id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="student.id" readonly />
-        </div>-->
         <div class="form-group">
             <label class="control-label" translate="jeducenterApp.student.lastName" for="field_lastName">LastName</label>
             <input type="text" class="form-control" name="lastName" id="field_lastName"
@@ -87,25 +82,6 @@
                     ng-model="student.course"
                      />
         </div>
-        <div class="form-group">
-            <label class="control-label" translate="jeducenterApp.student.isActive" for="field_isActive">IsActive</label>
-            <input type="checkbox" class="form-control" name="isActive" id="field_isActive"
-                    ng-model="student.isActive"
-                     />
-            <div ng-show="editForm.isActive.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.isActive.$error.required" translate="entity.validation.required">
-                    This field is required.
-                </p>
-            </div>
-        </div>
-
-        <!--<div class="form-group">
-            <label translate="jeducenterApp.student.user" for="field_user">user</label>
-            <select class="form-control" id="field_user" name="user" ng-model="student.user" ng-options="user as user.login for user in users track by user.id">
-                <option value=""></option>
-            </select>
-        </div>-->
         <div class="form-group">
             <label translate="jeducenterApp.student.groupOfStudent" for="field_groupOfStudent">groupOfStudent</label>
             <select class="form-control" id="field_groupOfStudent" name="groupOfStudent" ng-model="student.groupOfStudent" ng-options="groupOfStudent as groupOfStudent.name for groupOfStudent in groupofstudents track by groupOfStudent.id">
