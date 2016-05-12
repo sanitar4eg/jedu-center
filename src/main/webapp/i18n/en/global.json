@@ -16,7 +16,7 @@
                 "timeTable": "TimeTable",
                 "lesson": "Lesson",
                 "evaluation": "Evaluation",
-                "reasonForLeaving": "ReasonForLeaving",
+                "learningResult": "LearningResult",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

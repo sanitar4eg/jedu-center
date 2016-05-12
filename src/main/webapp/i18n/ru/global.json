@@ -16,7 +16,7 @@
                 "timeTable": "Расписание",
                 "lesson": "Уроки",
                 "evaluation": "Оценки",
-                "reasonForLeaving": "Причина отчисления",
+                "learningResult": "Результаты обучения",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
