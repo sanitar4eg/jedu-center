@@ -99,7 +99,9 @@ module.exports = function (grunt) {
                     proxyOptions: {
                         xfwd: true
                     }
-                }
+                },
+                logConnections: true,
+                open: false
             }
         },
         clean: {
@@ -357,6 +359,6 @@ module.exports = function (grunt) {
         'htmlmin'
     ]);
 
-    
+
     grunt.registerTask('default', ['serve']);
 };
