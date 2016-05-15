@@ -3,8 +3,7 @@
         "TypeOfResult" : {
             "null": "",
             "Dismissed": "Dismissed",
-            "GotJob": "GotJob",
-            "TookDocuments": "TookDocuments"
+            "GotJob": "GotJob"
         }
     }
 }

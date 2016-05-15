@@ -18,7 +18,6 @@
             <select class="form-control" name="type" ng-model="learningResult.type" id="field_type" required>
                 <option value="Dismissed" translate="jeducenterApp.TypeOfResult.Dismissed">Dismissed</option>
                 <option value="GotJob" translate="jeducenterApp.TypeOfResult.GotJob">GotJob</option>
-                <option value="TookDocuments" translate="jeducenterApp.TypeOfResult.TookDocuments">TookDocuments</option>
             </select>
             <div ng-show="editForm.type.$invalid">
                 <p class="help-block"
@@ -32,6 +31,22 @@
             <input type="text" class="form-control" name="description" id="field_description"
                     ng-model="learningResult.description"
                      />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="jeducenterApp.learningResult.creationTime" for="field_creationTime">CreationTime</label>
+            <input type="datetime-local" class="form-control" name="creationTime" id="field_creationTime"
+                    ng-model="learningResult.creationTime"
+                    required />
+            <div ng-show="editForm.creationTime.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.creationTime.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.creationTime.$error.ZonedDateTimelocal" translate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </p>
+            </div>
         </div>
 
     </div>

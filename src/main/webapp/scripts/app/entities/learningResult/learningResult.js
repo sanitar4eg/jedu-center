@@ -65,6 +65,7 @@ angular.module('jeducenterApp')
                                 return {
                                     type: null,
                                     description: null,
+                                    creationTime: new Date,
                                     id: null
                                 };
                             }

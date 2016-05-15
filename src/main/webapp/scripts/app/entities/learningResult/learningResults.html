@@ -20,6 +20,7 @@
                     <th><span translate="global.field.id">ID</span></th>
                     <th><span translate="jeducenterApp.learningResult.type">Type</span></th>
                     <th><span translate="jeducenterApp.learningResult.description">Description</span></th>
+                    <th><span translate="jeducenterApp.learningResult.creationTime">CreationTime</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -28,6 +29,7 @@
                     <td><a ui-sref="learningResult.detail({id:learningResult.id})">{{learningResult.id}}</a></td>
                     <td translate="{{'jeducenterApp.TypeOfResult.' + learningResult.type}}">{{learningResult.type}}</td>
                     <td>{{learningResult.description}}</td>
+                    <td>{{learningResult.creationTime | date:'medium'}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

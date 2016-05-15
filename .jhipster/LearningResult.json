@@ -14,7 +14,7 @@
             "fieldId": 1,
             "fieldName": "type",
             "fieldType": "TypeOfResult",
-            "fieldValues": "Dismissed,GotJob,TookDocuments",
+            "fieldValues": "Dismissed,GotJob",
             "fieldValidateRules": [
                 "required"
             ]
@@ -23,6 +23,14 @@
             "fieldId": 2,
             "fieldName": "description",
             "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "creationTime",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20160312115031",

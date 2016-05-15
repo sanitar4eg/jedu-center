@@ -3,8 +3,7 @@
         "TypeOfResult" : {
             "null": "",
             "Dismissed": "Отчислен",
-            "GotJob": "Принят на работу",
-            "TookDocuments": "Забрал документы"
+            "GotJob": "Принят на работу"
         }
     }
 }

@@ -24,11 +24,17 @@
             <column name="type" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-
+            
             <column name="description" type="varchar(255)"/>
-
+            
+            <column name="creation_time" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+            
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
+        <dropDefaultValue tableName="learning_result" columnName="creation_time" columnDataType="datetime"/>
 
+        
     </changeSet>
 </databaseChangeLog>

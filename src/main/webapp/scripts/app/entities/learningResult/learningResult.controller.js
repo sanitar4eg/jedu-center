@@ -30,6 +30,7 @@ angular.module('jeducenterApp')
             $scope.learningResult = {
                 type: null,
                 description: null,
+                creationTime: null,
                 id: null
             };
         };

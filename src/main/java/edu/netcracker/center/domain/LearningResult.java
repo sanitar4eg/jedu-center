@@ -1,17 +1,15 @@
 package edu.netcracker.center.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import edu.netcracker.center.domain.enumeration.TypeOfResult;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.time.ZonedDateTime;
 import java.util.Objects;
-
-import edu.netcracker.center.domain.enumeration.TypeOfResult;
 
 /**
  * A LearningResult.
@@ -32,6 +30,10 @@ public class LearningResult implements Serializable {
 
     @Column(name = "description")
     private String description;
+
+    @NotNull
+    @Column(name = "creation_time", nullable = false)
+    private ZonedDateTime creationTime;
 
     @OneToOne(mappedBy = "learningResult")
     @JsonIgnore
@@ -59,6 +61,14 @@ public class LearningResult implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public ZonedDateTime getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(ZonedDateTime creationTime) {
+        this.creationTime = creationTime;
     }
 
     public Student getStudent() {
@@ -95,6 +105,7 @@ public class LearningResult implements Serializable {
             "id=" + id +
             ", type='" + type + "'" +
             ", description='" + description + "'" +
+            ", creationTime='" + creationTime + "'" +
             '}';
     }
 }

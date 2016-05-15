@@ -1,18 +1,17 @@
 package edu.netcracker.center.service.impl;
 
-import edu.netcracker.center.service.LearningResultService;
 import edu.netcracker.center.domain.LearningResult;
 import edu.netcracker.center.repository.LearningResultRepository;
+import edu.netcracker.center.service.LearningResultService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -21,7 +20,7 @@ import java.util.stream.StreamSupport;
  */
 @Service
 @Transactional
-public class LearningResultServiceImpl implements LearningResultService{
+public class LearningResultServiceImpl implements LearningResultService {
 
     private final Logger log = LoggerFactory.getLogger(LearningResultServiceImpl.class);
 
@@ -30,6 +29,7 @@ public class LearningResultServiceImpl implements LearningResultService{
 
     /**
      * Save a learningResult.
+     *
      * @return the persisted entity
      */
     public LearningResult save(LearningResult learningResult) {
@@ -39,8 +39,9 @@ public class LearningResultServiceImpl implements LearningResultService{
     }
 
     /**
-     *  get all the learningResults.
-     *  @return the list of entities
+     * get all the learningResults.
+     *
+     * @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<LearningResult> findAll(Pageable pageable) {
@@ -51,8 +52,9 @@ public class LearningResultServiceImpl implements LearningResultService{
 
 
     /**
-     *  get all the learningResults where Student is null.
-     *  @return the list of entities
+     * get all the learningResults where Student is null.
+     *
+     * @return the list of entities
      */
     @Transactional(readOnly = true)
     public List<LearningResult> findAllWhereStudentIsNull() {
@@ -64,8 +66,9 @@ public class LearningResultServiceImpl implements LearningResultService{
     }
 
     /**
-     *  get one learningResult by id.
-     *  @return the entity
+     * get one learningResult by id.
+     *
+     * @return the entity
      */
     @Transactional(readOnly = true)
     public LearningResult findOne(Long id) {
@@ -75,17 +78,10 @@ public class LearningResultServiceImpl implements LearningResultService{
     }
 
     /**
-     *  delete the  learningResult by id.
+     * delete the  learningResult by id.
      */
     public void delete(Long id) {
         log.debug("Request to delete LearningResult : {}", id);
-        LearningResult result = learningResultRepository.findOne(id);
-        deleteRelationFromStudent(result);
-        learningResultRepository.delete(result);
-    }
-
-    private void deleteRelationFromStudent(LearningResult result) {
-        Optional.ofNullable(result.getStudent()).ifPresent(student -> student.setForm(null));
-        result.setStudent(null);
+        learningResultRepository.delete(id);
     }
 }

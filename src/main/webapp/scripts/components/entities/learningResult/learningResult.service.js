@@ -8,6 +8,7 @@ angular.module('jeducenterApp')
                 method: 'GET',
                 transformResponse: function (data) {
                     data = angular.fromJson(data);
+                    data.creationTime = DateUtils.convertDateTimeFromServer(data.creationTime);
                     return data;
                 }
             },

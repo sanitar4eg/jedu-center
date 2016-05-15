@@ -19,6 +19,7 @@
             },
             "type": "Тип",
             "description": "Описание",
+            "creationTime": "Дата создания",
             "student": "Студент"
         }
     }

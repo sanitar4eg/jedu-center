@@ -34,4 +34,13 @@ angular.module('jeducenterApp').controller('LearningResultDialogController',
         $scope.clear = function() {
             $uibModalInstance.dismiss('cancel');
         };
+        $scope.datePickerForCreationTime = {};
+
+        $scope.datePickerForCreationTime.status = {
+            opened: false
+        };
+
+        $scope.datePickerForCreationTimeOpen = function($event) {
+            $scope.datePickerForCreationTime.status.opened = true;
+        };
 }]);
