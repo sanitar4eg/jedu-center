@@ -17,6 +17,7 @@
                 "lesson": "Уроки",
                 "evaluation": "Оценки",
                 "learningResult": "Результаты обучения",
+                "studentsSet": "Наборы",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

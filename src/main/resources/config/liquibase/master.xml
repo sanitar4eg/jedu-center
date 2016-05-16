@@ -6,6 +6,7 @@
 
     <include file="classpath:config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160312115031_added_entity_LearningResult.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20160312125031_added_entity_StudentsSet.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160312173231_added_entity_TimeTable.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160312174035_added_entity_Form.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20160312174231_added_entity_GroupOfStudent.xml" relativeToChangelogFile="false"/>

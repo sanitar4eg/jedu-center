@@ -1,0 +1,45 @@
+{
+    "relationships": [
+        {
+            "relationshipId": 1,
+            "relationshipName": "student",
+            "otherEntityName": "student",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "studentsSet"
+        },
+        {
+            "relationshipId": 2,
+            "relationshipName": "groupOfStudent",
+            "otherEntityName": "groupOfStudent",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "studentsSet"
+        }
+    ],
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "isActive",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20160312125031",
+    "dto": "no",
+    "service": "serviceImpl",
+    "pagination": "pagination"
+}

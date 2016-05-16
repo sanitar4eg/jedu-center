@@ -1,0 +1,26 @@
+{
+    "jeducenterApp": {
+        "studentsSet" : {
+            "home": {
+                "title": "StudentsSets",
+                "createLabel": "Create a new StudentsSet",
+                "createOrEditLabel": "Create or edit a StudentsSet",
+                "search": "Search for StudentsSet"
+            },
+            "created": "A new StudentsSet is created with identifier {{ param }}",
+            "updated": "A StudentsSet is updated with identifier {{ param }}",
+            "deleted": "A StudentsSet is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete StudentsSet {{ id }}?"
+            },
+            "detail": {
+                "title": "StudentsSet"
+            },
+            "name": "Name",
+            "description": "Description",
+            "isActive": "IsActive",
+            "student": "Student",
+            "groupOfStudent": "GroupOfStudent"
+        }
+    }
+}

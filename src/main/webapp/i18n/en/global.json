@@ -17,6 +17,7 @@
                 "lesson": "Lesson",
                 "evaluation": "Evaluation",
                 "learningResult": "LearningResult",
+                "studentsSet": "StudentsSet",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

@@ -1,0 +1,26 @@
+{
+    "jeducenterApp": {
+        "studentsSet" : {
+            "home": {
+                "title": "Наборы",
+                "createLabel": "Создать набор",
+                "createOrEditLabel": "Создать или редактировать набор",
+                "search": "Поиск набора"
+            },
+            "created": "Новый набор создан, ID: {{ param }}",
+            "updated": "Набор обнавлен, ID: {{ param }}",
+            "deleted": "Набор удален, ID: {{ param }}",
+            "delete": {
+                "question": "Вы действительно хотите удалить набор {{ id }}?"
+            },
+            "detail": {
+                "title": "Набор"
+            },
+            "name": "Имя",
+            "description": "Описание",
+            "isActive": "Активен",
+            "student": "Студент",
+            "groupOfStudent": "Группа"
+        }
+    }
+}

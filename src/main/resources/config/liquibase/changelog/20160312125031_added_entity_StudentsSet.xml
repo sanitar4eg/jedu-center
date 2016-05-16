@@ -14,18 +14,22 @@
     <property name="floatType" value="float" dbms="mysql, oracle"/>
 
     <!--
-        Added the entity ReasonForLeaving.
+        Added the entity StudentsSet.
     -->
-    <changeSet id="20160312115031" author="jhipster">
-        <createTable tableName="reason_for_leaving">
+    <changeSet id="20160312125031" author="jhipster">
+        <createTable tableName="students_set">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="type" type="varchar(255)">
+            <column name="name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
             
             <column name="description" type="varchar(255)"/>
+            
+            <column name="is_active" type="bit">
+                <constraints nullable="false" />
+            </column>
             
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
