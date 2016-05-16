@@ -91,6 +91,11 @@ public class Student implements Serializable {
     @NotAudited
     private LearningResult learningResult;
 
+    @ManyToOne
+    @NotAudited
+    @JoinColumn(name = "students_set_id")
+    private StudentsSet studentsSet;
+
     public Long getId() {
         return id;
     }
@@ -225,6 +230,14 @@ public class Student implements Serializable {
 
     public void setLearningResult(LearningResult learningResult) {
         this.learningResult = learningResult;
+    }
+
+    public StudentsSet getStudentsSet() {
+        return studentsSet;
+    }
+
+    public void setStudentsSet(StudentsSet studentsSet) {
+        this.studentsSet = studentsSet;
     }
 
     @Override

@@ -32,7 +32,8 @@
             "groupOfStudent": "GroupOfStudent",
             "curator": "Curator",
             "form": "Form",
-            "learningResult": "LearningResult"
+            "learningResult": "LearningResult",
+            "studentsSet": "StudentsSet"
         }
     }
 }

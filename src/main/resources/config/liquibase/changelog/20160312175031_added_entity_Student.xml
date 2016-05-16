@@ -22,7 +22,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="last_name" type="varchar(255)">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
 
             <column name="first_name" type="varchar(255)"/>
@@ -30,11 +30,11 @@
             <column name="middle_name" type="varchar(255)"/>
 
             <column name="type" type="varchar(255)">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
 
             <column name="email" type="varchar(255)">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
 
             <column name="phone" type="varchar(255)"/>
@@ -48,7 +48,7 @@
             <column name="course" type="varchar(255)"/>
 
             <column name="is_active" type="bit">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
 
             <column name="user_id" type="bigint">
@@ -62,6 +62,7 @@
             <column name="learning_result_id" type="bigint">
                 <constraints unique="true"/>
             </column>
+            <column name="students_set_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
 
@@ -94,6 +95,12 @@
                                  constraintName="fk_student_learningresult_id"
                                  referencedColumnNames="id"
                                  referencedTableName="learning_result"/>
+
+        <addForeignKeyConstraint baseColumnNames="students_set_id"
+                                 baseTableName="student"
+                                 constraintName="fk_student_studentsset_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="students_set"/>
 
     </changeSet>
 </databaseChangeLog>

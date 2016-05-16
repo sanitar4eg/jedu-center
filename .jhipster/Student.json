@@ -41,6 +41,14 @@
             "otherEntityField": "type",
             "ownerSide": true,
             "otherEntityRelationshipName": "student"
+        },
+        {
+            "relationshipId": 6,
+            "relationshipName": "studentsSet",
+            "otherEntityName": "studentsSet",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name",
+            "otherEntityRelationshipName": "student"
         }
     ],
     "fields": [
