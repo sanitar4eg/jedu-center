@@ -38,7 +38,8 @@
             "curator": "Куратор",
             "form": "Анкета",
             "learningResult": "Результат обучения",
-            "studentsSet": "Набор"
+            "studentsSet": "Набор",
+            "learningType": "Тип обучения"
         }
     }
 }

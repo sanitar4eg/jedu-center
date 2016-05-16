@@ -50,8 +50,6 @@ public class StudentResourceIntTest {
     private static final String DEFAULT_MIDDLE_NAME = "AAAAA";
     private static final String UPDATED_MIDDLE_NAME = "BBBBB";
 
-    private static final TypeEnumeration DEFAULT_TYPE = TypeEnumeration.DEV;
-    private static final TypeEnumeration UPDATED_TYPE = TypeEnumeration.QA;
     private static final String DEFAULT_EMAIL = "AAAAA@CCCC";
     private static final String UPDATED_EMAIL = "BBBBB@DDDD";
     private static final String DEFAULT_PHONE = "AAAAA";
@@ -104,7 +102,6 @@ public class StudentResourceIntTest {
         student.setLastName(DEFAULT_LAST_NAME);
         student.setFirstName(DEFAULT_FIRST_NAME);
         student.setMiddleName(DEFAULT_MIDDLE_NAME);
-        student.setType(DEFAULT_TYPE);
         student.setEmail(DEFAULT_EMAIL);
         student.setPhone(DEFAULT_PHONE);
         student.setUniversity(DEFAULT_UNIVERSITY);
@@ -133,7 +130,6 @@ public class StudentResourceIntTest {
         assertThat(testStudent.getLastName()).isEqualTo(DEFAULT_LAST_NAME);
         assertThat(testStudent.getFirstName()).isEqualTo(DEFAULT_FIRST_NAME);
         assertThat(testStudent.getMiddleName()).isEqualTo(DEFAULT_MIDDLE_NAME);
-        assertThat(testStudent.getType()).isEqualTo(DEFAULT_TYPE);
         assertThat(testStudent.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testStudent.getPhone()).isEqualTo(DEFAULT_PHONE);
         assertThat(testStudent.getUniversity()).isEqualTo(DEFAULT_UNIVERSITY);
@@ -149,24 +145,6 @@ public class StudentResourceIntTest {
         int databaseSizeBeforeTest = studentRepository.findAll().size();
         // set the field null
         student.setLastName(null);
-
-        // Create the Student, which fails.
-
-        restStudentMockMvc.perform(post("/api/students")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(student)))
-            .andExpect(status().isBadRequest());
-
-        List<Student> students = studentRepository.findAll();
-        assertThat(students).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkTypeIsRequired() throws Exception {
-        int databaseSizeBeforeTest = studentRepository.findAll().size();
-        // set the field null
-        student.setType(null);
 
         // Create the Student, which fails.
 
@@ -229,7 +207,6 @@ public class StudentResourceIntTest {
             .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME.toString())))
             .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME.toString())))
             .andExpect(jsonPath("$.[*].middleName").value(hasItem(DEFAULT_MIDDLE_NAME.toString())))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
             .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE.toString())))
 //            .andExpect(jsonPath("$.[*].university").value(hasItem(DEFAULT_UNIVERSITY.toString())))
@@ -253,7 +230,6 @@ public class StudentResourceIntTest {
             .andExpect(jsonPath("$.lastName").value(DEFAULT_LAST_NAME.toString()))
             .andExpect(jsonPath("$.firstName").value(DEFAULT_FIRST_NAME.toString()))
             .andExpect(jsonPath("$.middleName").value(DEFAULT_MIDDLE_NAME.toString()))
-            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()))
             .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE.toString()))
 //            .andExpect(jsonPath("$.university").value(DEFAULT_UNIVERSITY.toString()))
@@ -283,7 +259,6 @@ public class StudentResourceIntTest {
         student.setLastName(UPDATED_LAST_NAME);
         student.setFirstName(UPDATED_FIRST_NAME);
         student.setMiddleName(UPDATED_MIDDLE_NAME);
-        student.setType(UPDATED_TYPE);
         student.setEmail(UPDATED_EMAIL);
         student.setPhone(UPDATED_PHONE);
         student.setUniversity(UPDATED_UNIVERSITY);
@@ -304,7 +279,6 @@ public class StudentResourceIntTest {
         assertThat(testStudent.getLastName()).isEqualTo(UPDATED_LAST_NAME);
         assertThat(testStudent.getFirstName()).isEqualTo(UPDATED_FIRST_NAME);
         assertThat(testStudent.getMiddleName()).isEqualTo(UPDATED_MIDDLE_NAME);
-        assertThat(testStudent.getType()).isEqualTo(UPDATED_TYPE);
         assertThat(testStudent.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testStudent.getPhone()).isEqualTo(UPDATED_PHONE);
         assertThat(testStudent.getUniversity()).isEqualTo(UPDATED_UNIVERSITY);

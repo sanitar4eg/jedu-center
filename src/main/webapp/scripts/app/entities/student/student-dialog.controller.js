@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('jeducenterApp').controller('StudentDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'Student', 'User', 'GroupOfStudent', 'Curator', 'Form', 'LearningResult', 'StudentsSet',
-        function($scope, $stateParams, $uibModalInstance, $q, entity, Student, User, GroupOfStudent, Curator, Form, LearningResult, StudentsSet) {
+    ['$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'Student', 'User', 'GroupOfStudent', 'Curator', 'Form', 'LearningResult', 'StudentsSet', 'LearningType',
+        function($scope, $stateParams, $uibModalInstance, $q, entity, Student, User, GroupOfStudent, Curator, Form, LearningResult, StudentsSet, LearningType) {
 
         $scope.student = entity;
         $scope.users = User.query();
@@ -27,6 +27,7 @@ angular.module('jeducenterApp').controller('StudentDialogController',
             $scope.learningresults.push(learningResult);
         });
         $scope.studentssets = StudentsSet.query();
+        $scope.learningtypes = LearningType.query();
         $scope.load = function(id) {
             Student.get({id : id}, function(result) {
                 $scope.student = result;

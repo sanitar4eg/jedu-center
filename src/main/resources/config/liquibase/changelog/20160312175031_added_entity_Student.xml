@@ -29,10 +29,6 @@
 
             <column name="middle_name" type="varchar(255)"/>
 
-            <column name="type" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-
             <column name="email" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
@@ -63,6 +59,7 @@
                 <constraints unique="true"/>
             </column>
             <column name="students_set_id" type="bigint"/>
+            <column name="learning_type_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
 
@@ -101,6 +98,12 @@
                                  constraintName="fk_student_studentsset_id"
                                  referencedColumnNames="id"
                                  referencedTableName="students_set"/>
+
+        <addForeignKeyConstraint baseColumnNames="learning_type_id"
+                                 baseTableName="student"
+                                 constraintName="fk_student_learningtype_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="learning_type"/>
 
     </changeSet>
 </databaseChangeLog>

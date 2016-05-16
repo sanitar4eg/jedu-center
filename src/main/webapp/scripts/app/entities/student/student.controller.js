@@ -31,7 +31,6 @@ angular.module('jeducenterApp')
                 lastName: null,
                 firstName: null,
                 middleName: null,
-                type: null,
                 email: null,
                 phone: null,
                 university: null,

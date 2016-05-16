@@ -1,20 +1,16 @@
 package edu.netcracker.center.domain;
 
-import edu.netcracker.center.domain.enumeration.TypeEnumeration;
 import edu.netcracker.center.domain.enumeration.UniversityEnumeration;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 import org.hibernate.validator.constraints.Email;
-import org.springframework.cloud.cloudfoundry.com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * A Student.
@@ -38,11 +34,6 @@ public class Student implements Serializable {
 
     @Column(name = "middle_name")
     private String middleName;
-
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column(name = "type", nullable = false)
-    private TypeEnumeration type;
 
     @NotNull
     @Column(name = "email", nullable = false)
@@ -96,6 +87,11 @@ public class Student implements Serializable {
     @JoinColumn(name = "students_set_id")
     private StudentsSet studentsSet;
 
+    @ManyToOne
+    @NotAudited
+    @JoinColumn(name = "learning_type_id")
+    private LearningType learningType;
+
     public Long getId() {
         return id;
     }
@@ -126,14 +122,6 @@ public class Student implements Serializable {
 
     public void setMiddleName(String middleName) {
         this.middleName = middleName;
-    }
-
-    public TypeEnumeration getType() {
-        return type;
-    }
-
-    public void setType(TypeEnumeration type) {
-        this.type = type;
     }
 
     public String getEmail() {
@@ -240,6 +228,14 @@ public class Student implements Serializable {
         this.studentsSet = studentsSet;
     }
 
+    public LearningType getLearningType() {
+        return learningType;
+    }
+
+    public void setLearningType(LearningType learningType) {
+        this.learningType = learningType;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -267,7 +263,6 @@ public class Student implements Serializable {
             ", lastName='" + lastName + "'" +
             ", firstName='" + firstName + "'" +
             ", middleName='" + middleName + "'" +
-            ", type='" + type + "'" +
             ", email='" + email + "'" +
             ", phone='" + phone + "'" +
             ", university='" + university + "'" +

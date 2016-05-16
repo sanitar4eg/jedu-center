@@ -20,7 +20,6 @@
             "lastName": "LastName",
             "firstName": "FirstName",
             "middleName": "MiddleName",
-            "type": "Type",
             "email": "Email",
             "phone": "Phone",
             "university": "University",
@@ -33,7 +32,8 @@
             "curator": "Curator",
             "form": "Form",
             "learningResult": "LearningResult",
-            "studentsSet": "StudentsSet"
+            "studentsSet": "StudentsSet",
+            "learningType": "LearningType"
         }
     }
 }

@@ -37,19 +37,6 @@
                      />
         </div>
         <div class="form-group">
-            <label class="control-label" translate="jeducenterApp.student.type" for="field_type">Type</label>
-            <select class="form-control" name="type" ng-model="student.type" id="field_type" required>
-                <option value="DEV" translate="jeducenterApp.TypeEnumeration.DEV">DEV</option>
-                <option value="QA" translate="jeducenterApp.TypeEnumeration.QA">QA</option>
-            </select>
-            <div ng-show="editForm.type.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.type.$error.required" translate="entity.validation.required">
-                    This field is required.
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
             <label class="control-label" translate="jeducenterApp.student.email" for="field_email">Email</label>
             <input type="text" class="form-control" name="email" id="field_email"
                     ng-model="student.email"
@@ -138,6 +125,12 @@
         <div class="form-group">
             <label translate="jeducenterApp.student.studentsSet" for="field_studentsSet">studentsSet</label>
             <select class="form-control" id="field_studentsSet" name="studentsSet" ng-model="student.studentsSet" ng-options="studentsSet as studentsSet.name for studentsSet in studentssets track by studentsSet.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="jeducenterApp.student.learningType" for="field_learningType">learningType</label>
+            <select class="form-control" id="field_learningType" name="learningType" ng-model="student.learningType" ng-options="learningType as learningType.name for learningType in learningtypes track by learningType.id">
                 <option value=""></option>
             </select>
         </div>

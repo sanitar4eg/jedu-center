@@ -2,7 +2,8 @@
 
 angular.module('jeducenterApp')
     .controller('StudentDetailController', function ($scope, $rootScope, $stateParams, entity, Student, User, 
-                                                     GroupOfStudent, Curator, Form, LearningResult, StudentsSet) {
+                                                     GroupOfStudent, Curator, Form, LearningResult, StudentsSet, 
+                                                     LearningType) {
         $scope.student = entity;
         $scope.load = function (id) {
             Student.get({id: id}, function(result) {
