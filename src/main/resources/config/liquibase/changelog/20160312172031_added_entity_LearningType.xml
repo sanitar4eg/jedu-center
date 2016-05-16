@@ -22,15 +22,21 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
-            
+
             <column name="is_active" type="bit">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
-            
+
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        
+
+        <loadData encoding="UTF-8"
+                  file="config/liquibase/learning_type.csv"
+                  separator=";"
+                  tableName="learning_type">
+        </loadData>
+
     </changeSet>
 </databaseChangeLog>
