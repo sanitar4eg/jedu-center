@@ -2,9 +2,10 @@
 
 angular.module('jeducenterApp')
     .controller('TeacherStudentController', function ($scope, $state, Student, tmhDynamicLocale,
-                                                      i18nService, $translate, $log) {
+                                                      i18nService, $translate, $log, LearningType) {
 
         $scope.students = [];
+        $scope.types = LearningType.query();
         $scope.options = [
             {text: "Все", predicate: {}},
             {text: "DEV", predicate: {type: "DEV"}},
@@ -48,8 +49,11 @@ angular.module('jeducenterApp')
                     headerCellFilter: "translate"
                 },
                 {
-                    displayName: 'jeducenterApp.student.type', field: 'type', width: '4%',
-                    headerCellFilter: "translate"
+                    displayName: 'jeducenterApp.student.learningType', width: '4%', name: 'learningType',
+                    headerCellFilter: "translate",
+                    cellTemplate: 'scripts/app/teacher/student/ui-grid/student.type.cell.html',
+                    editDropdownOptionsArray: $scope.types, editDropdownValueLabel: 'name',
+                    editableCellTemplate: 'scripts/app/teacher/student/ui-grid/student.type.select.html'
                 },
                 {
                     displayName: 'jeducenterApp.student.email', field: 'email', width: '14%',
@@ -61,7 +65,8 @@ angular.module('jeducenterApp')
                 },
                 {
                     displayName: 'jeducenterApp.student.university', field: 'university', width: '10%',
-                    headerCellFilter: "translate"
+                    headerCellFilter: "translate", editDropdownOptionsArray: ['СГУ', 'СГТУ'],
+                    editableCellTemplate: 'scripts/app/teacher/student/ui-grid/student.university.select.html'
                 },
                 {
                     displayName: 'jeducenterApp.student.specialty', field: 'specialty', width: '12%', visible: false,
