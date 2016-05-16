@@ -29,7 +29,6 @@ angular.module('jeducenterApp')
         $scope.clear = function () {
             $scope.groupOfStudent = {
                 name: null,
-                type: null,
                 description: null,
                 isActive: false,
                 id: null

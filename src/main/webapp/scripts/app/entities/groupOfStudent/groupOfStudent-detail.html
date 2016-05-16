@@ -20,14 +20,6 @@
             </tr>
             <tr>
                 <td>
-                    <span translate="jeducenterApp.groupOfStudent.type">Type</span>
-                </td>
-                <td>
-                    <span class="form-control-static" translate="{{'jeducenterApp.TypeEnumeration.' + groupOfStudent.type}}">{{groupOfStudent.type}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
                     <span translate="jeducenterApp.groupOfStudent.description">Description</span>
                 </td>
                 <td>
@@ -56,6 +48,14 @@
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="studentsSet.detail({id:groupOfStudent.studentsSet.id})">{{groupOfStudent.studentsSet.name}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="jeducenterApp.groupOfStudent.learningType">learningType</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="learningType.detail({id:groupOfStudent.learningType.id})">{{groupOfStudent.learningType.name}}</a>
                 </td>
             </tr>
             </tbody>

@@ -1,7 +1,6 @@
 package edu.netcracker.center.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import edu.netcracker.center.domain.enumeration.TypeEnumeration;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -28,11 +27,6 @@ public class GroupOfStudent implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column(name = "type", nullable = false)
-    private TypeEnumeration type;
-
     @Column(name = "description")
     private String description;
 
@@ -52,6 +46,11 @@ public class GroupOfStudent implements Serializable {
     @JoinColumn(name = "students_set_id")
     private StudentsSet studentsSet;
 
+    @ManyToOne
+    @NotNull
+    @JoinColumn(name = "learning_type_id")
+    private LearningType learningType;
+
     public Long getId() {
         return id;
     }
@@ -66,14 +65,6 @@ public class GroupOfStudent implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public TypeEnumeration getType() {
-        return type;
-    }
-
-    public void setType(TypeEnumeration type) {
-        this.type = type;
     }
 
     public String getDescription() {
@@ -116,6 +107,14 @@ public class GroupOfStudent implements Serializable {
         this.studentsSet = studentsSet;
     }
 
+    public LearningType getLearningType() {
+        return learningType;
+    }
+
+    public void setLearningType(LearningType learningType) {
+        this.learningType = learningType;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -141,7 +140,6 @@ public class GroupOfStudent implements Serializable {
         return "GroupOfStudent{" +
             "id=" + id +
             ", name='" + name + "'" +
-            ", type='" + type + "'" +
             ", description='" + description + "'" +
             ", isActive='" + isActive + "'" +
             '}';

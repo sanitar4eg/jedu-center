@@ -12,7 +12,6 @@ import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.data.web.querydsl.QuerydslPredicateArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
@@ -31,7 +30,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import edu.netcracker.center.domain.enumeration.TypeEnumeration;
 
 /**
  * Test class for the GroupOfStudentResource REST controller.
@@ -46,9 +44,6 @@ public class GroupOfStudentResourceIntTest {
 
     private static final String DEFAULT_NAME = "AAAAA";
     private static final String UPDATED_NAME = "BBBBB";
-
-    private static final TypeEnumeration DEFAULT_TYPE = TypeEnumeration.DEV;
-    private static final TypeEnumeration UPDATED_TYPE = TypeEnumeration.QA;
     private static final String DEFAULT_DESCRIPTION = "AAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBB";
 
@@ -67,9 +62,6 @@ public class GroupOfStudentResourceIntTest {
     @Inject
     private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
 
-    @Inject
-    private QuerydslPredicateArgumentResolver querydslPredicateArgumentResolver;
-
     private MockMvc restGroupOfStudentMockMvc;
 
     private GroupOfStudent groupOfStudent;
@@ -80,7 +72,7 @@ public class GroupOfStudentResourceIntTest {
         GroupOfStudentResource groupOfStudentResource = new GroupOfStudentResource();
         ReflectionTestUtils.setField(groupOfStudentResource, "groupOfStudentService", groupOfStudentService);
         this.restGroupOfStudentMockMvc = MockMvcBuilders.standaloneSetup(groupOfStudentResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver, querydslPredicateArgumentResolver)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
     }
 
@@ -88,7 +80,6 @@ public class GroupOfStudentResourceIntTest {
     public void initTest() {
         groupOfStudent = new GroupOfStudent();
         groupOfStudent.setName(DEFAULT_NAME);
-        groupOfStudent.setType(DEFAULT_TYPE);
         groupOfStudent.setDescription(DEFAULT_DESCRIPTION);
         groupOfStudent.setIsActive(DEFAULT_IS_ACTIVE);
     }
@@ -110,7 +101,6 @@ public class GroupOfStudentResourceIntTest {
         assertThat(groupOfStudents).hasSize(databaseSizeBeforeCreate + 1);
         GroupOfStudent testGroupOfStudent = groupOfStudents.get(groupOfStudents.size() - 1);
         assertThat(testGroupOfStudent.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testGroupOfStudent.getType()).isEqualTo(DEFAULT_TYPE);
         assertThat(testGroupOfStudent.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testGroupOfStudent.getIsActive()).isEqualTo(DEFAULT_IS_ACTIVE);
     }
@@ -121,24 +111,6 @@ public class GroupOfStudentResourceIntTest {
         int databaseSizeBeforeTest = groupOfStudentRepository.findAll().size();
         // set the field null
         groupOfStudent.setName(null);
-
-        // Create the GroupOfStudent, which fails.
-
-        restGroupOfStudentMockMvc.perform(post("/api/groupOfStudents")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(groupOfStudent)))
-                .andExpect(status().isBadRequest());
-
-        List<GroupOfStudent> groupOfStudents = groupOfStudentRepository.findAll();
-        assertThat(groupOfStudents).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkTypeIsRequired() throws Exception {
-        int databaseSizeBeforeTest = groupOfStudentRepository.findAll().size();
-        // set the field null
-        groupOfStudent.setType(null);
 
         // Create the GroupOfStudent, which fails.
 
@@ -181,7 +153,6 @@ public class GroupOfStudentResourceIntTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(groupOfStudent.getId().intValue())))
                 .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-                .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
                 .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
                 .andExpect(jsonPath("$.[*].isActive").value(hasItem(DEFAULT_IS_ACTIVE.booleanValue())));
     }
@@ -198,7 +169,6 @@ public class GroupOfStudentResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(groupOfStudent.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.isActive").value(DEFAULT_IS_ACTIVE.booleanValue()));
     }
@@ -221,7 +191,6 @@ public class GroupOfStudentResourceIntTest {
 
         // Update the groupOfStudent
         groupOfStudent.setName(UPDATED_NAME);
-        groupOfStudent.setType(UPDATED_TYPE);
         groupOfStudent.setDescription(UPDATED_DESCRIPTION);
         groupOfStudent.setIsActive(UPDATED_IS_ACTIVE);
 
@@ -235,7 +204,6 @@ public class GroupOfStudentResourceIntTest {
         assertThat(groupOfStudents).hasSize(databaseSizeBeforeUpdate);
         GroupOfStudent testGroupOfStudent = groupOfStudents.get(groupOfStudents.size() - 1);
         assertThat(testGroupOfStudent.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testGroupOfStudent.getType()).isEqualTo(UPDATED_TYPE);
         assertThat(testGroupOfStudent.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testGroupOfStudent.getIsActive()).isEqualTo(UPDATED_IS_ACTIVE);
     }

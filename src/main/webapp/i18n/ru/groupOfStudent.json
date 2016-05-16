@@ -26,7 +26,8 @@
             "isActive": "Активна",
             "student": "Студенты",
             "timeTable": "Расписание",
-            "studentsSet": "Набор"
+            "studentsSet": "Набор",
+            "learningType": "Тип обучения"
         }
     }
 }

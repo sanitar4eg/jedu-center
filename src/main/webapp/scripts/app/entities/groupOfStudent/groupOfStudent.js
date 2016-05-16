@@ -19,7 +19,6 @@ angular.module('jeducenterApp')
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('groupOfStudent');
-                        $translatePartialLoader.addPart('typeEnumeration');
                         $translatePartialLoader.addPart('global');
                         return $translate.refresh();
                     }]
@@ -41,7 +40,6 @@ angular.module('jeducenterApp')
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('groupOfStudent');
-                        $translatePartialLoader.addPart('typeEnumeration');
                         return $translate.refresh();
                     }],
                     entity: ['$stateParams', 'GroupOfStudent', function($stateParams, GroupOfStudent) {
@@ -64,7 +62,6 @@ angular.module('jeducenterApp')
                             entity: function () {
                                 return {
                                     name: null,
-                                    type: null,
                                     description: null,
                                     isActive: false,
                                     id: null

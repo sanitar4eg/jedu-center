@@ -17,9 +17,17 @@
             "otherEntityRelationshipName": "groupOfStudent"
         },
         {
-            "relationshipId": 6,
+            "relationshipId": 3,
             "relationshipName": "studentsSet",
             "otherEntityName": "studentsSet",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name",
+            "otherEntityRelationshipName": "groupOfStudent"
+        },
+        {
+            "relationshipId": 4,
+            "relationshipName": "learningType",
+            "otherEntityName": "learningType",
             "relationshipType": "many-to-one",
             "otherEntityField": "name",
             "otherEntityRelationshipName": "groupOfStudent"
@@ -36,20 +44,11 @@
         },
         {
             "fieldId": 2,
-            "fieldName": "type",
-            "fieldType": "TypeEnumeration",
-            "fieldValues": "DEV,QA",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldId": 3,
             "fieldName": "description",
             "fieldType": "String"
         },
         {
-            "fieldId": 4,
+            "fieldId": 3,
             "fieldName": "isActive",
             "fieldType": "Boolean",
             "fieldValidateRules": [

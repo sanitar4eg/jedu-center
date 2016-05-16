@@ -21,12 +21,12 @@
                 "title": "GroupOfStudent"
             },
             "name": "Name",
-            "type": "Type",
             "description": "Description",
             "isActive": "IsActive",
             "student": "Student",
             "timeTable": "TimeTable",
-            "studentsSet": "StudentsSet"
+            "studentsSet": "StudentsSet",
+            "learningType": "LearningType"
         }
     }
 }

@@ -25,10 +25,6 @@
                 <constraints nullable="false" />
             </column>
             
-            <column name="type" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
-            
             <column name="description" type="varchar(255)"/>
             
             <column name="is_active" type="bit">
@@ -39,6 +35,7 @@
                 <constraints unique="true"/>
             </column>
             <column name="students_set_id" type="bigint"/>
+            <column name="learning_type_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         
@@ -53,6 +50,12 @@
                                  constraintName="fk_groupofstudent_studentsset_id"
                                  referencedColumnNames="id"
                                  referencedTableName="students_set"/>
+
+        <addForeignKeyConstraint baseColumnNames="learning_type_id"
+                                 baseTableName="group_of_student"
+                                 constraintName="fk_groupofstudent_learningtype_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="learning_type"/>
 
     </changeSet>
 </databaseChangeLog>
