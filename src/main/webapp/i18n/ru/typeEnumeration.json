@@ -1,9 +1,0 @@
-{
-    "jeducenterApp": {
-        "TypeEnumeration" : {
-            "null": "",
-            "DEV": "DEV",
-            "QA": "QA"
-        }
-    }
-}

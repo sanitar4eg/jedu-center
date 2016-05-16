@@ -19,7 +19,6 @@ angular.module('jeducenterApp')
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('student');
-                        $translatePartialLoader.addPart('typeEnumeration');
                         $translatePartialLoader.addPart('universityEnumeration');
                         $translatePartialLoader.addPart('learningResult');
                         $translatePartialLoader.addPart('typeOfResult');
@@ -44,7 +43,6 @@ angular.module('jeducenterApp')
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('student');
-                        $translatePartialLoader.addPart('typeEnumeration');
                         $translatePartialLoader.addPart('universityEnumeration');
                         $translatePartialLoader.addPart('recall');
                         $translatePartialLoader.addPart('typeRecallEnumeration');

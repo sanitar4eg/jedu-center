@@ -19,7 +19,6 @@ angular.module('jeducenterApp')
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('student');
-                        $translatePartialLoader.addPart('typeEnumeration');
                         $translatePartialLoader.addPart('global');
                         return $translate.refresh();
                     }]

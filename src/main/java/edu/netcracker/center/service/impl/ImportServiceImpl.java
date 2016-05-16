@@ -1,7 +1,6 @@
 package edu.netcracker.center.service.impl;
 
 import edu.netcracker.center.domain.Student;
-import edu.netcracker.center.domain.enumeration.TypeEnumeration;
 import edu.netcracker.center.domain.enumeration.UniversityEnumeration;
 import edu.netcracker.center.domain.util.OperationResult;
 import edu.netcracker.center.repository.StudentRepository;
@@ -85,7 +84,6 @@ public class ImportServiceImpl implements ImportService {
         setParameter(row, StudentXslView.FIRST_NAME, student::setFirstName);
         setParameter(row, StudentXslView.LAST_NAME, student::setLastName);
         setParameter(row, StudentXslView.MIDDLE_NAME, student::setMiddleName);
-        setType(row, StudentXslView.TYPE, student::setType);
         setParameter(row, StudentXslView.EMAIL, student::setEmail);
         setParameter(row, StudentXslView.PHONE, student::setPhone);
         setUniversity(row, StudentXslView.UNIVER, student::setUniversity);
@@ -95,10 +93,10 @@ public class ImportServiceImpl implements ImportService {
         return studentRepository.save(student);
     }
 
-    private void setType(Row row, int field, Consumer<TypeEnumeration> consumer) {
-        getNullableCell(row.getCell(field)).
-            ifPresent(cell -> consumer.accept(TypeEnumeration.valueOf(cell.getStringCellValue())));
-    }
+//    private void setType(Row row, int field, Consumer<TypeEnumeration> consumer) {
+//        getNullableCell(row.getCell(field)).
+//            ifPresent(cell -> consumer.accept(TypeEnumeration.valueOf(cell.getStringCellValue())));
+//    }
 
 
     private void setUniversity(Row row, int field, Consumer<UniversityEnumeration> consumer) {

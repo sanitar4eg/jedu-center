@@ -2,7 +2,6 @@ package edu.netcracker.center.web.rest;
 
 import edu.netcracker.center.Application;
 import edu.netcracker.center.domain.Student;
-import edu.netcracker.center.domain.enumeration.TypeEnumeration;
 import edu.netcracker.center.domain.enumeration.UniversityEnumeration;
 import edu.netcracker.center.repository.StudentRepository;
 import edu.netcracker.center.service.StudentService;
