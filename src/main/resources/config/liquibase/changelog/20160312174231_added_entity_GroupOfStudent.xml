@@ -38,6 +38,7 @@
             <column name="time_table_id" type="bigint">
                 <constraints unique="true"/>
             </column>
+            <column name="students_set_id" type="bigint"/>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
         
@@ -46,6 +47,12 @@
                                  constraintName="fk_groupofstudent_timetable_id"
                                  referencedColumnNames="id"
                                  referencedTableName="time_table"/>
+
+        <addForeignKeyConstraint baseColumnNames="students_set_id"
+                                 baseTableName="group_of_student"
+                                 constraintName="fk_groupofstudent_studentsset_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="students_set"/>
 
     </changeSet>
 </databaseChangeLog>

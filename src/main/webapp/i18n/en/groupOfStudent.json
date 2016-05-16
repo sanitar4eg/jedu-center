@@ -25,7 +25,8 @@
             "description": "Description",
             "isActive": "IsActive",
             "student": "Student",
-            "timeTable": "TimeTable"
+            "timeTable": "TimeTable",
+            "studentsSet": "StudentsSet"
         }
     }
 }

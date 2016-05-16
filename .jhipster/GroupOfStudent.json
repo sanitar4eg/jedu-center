@@ -15,6 +15,14 @@
             "otherEntityField": "id",
             "ownerSide": true,
             "otherEntityRelationshipName": "groupOfStudent"
+        },
+        {
+            "relationshipId": 6,
+            "relationshipName": "studentsSet",
+            "otherEntityName": "studentsSet",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name",
+            "otherEntityRelationshipName": "groupOfStudent"
         }
     ],
     "fields": [

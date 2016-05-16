@@ -48,6 +48,10 @@ public class GroupOfStudent implements Serializable {
     @OneToOne
     private TimeTable timeTable;
 
+    @ManyToOne
+    @JoinColumn(name = "students_set_id")
+    private StudentsSet studentsSet;
+
     public Long getId() {
         return id;
     }
@@ -102,6 +106,14 @@ public class GroupOfStudent implements Serializable {
 
     public void setTimeTable(TimeTable timeTable) {
         this.timeTable = timeTable;
+    }
+
+    public StudentsSet getStudentsSet() {
+        return studentsSet;
+    }
+
+    public void setStudentsSet(StudentsSet studentsSet) {
+        this.studentsSet = studentsSet;
     }
 
     @Override

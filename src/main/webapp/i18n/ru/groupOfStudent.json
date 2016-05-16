@@ -25,7 +25,8 @@
             "description": "Описание",
             "isActive": "Активна",
             "student": "Студенты",
-            "timeTable": "Расписание"
+            "timeTable": "Расписание",
+            "studentsSet": "Набор"
         }
     }
 }
