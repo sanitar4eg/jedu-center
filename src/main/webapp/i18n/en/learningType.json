@@ -1,0 +1,25 @@
+{
+    "jeducenterApp": {
+        "learningType" : {
+            "home": {
+                "title": "LearningTypes",
+                "createLabel": "Create a new LearningType",
+                "createOrEditLabel": "Create or edit a LearningType",
+                "search": "Search for LearningType"
+            },
+            "created": "A new LearningType is created with identifier {{ param }}",
+            "updated": "A LearningType is updated with identifier {{ param }}",
+            "deleted": "A LearningType is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete LearningType {{ id }}?"
+            },
+            "detail": {
+                "title": "LearningType"
+            },
+            "name": "Name",
+            "isActive": "IsActive",
+            "student": "Student",
+            "groupOfStudent": "GroupOfStudent"
+        }
+    }
+}

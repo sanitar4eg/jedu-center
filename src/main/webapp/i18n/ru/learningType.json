@@ -1,0 +1,25 @@
+{
+    "jeducenterApp": {
+        "learningType" : {
+            "home": {
+                "title": "Тип обучения",
+                "createLabel": "Создать новый тип",
+                "createOrEditLabel": "Создать или редактировать тип обучения",
+                "search": "Поиск типа обучения"
+            },
+            "created": "Новый тип обучения создан, ID: {{ param }}",
+            "updated": "Тип обучения обновлен, ID: {{ param }}",
+            "deleted": "Тип обучения удален, ID: {{ param }}",
+            "delete": {
+                "question": "Вы действительно хотите удалить тип обучения, ID: {{ id }}?"
+            },
+            "detail": {
+                "title": "Тип обучения"
+            },
+            "name": "Название",
+            "isActive": "Активен",
+            "student": "Студент",
+            "groupOfStudent": "Группа"
+        }
+    }
+}
