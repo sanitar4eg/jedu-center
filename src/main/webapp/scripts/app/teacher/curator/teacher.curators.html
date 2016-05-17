@@ -17,9 +17,8 @@
         <table class="jh-table table table-striped">
             <thead>
                 <tr>
-                    <th><span translate="global.field.id">ID</span></th>
-                    <th><span translate="jeducenterApp.curator.firstName">FirstName</span></th>
                     <th><span translate="jeducenterApp.curator.lastName">LastName</span></th>
+                    <th><span translate="jeducenterApp.curator.firstName">FirstName</span></th>
                     <th><span translate="jeducenterApp.curator.email">Email</span></th>
                     <th><span translate="jeducenterApp.curator.department">Department</span></th>
                     <th><span translate="jeducenterApp.curator.isActive">IsActive</span></th>
@@ -29,9 +28,8 @@
             </thead>
             <tbody>
                 <tr ng-repeat="curator in curators track by curator.id">
-                    <td><a ui-sref="teacher.curator.detail({id:curator.id})">{{curator.id}}</a></td>
+                    <td><a ui-sref="teacher.curator.detail({id:curator.id})">{{curator.lastName}}</a></td>
                     <td>{{curator.firstName}}</td>
-                    <td>{{curator.lastName}}</td>
                     <td>{{curator.email}}</td>
                     <td>{{curator.department}}</td>
                     <td>{{curator.isActive}}</td>

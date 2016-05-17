@@ -40,6 +40,7 @@ angular.module('jeducenterApp')
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('curator');
+                        $translatePartialLoader.addPart('student');
                         return $translate.refresh();
                     }],
                     entity: ['$stateParams', 'Curator', function($stateParams, Curator) {
@@ -51,7 +52,7 @@ angular.module('jeducenterApp')
                 parent: 'teacher.curator',
                 url: '/teacher/new',
                 data: {
-                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
