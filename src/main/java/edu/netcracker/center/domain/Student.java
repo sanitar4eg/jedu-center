@@ -6,6 +6,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -25,7 +26,7 @@ public class Student implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
+    @NotEmpty
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
@@ -35,7 +36,7 @@ public class Student implements Serializable {
     @Column(name = "middle_name")
     private String middleName;
 
-    @NotNull
+    @NotEmpty
     @Column(name = "email", nullable = false)
     @Email
     private String email;

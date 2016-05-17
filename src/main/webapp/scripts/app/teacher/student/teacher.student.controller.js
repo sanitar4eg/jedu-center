@@ -38,7 +38,8 @@ angular.module('jeducenterApp')
             columnDefs: [
                 {
                     displayName: 'jeducenterApp.student.lastName', field: 'lastName', width: '12%',
-                    headerCellFilter: "translate"
+                    headerCellFilter: "translate",
+                    validators: {required: true}, cellTemplate: 'ui-grid/cellTooltipValidator'
                 },
                 {
                     displayName: 'jeducenterApp.student.firstName', field: 'firstName', width: '10%',
@@ -56,8 +57,12 @@ angular.module('jeducenterApp')
                     editableCellTemplate: 'scripts/app/teacher/student/ui-grid/student.type.select.html'
                 },
                 {
+                    // TODO: Fixed this
+
                     displayName: 'jeducenterApp.student.email', field: 'email', width: '14%',
-                    headerCellFilter: "translate"
+                    headerCellFilter: "translate", type: 'email',
+                    validators: {required: true}, cellTemplate: 'ui-grid/cellTitleValidator'
+                    // editableCellTemplate: 'scripts/app/teacher/student/ui-grid/student.email.validate.html'
                 },
                 {
                     displayName: 'jeducenterApp.student.phone', field: 'phone', width: '11%',
@@ -102,6 +107,13 @@ angular.module('jeducenterApp')
             $scope.gridApi = gridApi;
             gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
                 Student.update(rowEntity, onSaveSuccess);
+            });
+            gridApi.validate.on.validationFailed($scope,function(rowEntity, colDef, newValue, oldValue){
+                alert('rowEntity: '+ JSON.stringify(rowEntity) + '\n' +
+                    'colDef: ' + JSON.stringify(colDef) + '\n' +
+                    'newValue: ' + newValue + '\n' +
+                    'oldValue: ' + oldValue);
+                newValue = oldValue;
             });
         };
 
