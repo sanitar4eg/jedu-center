@@ -7,7 +7,7 @@ angular.module('jeducenterApp')
                 parent: 'entity',
                 url: '/studentsSets',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_ADMIN'],
                     pageTitle: 'jeducenterApp.studentsSet.home.title'
                 },
                 views: {
@@ -28,7 +28,7 @@ angular.module('jeducenterApp')
                 parent: 'entity',
                 url: '/studentsSet/{id}',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_ADMIN'],
                     pageTitle: 'jeducenterApp.studentsSet.detail.title'
                 },
                 views: {
@@ -51,7 +51,7 @@ angular.module('jeducenterApp')
                 parent: 'studentsSet',
                 url: '/new',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -79,7 +79,7 @@ angular.module('jeducenterApp')
                 parent: 'studentsSet',
                 url: '/{id}/edit',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -102,7 +102,7 @@ angular.module('jeducenterApp')
                 parent: 'studentsSet',
                 url: '/{id}/delete',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
