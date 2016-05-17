@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jeducenterApp')
-    .controller('TeacherStudentController', function ($scope, $state, Student, tmhDynamicLocale,
+    .controller('TeacherStudentController', function ($scope, $state, Student, tmhDynamicLocale, $window,
                                                       i18nService, $translate, $log, LearningType) {
 
         $scope.students = [];
@@ -62,7 +62,6 @@ angular.module('jeducenterApp')
                     displayName: 'jeducenterApp.student.email', field: 'email', width: '14%',
                     headerCellFilter: "translate", type: 'email',
                     validators: {required: true}, cellTemplate: 'ui-grid/cellTitleValidator'
-                    // editableCellTemplate: 'scripts/app/teacher/student/ui-grid/student.email.validate.html'
                 },
                 {
                     displayName: 'jeducenterApp.student.phone', field: 'phone', width: '11%',
@@ -106,19 +105,21 @@ angular.module('jeducenterApp')
         $scope.studentsGrid.onRegisterApi = function (gridApi) {
             $scope.gridApi = gridApi;
             gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
-                Student.update(rowEntity, onSaveSuccess);
+                Student.update(rowEntity, onSaveSuccess, onSaveError);
             });
             gridApi.validate.on.validationFailed($scope,function(rowEntity, colDef, newValue, oldValue){
-                alert('rowEntity: '+ JSON.stringify(rowEntity) + '\n' +
-                    'colDef: ' + JSON.stringify(colDef) + '\n' +
-                    'newValue: ' + newValue + '\n' +
-                    'oldValue: ' + oldValue);
-                newValue = oldValue;
+                $window.alert("Не правильно заполнено поле " + $translate.instant(colDef.displayName)
+                    + "\nРезультат не сохранен!");
+                $scope.refresh();
             });
         };
 
         var onSaveSuccess = function (result) {
             $scope.$emit('jeducenterApp:studentUpdate', result);
+        };
+
+        var onSaveError = function (result) {
+            $scope.refresh();
         };
 
 
