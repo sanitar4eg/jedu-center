@@ -5,11 +5,11 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A StudentsSet.
@@ -26,20 +26,20 @@ public class StudentsSet implements Serializable {
     @NotNull
     @Column(name = "name", nullable = false)
     private String name;
-    
+
     @Column(name = "description")
     private String description;
-    
+
     @NotNull
     @Column(name = "is_active", nullable = false)
     private Boolean isActive;
-    
-    @OneToMany(mappedBy = "studentsSet")
+
+    @OneToMany(mappedBy = "studentsSet", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Student> students = new HashSet<>();
 
-    @OneToMany(mappedBy = "studentsSet")
+    @OneToMany(mappedBy = "studentsSet", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<GroupOfStudent> groupOfStudents = new HashSet<>();
@@ -55,7 +55,7 @@ public class StudentsSet implements Serializable {
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
@@ -63,7 +63,7 @@ public class StudentsSet implements Serializable {
     public String getDescription() {
         return description;
     }
-    
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -71,7 +71,7 @@ public class StudentsSet implements Serializable {
     public Boolean getIsActive() {
         return isActive;
     }
-    
+
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
     }
@@ -101,7 +101,7 @@ public class StudentsSet implements Serializable {
             return false;
         }
         StudentsSet studentsSet = (StudentsSet) o;
-        if(studentsSet.id == null || id == null) {
+        if (studentsSet.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, studentsSet.id);
