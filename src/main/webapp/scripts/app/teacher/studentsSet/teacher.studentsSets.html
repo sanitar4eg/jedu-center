@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="studentsSet.new" >
+                <button class="btn btn-primary" ui-sref="teacher.studentsSet.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span
                         translate="jeducenterApp.studentsSet.home.createLabel">Create new StudentsSet
@@ -26,26 +26,26 @@
             </thead>
             <tbody>
                 <tr ng-repeat="studentsSet in studentsSets track by studentsSet.id">
-                    <td><a ui-sref="studentsSet.detail({id:studentsSet.id})">{{studentsSet.id}}</a></td>
+                    <td><a ui-sref="teacher.studentsSet.detail({id:studentsSet.id})">{{studentsSet.id}}</a></td>
                     <td>{{studentsSet.name}}</td>
                     <td>{{studentsSet.description}}</td>
                     <td>{{studentsSet.isActive}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
-                                    ui-sref="studentsSet.detail({id:studentsSet.id})"
+                                    ui-sref="teacher.studentsSet.detail({id:studentsSet.id})"
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="studentsSet.edit({id:studentsSet.id})"
+                                    ui-sref="teacher.studentsSet.edit({id:studentsSet.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="studentsSet.delete({id:studentsSet.id})"
+                                    ui-sref="teacher.studentsSet.delete({id:studentsSet.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>

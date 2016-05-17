@@ -63,15 +63,15 @@ angular.module('jeducenterApp')
                                 return {
                                     name: null,
                                     description: null,
-                                    isActive: false,
+                                    isActive: true,
                                     id: null
                                 };
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('studentsSet', null, { reload: true });
+                        $state.go('teacher.studentsSet', null, { reload: true });
                     }, function() {
-                        $state.go('studentsSet');
+                        $state.go('teacher.studentsSet');
                     })
                 }]
             })
@@ -92,7 +92,7 @@ angular.module('jeducenterApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('studentsSet', null, { reload: true });
+                        $state.go('teacher.studentsSet', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })
@@ -115,7 +115,7 @@ angular.module('jeducenterApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('studentsSet', null, { reload: true });
+                        $state.go('teacher.studentsSet', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })
