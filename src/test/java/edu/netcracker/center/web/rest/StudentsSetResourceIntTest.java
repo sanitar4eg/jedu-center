@@ -12,6 +12,7 @@ import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.data.web.querydsl.QuerydslPredicateArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
@@ -62,6 +63,9 @@ public class StudentsSetResourceIntTest {
     @Inject
     private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
 
+    @Inject
+    private QuerydslPredicateArgumentResolver querydslPredicateArgumentResolver;
+
     private MockMvc restStudentsSetMockMvc;
 
     private StudentsSet studentsSet;
@@ -72,7 +76,7 @@ public class StudentsSetResourceIntTest {
         StudentsSetResource studentsSetResource = new StudentsSetResource();
         ReflectionTestUtils.setField(studentsSetResource, "studentsSetService", studentsSetService);
         this.restStudentsSetMockMvc = MockMvcBuilders.standaloneSetup(studentsSetResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setCustomArgumentResolvers(pageableArgumentResolver, querydslPredicateArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
     }
 

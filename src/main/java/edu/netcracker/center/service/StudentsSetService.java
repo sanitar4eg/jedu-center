@@ -1,10 +1,9 @@
 package edu.netcracker.center.service;
 
+import com.mysema.query.types.Predicate;
 import edu.netcracker.center.domain.StudentsSet;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import java.util.List;
 
 /**
  * Service Interface for managing StudentsSet.
@@ -21,7 +20,7 @@ public interface StudentsSetService {
      *  get all the studentsSets.
      *  @return the list of entities
      */
-    public Page<StudentsSet> findAll(Pageable pageable);
+    public Page<StudentsSet> findAll(Predicate predicate, Pageable pageable);
 
     /**
      *  get the "id" studentsSet.

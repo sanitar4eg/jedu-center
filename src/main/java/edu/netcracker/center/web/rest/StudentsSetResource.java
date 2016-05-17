@@ -1,6 +1,7 @@
 package edu.netcracker.center.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.mysema.query.types.Predicate;
 import edu.netcracker.center.domain.StudentsSet;
 import edu.netcracker.center.service.StudentsSetService;
 import edu.netcracker.center.web.rest.util.HeaderUtil;
@@ -9,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -30,10 +32,10 @@ import java.util.Optional;
 public class StudentsSetResource {
 
     private final Logger log = LoggerFactory.getLogger(StudentsSetResource.class);
-        
+
     @Inject
     private StudentsSetService studentsSetService;
-    
+
     /**
      * POST  /studentsSets -> Create a new studentsSet.
      */
@@ -77,10 +79,11 @@ public class StudentsSetResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<StudentsSet>> getAllStudentsSets(Pageable pageable)
+    public ResponseEntity<List<StudentsSet>> getAllStudentsSets(Pageable pageable,
+                                                                @QuerydslPredicate(root = StudentsSet.class) Predicate predicate)
         throws URISyntaxException {
         log.debug("REST request to get a page of StudentsSets");
-        Page<StudentsSet> page = studentsSetService.findAll(pageable); 
+        Page<StudentsSet> page = studentsSetService.findAll(predicate, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/studentsSets");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
