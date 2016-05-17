@@ -5,6 +5,8 @@ angular.module('jeducenterApp').controller('TeacherStudentArchivingController',
         function ($scope, $stateParams, $uibModalInstance, entity, StudentArchiving) {
 
             $scope.student = entity;
+            $scope.student.learningResult = {};
+            $scope.student.learningResult.creationTime = new Date;
 
             var onSaveSuccess = function (result) {
                 $scope.$emit('jeducenterApp:learningResultUpdate', result);
