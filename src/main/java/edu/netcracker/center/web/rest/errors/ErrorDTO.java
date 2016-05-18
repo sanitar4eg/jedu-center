@@ -49,4 +49,12 @@ public class ErrorDTO implements Serializable {
     public List<FieldErrorDTO> getFieldErrors() {
         return fieldErrors;
     }
+
+    @Override
+    public String toString() {
+        return "ErrorDTO{" +
+            "message='" + message + '\'' +
+            ", description='" + description + '\'' +
+            '}';
+    }
 }
