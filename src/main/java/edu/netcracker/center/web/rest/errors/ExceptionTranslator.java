@@ -1,7 +1,5 @@
 package edu.netcracker.center.web.rest.errors;
 
-import java.util.List;
-
 import org.springframework.dao.ConcurrencyFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
@@ -9,7 +7,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.multipart.MultipartException;
+
+import java.util.List;
 
 /**
  * Controller advice to translate the server side exceptions to client-friendly json structures.
@@ -22,6 +26,13 @@ public class ExceptionTranslator {
     @ResponseBody
     public ErrorDTO processConcurencyError(ConcurrencyFailureException ex) {
         return new ErrorDTO(ErrorConstants.ERR_CONCURRENCY_FAILURE);
+    }
+
+    @ExceptionHandler(MultipartException.class)
+    @ResponseStatus(HttpStatus.PAYLOAD_TOO_LARGE)
+    @ResponseBody
+    public ErrorDTO processSizeLimitError(MultipartException ex) {
+        return new ErrorDTO(ErrorConstants.ERR_FILE_SIZE_LIMIT, ex.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

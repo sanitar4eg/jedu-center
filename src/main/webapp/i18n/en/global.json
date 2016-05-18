@@ -135,7 +135,8 @@
         "Size": "Field {{ fieldName }} does not meet min/max size requirements!",
         "userexists": "Login name already used!",
         "emailexists": "E-mail is already in use!",
-        "idexists": "A new {{ entityName }} cannot already have an ID"
+        "idexists": "A new {{ entityName }} cannot already have an ID",
+        "fileSizeLimit": "File size cannot be larger than 10Mb"
     },
     "footer": "Educational Research and Production Center<br/>\"Information and telecommunication systems\""
 }
