@@ -29,7 +29,7 @@ public class ExceptionTranslator {
     }
 
     @ExceptionHandler(MultipartException.class)
-    @ResponseStatus(HttpStatus.PAYLOAD_TOO_LARGE)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ErrorDTO processSizeLimitError(MultipartException ex) {
         return new ErrorDTO(ErrorConstants.ERR_FILE_SIZE_LIMIT, ex.getMessage());
