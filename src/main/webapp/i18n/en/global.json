@@ -136,7 +136,8 @@
         "userexists": "Login name already used!",
         "emailexists": "E-mail is already in use!",
         "idexists": "A new {{ entityName }} cannot already have an ID",
-        "fileSizeLimit": "File size cannot be larger than 10Mb"
+        "fileSizeLimit": "File size cannot be larger than 10Mb",
+        "fileUpload": "Could not load file"
     },
     "footer": "Educational Research and Production Center<br/>\"Information and telecommunication systems\""
 }
