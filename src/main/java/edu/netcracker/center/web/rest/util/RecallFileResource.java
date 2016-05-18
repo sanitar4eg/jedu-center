@@ -9,6 +9,7 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +20,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
  * REST controller for managing files of Recall.
@@ -49,7 +52,7 @@ public class RecallFileResource {
         String filePath = fileServerService.getPath() + RECALL_PATH + recall.getId() + "/" + recall.getFile();
         log.debug("File path: {}", filePath);
         try (InputStream is = new FileInputStream(filePath)) {
-            String fileName = java.net.URLEncoder.encode(recall.getFile(),"UTF-8");
+            String fileName = java.net.URLEncoder.encode(recall.getFile(), "UTF-8");
             response.setContentType("application/msword");
             response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
             IOUtils.copy(is, response.getOutputStream());
@@ -67,7 +70,8 @@ public class RecallFileResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public void saveFile(@RequestParam("file") MultipartFile file, @PathVariable Long id) {
+    public ResponseEntity<Recall> saveFile(@RequestParam("file") MultipartFile file, @PathVariable Long id)
+        throws URISyntaxException {
         Recall recall = recallService.findOne(id);
         String fileName = file.getOriginalFilename();
         String dirPath = fileServerService.getPath() + RECALL_PATH + id;
@@ -80,10 +84,14 @@ public class RecallFileResource {
             file.transferTo(new File(dirPath + "/" + fileName));
         } catch (IOException e) {
             log.error("Error saving file for recall: {}, file:{}", id, fileName, e);
-            throw new RuntimeException(e);
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("recall",
+                "fileUpload", "Не удалось загрузить файл")).body(recall);
         }
         recall.setFile(fileName);
-        recallService.save(recall);
+        recall = recallService.save(recall);
+        return ResponseEntity.created(new URI("/api/recalls/" + recall.getId()))
+            .headers(HeaderUtil.createEntityUpdateAlert("recall", recall.getId().toString()))
+            .body(recall);
     }
 
 
