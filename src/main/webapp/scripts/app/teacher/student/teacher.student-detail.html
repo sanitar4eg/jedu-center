@@ -13,7 +13,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
+            <!--<tr>
                 <td>
                     <span translate="jeducenterApp.student.lastName">LastName</span>
                 </td>
@@ -36,13 +36,13 @@
                 <td>
                     <span class="form-control-static">{{student.middleName}}</span>
                 </td>
-            </tr>
+            </tr>-->
             <tr>
                 <td>
                     <span translate="jeducenterApp.student.type">Type</span>
                 </td>
                 <td>
-                    <span class="form-control-static" translate="{{'jeducenterApp.TypeEnumeration.' + student.type}}">{{student.type}}</span>
+                    <span class="form-control-static">{{student.learningType.name}}</span>
                 </td>
             </tr>
             <tr>
@@ -103,14 +103,6 @@
             </tr>
             <tr>
                 <td>
-                    <span translate="jeducenterApp.student.user">user</span>
-                </td>
-                <td>
-                    {{student.user.login}}
-                </td>
-            </tr>
-            <tr>
-                <td>
                     <span translate="jeducenterApp.student.groupOfStudent">groupOfStudent</span>
                 </td>
                 <td>
@@ -131,6 +123,22 @@
                 </td>
                 <td>
                     <a class="form-control-static" ui-sref="teacher.form.detail({id:student.form.id})">{{student.form.file}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="jeducenterApp.student.learningResult">learningResult</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="learningResult.detail({id:student.learningResult.id})">{{student.learningResult.type}}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="jeducenterApp.student.studentsSet">studentsSet</span>
+                </td>
+                <td>
+                    <a class="form-control-static" ui-sref="studentsSet.detail({id:student.studentsSet.id})">{{student.studentsSet.name}}</a>
                 </td>
             </tr>
             </tbody>
@@ -199,7 +207,7 @@
     </div>
     <br/>
     <button type="submit"
-            ui-sref="teacher.student"
+            onclick="window.history.back()"
             class="btn btn-info">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
     </button>
