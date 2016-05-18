@@ -14,20 +14,29 @@ angular.module('jeducenterApp').controller('TeacherRecallDialogController',
                 $scope.recall = result;
             });
         };
+            var osSaveFileSuccess = function (result) {
+                console.log(JSON.stringify(result));
+                $scope.$emit('jeducenterApp:recallUpdate', result);
+                $uibModalInstance.close(result);
+                $scope.isSaving = false;
+            };
+            var onSaveFileError = function (result) {
+                $scope.isSaving = false;
+            };
 
         var onSaveSuccess = function (result) {
             var file = fileService.getFile();
-            if (file != null && $scope.recall.id == null) {
+            if (file != null) {
                 var formData = new FormData();
                 formData.append("file", file);
-                RecallFile.uploadFile({id: result.id}, formData);
+                RecallFile.uploadFile({id: result.id}, formData, osSaveFileSuccess, onSaveFileError);
+            } else {
+                $scope.$emit('jeducenterApp:recallUpdate', result);
+                $uibModalInstance.close(result);
             }
-            $scope.$emit('jeducenterApp:recallUpdate', result);
-            $uibModalInstance.close(result);
-            $scope.isSaving = false;
         };
-
         var onSaveError = function (result) {
+            console.log(JSON.stringify(result));
             $scope.isSaving = false;
         };
 
@@ -38,11 +47,6 @@ angular.module('jeducenterApp').controller('TeacherRecallDialogController',
                 Recall.update($scope.recall, onSaveSuccess, onSaveError);
             } else {
                 Recall.save($scope.recall, onSaveSuccess, onSaveError);
-            }
-            if (file != null && $scope.recall.id != null) {
-                var formData = new FormData();
-                formData.append("file", file);
-                RecallFile.uploadFile({id: $scope.recall.id}, formData);
             }
         };
 

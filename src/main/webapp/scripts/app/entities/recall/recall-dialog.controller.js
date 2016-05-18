@@ -5,29 +5,37 @@ angular.module('jeducenterApp').controller('RecallDialogController',
         'fileService', 'RecallFile',
         function($scope, $stateParams, $uibModalInstance, DataUtils, entity, Recall, Student, Curator,
                  fileService, RecallFile) {
-
         $scope.recall = entity;
         $scope.students = Student.query();
         $scope.curators = Curator.query();
-        $scope.load = function(id) {
-            Recall.get({id : id}, function(result) {
+        $scope.load = function (id) {
+            Recall.get({id: id}, function (result) {
                 $scope.recall = result;
             });
         };
-
-        var onSaveSuccess = function (result) {
-            var file = fileService.getFile();
-            if (file != null && $scope.recall.id == null) {
-                var formData = new FormData();
-                formData.append("file", file);
-                RecallFile.uploadFile({id: result.id}, formData);
-            }
+        var osSaveFileSuccess = function (result) {
+            console.log(JSON.stringify(result));
             $scope.$emit('jeducenterApp:recallUpdate', result);
             $uibModalInstance.close(result);
             $scope.isSaving = false;
         };
+        var onSaveFileError = function (result) {
+            $scope.isSaving = false;
+        };
 
+        var onSaveSuccess = function (result) {
+            var file = fileService.getFile();
+            if (file != null) {
+                var formData = new FormData();
+                formData.append("file", file);
+                RecallFile.uploadFile({id: result.id}, formData, osSaveFileSuccess, onSaveFileError);
+            } else {
+                $scope.$emit('jeducenterApp:recallUpdate', result);
+                $uibModalInstance.close(result);
+            }
+        };
         var onSaveError = function (result) {
+            console.log(JSON.stringify(result));
             $scope.isSaving = false;
         };
 
@@ -39,14 +47,9 @@ angular.module('jeducenterApp').controller('RecallDialogController',
             } else {
                 Recall.save($scope.recall, onSaveSuccess, onSaveError);
             }
-            if (file != null && $scope.recall.id != null) {
-                var formData = new FormData();
-                formData.append("file", file);
-                RecallFile.uploadFile({id: $scope.recall.id}, formData);
-            }
         };
 
-        $scope.clear = function() {
+        $scope.clear = function () {
             $uibModalInstance.dismiss('cancel');
         };
 
