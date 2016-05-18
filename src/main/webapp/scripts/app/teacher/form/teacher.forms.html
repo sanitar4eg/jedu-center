@@ -1,0 +1,65 @@
+<div>
+    <h2 translate="jeducenterApp.form.home.title">Forms</h2>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="teacher.form.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span
+                        translate="jeducenterApp.form.home.createLabel">Create new Form
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span translate="global.field.id">ID</span></th>
+                    <th><span translate="jeducenterApp.form.file">File</span></th>
+                    <th><span translate="jeducenterApp.form.creationTime">CreationTime</span></th>
+                    <th><span translate="jeducenterApp.form.isActive">IsActive</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="form in forms track by form.id">
+                    <td><a ui-sref="teacher.form.detail({id:form.id})">{{form.id}}</a></td>
+                    <td>
+                        <a href="/api/forms/file/{{form.id}}">{{form.file}}</a>
+                    </td>
+                    <td>{{form.creationTime | date:'medium'}}</td>
+                    <td>{{form.isActive}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="teacher.form.detail({id:form.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="teacher.form.edit({id:form.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="teacher.form.delete({id:form.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="page" ng-change="loadAll()"></uib-pagination>
+    </div>
+    <jh-alert></jh-alert>
+</div>

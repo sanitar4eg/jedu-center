@@ -1,0 +1,48 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myFormLabel" translate="jeducenterApp.form.home.createOrEditLabel">Create or edit a Form</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label class="control-label" translate="global.file.selectFile" for="recall-input-file">Select File</label>
+            <input id="recall-input-file" name="file" type="file" bfi-for-form class="file" data-show-preview="false"
+                   data-rule-required="true" accept=".doc,.docx" file-uploader required>
+            <div ng-show="editForm.file.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.file.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="jeducenterApp.form.creationTime" for="field_creationTime">CreationTime</label>
+            <input type="datetime-local" class="form-control" name="creationTime" id="field_creationTime"
+                    ng-model="form.creationTime"
+                    required />
+            <div ng-show="editForm.creationTime.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.creationTime.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.creationTime.$error.ZonedDateTimelocal" translate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </p>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
