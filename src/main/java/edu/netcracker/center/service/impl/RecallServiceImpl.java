@@ -33,8 +33,10 @@ public class RecallServiceImpl implements RecallService{
      */
     public Recall save(Recall recall) {
         log.debug("Request to save Recall : {}", recall);
-        Recall result = recallRepository.save(recall);
-        return result;
+        if (recall.getName() == null) {
+            recall.setName(recall.getFile());
+        }
+        return recallRepository.save(recall);
     }
 
     /**
