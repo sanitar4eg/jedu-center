@@ -5,6 +5,8 @@ import com.codahale.metrics.servlet.InstrumentedFilter;
 import com.codahale.metrics.servlets.MetricsServlet;
 import edu.netcracker.center.web.filter.CachingHttpHeadersFilter;
 import edu.netcracker.center.web.filter.StaticResourcesProductionFilter;
+import org.apache.catalina.connector.Connector;
+import org.apache.coyote.http11.AbstractHttp11Protocol;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletCont
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.context.embedded.MimeMappings;
 import org.springframework.boot.context.embedded.ServletContextInitializer;
+import org.springframework.boot.context.embedded.tomcat.TomcatConnectorCustomizer;
+import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -139,6 +143,14 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
             source.registerCorsConfiguration("/oauth/**", config);
         }
         return new CorsFilter(source);
+    }
+
+    @Bean
+    public TomcatEmbeddedServletContainerFactory containerFactory() {
+        TomcatEmbeddedServletContainerFactory factory = new TomcatEmbeddedServletContainerFactory();
+        factory.addConnectorCustomizers((TomcatConnectorCustomizer) connector ->
+            ((AbstractHttp11Protocol<?>) connector.getProtocolHandler()).setMaxSwallowSize(-1));
+        return factory;
     }
 
     /**
