@@ -3,15 +3,13 @@
 angular.module('jeducenterApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('students', {
+            .state('teacher.studentsSet.detail.students', {
                 parent: 'teacher.studentsSet.detail',
-                url: '/students',
                 data: {
-                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN'],
-                    pageTitle: 'jeducenterApp.student.home.title'
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
                 views: {
-                    'students@': {
+                    'students': {
                         templateUrl: 'scripts/app/teacher/student/teacher.student.html',
                         controller: 'TeacherStudentController'
                     }
@@ -22,6 +20,25 @@ angular.module('jeducenterApp')
                         $translatePartialLoader.addPart('universityEnumeration');
                         $translatePartialLoader.addPart('learningResult');
                         $translatePartialLoader.addPart('typeOfResult');
+                        $translatePartialLoader.addPart('global');
+                        return $translate.refresh();
+                    }]
+                }
+            })
+            .state('teacher.studentsSet.detail.groups', {
+                parent: 'teacher.studentsSet.detail',
+                data: {
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
+                },
+                views: {
+                    'groups': {
+                        templateUrl: 'scripts/app/teacher/groupOfStudent/teacher.groupOfStudents.html',
+                        controller: 'TeacherGroupOfStudentController'
+                    }
+                },
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('groupOfStudent');
                         $translatePartialLoader.addPart('global');
                         return $translate.refresh();
                     }]
