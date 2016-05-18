@@ -10,8 +10,8 @@ angular.module('jeducenterApp')
                 },
                 views: {
                     'students': {
-                        templateUrl: 'scripts/app/teacher/student/teacher.student.html',
-                        controller: 'TeacherStudentController'
+                        templateUrl: 'scripts/app/teacher/studentsSet/student/set.student.html',
+                        controller: 'SetStudentController'
                     }
                 },
                 resolve: {

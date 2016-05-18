@@ -1,0 +1,118 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myStudentLabel" translate="jeducenterApp.student.home.createOrEditLabel">Create or edit a Student</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label class="control-label" translate="jeducenterApp.student.lastName" for="field_lastName">LastName</label>
+            <input type="text" class="form-control" name="lastName" id="field_lastName"
+                    ng-model="student.lastName"
+                    required />
+            <div ng-show="editForm.lastName.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.lastName.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="jeducenterApp.student.firstName" for="field_firstName">FirstName</label>
+            <input type="text" class="form-control" name="firstName" id="field_firstName"
+                   ng-model="student.firstName"
+            />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="jeducenterApp.student.middleName" for="field_middleName">MiddleName</label>
+            <input type="text" class="form-control" name="middleName" id="field_middleName"
+                    ng-model="student.middleName"
+                     />
+        </div>
+        <div class="form-group">
+            <label translate="jeducenterApp.student.learningType" for="field_learningType">learningType</label>
+            <select class="form-control" id="field_learningType" name="learningType" ng-model="student.learningType"
+                    ng-options="learningType as learningType.name for learningType in learningtypes track by learningType.id"
+                    required>
+            </select>
+            <div ng-show="editForm.learningType.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.learningType.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="jeducenterApp.student.email" for="field_email">Email</label>
+            <input type="email" class="form-control" name="email" id="field_email"
+                    ng-model="student.email"
+                    required />
+            <div ng-show="editForm.email.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.email.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="jeducenterApp.student.phone" for="field_phone">Phone</label>
+            <input type="phone" class="form-control" name="phone" id="field_phone"
+                    ng-model="student.phone"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="jeducenterApp.student.university" for="field_university">University</label>
+            <select class="form-control" name="university" ng-model="student.university" id="field_university">
+                <option value="СГТУ" translate="jeducenterApp.UniversityEnumeration.СГТУ">СГТУ</option>
+                <option value="СГУ" translate="jeducenterApp.UniversityEnumeration.СГУ">СГУ</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="jeducenterApp.student.specialty" for="field_specialty">Specialty</label>
+            <input type="text" class="form-control" name="specialty" id="field_specialty"
+                    ng-model="student.specialty"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="jeducenterApp.student.faculty" for="field_faculty">Faculty</label>
+            <input type="text" class="form-control" name="faculty" id="field_faculty"
+                   ng-model="student.faculty"
+            />
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="jeducenterApp.student.course" for="field_course">Course</label>
+            <input type="text" class="form-control" name="course" id="field_course"
+                    ng-model="student.course"
+                     />
+        </div>
+        <div class="form-group">
+            <label translate="jeducenterApp.student.groupOfStudent" for="field_groupOfStudent">groupOfStudent</label>
+            <select class="form-control" id="field_groupOfStudent" name="groupOfStudent" ng-model="student.groupOfStudent" ng-options="groupOfStudent as groupOfStudent.name for groupOfStudent in groupofstudents track by groupOfStudent.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="jeducenterApp.student.curator" for="field_curator">curator</label>
+            <select class="form-control" id="field_curator" name="curator" ng-model="student.curator" ng-options="curator as curator.lastName for curator in curators track by curator.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="jeducenterApp.student.form" for="field_form">form</label>
+            <select class="form-control" id="field_form" name="form" ng-model="student.form" ng-options="form as form.file for form in forms | orderBy:'id' track by form.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
