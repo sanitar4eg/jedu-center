@@ -6,14 +6,6 @@
             <tbody>
             <tr>
                 <td>
-                    <span translate="jeducenterApp.studentsSet.name">Name</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{studentsSet.name}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
                     <span translate="jeducenterApp.studentsSet.description">Description</span>
                 </td>
                 <td>
@@ -31,6 +23,18 @@
             </tbody>
         </table>
     </div>
+
+    <uib-tabset  justified="true">
+        <uib-tab heading="Студенты" ui-sref="students">
+
+            <div ui-view="students"></div>
+        </uib-tab>
+        <uib-tab heading="Группы">
+
+        </uib-tab>
+    </uib-tabset>
+    <br>
+
 
     <button type="submit"
             onclick="window.history.back()"

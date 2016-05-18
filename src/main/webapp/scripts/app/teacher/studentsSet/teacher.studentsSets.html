@@ -17,17 +17,15 @@
         <table class="jh-table table table-striped">
             <thead>
                 <tr jh-sort="predicate" ascending="reverse" callback="loadAll()">
-                    <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="name"><span translate="jeducenterApp.studentsSet.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="description"><span translate="jeducenterApp.studentsSet.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="isActive"><span translate="jeducenterApp.studentsSet.isActive">IsActive</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th><span translate="jeducenterApp.studentsSet.name">Name</span></th>
+                    <th><span translate="jeducenterApp.studentsSet.description">Description</span></th>
+                    <th><span translate="jeducenterApp.studentsSet.isActive">IsActive</span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="studentsSet in studentsSets track by studentsSet.id">
-                    <td><a ui-sref="teacher.studentsSet.detail({id:studentsSet.id})">{{studentsSet.id}}</a></td>
-                    <td>{{studentsSet.name}}</td>
+                    <td><a ui-sref="teacher.studentsSet.detail({id:studentsSet.id})">{{studentsSet.name}}</a></td>
                     <td>{{studentsSet.description}}</td>
                     <td>{{studentsSet.isActive}}</td>
                     <td class="text-right">
