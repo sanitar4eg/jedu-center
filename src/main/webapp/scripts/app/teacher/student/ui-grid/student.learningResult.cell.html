@@ -1,0 +1,10 @@
+<a ui-sref="teacher.learningResult.detail({id:{{
+row.entity.learningResult.id != null
+?
+row.entity.learningResult.id
+:
+-1
+}}})"
+   translate="{{'jeducenterApp.TypeOfResult.' + row.entity.learningResult.type}}">
+    {{row.entity.learningResult.type}}
+</a>
