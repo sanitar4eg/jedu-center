@@ -2,7 +2,14 @@
 
 angular.module('jeducenterApp')
     .controller('TeacherStudentArchiveController', function ($scope, $state, Student, tmhDynamicLocale,
-                                                             i18nService, $translate, uiGridConstants) {
+                                                             i18nService, $translate, uiGridConstants, LearningType) {
+        $scope.learningTypes = [];
+        LearningType.query(function (result) {
+            result.forEach(function (item) {
+                $scope.learningTypes.push({value: item.id, label: item.name})
+            });
+        });
+
         $scope.loadAll = function (predicate) {
             Student.query(predicate, function (result) {
                 $scope.studentsGrid.data = result;
@@ -34,11 +41,11 @@ angular.module('jeducenterApp')
                     headerCellFilter: "translate"
                 },
                 {
-                    displayName: 'jeducenterApp.student.type', field: 'type', width: '6%',
+                    displayName: 'jeducenterApp.student.type', field: 'learningType.name', width: '6%',
                     headerCellFilter: "translate",
                     filter: {
                         type: uiGridConstants.filter.SELECT,
-                        selectOptions: [{value: 'QA', label: 'QA'}, {value: 'DEV', label:'DEV'}]
+                        selectOptions: $scope.learningTypes
                     }
                 },
                 {
@@ -100,7 +107,7 @@ angular.module('jeducenterApp')
                     $.extend(predicate, {lastName: grid.columns[0].filters[0].term});
                     $.extend(predicate, {firstName: grid.columns[1].filters[0].term});
                     $.extend(predicate, {middleName: grid.columns[2].filters[0].term});
-                    $.extend(predicate, {type: grid.columns[3].filters[0].term});
+                    $.extend(predicate, {learningType: grid.columns[3].filters[0].term});
                     $.extend(predicate, {email: grid.columns[4].filters[0].term});
                     $.extend(predicate, {phone: grid.columns[5].filters[0].term});
                     $.extend(predicate, {university: grid.columns[6].filters[0].term});
@@ -108,9 +115,6 @@ angular.module('jeducenterApp')
                     $.extend(predicate, {faculty: grid.columns[8].filters[0].term});
                     $.extend(predicate, {course: grid.columns[9].filters[0].term});
                     $.extend(predicate, {isActive: grid.columns[10].filters[0].term});
-                    // $.extend(predicate, {groupOfStudent: grid.columns[11].filters[0].term});
-                    // $.extend(predicate, {curator: grid.columns[12].filters[0].term});
-                    // console.log("predicate is " + JSON.stringify(predicate));
                     $scope.loadAll(predicate);
                 });
             }
