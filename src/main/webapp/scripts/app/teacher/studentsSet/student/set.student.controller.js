@@ -3,16 +3,15 @@
 angular.module('jeducenterApp')
     .controller('SetStudentController', function ($scope, $state, Student, tmhDynamicLocale, $window, $stateParams,
                                                       i18nService, $translate, $log, LearningType) {
-        console.log($stateParams.id);
-
         $scope.students = [];
-        $scope.types = LearningType.query();
-        $scope.options = [
-            {text: "Все", predicate: {}},
-            {text: "DEV", predicate: {type: "DEV"}},
-            {text: "QA", predicate: {type: "QA"}}
-        ];
-        $scope.studentsPredicate = {isActive: true};
+        $scope.types = [];
+        $scope.types.push({name: "Все", value: null});
+        LearningType.query(function (result) {
+            result.forEach(function (item) {
+                $scope.types.push(item)
+            })
+        });
+        $scope.studentsPredicate = {studentsSet: $stateParams.id};
 
         $scope.loadAll = function (predicate) {
             var resultPredicate = $.extend($scope.studentsPredicate, predicate);
@@ -22,8 +21,8 @@ angular.module('jeducenterApp')
             });
         };
 
-        $scope.updateSelect = function (option) {
-            $scope.loadAll($scope.option.predicate);
+        $scope.updateSelect = function (type) {
+            $scope.loadAll({learningType: type.id});
         };
 
 
@@ -58,8 +57,6 @@ angular.module('jeducenterApp')
                     editableCellTemplate: 'scripts/app/teacher/student/ui-grid/student.type.select.html'
                 },
                 {
-                    // TODO: Fixed this
-
                     displayName: 'jeducenterApp.student.email', field: 'email', width: '14%',
                     headerCellFilter: "translate", type: 'email',
                     validators: {required: true}, cellTemplate: 'ui-grid/cellTitleValidator'
