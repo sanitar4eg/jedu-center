@@ -14,7 +14,7 @@ angular.module('jeducenterApp')
         $scope.studentsPredicate = {studentsSet: $stateParams.id};
 
         $scope.loadAll = function (predicate) {
-            var resultPredicate = $.extend($scope.studentsPredicate, predicate);
+            var resultPredicate = $.extend(predicate, $scope.studentsPredicate);
             Student.query(resultPredicate, function (result) {
                 $scope.students = result;
                 $scope.studentsGrid.data = result;
