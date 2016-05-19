@@ -5,6 +5,12 @@ row.entity.learningResult.id
 :
 -1
 }}})"
-   translate="{{'jeducenterApp.TypeOfResult.' + row.entity.learningResult.type}}">
+   translate="{{
+   row.entity.learningResult.type != null
+   ?
+   'jeducenterApp.TypeOfResult.' + row.entity.learningResult.type
+   :
+   ''
+   }}">
     {{row.entity.learningResult.type}}
 </a>
