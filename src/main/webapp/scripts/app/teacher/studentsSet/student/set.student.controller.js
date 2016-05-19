@@ -6,6 +6,9 @@ angular.module('jeducenterApp')
         $scope.students = [];
         $scope.types = [];
         $scope.types.push({name: "Все", value: null});
+        $scope.count = 0;
+        $scope.dismissed = 0;
+        $scope.gotJob = 0;
         LearningType.query(function (result) {
             result.forEach(function (item) {
                 $scope.types.push(item)
@@ -18,13 +21,23 @@ angular.module('jeducenterApp')
             Student.query(resultPredicate, function (result) {
                 $scope.students = result;
                 $scope.studentsGrid.data = result;
+                calculateStatistics(result);
             });
         };
 
         $scope.updateSelect = function (type) {
             $scope.loadAll({learningType: type.id});
         };
-
+        var calculateStatistics = function (students) {
+            $scope.count = students.length;
+            $scope.dismissed = 0;
+            $scope.gotJob = 0;
+            students.forEach(function (item) {
+                if(item.learningResult) {
+                    item.learningResult.type === 'GotJob' ? $scope.gotJob ++ : $scope.dismissed ++;
+                }
+            })
+        };
 
         $scope.loadAll();
 
