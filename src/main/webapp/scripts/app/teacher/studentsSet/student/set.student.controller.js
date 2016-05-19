@@ -99,7 +99,7 @@ angular.module('jeducenterApp')
                     cellTemplate: 'scripts/app/teacher/student/ui-grid/student.learningResult.cell.html'
                 },
                 {
-                    name: ' ', width: '10%', enableSorting: false, enableCellEdit: false,
+                    name: ' ', width: '13%', enableSorting: false, enableCellEdit: false,
                     cellTemplate: 'scripts/app/teacher/studentsSet/student/ui-grid/student.buttons.html'
                 }
             ]

@@ -9,9 +9,21 @@
             class="btn btn-primary btn-sm">
         <span class="glyphicon glyphicon-pencil"></span>
     </button>
-    <button type="submit"
+    <button ng-hide="!row.entity.isActive"
+            type="submit"
             ui-sref="teacher.studentsSet.detail.students.archiving({studentId:{{row.entity.id}}})"
             class="btn btn-warning btn-sm">
         <span class="glyphicon glyphicon-folder-close"></span>
+    </button>
+    <button ng-hide="row.entity.isActive"
+            type="submit"
+            ui-sref="teacher.studentsSet.detail.students.unarchiving({studentId:{{row.entity.id}}})"
+            class="btn btn-success btn-sm">
+        <span class="glyphicon glyphicon-folder-open"></span>
+    </button>
+    <button type="submit"
+            ui-sref="teacher.studentsSet.detail.students.delete({studentId:{{row.entity.id}}})"
+            class="btn btn-danger btn-sm">
+        <span class="glyphicon glyphicon-remove-circle"></span>
     </button>
 </div>
