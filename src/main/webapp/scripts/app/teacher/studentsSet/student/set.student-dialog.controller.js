@@ -1,9 +1,10 @@
 'use strict';
 
-angular.module('jeducenterApp').controller('TeacherStudentDialogController',
+angular.module('jeducenterApp').controller('SetStudentDialogController',
     ['$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'Student', 'User', 'GroupOfStudent', 'Curator', 'Form', 'StudentsSet', 'LearningType',
         function($scope, $stateParams, $uibModalInstance, $q, entity, Student, User, GroupOfStudent, Curator, Form, StudentsSet, LearningType) {
 
+            console.log($stateParams.id);
         $scope.student = entity;
         $scope.groupofstudents = GroupOfStudent.query({isActive: true});
         $scope.curators = Curator.query({isActive: true});

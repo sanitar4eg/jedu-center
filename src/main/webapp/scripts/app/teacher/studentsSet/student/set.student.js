@@ -3,19 +3,23 @@
 angular.module('jeducenterApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('set.student.new', {
+            .state('teacher.studentsSet.detail.students.new', {
                 parent: 'teacher.studentsSet.detail.students',
-                url: '/teacher/new',
+                url: '/set/new',
                 data: {
                     authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/teacher/student/teacher.student-dialog.html',
-                        controller: 'TeacherStudentDialogController',
+                        templateUrl: 'scripts/app/teacher/studentsSet/student/set.student-dialog.html',
+                        controller: 'SetStudentDialogController',
                         size: 'lg',
                         resolve: {
-                            entity: function () {
+                            // entity: ['Student', function(Student) {
+                            //     return Student.get({id : $stateParams.id});
+                            // }]
+                            entity: function (StudentsSet) {
+                                var set = StudentsSet.get({id: $stateParams.id})
                                 return {
                                     firstName: null,
                                     lastName: null,
@@ -27,14 +31,15 @@ angular.module('jeducenterApp')
                                     specialty: null,
                                     course: null,
                                     isActive: true,
+                                    studentsSet: set,
                                     id: null
                                 };
                             }
                         }
                     }).result.then(function(result) {
-                        $state.go('teacher.student', null, { reload: true });
+                        $state.go('teacher.studentsSet.detail.students', null, { reload: true });
                     }, function() {
-                        $state.go('teacher.student');
+                        $state.go('teacher.studentsSet.detail.students');
                     })
                 }]
             })
@@ -61,9 +66,9 @@ angular.module('jeducenterApp')
                     })
                 }]
             })
-            .state('set.student.delete', {
-                parent: 'teacher.student',
-                url: '/teacher/{id}/delete',
+            .state('teacher.studentsSet.detail.students.delete', {
+                parent: 'teacher.studentsSet.detail.students',
+                url: '/set/{id}/delete',
                 data: {
                     authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
@@ -78,7 +83,7 @@ angular.module('jeducenterApp')
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('teacher.student', null, { reload: true });
+                        $state.go('teacher.studentsSet.detail.students', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })
