@@ -4,11 +4,12 @@ angular.module('jeducenterApp').controller('SetStudentDialogController',
     ['$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'Student', 'User', 'GroupOfStudent', 'Curator', 'Form', 'StudentsSet', 'LearningType',
         function($scope, $stateParams, $uibModalInstance, $q, entity, Student, User, GroupOfStudent, Curator, Form, StudentsSet, LearningType) {
 
-            console.log($stateParams.id);
         $scope.student = entity;
         $scope.groupofstudents = GroupOfStudent.query({isActive: true});
         $scope.curators = Curator.query({isActive: true});
         $scope.forms = Form.query({filter: 'student-is-null', isActive: true});
+        $scope.studentssets = StudentsSet.query();
+        $scope.learningtypes = LearningType.query();
         $q.all([$scope.student.$promise, $scope.forms.$promise]).then(function() {
             if (!$scope.student.form || !$scope.student.form.id) {
                 return $q.reject();
@@ -22,13 +23,6 @@ angular.module('jeducenterApp').controller('SetStudentDialogController',
                 $scope.student = result;
             });
         };
-            $scope.studentssets = StudentsSet.query();
-            $scope.learningtypes = LearningType.query();
-            $scope.load = function(id) {
-                Student.get({id : id}, function(result) {
-                    $scope.student = result;
-                });
-            };
 
         var onSaveSuccess = function (result) {
             $scope.$emit('jeducenterApp:studentUpdate', result);

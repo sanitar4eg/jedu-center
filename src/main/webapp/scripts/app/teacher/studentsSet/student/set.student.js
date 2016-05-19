@@ -5,7 +5,7 @@ angular.module('jeducenterApp')
         $stateProvider
             .state('teacher.studentsSet.detail.students.new', {
                 parent: 'teacher.studentsSet.detail.students',
-                url: '/set/new',
+                url: '/student/new',
                 data: {
                     authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
@@ -43,24 +43,24 @@ angular.module('jeducenterApp')
                     })
                 }]
             })
-            .state('set.students.edit', {
-                parent: 'teacher.student',
-                url: '/teacher/{id}/edit',
+            .state('teacher.studentsSet.detail.students.edit', {
+                parent: 'teacher.studentsSet.detail.students',
+                url: '/student/{studentId}/edit',
                 data: {
                     authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/teacher/student/teacher.student-dialog.html',
-                        controller: 'TeacherStudentDialogController',
+                        templateUrl: 'scripts/app/teacher/studentsSet/student/set.student-dialog.html',
+                        controller: 'SetStudentDialogController',
                         size: 'lg',
                         resolve: {
                             entity: ['Student', function(Student) {
-                                return Student.get({id : $stateParams.id});
+                                return Student.get({id : $stateParams.studentId});
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('teacher.student', null, { reload: true });
+                        $state.go('teacher.studentsSet.detail.students', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })
@@ -68,7 +68,7 @@ angular.module('jeducenterApp')
             })
             .state('teacher.studentsSet.detail.students.delete', {
                 parent: 'teacher.studentsSet.detail.students',
-                url: '/set/{id}/delete',
+                url: '/student/{studentId}/delete',
                 data: {
                     authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
@@ -79,7 +79,7 @@ angular.module('jeducenterApp')
                         size: 'md',
                         resolve: {
                             entity: ['Student', function(Student) {
-                                return Student.get({id : $stateParams.id});
+                                return Student.get({id : $stateParams.studentId});
                             }]
                         }
                     }).result.then(function(result) {
@@ -89,9 +89,9 @@ angular.module('jeducenterApp')
                     })
                 }]
             })
-            .state('set.student.archiving', {
-                parent: 'teacher.student',
-                url: '/teacher/{id}/archiving',
+            .state('teacher.studentsSet.detail.students.archiving', {
+                parent: 'teacher.studentsSet.detail.students',
+                url: '/student/{studentId}/archiving',
                 data: {
                     authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
                 },
@@ -102,11 +102,11 @@ angular.module('jeducenterApp')
                         size: 'lg',
                         resolve: {
                             entity: ['Student', function(Student) {
-                                return Student.get({id : $stateParams.id});
+                                return Student.get({id : $stateParams.studentId});
                             }]
                         }
                     }).result.then(function(result) {
-                        $state.go('teacher.student', null, { reload: true });
+                        $state.go('teacher.studentsSet.detail.students', null, { reload: true });
                     }, function() {
                         $state.go('^');
                     })
