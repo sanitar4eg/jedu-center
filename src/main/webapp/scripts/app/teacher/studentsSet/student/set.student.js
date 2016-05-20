@@ -112,4 +112,27 @@ angular.module('jeducenterApp')
                     })
                 }]
             })
+            .state('teacher.studentsSet.detail.students.unzip', {
+                parent: 'teacher.studentsSet.detail.students',
+                url: '/student/{studentId}/unzip',
+                data: {
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'scripts/app/teacher/student/archive/teacher.student.unzip.html',
+                        controller: 'TeacherStudentUnzipController',
+                        size: 'lg',
+                        resolve: {
+                            entity: ['Student', function(Student) {
+                                return Student.get({id : $stateParams.studentId});
+                            }]
+                        }
+                    }).result.then(function(result) {
+                        $state.go('teacher.studentsSet.detail.students', null, { reload: true });
+                    }, function() {
+                        $state.go('^');
+                    })
+                }]
+            })
     });

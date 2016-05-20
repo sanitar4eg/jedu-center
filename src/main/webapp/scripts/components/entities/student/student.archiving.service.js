@@ -3,6 +3,7 @@
 angular.module('jeducenterApp')
     .factory('StudentArchiving', function ($resource) {
         return $resource('api/students/archive', {}, {
-            'update': { method:'PUT' }
+            'update': {method: 'PUT'},
+            'unzip': {method: 'DELETE'}
         });
     });
