@@ -90,6 +90,7 @@ public class Student implements Serializable {
 
     @ManyToOne
     @NotAudited
+    @NotNull
     @JoinColumn(name = "learning_type_id")
     private LearningType learningType;
 

@@ -1,8 +1,10 @@
 package edu.netcracker.center.web.rest;
 
 import edu.netcracker.center.Application;
+import edu.netcracker.center.domain.LearningType;
 import edu.netcracker.center.domain.Student;
 import edu.netcracker.center.domain.enumeration.UniversityEnumeration;
+import edu.netcracker.center.repository.LearningTypeRepository;
 import edu.netcracker.center.repository.StudentRepository;
 import edu.netcracker.center.service.StudentService;
 import org.junit.Before;
@@ -70,6 +72,9 @@ public class StudentResourceIntTest {
     private StudentRepository studentRepository;
 
     @Inject
+    private LearningTypeRepository learningTypeRepository;
+
+    @Inject
     private StudentService studentService;
 
     @Inject
@@ -85,6 +90,8 @@ public class StudentResourceIntTest {
 
     private Student student;
 
+    private LearningType learningType;
+
     @PostConstruct
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -98,6 +105,7 @@ public class StudentResourceIntTest {
     @Before
     public void initTest() {
         student = new Student();
+        learningType = learningTypeRepository.getOne(1L);
         student.setLastName(DEFAULT_LAST_NAME);
         student.setFirstName(DEFAULT_FIRST_NAME);
         student.setMiddleName(DEFAULT_MIDDLE_NAME);
@@ -108,6 +116,7 @@ public class StudentResourceIntTest {
         student.setFaculty(DEFAULT_FACULTY);
         student.setCourse(DEFAULT_COURSE);
         student.setIsActive(DEFAULT_IS_ACTIVE);
+        student.setLearningType(learningType);
     }
 
     @Test
@@ -136,6 +145,7 @@ public class StudentResourceIntTest {
         assertThat(testStudent.getFaculty()).isEqualTo(DEFAULT_FACULTY);
         assertThat(testStudent.getCourse()).isEqualTo(DEFAULT_COURSE);
         assertThat(testStudent.getIsActive()).isEqualTo(DEFAULT_IS_ACTIVE);
+        assertThat(testStudent.getLearningType().getId()).isEqualTo(learningType.getId());
     }
 
     @Test
@@ -180,6 +190,25 @@ public class StudentResourceIntTest {
         int databaseSizeBeforeTest = studentRepository.findAll().size();
         // set the field null
         student.setIsActive(null);
+
+        // Create the Student, which fails.
+
+        restStudentMockMvc.perform(post("/api/students")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(student)))
+            .andExpect(status().isBadRequest());
+
+        List<Student> students = studentRepository.findAll();
+        assertThat(students).hasSize(databaseSizeBeforeTest);
+    }
+
+
+    @Test
+    @Transactional
+    public void checkLearningTypeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = studentRepository.findAll().size();
+        // set the field null
+        student.setLearningType(null);
 
         // Create the Student, which fails.
 
