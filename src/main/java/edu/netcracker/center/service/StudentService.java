@@ -64,4 +64,9 @@ public interface StudentService {
      *  archive student.
      */
     Student archive(Student student);
+
+    /**
+     *  unzip student.
+     */
+    Student unzip(Long id);
 }

@@ -160,10 +160,20 @@ public class StudentServiceImpl implements StudentService {
         return results;
     }
 
-    @Override
+    @Transactional
     public Student archive(Student student) {
         learningResultRepository.save(student.getLearningResult());
         student.setIsActive(false);
+        return studentRepository.save(student);
+    }
+
+    @Transactional
+    public Student unzip(Long id) {
+        Student student = studentRepository.getOne(id);
+        log.error(student.getLearningResult().toString());
+        learningResultRepository.delete(student.getLearningResult());
+        student.setIsActive(true);
+        student.setLearningResult(null);
         return studentRepository.save(student);
     }
 
@@ -174,6 +184,9 @@ public class StudentServiceImpl implements StudentService {
         return userService.createUserForEC(student.getFirstName(), student.getLastName(),
             student.getEmail(), authorities);
     }
+
+
+
 
     private OperationResult createResult(Long id, String message, String description) {
         return new OperationResult(id.toString(), message, description);

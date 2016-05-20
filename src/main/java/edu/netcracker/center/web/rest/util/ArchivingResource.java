@@ -3,7 +3,6 @@ package edu.netcracker.center.web.rest.util;
 import com.codahale.metrics.annotation.Timed;
 import edu.netcracker.center.domain.Student;
 import edu.netcracker.center.service.StudentService;
-import edu.netcracker.center.web.rest.StudentResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -40,7 +39,22 @@ public class ArchivingResource {
         log.debug("REST request to archive Student : {}, result: {}", student, student.getLearningResult());
         Student result = studentService.archive(student);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert("student", student.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert("student", result.getId().toString()))
+            .body(result);
+    }
+
+    /**
+     * DELETE  /students/archive -> Updates an existing student.
+     */
+    @RequestMapping(value = "/students/archive",
+        method = RequestMethod.DELETE,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Student> unzipStudent(Long id) throws URISyntaxException {
+        log.debug("REST request to unzip Student ID: {}", id);
+        Student result = studentService.unzip(id);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert("student", result.getId().toString()))
             .body(result);
     }
 }
