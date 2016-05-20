@@ -1,5 +1,6 @@
 package edu.netcracker.center.web.rest;
 
+import com.fasterxml.jackson.databind.SerializationFeature;
 import edu.netcracker.center.domain.util.JSR310DateTimeSerializer;
 import edu.netcracker.center.domain.util.JSR310LocalDateDeserializer;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -37,6 +38,7 @@ public class TestUtil {
             throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 
         JavaTimeModule module = new JavaTimeModule();
         module.addSerializer(OffsetDateTime.class, JSR310DateTimeSerializer.INSTANCE);
