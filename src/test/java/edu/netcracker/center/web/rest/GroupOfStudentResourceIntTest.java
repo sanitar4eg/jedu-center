@@ -2,7 +2,10 @@ package edu.netcracker.center.web.rest;
 
 import edu.netcracker.center.Application;
 import edu.netcracker.center.domain.GroupOfStudent;
+import edu.netcracker.center.domain.LearningType;
 import edu.netcracker.center.repository.GroupOfStudentRepository;
+import edu.netcracker.center.repository.LearningResultRepository;
+import edu.netcracker.center.repository.LearningTypeRepository;
 import edu.netcracker.center.service.GroupOfStudentService;
 
 import org.junit.Before;
@@ -12,6 +15,8 @@ import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.cloud.cloudfoundry.com.fasterxml.jackson.annotation.JsonAutoDetect;
+import org.springframework.data.web.querydsl.QuerydslPredicateArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
@@ -54,6 +59,9 @@ public class GroupOfStudentResourceIntTest {
     private GroupOfStudentRepository groupOfStudentRepository;
 
     @Inject
+    private LearningTypeRepository learningTypeRepository;
+
+    @Inject
     private GroupOfStudentService groupOfStudentService;
 
     @Inject
@@ -62,9 +70,14 @@ public class GroupOfStudentResourceIntTest {
     @Inject
     private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
 
+    @Inject
+    private QuerydslPredicateArgumentResolver querydslPredicateArgumentResolver;
+
     private MockMvc restGroupOfStudentMockMvc;
 
     private GroupOfStudent groupOfStudent;
+
+    private LearningType learningType;
 
     @PostConstruct
     public void setup() {
@@ -72,16 +85,18 @@ public class GroupOfStudentResourceIntTest {
         GroupOfStudentResource groupOfStudentResource = new GroupOfStudentResource();
         ReflectionTestUtils.setField(groupOfStudentResource, "groupOfStudentService", groupOfStudentService);
         this.restGroupOfStudentMockMvc = MockMvcBuilders.standaloneSetup(groupOfStudentResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setCustomArgumentResolvers(pageableArgumentResolver, querydslPredicateArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
     }
 
     @Before
     public void initTest() {
         groupOfStudent = new GroupOfStudent();
+        learningType = learningTypeRepository.getOne(1L);
         groupOfStudent.setName(DEFAULT_NAME);
         groupOfStudent.setDescription(DEFAULT_DESCRIPTION);
         groupOfStudent.setIsActive(DEFAULT_IS_ACTIVE);
+        groupOfStudent.setLearningType(learningType);
     }
 
     @Test
@@ -103,6 +118,7 @@ public class GroupOfStudentResourceIntTest {
         assertThat(testGroupOfStudent.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testGroupOfStudent.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testGroupOfStudent.getIsActive()).isEqualTo(DEFAULT_IS_ACTIVE);
+        assertThat(testGroupOfStudent.getLearningType().getId()).isEqualTo(learningType.getId());
     }
 
     @Test
@@ -111,6 +127,24 @@ public class GroupOfStudentResourceIntTest {
         int databaseSizeBeforeTest = groupOfStudentRepository.findAll().size();
         // set the field null
         groupOfStudent.setName(null);
+
+        // Create the GroupOfStudent, which fails.
+
+        restGroupOfStudentMockMvc.perform(post("/api/groupOfStudents")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(groupOfStudent)))
+                .andExpect(status().isBadRequest());
+
+        List<GroupOfStudent> groupOfStudents = groupOfStudentRepository.findAll();
+        assertThat(groupOfStudents).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkLearningTypeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = groupOfStudentRepository.findAll().size();
+        // set the field null
+        groupOfStudent.setLearningType(null);
 
         // Create the GroupOfStudent, which fails.
 
