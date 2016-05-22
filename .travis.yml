@@ -5,10 +5,16 @@ node_js:
   - "4.4.3"
 jdk:
   - oraclejdk8
-sudo: false
-before_install: npm install -g grunt-cli
-install: npm install
-before_script: grunt build
+before_install:
+  - npm install -g bower
+    - npm install -g grunt-cli
+install:
+  - npm install
+  - bower install
+#before_script: grunt build
+script:
+  - mvn test
+  - grunt test
 notifications:
   slack: gui-team:aDCNycEgsrZg2fssvHq5NkoB
   webhooks:
