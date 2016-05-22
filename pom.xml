@@ -625,6 +625,22 @@
                     </arguments>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.3.7</version>
+                <configuration>
+                    <imageName>edu.netcracker.center/jeducenter:tmp</imageName>
+                    <dockerDirectory>src/main/docker/push</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.war*</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
             <!-- jhipster-needle-maven-add-plugin -->
         </plugins>
         <pluginManagement>
