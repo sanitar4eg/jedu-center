@@ -1,10 +1,10 @@
 os:
-  - linux
+  - trusty
 language:
   - node_js
   - java
 node_js:
-  - "4.4.3"
+  - "4.4.4"
 jdk:
   - oraclejdk8
 before_install:
