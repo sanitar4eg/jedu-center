@@ -1,6 +1,8 @@
 os:
   - linux
-language: node_js
+language:
+  - node_js
+  - java
 node_js:
   - "4.4.3"
 jdk:
