@@ -1,5 +1,7 @@
 # jeduCenter
 
+[![Build Status][travis-image]][travis-url] 
+
 This application was generated using JHipster, you can find documentation and help at [https://jhipster.github.io](https://jhipster.github.io).
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
@@ -73,3 +75,6 @@ To setup this project in Jenkins, use the following configuration:
 [Karma]: http://karma-runner.github.io/
 [Jasmine]: http://jasmine.github.io/2.0/introduction.html
 [Protractor]: https://angular.github.io/protractor/
+
+[travis-image]: https://travis-ci.org/sanitar4eg/jedu-center.svg?branch=master
+[travis-url]: https://travis-ci.org/sanitar4eg/jedu-center
