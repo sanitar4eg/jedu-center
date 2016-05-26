@@ -14,7 +14,7 @@
             "fieldId": 1,
             "fieldName": "type",
             "fieldType": "TypeOfResult",
-            "fieldValues": "Dismissed,GotJob",
+            "fieldValues": "Dismissed,Released",
             "fieldValidateRules": [
                 "required"
             ]

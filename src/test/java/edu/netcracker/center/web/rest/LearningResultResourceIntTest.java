@@ -49,7 +49,7 @@ public class LearningResultResourceIntTest {
 
 
     private static final TypeOfResult DEFAULT_TYPE = TypeOfResult.Dismissed;
-    private static final TypeOfResult UPDATED_TYPE = TypeOfResult.GotJob;
+    private static final TypeOfResult UPDATED_TYPE = TypeOfResult.Released;
     private static final String DEFAULT_DESCRIPTION = "AAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBB";
 

@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.time.ZonedDateTime;
 import java.util.*;
 
 /**
@@ -162,6 +163,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Transactional
     public Student archive(Student student) {
+        student.getLearningResult().setCreationTime(ZonedDateTime.now());
         learningResultRepository.save(student.getLearningResult());
         student.setIsActive(false);
         return studentRepository.save(student);

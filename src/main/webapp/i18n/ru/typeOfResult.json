@@ -3,7 +3,7 @@
         "TypeOfResult" : {
             "null": "",
             "Dismissed": "Отчислен",
-            "GotJob": "Принят на работу"
+            "Released": "Выпускник"
         }
     }
 }

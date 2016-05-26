@@ -21,6 +21,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * REST controller for managing LearningResult.
@@ -30,10 +32,10 @@ import java.util.Optional;
 public class LearningResultResource {
 
     private final Logger log = LoggerFactory.getLogger(LearningResultResource.class);
-
+        
     @Inject
     private LearningResultService learningResultService;
-
+    
     /**
      * POST  /learningResults -> Create a new learningResult.
      */
@@ -82,10 +84,10 @@ public class LearningResultResource {
         if ("student-is-null".equals(filter)) {
             log.debug("REST request to get all LearningResults where student is null");
             return new ResponseEntity<>(learningResultService.findAllWhereStudentIsNull(),
-                HttpStatus.OK);
+                    HttpStatus.OK);
         }
         log.debug("REST request to get a page of LearningResults");
-        Page<LearningResult> page = learningResultService.findAll(pageable);
+        Page<LearningResult> page = learningResultService.findAll(pageable); 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/learningResults");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
