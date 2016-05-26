@@ -31,6 +31,8 @@
             <column name="university" type="VARCHAR(255)"/>
             <column name="faculty" type="VARCHAR(255)"/>
             <column name="is_active" type="bit"/>
+            <column name="got_job" type="bit"/>
+            <column name="comment" type="varchar(255)"/>
         </createTable>
     </changeSet>
     <changeSet author="jhipster" id="1453366677087-3">
