@@ -20,6 +20,7 @@ script:
   - mvn test
   - grunt test
 notifications:
+  email: false
   slack: gui-team:aDCNycEgsrZg2fssvHq5NkoB
   webhooks:
     on_failure: always  # options: [always|never|change] default: always
