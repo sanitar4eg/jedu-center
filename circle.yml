@@ -14,8 +14,10 @@ dependencies:
     - mvn dependency:go-offline
 test:
   override:
-    - mvn test
-    - grunt test
+    - mvn test:
+      timeout: 10
+    - grunt test:
+      timeout: 7
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
