@@ -47,6 +47,12 @@
                 <constraints nullable="false"/>
             </column>
 
+            <column name="got_job" type="bit">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="comment" type="varchar(255)"/>
+
             <column name="user_id" type="bigint">
                 <constraints unique="true"/>
             </column>

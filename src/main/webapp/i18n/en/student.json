@@ -27,6 +27,8 @@
             "faculty": "Faculty",
             "course": "Course",
             "isActive": "IsActive",
+            "gotJob": "GotJob",
+            "comment": "Comment",
             "user": "User",
             "groupOfStudent": "GroupOfStudent",
             "curator": "Curator",

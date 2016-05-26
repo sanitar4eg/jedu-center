@@ -33,6 +33,8 @@
             "faculty": "Факультет",
             "course": "Курс",
             "isActive": "Активен",
+            "gotJob": "Принят на работу",
+            "comment": "Комментарий",
             "user": "User",
             "groupOfStudent": "Группа",
             "curator": "Куратор",

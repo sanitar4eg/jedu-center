@@ -68,6 +68,11 @@ public class StudentResourceIntTest {
     private static final Boolean DEFAULT_IS_ACTIVE = true;
     private static final Boolean UPDATED_IS_ACTIVE = false;
 
+    private static final Boolean DEFAULT_GOT_JOB = false;
+    private static final Boolean UPDATED_GOT_JOB = true;
+    private static final String DEFAULT_COMMENT = "AAAAA";
+    private static final String UPDATED_COMMENT = "BBBBB";
+
     @Inject
     private StudentRepository studentRepository;
 
@@ -105,7 +110,6 @@ public class StudentResourceIntTest {
     @Before
     public void initTest() {
         student = new Student();
-        learningType = learningTypeRepository.getOne(1L);
         student.setLastName(DEFAULT_LAST_NAME);
         student.setFirstName(DEFAULT_FIRST_NAME);
         student.setMiddleName(DEFAULT_MIDDLE_NAME);
@@ -116,6 +120,8 @@ public class StudentResourceIntTest {
         student.setFaculty(DEFAULT_FACULTY);
         student.setCourse(DEFAULT_COURSE);
         student.setIsActive(DEFAULT_IS_ACTIVE);
+        student.setGotJob(DEFAULT_GOT_JOB);
+        student.setComment(DEFAULT_COMMENT);
         student.setLearningType(learningType);
     }
 
@@ -145,6 +151,8 @@ public class StudentResourceIntTest {
         assertThat(testStudent.getFaculty()).isEqualTo(DEFAULT_FACULTY);
         assertThat(testStudent.getCourse()).isEqualTo(DEFAULT_COURSE);
         assertThat(testStudent.getIsActive()).isEqualTo(DEFAULT_IS_ACTIVE);
+        assertThat(testStudent.getGotJob()).isEqualTo(DEFAULT_GOT_JOB);
+        assertThat(testStudent.getComment()).isEqualTo(DEFAULT_COMMENT);
         assertThat(testStudent.getLearningType().getId()).isEqualTo(learningType.getId());
     }
 
@@ -202,6 +210,23 @@ public class StudentResourceIntTest {
         assertThat(students).hasSize(databaseSizeBeforeTest);
     }
 
+    @Test
+    @Transactional
+    public void checkGotJobIsRequired() throws Exception {
+        int databaseSizeBeforeTest = studentRepository.findAll().size();
+        // set the field null
+        student.setGotJob(null);
+
+        // Create the Student, which fails.
+
+        restStudentMockMvc.perform(post("/api/students")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(student)))
+            .andExpect(status().isBadRequest());
+
+        List<Student> students = studentRepository.findAll();
+        assertThat(students).hasSize(databaseSizeBeforeTest);
+    }
 
     @Test
     @Transactional
@@ -241,7 +266,9 @@ public class StudentResourceIntTest {
             .andExpect(jsonPath("$.[*].specialty").value(hasItem(DEFAULT_SPECIALTY.toString())))
             .andExpect(jsonPath("$.[*].faculty").value(hasItem(DEFAULT_FACULTY.toString())))
             .andExpect(jsonPath("$.[*].course").value(hasItem(DEFAULT_COURSE.toString())))
-            .andExpect(jsonPath("$.[*].isActive").value(hasItem(DEFAULT_IS_ACTIVE.booleanValue())));
+            .andExpect(jsonPath("$.[*].isActive").value(hasItem(DEFAULT_IS_ACTIVE.booleanValue())))
+            .andExpect(jsonPath("$.[*].gotJob").value(hasItem(DEFAULT_GOT_JOB.booleanValue())))
+            .andExpect(jsonPath("$.[*].comment").value(hasItem(DEFAULT_COMMENT.toString())));
     }
 
     @Test
@@ -264,7 +291,9 @@ public class StudentResourceIntTest {
             .andExpect(jsonPath("$.specialty").value(DEFAULT_SPECIALTY.toString()))
             .andExpect(jsonPath("$.faculty").value(DEFAULT_FACULTY.toString()))
             .andExpect(jsonPath("$.course").value(DEFAULT_COURSE.toString()))
-            .andExpect(jsonPath("$.isActive").value(DEFAULT_IS_ACTIVE.booleanValue()));
+            .andExpect(jsonPath("$.isActive").value(DEFAULT_IS_ACTIVE.booleanValue()))
+            .andExpect(jsonPath("$.gotJob").value(DEFAULT_GOT_JOB.booleanValue()))
+            .andExpect(jsonPath("$.comment").value(DEFAULT_COMMENT.toString()));
     }
 
     @Test
@@ -294,6 +323,8 @@ public class StudentResourceIntTest {
         student.setFaculty(UPDATED_FACULTY);
         student.setCourse(UPDATED_COURSE);
         student.setIsActive(UPDATED_IS_ACTIVE);
+        student.setGotJob(UPDATED_GOT_JOB);
+        student.setComment(UPDATED_COMMENT);
 
         restStudentMockMvc.perform(put("/api/students")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -314,6 +345,8 @@ public class StudentResourceIntTest {
         assertThat(testStudent.getFaculty()).isEqualTo(UPDATED_FACULTY);
         assertThat(testStudent.getCourse()).isEqualTo(UPDATED_COURSE);
         assertThat(testStudent.getIsActive()).isEqualTo(UPDATED_IS_ACTIVE);
+        assertThat(testStudent.getGotJob()).isEqualTo(UPDATED_GOT_JOB);
+        assertThat(testStudent.getComment()).isEqualTo(UPDATED_COMMENT);
     }
 
     @Test

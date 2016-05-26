@@ -91,6 +91,24 @@
                 </p>
             </div>
         </div>
+        <div class="form-group">
+            <label class="control-label" translate="jeducenterApp.student.gotJob" for="field_gotJob">GotJob</label>
+            <input type="checkbox" class="form-control" name="gotJob" id="field_gotJob"
+                    ng-model="student.gotJob"
+                     />
+            <div ng-show="editForm.gotJob.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.gotJob.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" translate="jeducenterApp.student.comment" for="field_comment">Comment</label>
+            <input type="text" class="form-control" name="comment" id="field_comment"
+                    ng-model="student.comment"
+                     />
+        </div>
 
         <div class="form-group">
             <label translate="jeducenterApp.student.user" for="field_user">user</label>
@@ -130,9 +148,15 @@
         </div>
         <div class="form-group">
             <label translate="jeducenterApp.student.learningType" for="field_learningType">learningType</label>
-            <select class="form-control" id="field_learningType" name="learningType" ng-model="student.learningType" ng-options="learningType as learningType.name for learningType in learningtypes track by learningType.id">
+            <select class="form-control" id="field_learningType" name="learningType" ng-model="student.learningType" ng-options="learningType as learningType.name for learningType in learningtypes track by learningType.id" required>
                 <option value=""></option>
             </select>
+            <div ng-show="editForm.learningType.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.learningType.$error.required" translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
         </div>
     </div>
     <div class="modal-footer">

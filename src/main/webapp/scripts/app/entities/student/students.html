@@ -29,24 +29,26 @@
         <table class="jh-table table table-striped">
             <thead>
                 <tr jh-sort="predicate" ascending="reverse" callback="loadAll()">
-                    <th><span translate="global.field.id">ID</span></span></th>
-                    <th><span translate="jeducenterApp.student.lastName">LastName</span></th>
-                    <th><span translate="jeducenterApp.student.firstName">FirstName</span></th>
-                    <th><span translate="jeducenterApp.student.middleName">MiddleName</span></th >
-                    <th><span translate="jeducenterApp.student.email">Email</span></th>
-                    <th><span translate="jeducenterApp.student.phone">Phone</span></th>
-                    <th><span translate="jeducenterApp.student.university">University</span></th>
-                    <th><span translate="jeducenterApp.student.specialty">Specialty</span></th>
-                    <th><span translate="jeducenterApp.student.faculty">Faculty</span></th>
-                    <th><span translate="jeducenterApp.student.course">Course</span></th>
-                    <th><span translate="jeducenterApp.student.isActive">IsActive</span></th>
-                    <th><span translate="jeducenterApp.student.user">user</span></th>
-                    <th><span translate="jeducenterApp.student.groupOfStudent">groupOfStudent</span></th>
-                    <th><span translate="jeducenterApp.student.curator">curator</span></th>
-                    <th><span translate="jeducenterApp.student.form">form</span></th>
-                    <th><span translate="jeducenterApp.student.learningResult">learningResult</span></th>
-                    <th><span translate="jeducenterApp.student.studentsSet">studentsSet</span></th>
-                    <th><span translate="jeducenterApp.student.learningType">learningType</span></th>
+                    <th jh-sort-by="id"><span translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastName"><span translate="jeducenterApp.student.lastName">LastName</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="firstName"><span translate="jeducenterApp.student.firstName">FirstName</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="middleName"><span translate="jeducenterApp.student.middleName">MiddleName</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="email"><span translate="jeducenterApp.student.email">Email</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="phone"><span translate="jeducenterApp.student.phone">Phone</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="university"><span translate="jeducenterApp.student.university">University</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="specialty"><span translate="jeducenterApp.student.specialty">Specialty</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="faculty"><span translate="jeducenterApp.student.faculty">Faculty</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="course"><span translate="jeducenterApp.student.course">Course</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="isActive"><span translate="jeducenterApp.student.isActive">IsActive</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="gotJob"><span translate="jeducenterApp.student.gotJob">GotJob</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="comment"><span translate="jeducenterApp.student.comment">Comment</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="user.login"><span translate="jeducenterApp.student.user">user</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="groupOfStudent.name"><span translate="jeducenterApp.student.groupOfStudent">groupOfStudent</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="curator.lastName"><span translate="jeducenterApp.student.curator">curator</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="form.file"><span translate="jeducenterApp.student.form">form</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="learningResult.type"><span translate="jeducenterApp.student.learningResult">learningResult</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="studentsSet.name"><span translate="jeducenterApp.student.studentsSet">studentsSet</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="learningType.name"><span translate="jeducenterApp.student.learningType">learningType</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -63,6 +65,8 @@
                     <td>{{student.faculty}}</td>
                     <td>{{student.course}}</td>
                     <td>{{student.isActive}}</td>
+                    <td>{{student.gotJob}}</td>
+                    <td>{{student.comment}}</td>
                     <td>
                         {{student.user.login}}
                     </td>
@@ -80,6 +84,9 @@
                     </td>
                     <td>
                         <a ui-sref="studentsSet.detail({id:student.studentsSet.id})">{{student.studentsSet.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="learningType.detail({id:student.learningType.id})">{{student.learningType.name}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

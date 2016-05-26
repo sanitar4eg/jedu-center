@@ -61,6 +61,13 @@ public class Student implements Serializable {
     @Column(name = "is_active", nullable = false)
     private Boolean isActive;
 
+    @NotNull
+    @Column(name = "got_job", nullable = false)
+    private Boolean gotJob;
+
+    @Column(name = "comment")
+    private String comment;
+
     @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @NotAudited
     private User user;
@@ -182,6 +189,22 @@ public class Student implements Serializable {
         this.isActive = isActive;
     }
 
+    public Boolean getGotJob() {
+        return gotJob;
+    }
+
+    public void setGotJob(Boolean gotJob) {
+        this.gotJob = gotJob;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     public User getUser() {
         return user;
     }
@@ -272,6 +295,8 @@ public class Student implements Serializable {
             ", faculty='" + faculty + "'" +
             ", course='" + course + "'" +
             ", isActive='" + isActive + "'" +
+            ", gotJob='" + gotJob + "'" +
+            ", comment='" + comment + "'" +
             '}';
     }
 }

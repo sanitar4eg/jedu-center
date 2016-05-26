@@ -119,6 +119,19 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldId": 12,
+            "fieldName": "gotJob",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldId": 13,
+            "fieldName": "comment",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20160312175031",
