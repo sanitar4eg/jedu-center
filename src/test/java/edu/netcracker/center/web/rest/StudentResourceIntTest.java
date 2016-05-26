@@ -110,6 +110,7 @@ public class StudentResourceIntTest {
     @Before
     public void initTest() {
         student = new Student();
+        learningType = learningTypeRepository.getOne(1L);
         student.setLastName(DEFAULT_LAST_NAME);
         student.setFirstName(DEFAULT_FIRST_NAME);
         student.setMiddleName(DEFAULT_MIDDLE_NAME);
