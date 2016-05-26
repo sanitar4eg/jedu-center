@@ -77,6 +77,8 @@ angular.module('jeducenterApp')
                                     specialty: null,
                                     course: null,
                                     isActive: true,
+                                    gotJob: false,
+                                    comment: null,
                                     id: null
                                 };
                             }

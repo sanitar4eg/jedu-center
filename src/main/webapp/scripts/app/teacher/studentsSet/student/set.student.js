@@ -31,6 +31,8 @@ angular.module('jeducenterApp')
                                     specialty: null,
                                     course: null,
                                     isActive: true,
+                                    gotJob: false,
+                                    comment: null,
                                     studentsSet: set,
                                     id: null
                                 };

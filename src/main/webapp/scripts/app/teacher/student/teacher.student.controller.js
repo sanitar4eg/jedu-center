@@ -85,6 +85,14 @@ angular.module('jeducenterApp')
                     headerCellFilter: "translate"
                 },
                 {
+                    displayName: 'jeducenterApp.student.gotJob', field: 'gotJob', width: '6%', visible: false,
+                    headerCellFilter: "translate", type: 'boolean'
+                },
+                {
+                    displayName: 'jeducenterApp.student.comment', field: 'comment', width: '10%', visible: false,
+                    headerCellFilter: "translate"
+                },
+                {
                     displayName: 'jeducenterApp.student.groupOfStudent',
                     name: 'groupOfStudent', width: '8%', visible: false, headerCellFilter: "translate",
                     enableCellEdit: false,
