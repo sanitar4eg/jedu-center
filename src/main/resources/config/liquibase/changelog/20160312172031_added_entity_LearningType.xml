@@ -25,7 +25,7 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="is_active" type="bit">
+            <column name="is_active" type="bit" defaultValue="true">
                 <constraints nullable="false"/>
             </column>
 
