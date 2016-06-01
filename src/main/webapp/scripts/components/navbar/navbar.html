@@ -159,7 +159,7 @@
                     </ul>
                 </li>
                 <!--Curator Tab-->
-                <li ng-class="{active: $state.includes('curator-tab')}"  ng-switch-when="true" has-authority="ROLE_CURATOR" class="dropdown pointer">
+                <li ng-class="{active: $state.includes('cur-tab')}"  ng-switch-when="true" has-authority="ROLE_CURATOR" class="dropdown pointer">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="" id="curator-menu">
                         <span>
                             <span class="glyphicon glyphicon-tower"></span>
@@ -168,18 +168,8 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li ui-sref-active="active" ><a ui-sref="teacher.student" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
+                        <li ui-sref-active="active" ><a ui-sref="cur-tab.student" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
                             &#xA0;<span translate="global.menu.entities.student">Student</span></a></li>
-                        <li ui-sref-active="active" ><a ui-sref="curator" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.curator">Curator</span></a></li>
-                        <li ui-sref-active="active" ><a ui-sref="recall" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.recall">Recall</span></a></li>
-                        <li ui-sref-active="active" ><a ui-sref="timeTable" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.timeTable">Time table</span></a></li>
-                        <li ui-sref-active="active" ><a ui-sref="lesson" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.lesson">Lesson</span></a></li>
-                        <li ui-sref-active="active" ><a ui-sref="evaluation" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.evaluation">Evaluation</span></a></li>
                     </ul>
                 </li>
                 <!--Student Tab-->
