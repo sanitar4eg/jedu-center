@@ -3,7 +3,7 @@
 angular.module('jeducenterApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('curator-tab', {
+            .state('cur-tab', {
                 abstract: true,
                 parent: 'site'
             });
