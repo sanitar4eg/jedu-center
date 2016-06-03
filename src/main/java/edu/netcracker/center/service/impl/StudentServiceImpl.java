@@ -1,9 +1,8 @@
 package edu.netcracker.center.service.impl;
 
+import com.mysema.query.BooleanBuilder;
 import com.mysema.query.types.Predicate;
-import edu.netcracker.center.domain.Authority;
-import edu.netcracker.center.domain.Student;
-import edu.netcracker.center.domain.User;
+import edu.netcracker.center.domain.*;
 import edu.netcracker.center.domain.util.OperationResult;
 import edu.netcracker.center.repository.AuthorityRepository;
 import edu.netcracker.center.repository.LearningResultRepository;
@@ -96,6 +95,12 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.findAll(predicate, pageable);
     }
 
+    @Transactional(readOnly = true)
+    public Page<Student> findByCurator(Curator curator, Pageable pageable) {
+        log.debug("Request to get all Students by curator");
+        return studentRepository.findAll(new BooleanBuilder().and(QStudent.student.curator.eq(curator)), pageable);
+    }
+
     /**
      * get all the students.
      *
@@ -186,9 +191,6 @@ public class StudentServiceImpl implements StudentService {
         return userService.createUserForEC(student.getFirstName(), student.getLastName(),
             student.getEmail(), authorities);
     }
-
-
-
 
     private OperationResult createResult(Long id, String message, String description) {
         return new OperationResult(id.toString(), message, description);

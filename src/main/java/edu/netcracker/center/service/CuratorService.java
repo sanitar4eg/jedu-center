@@ -2,6 +2,7 @@ package edu.netcracker.center.service;
 
 import com.mysema.query.types.Predicate;
 import edu.netcracker.center.domain.Curator;
+import edu.netcracker.center.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -27,9 +28,13 @@ public interface CuratorService {
      *  @return the entity
      */
     public Curator findOne(Long id);
-
     /**
      *  delete the "id" curator.
      */
     public void delete(Long id);
+
+    /**
+     *  get the curator by User.
+     */
+    Curator findByUser(User user);
 }

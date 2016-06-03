@@ -1,6 +1,7 @@
 package edu.netcracker.center.service;
 
 import com.mysema.query.types.Predicate;
+import edu.netcracker.center.domain.Curator;
 import edu.netcracker.center.domain.Student;
 import edu.netcracker.center.domain.util.OperationResult;
 import org.springframework.data.domain.Page;
@@ -69,4 +70,9 @@ public interface StudentService {
      *  unzip student.
      */
     Student unzip(Long id);
+
+    /**
+     *  find students by curator.
+     */
+    Page<Student> findByCurator(Curator curator, Pageable pageable);
 }

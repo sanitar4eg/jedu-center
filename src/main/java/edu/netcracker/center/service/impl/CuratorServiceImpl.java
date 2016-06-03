@@ -1,6 +1,9 @@
 package edu.netcracker.center.service.impl;
 
+import com.mysema.query.BooleanBuilder;
 import com.mysema.query.types.Predicate;
+import edu.netcracker.center.domain.QCurator;
+import edu.netcracker.center.domain.User;
 import edu.netcracker.center.service.CuratorService;
 import edu.netcracker.center.domain.Curator;
 import edu.netcracker.center.repository.CuratorRepository;
@@ -8,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.binding.QuerydslPredicateBuilder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -68,5 +72,14 @@ public class CuratorServiceImpl implements CuratorService{
         curator.getStudents().forEach(student -> student.setCurator(null));
         curator.getStudents().clear();
         curatorRepository.delete(curator);
+    }
+
+    /**
+     *  get the  curator by user.
+     */
+    public Curator findByUser(User user) {
+        log.debug("Request to get Curator by user: {}", user.getLogin());
+        Predicate predicate = new BooleanBuilder().and(QCurator.curator.user.eq(user));
+        return curatorRepository.findOne(predicate);
     }
 }
