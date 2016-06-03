@@ -163,12 +163,12 @@
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                ui-sref="cur-tab.recall.edit({id:recall.id})"
+                                ui-sref="cur-tab.student.detail.recall.edit({id:recall.id})"
                                 class="btn btn-primary btn-sm">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </button>
                         <button type="submit"
-                                ui-sref="cur-tab.recall.delete({id:recall.id})"
+                                ui-sref="cur-tab.student.detail.recall.delete({id:recall.id})"
                                 class="btn btn-danger btn-sm">
                             <span class="glyphicon glyphicon-remove-circle"></span>
                         </button>
@@ -178,9 +178,9 @@
             </tbody>
         </table>
     </div>
-    <br/>
+    <br/><!--onclick="window.history.back()"-->
     <button type="submit"
-            onclick="window.history.back()"
+            ui-sref="cur-tab.student"
             class="btn btn-info">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
     </button>

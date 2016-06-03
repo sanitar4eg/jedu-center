@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jeducenterApp')
-    .controller('CurTabStudentDetailController', function ($scope, $rootScope, $stateParams, entity, Student,
+    .controller('CurTabStudentDetailController', function ($scope, $rootScope, $state, $stateParams, entity, Student,
                                                             User, GroupOfStudent, Curator, Form, Recall) {
         $scope.student = entity;
         $scope.recalls = [];
