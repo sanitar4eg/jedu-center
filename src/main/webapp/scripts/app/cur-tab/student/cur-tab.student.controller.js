@@ -3,10 +3,11 @@
 angular.module('jeducenterApp')
     .controller('CurTabStudentController', function ($scope, $state, $translate, uiGridConstants, CurTabStudent) {
 
-        $scope.students = [];
-        $scope.loadAll = function() {
+        $scope.loadAll = function(predicate) {
+            console.log("HEre!!");
             CurTabStudent.query(function(result) {
-               $scope.students = result;
+                $scope.studentsGrid.data = result;
+                console.log(JSON.stringify(result));
             });
         };
         $scope.loadAll();
@@ -20,7 +21,7 @@ angular.module('jeducenterApp')
             enableGridMenu: true,
             enableColumnResizing: true,
             gridMenuTitleFilter: $translate,
-            enableFiltering: true,
+            // enableFiltering: true,
             useExternalFiltering: true,
             columnDefs: [
                 {
@@ -72,26 +73,13 @@ angular.module('jeducenterApp')
                     headerCellFilter: "translate"
                 },
                 {
-                    displayName: 'jeducenterApp.student.isActive', field: 'isActive', width: '8%', type: 'boolean',
-                    visible: false, headerCellFilter: "translate",
-                    filter: {
-                        type: uiGridConstants.filter.SELECT,
-                        selectOptions: [{value: 'true', label: 'true'}, {value: 'false', label:'false'}]
-                    }
-                },
-                {
                     displayName: 'jeducenterApp.student.groupOfStudent', name: 'groupOfStudent', width: '8%',
                     visible: false, enableFiltering: false, headerCellFilter: "translate",
                     cellTemplate: 'scripts/app/teacher/student/ui-grid/student.group.cell.html'
                 },
                 {
-                    displayName: 'jeducenterApp.student.curator', name: 'curator', width: '8%',
-                    visible: false, enableFiltering: false, headerCellFilter: "translate",
-                    cellTemplate: 'scripts/app/teacher/student/ui-grid/student.curator.cell.html'
-                },
-                {
-                    name: ' ', width: '14%', enableSorting: false, enableFiltering: false,
-                    cellTemplate: 'scripts/app/teacher/student/archive/ui-grid/student.archive.buttons.html'
+                    name: ' ', width: '4%', enableSorting: false, enableFiltering: false,
+                    cellTemplate: 'scripts/app/cur-tab/student/ui-grid/student.archive.buttons.html'
                 }
             ],
             onRegisterApi: function (gridApi) {

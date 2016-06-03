@@ -98,7 +98,8 @@ public class StudentServiceImpl implements StudentService {
     @Transactional(readOnly = true)
     public Page<Student> findByCurator(Curator curator, Pageable pageable) {
         log.debug("Request to get all Students by curator");
-        return studentRepository.findAll(new BooleanBuilder().and(QStudent.student.curator.eq(curator)), pageable);
+        return studentRepository.findAll(new BooleanBuilder().and(QStudent.student.curator.eq(curator))
+            .and(QStudent.student.isActive.eq(true)), pageable);
     }
 
     /**

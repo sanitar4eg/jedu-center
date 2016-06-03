@@ -1,15 +1,26 @@
 
 <div>
-    <h2><span translate="jeducenterApp.student.detail.title">Student</span> {{student.id}}</h2>
+    <h2>
+        <span translate="jeducenterApp.student.detail.title">Student</span>
+        {{[student.lastName, student.firstName, student.middleName].join(' ')}}
+    </h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
             <tr>
-                <th translate="entity.detail.field">Field</th>
-                <th translate="entity.detail.value">Value</th>
+                <th width="18%"></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
+            <!--<tr>
+                <td>
+                    <span translate="jeducenterApp.student.lastName">LastName</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{student.lastName}}</span>
+                </td>
+            </tr>
             <tr>
                 <td>
                     <span translate="jeducenterApp.student.firstName">FirstName</span>
@@ -20,26 +31,18 @@
             </tr>
             <tr>
                 <td>
-                    <span translate="jeducenterApp.student.lastName">LastName</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{student.lastName}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
                     <span translate="jeducenterApp.student.middleName">MiddleName</span>
                 </td>
                 <td>
                     <span class="form-control-static">{{student.middleName}}</span>
                 </td>
-            </tr>
+            </tr>-->
             <tr>
                 <td>
                     <span translate="jeducenterApp.student.type">Type</span>
                 </td>
                 <td>
-                    <span class="form-control-static" translate="{{'jeducenterApp.TypeEnumeration.' + student.type}}">{{student.type}}</span>
+                    <span class="form-control-static">{{student.learningType.name}}</span>
                 </td>
             </tr>
             <tr>
@@ -63,7 +66,7 @@
                     <span translate="jeducenterApp.student.university">University</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{student.university}}</span>
+                    <span class="form-control-static" translate="{{'jeducenterApp.UniversityEnumeration.' + student.university}}">{{student.university}}</span>
                 </td>
             </tr>
             <tr>
@@ -72,6 +75,14 @@
                 </td>
                 <td>
                     <span class="form-control-static">{{student.specialty}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span translate="jeducenterApp.student.faculty">Faculty</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{student.faculty}}</span>
                 </td>
             </tr>
             <tr>
@@ -92,40 +103,82 @@
             </tr>
             <tr>
                 <td>
-                    <span translate="jeducenterApp.student.user">user</span>
-                </td>
-                <td>
-                    {{student.user.login}}
-                </td>
-            </tr>
-            <tr>
-                <td>
                     <span translate="jeducenterApp.student.groupOfStudent">groupOfStudent</span>
                 </td>
                 <td>
-                    <a class="form-control-static" ui-sref="groupOfStudent.detail({id:student.groupOfStudent.id})">{{student.groupOfStudent.name}}</a>
+                    <span class="form-control-static">{{student.groupOfStudent.name}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span translate="jeducenterApp.student.curator">curator</span>
+                    <span translate="jeducenterApp.student.learningResult">learningResult</span>
                 </td>
                 <td>
-                    <a class="form-control-static" ui-sref="curator.detail({id:student.curator.id})">{{student.curator.lastName}}</a>
+                    <span class="form-control-static">{{student.learningResult.type}}</span>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <span translate="jeducenterApp.student.form">form</span>
+                    <span translate="jeducenterApp.student.studentsSet">studentsSet</span>
                 </td>
                 <td>
-                    <a class="form-control-static" ui-sref="form.detail({id:student.form.id})">{{student.form.pathToFile}}</a>
+                    <span class="form-control-static">{{student.studentsSet.name}}</span>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
-
+    <br/>
+    <h4 translate="jeducenterApp.recall.home.title">Recalls</h4>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="cur-tab.student.detail.recall({student:student})" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span translate="jeducenterApp.recall.home.createLabel">Create new Recall</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+            <tr>
+                <th><span translate="jeducenterApp.recall.type">Type</span></th>
+                <th><span translate="jeducenterApp.recall.name">Name</span></th>
+                <th><span translate="jeducenterApp.recall.description">Description</span></th>
+                <th><span translate="jeducenterApp.recall.file">File</span></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="recall in recalls track by recall.id">
+                <td translate="{{'jeducenterApp.TypeRecallEnumeration.' + recall.type}}">{{recall.type}}</td>
+                <td>{{recall.name}}</td>
+                <td>{{recall.description}}</td>
+                <td>
+                    <a href="/api/recalls/file/{{recall.id}}">{{recall.file}}</a>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                ui-sref="cur-tab.recall.edit({id:recall.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="cur-tab.recall.delete({id:recall.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <br/>
     <button type="submit"
             onclick="window.history.back()"
             class="btn btn-info">

@@ -3,57 +3,11 @@
 angular.module('jeducenterApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('recall', {
-                parent: 'entity',
-                url: '/recalls',
+            .state('cur-tab.recall.new', {
+                parent: 'cur-tab',
+                url: '/cur-tab/recall/new',
                 data: {
-                    authorities: ['ROLE_USER'],
-                    pageTitle: 'jeducenterApp.recall.home.title'
-                },
-                views: {
-                    'content@': {
-                        templateUrl: 'scripts/app/entities/recall/recalls.html',
-                        controller: 'RecallController'
-                    }
-                },
-                resolve: {
-                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('recall');
-                        $translatePartialLoader.addPart('typeRecallEnumeration');
-                        $translatePartialLoader.addPart('global');
-                        return $translate.refresh();
-                    }]
-                }
-            })
-            .state('recall.detail', {
-                parent: 'entity',
-                url: '/recall/{id}',
-                data: {
-                    authorities: ['ROLE_USER'],
-                    pageTitle: 'jeducenterApp.recall.detail.title'
-                },
-                views: {
-                    'content@': {
-                        templateUrl: 'scripts/app/entities/recall/recall-detail.html',
-                        controller: 'RecallDetailController'
-                    }
-                },
-                resolve: {
-                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('recall');
-                        $translatePartialLoader.addPart('typeRecallEnumeration');
-                        return $translate.refresh();
-                    }],
-                    entity: ['$stateParams', 'Recall', function($stateParams, Recall) {
-                        return Recall.get({id : $stateParams.id});
-                    }]
-                }
-            })
-            .state('recall.new', {
-                parent: 'recall',
-                url: '/new',
-                data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_CURATOR']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -77,11 +31,11 @@ angular.module('jeducenterApp')
                     })
                 }]
             })
-            .state('recall.edit', {
-                parent: 'recall',
-                url: '/{id}/edit',
+            .state('cur-tab.recall.edit', {
+                parent: 'cur-tab',
+                url: 'cur-tab/recall/{id}/edit',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_CURATOR']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -100,11 +54,11 @@ angular.module('jeducenterApp')
                     })
                 }]
             })
-            .state('recall.delete', {
-                parent: 'recall',
-                url: '/{id}/delete',
+            .state('cur-tab.recall.delete', {
+                parent: 'cur-tab',
+                url: 'cur-tab/recall/{id}/delete',
                 data: {
-                    authorities: ['ROLE_USER'],
+                    authorities: ['ROLE_CURATOR']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({

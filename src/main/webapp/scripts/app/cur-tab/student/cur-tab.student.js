@@ -5,7 +5,7 @@ angular.module('jeducenterApp')
         $stateProvider
             .state('cur-tab.student', {
                 parent: 'cur-tab',
-                url: '/students',
+                url: '/cur-tab/students',
                 data: {
                     authorities: ['ROLE_CURATOR'],
                     pageTitle: 'jeducenterApp.student.home.title'
@@ -19,6 +19,9 @@ angular.module('jeducenterApp')
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('student');
+                        $translatePartialLoader.addPart('universityEnumeration');
+                        $translatePartialLoader.addPart('learningResult');
+                        $translatePartialLoader.addPart('typeOfResult');
                         $translatePartialLoader.addPart('global');
                         return $translate.refresh();
                     }]
@@ -26,20 +29,23 @@ angular.module('jeducenterApp')
             })
             .state('cur-tab.student.detail', {
                 parent: 'cur-tab',
-                url: '/student/{id}',
+                url: '/cur-tab/student/{id}',
                 data: {
                     authorities: ['ROLE_CURATOR'],
                     pageTitle: 'jeducenterApp.student.detail.title'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/entities/student/student-detail.html',
-                        controller: 'StudentDetailController'
+                        templateUrl: 'scripts/app/cur-tab/student/cur-tab.student-detail.html',
+                        controller: 'CurTabStudentDetailController'
                     }
                 },
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('student');
+                        $translatePartialLoader.addPart('universityEnumeration');
+                        $translatePartialLoader.addPart('recall');
+                        $translatePartialLoader.addPart('typeRecallEnumeration');
                         return $translate.refresh();
                     }],
                     entity: ['$stateParams', 'Student', function($stateParams, Student) {
