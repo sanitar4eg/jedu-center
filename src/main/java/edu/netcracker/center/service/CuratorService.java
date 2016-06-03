@@ -37,4 +37,8 @@ public interface CuratorService {
      *  get the curator by User.
      */
     Curator findByUser(User user);
+
+    Curator register(Curator curator, String baseUrl);
+
+    Curator disable(Long id);
 }

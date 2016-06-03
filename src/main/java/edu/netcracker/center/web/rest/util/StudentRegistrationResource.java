@@ -40,20 +40,10 @@ public class StudentRegistrationResource {
     @Timed
     public Collection<OperationResult> register(@RequestBody List<Student> students, HttpServletRequest request) {
         log.debug("REST request to register Students: {}", students);
-        String baseUrl = getBaseUrl(request);
+        String baseUrl = HeaderUtil.getBaseUrl(request);
         if (Optional.ofNullable(students).isPresent() && !students.isEmpty()) {
             return studentService.registerStudents(students, baseUrl);
         }
         return Collections.singletonList(new OperationResult("-1", "Студенты не выбраны", ""));
-    }
-
-    private String getBaseUrl(HttpServletRequest request) {
-        return
-            request.getScheme() +                   // "http"
-            "://" +                                 // "://"
-            request.getServerName() +               // "myhost"
-            ":" +                                   // ":"
-            request.getServerPort() +               // "80"
-            request.getContextPath();               // "/myContextPath" or "" if deployed in root context
     }
 }

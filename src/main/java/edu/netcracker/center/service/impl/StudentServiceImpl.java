@@ -168,6 +168,10 @@ public class StudentServiceImpl implements StudentService {
 
     @Transactional
     public Student archive(Student student) {
+        Optional.ofNullable(student.getUser()).ifPresent(user -> {
+            user.setActivated(false);
+            userRepository.save(user);
+        });
         student.getLearningResult().setCreationTime(ZonedDateTime.now());
         learningResultRepository.save(student.getLearningResult());
         student.setIsActive(false);
@@ -177,6 +181,10 @@ public class StudentServiceImpl implements StudentService {
     @Transactional
     public Student unzip(Long id) {
         Student student = studentRepository.getOne(id);
+        Optional.ofNullable(student.getUser()).ifPresent(user -> {
+            user.setActivated(true);
+            userRepository.save(user);
+        });
         log.error(student.getLearningResult().toString());
         learningResultRepository.delete(student.getLearningResult());
         student.setIsActive(true);

@@ -2,6 +2,8 @@ package edu.netcracker.center.web.rest.util;
 
 import org.springframework.http.HttpHeaders;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Utility class for http header creation.
  *
@@ -32,5 +34,15 @@ public class HeaderUtil {
         headers.add("X-jeducenterApp-error", "error." + errorKey);
         headers.add("X-jeducenterApp-params", entityName);
         return headers;
+    }
+
+    public static String getBaseUrl(HttpServletRequest request) {
+        return
+            request.getScheme() +                   // "http"
+                "://" +                                 // "://"
+                request.getServerName() +               // "myhost"
+                ":" +                                   // ":"
+                request.getServerPort() +               // "80"
+                request.getContextPath();               // "/myContextPath" or "" if deployed in root context
     }
 }

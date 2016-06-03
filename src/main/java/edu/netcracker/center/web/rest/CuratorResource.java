@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -43,12 +44,14 @@ public class CuratorResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Curator> createCurator(@Valid @RequestBody Curator curator) throws URISyntaxException {
+    public ResponseEntity<Curator> createCurator(@Valid @RequestBody Curator curator,
+                                                 HttpServletRequest request) throws URISyntaxException {
         log.debug("REST request to save Curator : {}", curator);
         if (curator.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("curator", "idexists", "A new curator cannot already have an ID")).body(null);
         }
-        Curator result = curatorService.save(curator);
+        String baseUrl = HeaderUtil.getBaseUrl(request);
+        Curator result = curatorService.register(curator, baseUrl);
         return ResponseEntity.created(new URI("/api/curators/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("curator", result.getId().toString()))
             .body(result);
@@ -61,10 +64,11 @@ public class CuratorResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Curator> updateCurator(@Valid @RequestBody Curator curator) throws URISyntaxException {
+    public ResponseEntity<Curator> updateCurator(@Valid @RequestBody Curator curator,
+                                                 HttpServletRequest request) throws URISyntaxException {
         log.debug("REST request to update Curator : {}", curator);
         if (curator.getId() == null) {
-            return createCurator(curator);
+            return createCurator(curator, request);
         }
         Curator result = curatorService.save(curator);
         return ResponseEntity.ok()
