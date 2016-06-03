@@ -12,8 +12,8 @@ angular.module('jeducenterApp')
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'scripts/app/teacher/student/teacher.student.html',
-                        controller: 'TeacherStudentController'
+                        templateUrl: 'scripts/app/teacher/student/archive/teacher.student.archive.html',
+                        controller: 'TeacherStudentArchiveController'
                     }
                 },
                 resolve: {
