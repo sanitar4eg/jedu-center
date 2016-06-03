@@ -170,6 +170,7 @@ public class StudentServiceImpl implements StudentService {
     @Transactional
     public Student archive(Student student) {
         Optional.ofNullable(student.getUser()).ifPresent(user -> {
+            user = userRepository.findOne(user.getId());
             user.setActivated(false);
             userRepository.save(user);
         });

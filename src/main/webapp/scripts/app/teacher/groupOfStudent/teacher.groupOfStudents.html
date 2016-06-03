@@ -30,7 +30,7 @@
                 <tr ng-repeat="groupOfStudent in groupOfStudents track by groupOfStudent.id">
                     <td><a ui-sref="teacher.groupOfStudent.detail({id:groupOfStudent.id})">{{groupOfStudent.id}}</a></td>
                     <td>{{groupOfStudent.name}}</td>
-                    <td translate="{{'jeducenterApp.TypeEnumeration.' + groupOfStudent.type}}">{{groupOfStudent.type}}</td>
+                    <td>{{groupOfStudent.learningType.name}}</td>
                     <td>{{groupOfStudent.description}}</td>
                     <td>{{groupOfStudent.isActive}}</td>
                     <td>

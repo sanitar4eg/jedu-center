@@ -20,6 +20,8 @@ angular.module('jeducenterApp')
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('groupOfStudent');
                         $translatePartialLoader.addPart('global');
+                        $translatePartialLoader.addPart('learningType');
+                        $translatePartialLoader.addPart('student');
                         return $translate.refresh();
                     }]
                 }

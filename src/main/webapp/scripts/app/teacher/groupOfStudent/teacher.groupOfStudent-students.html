@@ -1,5 +1,5 @@
 <div>
-    <h2><span translate="jeducenterApp.groupOfStudent.detail.title">GroupOfStudent</span> {{groupOfStudent.id}}</h2>
+    <h2><span translate="jeducenterApp.groupOfStudent.detail.title">GroupOfStudent</span> {{groupOfStudent.name}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -22,8 +22,7 @@
                     <span translate="jeducenterApp.groupOfStudent.type">Type</span>
                 </td>
                 <td>
-                    <span class="form-control-static"
-                          translate="{{'jeducenterApp.TypeEnumeration.' + groupOfStudent.type}}">{{groupOfStudent.type}}</span>
+                    <span class="form-control-static">{{groupOfStudent.learningType.name}}</span>
                 </td>
             </tr>
             <tr>

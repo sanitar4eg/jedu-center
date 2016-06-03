@@ -26,14 +26,14 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label" translate="jeducenterApp.groupOfStudent.type" for="field_type">Type</label>
-            <select class="form-control" name="type" ng-model="groupOfStudent.type" id="field_type" required>
-                <option value="DEV" translate="jeducenterApp.TypeEnumeration.DEV">DEV</option>
-                <option value="QA" translate="jeducenterApp.TypeEnumeration.QA">QA</option>
+            <label translate="jeducenterApp.student.learningType" for="field_learningType">learningType</label>
+            <select class="form-control" id="field_learningType" name="learningType" ng-model="groupOfStudent.learningType"
+                    ng-options="learningType as learningType.name for learningType in learningtypes track by learningType.id"
+                    required>
             </select>
-            <div ng-show="editForm.type.$invalid">
+            <div ng-show="editForm.learningType.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.type.$error.required" translate="entity.validation.required">
+                   ng-show="editForm.learningType.$error.required" translate="entity.validation.required">
                     This field is required.
                 </p>
             </div>

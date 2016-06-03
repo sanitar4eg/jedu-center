@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('jeducenterApp').controller('TeacherGroupOfStudentDialogController',
-    ['$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'GroupOfStudent', 'Student', 'TimeTable', '$log',
-        function($scope, $stateParams, $uibModalInstance, $q, entity, GroupOfStudent, Student, TimeTable, $log) {
+    ['$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'GroupOfStudent', 'Student', 'TimeTable', 'LearningType',
+        function($scope, $stateParams, $uibModalInstance, $q, entity, GroupOfStudent, Student, TimeTable, LearningType) {
 
         $scope.groupOfStudent = entity;
         $scope.students = Student.query();
         $scope.timetables = TimeTable.query({filter: 'groupofstudent-is-null'});
+        $scope.learningtypes = LearningType.query();
         $q.all([$scope.groupOfStudent.$promise, $scope.timetables.$promise]).then(function() {
             if (!$scope.groupOfStudent.timeTable || !$scope.groupOfStudent.timeTable.id) {
                 return $q.reject();
