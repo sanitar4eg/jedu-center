@@ -12,13 +12,13 @@
     <button ng-hide="!row.entity.isActive"
             type="submit"
             ui-sref="teacher.student.archiving({id:{{row.entity.id}}})"
-            class="btn btn-warning btn-sm">
+            class="btn btn-success btn-sm">
         <span class="glyphicon glyphicon-folder-close"></span>
     </button>
     <button ng-hide="row.entity.isActive"
             type="submit"
             ui-sref="teacher.student.unarchiving({id:{{row.entity.id}}})"
-            class="btn btn-success btn-sm">
+            class="btn btn-warning btn-sm">
         <span class="glyphicon glyphicon-folder-open"></span>
     </button>
     <button type="submit"

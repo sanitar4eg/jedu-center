@@ -21,7 +21,6 @@
                     <th><span translate="jeducenterApp.curator.firstName">FirstName</span></th>
                     <th><span translate="jeducenterApp.curator.email">Email</span></th>
                     <th><span translate="jeducenterApp.curator.department">Department</span></th>
-                    <th><span translate="jeducenterApp.curator.isActive">IsActive</span></th>
                     <th><span translate="jeducenterApp.curator.user">user</span></th>
                     <th></th>
                 </tr>
@@ -32,7 +31,6 @@
                     <td>{{curator.firstName}}</td>
                     <td>{{curator.email}}</td>
                     <td>{{curator.department}}</td>
-                    <td>{{curator.isActive}}</td>
                     <td>
                         {{curator.user.login}}
                     </td>
@@ -42,19 +40,28 @@
                                     ui-sref="teacher.curator.detail({id:curator.id})"
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-xs hidden-sm" translate="entity.action.view"></span>
                             </button>
                             <button type="submit"
                                     ui-sref="teacher.curator.edit({id:curator.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
                             </button>
                             <button type="submit"
                                     ui-sref="teacher.curator.delete({id:curator.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                            </button>
+                            <button ng-hide="!curator.isActive"
+                                    type="submit"
+                                    ui-sref="teacher.curator.disable({id:curator.id})"
+                                    class="btn btn-success btn-sm">
+                                <span class="glyphicon glyphicon-folder-open"></span>
+                            </button>
+                            <button ng-hide="curator.isActive"
+                                    type="submit"
+                                    ui-sref="teacher.curator.register({id:curator.id})"
+                                    class="btn btn-warning btn-sm">
+                                <span class="glyphicon glyphicon-folder-open"></span>
                             </button>
                         </div>
                     </td>

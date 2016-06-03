@@ -123,5 +123,28 @@ angular.module('jeducenterApp')
                         $state.go('^');
                     })
                 }]
+            })
+            .state('teacher.curator.disable', {
+                parent: 'teacher.curator',
+                url: '/teacher/{id}/disable',
+                data: {
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'scripts/app/teacher/curator/teacher.curator-disable-dialog.html',
+                        controller: 'TeacherCuratorDisableController',
+                        size: 'md',
+                        resolve: {
+                            entity: ['Curator', function(Curator) {
+                                return Curator.get({id : $stateParams.id});
+                            }]
+                        }
+                    }).result.then(function(result) {
+                        $state.go('teacher.curator', null, { reload: true });
+                    }, function() {
+                        $state.go('^');
+                    })
+                }]
             });
     });
