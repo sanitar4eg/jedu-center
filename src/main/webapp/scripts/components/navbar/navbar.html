@@ -81,6 +81,8 @@
                             &#xA0;<span translate="global.menu.account.register">Register</span></a></li>-->
                     </ul>
                 </li>
+
+                <!--EducationCenter Tab-->
                 <li ng-class="{active: $state.includes('ec')}" class="dropdown pointer">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="" id="ec-menu">
                         <span>
@@ -173,23 +175,21 @@
                     </ul>
                 </li>
                 <!--Student Tab-->
-                <li ng-class="{active: $state.includes('srudent-tab')}"  ng-switch-when="true" has-authority="ROLE_STUDENT" class="dropdown pointer">
+                <li ng-class="{active: $state.includes('st-tab')}"  ng-switch-when="true" has-authority="ROLE_STUDENT" class="dropdown pointer">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="" id="student-menu">
                         <span>
                             <span class="glyphicon glyphicon-tower"></span>
-                            <span class="hidden-sm" translate="global.menu.teacher.main">Manage</span>
+                            <span class="hidden-sm">Информация</span>
                             <b class="caret"></b>
                         </span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li ui-sref-active="active" ><a ui-sref="curator" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.curator">Curator</span></a></li>
-                        <li ui-sref-active="active" ><a ui-sref="timeTable" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.timeTable">Time table</span></a></li>
-                        <li ui-sref-active="active" ><a ui-sref="lesson" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.lesson">Lesson</span></a></li>
-                        <li ui-sref-active="active" ><a ui-sref="evaluation" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
-                            &#xA0;<span translate="global.menu.entities.evaluation">Evaluation</span></a></li>
+                        <li ui-sref-active="active" ><a ui-sref="st-tab.evaluation" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
+                            &#xA0;Успеваемость</a></li>
+                        <li ui-sref-active="active" ><a ui-sref="st-tab.timeTable" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
+                            &#xA0;Расписание</a></li>
+                        <li ui-sref-active="active" ><a ui-sref="st-tab.contacts" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
+                            &#xA0;Контакты</a></li>
                     </ul>
                 </li>
                 <!--<li ui-sref-active="active" class="dropdown pointer" ng-controller="LanguageController">

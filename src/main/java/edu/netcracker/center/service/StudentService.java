@@ -3,6 +3,7 @@ package edu.netcracker.center.service;
 import com.mysema.query.types.Predicate;
 import edu.netcracker.center.domain.Curator;
 import edu.netcracker.center.domain.Student;
+import edu.netcracker.center.domain.User;
 import edu.netcracker.center.domain.util.OperationResult;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -75,4 +76,6 @@ public interface StudentService {
      *  find students by curator.
      */
     Page<Student> findByCurator(Curator curator, Pageable pageable);
+
+    Student findByUser(User user);
 }

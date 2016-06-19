@@ -205,4 +205,11 @@ public class StudentServiceImpl implements StudentService {
     private OperationResult createResult(Long id, String message, String description) {
         return new OperationResult(id.toString(), message, description);
     }
+
+    @Override
+    public Student findByUser(User user) {
+        log.debug("Request to get Curator by user: {}", user.getLogin());
+        Predicate predicate = new BooleanBuilder().and(QStudent.student.user.eq(user));
+        return studentRepository.findOne(predicate);
+    }
 }

@@ -1,0 +1,34 @@
+<div>
+    <h2>Оценки для студента "{{[student.lastName, student.firstName, student.middleName].join(' ')}}"</h2>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+            <tr>
+                <th>Занятие</th>
+                <th width="5%">Оценка</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="evaluation in evaluations track by evaluation.id">
+                <td>{{evaluation.lesson.topic}}</td>
+                <td>{{evaluation.value}}</td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td>
+                    Средняя успеваемость
+                </td>
+                <td>
+                    {{average}}
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="text-center">
+        <uib-pagination class="pagination-sm" total-items="totalItems" ng-model="page"
+                        ng-change="loadAll()"></uib-pagination>
+    </div>
+</div>

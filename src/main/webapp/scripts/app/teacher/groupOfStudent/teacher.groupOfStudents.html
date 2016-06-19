@@ -17,7 +17,6 @@
         <table class="jh-table table table-striped">
             <thead>
                 <tr>
-                    <th><span translate="global.field.id">ID</span></th>
                     <th><span translate="jeducenterApp.groupOfStudent.name">Name</span></th>
                     <th><span translate="jeducenterApp.groupOfStudent.type">Type</span></th>
                     <th><span translate="jeducenterApp.groupOfStudent.description">Description</span></th>
@@ -28,8 +27,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="groupOfStudent in groupOfStudents track by groupOfStudent.id">
-                    <td><a ui-sref="teacher.groupOfStudent.detail({id:groupOfStudent.id})">{{groupOfStudent.id}}</a></td>
-                    <td>{{groupOfStudent.name}}</td>
+                    <td><a ui-sref="teacher.groupOfStudent.detail({id:groupOfStudent.id})">{{groupOfStudent.name}}</a></td>
                     <td>{{groupOfStudent.learningType.name}}</td>
                     <td>{{groupOfStudent.description}}</td>
                     <td>{{groupOfStudent.isActive}}</td>

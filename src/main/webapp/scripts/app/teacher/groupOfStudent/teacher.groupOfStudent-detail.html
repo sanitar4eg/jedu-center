@@ -1,5 +1,5 @@
 <div>
-    <h2><span translate="jeducenterApp.groupOfStudent.detail.title">GroupOfStudent</span> {{groupOfStudent.name}}</h2>
+    <h2><span translate="jeducenterApp.groupOfStudent.detail.title">GroupOfStudent</span> "{{groupOfStudent.name}}"</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -46,7 +46,7 @@
                     <span translate="jeducenterApp.groupOfStudent.timeTable">timeTable</span>
                 </td>
                 <td>
-                    <a class="form-control-static" ui-sref="timeTable.detail({id:groupOfStudent.timeTable.id})">{{groupOfStudent.timeTable.id}}</a>
+                    <a class="form-control-static" ui-sref="teacher.timeTable.detail({id:groupOfStudent.timeTable.id})">{{groupOfStudent.timeTable.name}}</a>
                 </td>
             </tr>
             </tbody>

@@ -3,7 +3,7 @@
 angular.module('jeducenterApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('student-tab', {
+            .state('st-tab', {
                 abstract: true,
                 parent: 'site'
             });
