@@ -5,7 +5,7 @@ angular.module('jeducenterApp').controller('UserManagementDialogController',
         function($scope, $stateParams, $uibModalInstance, entity, User, Language) {
 
         $scope.user = entity;
-        $scope.authorities = ["ROLE_USER", "ROLE_ADMIN", "ROLE_TEACHER", "ROLE_CURATOR", "ROLE_STUDENT"];
+        $scope.authorities = ["ROLE_USER", "ROLE_ADMIN", "ROLE_TEACHER", "ROLE_CURATOR", "ROLE_STUDENT", "ROLE_EMPLOYEE"];
         Language.getAll().then(function (languages) {
             $scope.languages = languages;
         });
