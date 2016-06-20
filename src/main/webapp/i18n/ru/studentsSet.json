@@ -19,7 +19,7 @@
             },
             "name": "Имя",
             "description": "Описание",
-            "isActive": "Активен",
+            "isActive": "Статус",
             "student": "Студент",
             "groupOfStudent": "Группа"
         }

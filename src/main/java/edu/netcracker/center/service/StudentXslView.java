@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -26,7 +27,7 @@ public class StudentXslView extends AbstractXlsView {
     public static final int TYPE = 4;
     public static final int EMAIL = 5;
     public static final int PHONE = 6;
-    public static final int UNIVER = 7;
+    public static final int UNIVERSITY = 7;
     public static final int SPECIALTY = 8;
     public static final int COURSE = 9;
 //    public static final int GROUP = 10;
@@ -41,12 +42,12 @@ public class StudentXslView extends AbstractXlsView {
         response.setHeader("Content-Type", "application/octet-stream");
         response.setHeader("Content-Disposition", "attachment; filename=Students_" + currentDate + ".xls");
 
-        List<Student> students = (List<Student>) model.get("students");
+        Set<Student> students = (Set<Student>) model.get("students");
 
         generateWorkbook(students, workbook);
     }
 
-    private void generateWorkbook(List<Student> students, Workbook workbook) {
+    protected void generateWorkbook(Set<Student> students, Workbook workbook) {
         Sheet sheet = createSheet(workbook);
 
         CellStyle headerStyle = createHeaderStyle(workbook);
@@ -56,7 +57,7 @@ public class StudentXslView extends AbstractXlsView {
         completeTable(students, sheet);
     }
 
-    private void completeTable(List<Student> students, Sheet sheet) {
+    private void completeTable(Set<Student> students, Sheet sheet) {
         int counter = 1;
         for (Student student : students) {
             Row row = sheet.createRow(counter++);
@@ -66,7 +67,7 @@ public class StudentXslView extends AbstractXlsView {
             setCellValueAndStyle(row.createCell(LAST_NAME), student.getLastName(), null);
             setCellValueAndStyle(row.createCell(EMAIL), student.getEmail(), null);
             setCellValueAndStyle(row.createCell(PHONE), student.getPhone(), null);
-            setCellValueAndStyle(row.createCell(UNIVER), ObjectUtils.toString(student.getUniversity()), null);
+            setCellValueAndStyle(row.createCell(UNIVERSITY), ObjectUtils.toString(student.getUniversity()), null);
             setCellValueAndStyle(row.createCell(SPECIALTY), student.getSpecialty(), null);
             setCellValueAndStyle(row.createCell(COURSE), student.getCourse(), null);
 //            setCellValueAndStyle(row.createCell(GROUP), student.getGroupName(), null);
@@ -83,7 +84,7 @@ public class StudentXslView extends AbstractXlsView {
         setCellValueAndStyle(header.createCell(TYPE), "Вид обучения", style);
         setCellValueAndStyle(header.createCell(EMAIL), "Email", style);
         setCellValueAndStyle(header.createCell(PHONE), "Телефон", style);
-        setCellValueAndStyle(header.createCell(UNIVER), "Университет", style);
+        setCellValueAndStyle(header.createCell(UNIVERSITY), "Университет", style);
         setCellValueAndStyle(header.createCell(SPECIALTY), "Специальность", style);
         setCellValueAndStyle(header.createCell(COURSE), "Курс", style);
 //        setCellValueAndStyle(header.createCell(GROUP), "Группа", style);
@@ -102,7 +103,7 @@ public class StudentXslView extends AbstractXlsView {
     }
 
     private Sheet createSheet(Workbook workbook) {
-        Sheet sheet = workbook.createSheet("Cписок студентов");
+        Sheet sheet = workbook.createSheet("Список студентов");
         sheet.setDefaultColumnWidth(15);
         return sheet;
     }

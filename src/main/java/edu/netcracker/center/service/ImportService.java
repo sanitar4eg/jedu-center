@@ -7,5 +7,5 @@ import java.util.Collection;
 
 public interface ImportService {
 
-    Collection<OperationResult> handleImportOfStudents(MultipartFile file);
+    Collection<OperationResult> handleImportOfStudents(MultipartFile file, Long id);
 }

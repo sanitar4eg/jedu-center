@@ -19,7 +19,7 @@
                 <tr jh-sort="predicate" ascending="reverse" callback="loadAll()">
                     <th><span translate="jeducenterApp.studentsSet.name">Name</span></th>
                     <th><span translate="jeducenterApp.studentsSet.description">Description</span></th>
-                    <th><span translate="jeducenterApp.studentsSet.isActive">IsActive</span></th>
+                    <!--<th>Статус</th>-->
                     <th></th>
                 </tr>
             </thead>
@@ -27,7 +27,7 @@
                 <tr ng-repeat="studentsSet in studentsSets track by studentsSet.id">
                     <td><a ui-sref="teacher.studentsSet.detail({id:studentsSet.id})">{{studentsSet.name}}</a></td>
                     <td>{{studentsSet.description}}</td>
-                    <td>{{studentsSet.isActive}}</td>
+                    <!--<td><status value="{{studentsSet.isActive}}"></status></td>-->
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
