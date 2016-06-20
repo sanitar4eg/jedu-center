@@ -29,7 +29,7 @@
 
             <column name="middle_name" type="varchar(255)"/>
 
-            <column name="email" type="varchar(255)">
+            <column name="email" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
 

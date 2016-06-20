@@ -22,27 +22,27 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="first_name" type="varchar(255)"/>
-            
+
             <column name="last_name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            
-            <column name="email" type="varchar(255)">
+
+            <column name="email" type="varchar(50)">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="department" type="varchar(255)"/>
-            
+
             <column name="is_active" type="bit">
                 <constraints nullable="false" />
             </column>
-            
+
             <column name="user_id" type="bigint">
                 <constraints unique="true"/>
             </column>
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        
+
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="curator"
                                  constraintName="fk_curator_user_id"

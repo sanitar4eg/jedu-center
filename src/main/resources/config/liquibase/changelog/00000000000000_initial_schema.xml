@@ -27,9 +27,9 @@
                 <constraints unique="true" nullable="false"/>
             </column>
             <column name="password_hash" type="varchar(60)"/>
-            <column name="first_name" type="varchar(50)"/>
-            <column name="last_name" type="varchar(50)"/>
-            <column name="email" type="varchar(100)">
+            <column name="first_name" type="varchar(255)"/>
+            <column name="last_name" type="varchar(255)"/>
+            <column name="email" type="varchar(50)">
                 <constraints unique="true"/>
             </column>
             <column name="activated" type="boolean" valueBoolean="false">
