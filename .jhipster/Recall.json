@@ -21,7 +21,7 @@
             "fieldId": 1,
             "fieldName": "type",
             "fieldType": "TypeRecallEnumeration",
-            "fieldValues": "Technical,Interview,Managerial",
+            "fieldValues": "Technical,Interview,Managerial,Curatorial",
             "fieldValidateRules": [
                 "required"
             ]

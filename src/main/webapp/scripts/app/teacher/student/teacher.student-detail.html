@@ -13,30 +13,6 @@
             </tr>
             </thead>
             <tbody>
-            <!--<tr>
-                <td>
-                    <span translate="jeducenterApp.student.lastName">LastName</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{student.lastName}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="jeducenterApp.student.firstName">FirstName</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{student.firstName}}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="jeducenterApp.student.middleName">MiddleName</span>
-                </td>
-                <td>
-                    <span class="form-control-static">{{student.middleName}}</span>
-                </td>
-            </tr>-->
             <tr>
                 <td>
                     <span translate="jeducenterApp.student.type">Type</span>
@@ -95,10 +71,10 @@
             </tr>
             <tr>
                 <td>
-                    <span translate="jeducenterApp.student.isActive">IsActive</span>
+                    <span>Статус</span>
                 </td>
                 <td>
-                    <span class="form-control-static">{{student.isActive}}</span>
+                    <status value="{{student.isActive}}"></status>
                 </td>
             </tr>
             <tr>
@@ -205,10 +181,4 @@
             </tbody>
         </table>
     </div>
-    <br/>
-    <button type="submit"
-            onclick="window.history.back()"
-            class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
-    </button>
 </div>
