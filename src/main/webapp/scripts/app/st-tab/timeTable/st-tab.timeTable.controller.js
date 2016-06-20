@@ -1,16 +1,20 @@
 'use strict';
 
 angular.module('jeducenterApp')
-    .controller('TimeTableController', function ($scope, $state, TimeTable) {
+    .controller('StTimeTableController', function ($scope, $state, Lesson, CurrentEntity) {
 
-        $scope.timeTables = [];
+        $scope.student = {};
+        $scope.groupOfStudent = {};
+        $scope.lessons = [];
         $scope.loadAll = function() {
-            TimeTable.query(function(result) {
-               $scope.timeTables = result;
+            CurrentEntity.get({}, function (result) {
+                $scope.student = result;
+                Lesson.query({timeTable: $scope.student.groupOfStudent.timeTable.id},function(result) {
+                    $scope.lessons = result;
+                });
             });
         };
         $scope.loadAll();
-
 
         $scope.refresh = function () {
             $scope.loadAll();

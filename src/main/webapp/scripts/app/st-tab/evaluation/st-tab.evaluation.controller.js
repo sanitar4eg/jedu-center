@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('jeducenterApp')
-    .controller('StEvaluationController', function ($scope, $state, Evaluation, ParseLinks, CurrentEntityId) {
+    .controller('StEvaluationController', function ($scope, $state, Evaluation, ParseLinks, CurrentEntity) {
 
         $scope.student = {};
         $scope.evaluations = [];
         $scope.average = 0.0;
 
         $scope.loadAll = function () {
-            CurrentEntityId.get({}, function (result) {
+            CurrentEntity.get({}, function (result) {
                 $scope.student = result;
                 Evaluation.query({student: $scope.student.id}, function (result) {
                     $scope.evaluations = result;

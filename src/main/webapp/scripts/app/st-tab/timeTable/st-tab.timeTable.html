@@ -1,0 +1,20 @@
+<div>
+    <h2>Расписание для группы "{{student.groupOfStudent.name}}"</h2>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+            <tr>
+                <th width="25%">Дата/Время</th>
+                <th>Занятие</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="lesson in lessons | orderBy:'-time'">
+                <td>{{lesson.time | date:'dd-MMM-yy HH:mm'}}</td>
+                <td>{{lesson.topic}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

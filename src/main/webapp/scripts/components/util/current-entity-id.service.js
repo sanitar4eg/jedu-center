@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jeducenterApp')
-    .factory('CurrentEntityId', function ($resource) {
+    .factory('CurrentEntity', function ($resource) {
         return $resource('api/current/', {}, {
             'get': {
                 method: 'GET',
