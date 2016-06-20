@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -21,16 +20,20 @@ import java.util.Set;
 public class StudentXslView extends AbstractXlsView {
 
     public static final int ID = 0;
-    public static final int FIRST_NAME = 1;
-    public static final int MIDDLE_NAME = 2;
-    public static final int LAST_NAME = 3;
-    public static final int TYPE = 4;
-    public static final int EMAIL = 5;
-    public static final int PHONE = 6;
+    public static final int LAST_NAME = 1;
+    public static final int FIRST_NAME = 2;
+    public static final int MIDDLE_NAME = 3;
+    public static final int EMAIL = 4;
+    public static final int PHONE = 5;
+    public static final int TYPE = 6;
     public static final int UNIVERSITY = 7;
     public static final int SPECIALTY = 8;
-    public static final int COURSE = 9;
-//    public static final int GROUP = 10;
+    public static final int FACULTY = 9;
+    public static final int COURSE = 10;
+    public static final int CURATOR = 11;
+    public static final int COMMENT = 12;
+    public static final int GROUP = 13;
+    public static final int SET = 14;
 
     @Override
     protected void buildExcelDocument(Map<String, Object> model,
@@ -62,15 +65,20 @@ public class StudentXslView extends AbstractXlsView {
         for (Student student : students) {
             Row row = sheet.createRow(counter++);
             setCellValueAndStyle(row.createCell(ID), student.getId().toString(), null);
+            setCellValueAndStyle(row.createCell(LAST_NAME), student.getLastName(), null);
             setCellValueAndStyle(row.createCell(FIRST_NAME), student.getFirstName(), null);
             setCellValueAndStyle(row.createCell(MIDDLE_NAME), student.getMiddleName(), null);
-            setCellValueAndStyle(row.createCell(LAST_NAME), student.getLastName(), null);
             setCellValueAndStyle(row.createCell(EMAIL), student.getEmail(), null);
             setCellValueAndStyle(row.createCell(PHONE), student.getPhone(), null);
+            setCellValueAndStyle(row.createCell(TYPE), student.getLearningType().getName(), null);
             setCellValueAndStyle(row.createCell(UNIVERSITY), ObjectUtils.toString(student.getUniversity()), null);
             setCellValueAndStyle(row.createCell(SPECIALTY), student.getSpecialty(), null);
+            setCellValueAndStyle(row.createCell(FACULTY), student.getFaculty(), null);
             setCellValueAndStyle(row.createCell(COURSE), student.getCourse(), null);
-//            setCellValueAndStyle(row.createCell(GROUP), student.getGroupName(), null);
+            setCellValueAndStyle(row.createCell(CURATOR), student.getCurator().getLastName(), null);
+            setCellValueAndStyle(row.createCell(COMMENT), student.getComment(), null);
+            setCellValueAndStyle(row.createCell(GROUP), student.getGroupOfStudent().getName(), null);
+            setCellValueAndStyle(row.createCell(SET), student.getStudentsSet().getName(), null);
         }
     }
 
@@ -78,16 +86,20 @@ public class StudentXslView extends AbstractXlsView {
         Row header = sheet.createRow(0);
 
         setCellValueAndStyle(header.createCell(ID), "ID", style);
+        setCellValueAndStyle(header.createCell(LAST_NAME), "Фамилия", style);
         setCellValueAndStyle(header.createCell(FIRST_NAME), "Имя", style);
         setCellValueAndStyle(header.createCell(MIDDLE_NAME), "Отчество", style);
-        setCellValueAndStyle(header.createCell(LAST_NAME), "Фамилия", style);
-        setCellValueAndStyle(header.createCell(TYPE), "Вид обучения", style);
         setCellValueAndStyle(header.createCell(EMAIL), "Email", style);
         setCellValueAndStyle(header.createCell(PHONE), "Телефон", style);
+        setCellValueAndStyle(header.createCell(TYPE), "Вид обучения", style);
         setCellValueAndStyle(header.createCell(UNIVERSITY), "Университет", style);
         setCellValueAndStyle(header.createCell(SPECIALTY), "Специальность", style);
+        setCellValueAndStyle(header.createCell(FACULTY), "Факультет", style);
         setCellValueAndStyle(header.createCell(COURSE), "Курс", style);
-//        setCellValueAndStyle(header.createCell(GROUP), "Группа", style);
+        setCellValueAndStyle(header.createCell(CURATOR), "Куратор", style);
+        setCellValueAndStyle(header.createCell(COMMENT), "Комментарий", style);
+        setCellValueAndStyle(header.createCell(GROUP), "Группа", style);
+        setCellValueAndStyle(header.createCell(SET), "Набор", style);
     }
 
     private CellStyle createHeaderStyle(Workbook workbook) {
@@ -111,5 +123,6 @@ public class StudentXslView extends AbstractXlsView {
     private void setCellValueAndStyle(Cell cell, String value, CellStyle style) {
         cell.setCellValue(value);
         cell.setCellStyle(style);
+        cell.setCellType(Cell.CELL_TYPE_STRING);
     }
 }

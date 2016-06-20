@@ -41,9 +41,6 @@ public class ImportServiceImpl implements ImportService {
     @Inject
     StudentsSetService studentsSetService;
 
-//    @Inject
-//    HibernateValidator validator;
-
     @Override
     public Collection<OperationResult> handleImportOfStudents(MultipartFile file, Long setId) {
         Workbook workbook;
@@ -77,6 +74,7 @@ public class ImportServiceImpl implements ImportService {
                         .orElseGet(() -> {
                             Student student = new Student();
                             student = updateStudent(student, row);
+                            student.setIsActive(STUDENT_IS_ACTIVE);
                             return new OperationResult(num, "Студент создан", student.toString());
                         });
                 } catch (RuntimeException e) {
@@ -90,22 +88,18 @@ public class ImportServiceImpl implements ImportService {
     }
 
     private Student updateStudent(Student student, Row row) {
-        setParameter(row, StudentXslView.FIRST_NAME, student::setFirstName);
         setParameter(row, StudentXslView.LAST_NAME, student::setLastName);
+        setParameter(row, StudentXslView.FIRST_NAME, student::setFirstName);
         setParameter(row, StudentXslView.MIDDLE_NAME, student::setMiddleName);
         setParameter(row, StudentXslView.EMAIL, student::setEmail);
         setParameter(row, StudentXslView.PHONE, student::setPhone);
         setUniversity(row, StudentXslView.UNIVERSITY, student::setUniversity);
         setParameter(row, StudentXslView.SPECIALTY, student::setSpecialty);
+        setParameter(row, StudentXslView.FACULTY, student::setFaculty);
         setParameter(row, StudentXslView.COURSE, student::setCourse);
-        student.setIsActive(STUDENT_IS_ACTIVE);
+        setParameter(row, StudentXslView.COMMENT, student::setComment);
         return studentRepository.save(student);
     }
-
-//    private void setType(Row row, int field, Consumer<TypeEnumeration> consumer) {
-//        getNullableCell(row.getCell(field)).
-//            ifPresent(cell -> consumer.accept(TypeEnumeration.valueOf(cell.getStringCellValue())));
-//    }
 
 
     private void setUniversity(Row row, int field, Consumer<UniversityEnumeration> consumer) {
@@ -119,7 +113,10 @@ public class ImportServiceImpl implements ImportService {
 
     private void setParameter(Row row, int field, Consumer<String> consumer) {
         getNullableCell(row.getCell(field)).
-            ifPresent(cell -> consumer.accept(cell.getStringCellValue()));
+            ifPresent(cell -> {
+                cell.setCellType(Cell.CELL_TYPE_STRING);
+                consumer.accept(cell.getStringCellValue());
+            });
     }
 
     private Optional<Cell> getNullableCell(Cell value) {

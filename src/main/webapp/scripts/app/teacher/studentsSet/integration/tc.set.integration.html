@@ -5,7 +5,7 @@
             <div class="col-xs-8">
                 <button class="btn btn-primary" ng-click="getExportFile()">
                     <span class="glyphicon glyphicon-folder-open"></span>
-                    <span translate="jeducenterApp.student.home.exportLabel">Download import file</span>
+                    <span>Скачать файл экспорта</span>
                 </button>
             </div>
         </div>
@@ -17,8 +17,7 @@
           ng-submit="uploadExportFile()">
         <div class="form-group">
             <div class="col-xs-8 input-group form-control-static ">
-                <label id="input-label" class="control-label" for="input-file"
-                       translate="jeducenterApp.student.home.importLabel">Select File</label>
+                <label id="input-label" class="control-label" for="input-file">Выберите файл для импорта</label>
                 <input id="input-file" name="file" type="file" class="file" data-show-preview="false" ng-model="file"
                        data-rule-required="true" accept=".csv,.xsl,.xml,.mpp,application/vnd.ms-excel">
             </div>
