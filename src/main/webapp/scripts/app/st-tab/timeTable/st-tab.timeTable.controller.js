@@ -15,16 +15,4 @@ angular.module('jeducenterApp')
             });
         };
         $scope.loadAll();
-
-        $scope.refresh = function () {
-            $scope.loadAll();
-            $scope.clear();
-        };
-
-        $scope.clear = function () {
-            $scope.timeTable = {
-                name: null,
-                id: null
-            };
-        };
     });

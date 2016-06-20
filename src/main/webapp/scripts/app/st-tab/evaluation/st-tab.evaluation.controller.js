@@ -18,11 +18,6 @@ angular.module('jeducenterApp')
         };
         $scope.loadAll();
 
-        $scope.refresh = function () {
-            $scope.loadAll();
-            $scope.clear();
-        };
-
         var calculateAverage = function (evaluations) {
             var sum = 0.0;
             var int = 0;
