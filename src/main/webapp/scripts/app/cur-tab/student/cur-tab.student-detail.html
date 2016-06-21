@@ -133,7 +133,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="cur-tab.student.detail.recall({student:student})" >
+                <button class="btn btn-primary" ui-sref="cur-tab.student.detail.recall({student:student, curator:curator})" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span translate="jeducenterApp.recall.home.createLabel">Create new Recall</span>
                 </button>
@@ -145,6 +145,7 @@
         <table class="jh-table table table-striped">
             <thead>
             <tr>
+                <th><span translate="global.field.id">ID</span></th>
                 <th><span translate="jeducenterApp.recall.type">Type</span></th>
                 <th><span translate="jeducenterApp.recall.name">Name</span></th>
                 <th><span translate="jeducenterApp.recall.description">Description</span></th>
@@ -154,6 +155,7 @@
             </thead>
             <tbody>
             <tr ng-repeat="recall in recalls track by recall.id">
+                <td><a ui-sref="teacher.recall.detail({id:recall.id})">{{recall.id}}</a></td>
                 <td translate="{{'jeducenterApp.TypeRecallEnumeration.' + recall.type}}">{{recall.type}}</td>
                 <td>{{recall.name}}</td>
                 <td>{{recall.description}}</td>

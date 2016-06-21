@@ -136,7 +136,6 @@ public class CuratorServiceImpl implements CuratorService {
     /**
      * get the  curator by user.
      */
-    @Transactional
     public Curator findByUser(User user) {
         log.debug("Request to get Curator by user: {}", user.getLogin());
         Predicate predicate = new BooleanBuilder().and(curator.user.eq(user));

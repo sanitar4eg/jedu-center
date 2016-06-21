@@ -9,20 +9,13 @@
     <div class="modal-body">
         <jh-alert-error></jh-alert-error>
         <div class="form-group">
-            <label for="id" translate="global.field.id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="recall.id" readonly />
-        </div>
-        <div class="form-group">
             <label class="control-label" translate="jeducenterApp.recall.type" for="field_type">Type</label>
-            <select class="form-control" name="type" ng-model="recall.type" id="field_type" required>
-                <option value="Technical" translate="jeducenterApp.TypeRecallEnumeration.Technical">Technical</option>
-                <option value="Interview" translate="jeducenterApp.TypeRecallEnumeration.Interview">Interview</option>
-                <option value="Managerial" translate="jeducenterApp.TypeRecallEnumeration.Managerial">Managerial</option>
+            <select class="form-control" name="type" ng-model="recall.type" id="field_type" required disabled>
+                <option value="Curatorial" translate="jeducenterApp.TypeRecallEnumeration.Curatorial" selected="selected">Curatorial</option>
             </select>
             <div ng-show="editForm.type.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.type.$error.required" translate="entity.validation.required">
+                   ng-show="editForm.type.$error.required" translate="entity.validation.required">
                     This field is required.
                 </p>
             </div>
@@ -30,30 +23,34 @@
         <div class="form-group">
             <label class="control-label" translate="jeducenterApp.recall.name" for="field_name">Name</label>
             <input type="text" class="form-control" name="name" id="field_name"
-                    ng-model="recall.name"
-                     />
+                   ng-model="recall.name"
+            />
         </div>
         <div class="form-group">
             <label class="control-label" translate="jeducenterApp.recall.description" for="field_description">Description</label>
                 <textarea class="form-control" name="description" id="field_description"
-                    ng-model="recall.description" required />
-            <div ng-show="editForm.description.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.description.$error.required" translate="entity.validation.required">
-                    This field is required.
-                </p>
-            </div>
+                          ng-model="recall.description"  />
         </div>
-
+        <!--<div class="form-group">
+            <label class="control-label" translate="jeducenterApp.recall.file" for="field_file">File</label>
+            <input type="text" class="form-control" name="file" id="field_file"
+                    ng-model="recall.file"
+                     />
+        </div>-->
+        <div class="form-group">
+            <label class="control-label" translate="global.file.selectFile" for="recall-input-file">Select File</label>
+            <input id="recall-input-file" name="file" type="file" bfi-for-form class="file" data-show-preview="false"
+                   data-rule-required="true" accept=".doc,.docx" file-uploader required>
+        </div>
         <div class="form-group">
             <label translate="jeducenterApp.recall.student" for="field_student">student</label>
-            <select class="form-control" id="field_student" name="student" ng-model="recall.student" ng-options="student as student.lastName for student in students track by student.id">
+            <select class="form-control" id="field_student" name="student" ng-model="recall.student" ng-options="student as student.lastName for student in students track by student.id" disabled>
                 <option value=""></option>
             </select>
         </div>
-        <div class="form-group">
+        <div class="form-group" has-authority="ROLE_CURATOR">
             <label translate="jeducenterApp.recall.curator" for="field_curator">curator</label>
-            <select class="form-control" id="field_curator" name="curator" ng-model="recall.curator" ng-options="curator as curator.lastName for curator in curators track by curator.id">
+            <select class="form-control" id="field_curator" name="curator" ng-model="recall.curator" ng-options="curator as curator.lastName for curator in curators track by curator.id" disabled>
                 <option value=""></option>
             </select>
         </div>

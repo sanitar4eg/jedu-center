@@ -1,13 +1,16 @@
 'use strict';
 
 angular.module('jeducenterApp')
-    .controller('CurTabStudentController', function ($scope, $state, $translate, uiGridConstants, CurTabStudent) {
+    .controller('CurTabStudentController', function ($scope, $state, $translate, uiGridConstants, CurrentEntity, Student) {
 
-        $scope.loadAll = function(predicate) {
-            console.log("HEre!!");
-            CurTabStudent.query(function(result) {
-                $scope.studentsGrid.data = result;
-                console.log(JSON.stringify(result));
+        $scope.curator = {};
+        $scope.loadAll = function (predicate) {
+            CurrentEntity.get({}, function (result) {
+                $scope.curator = result;
+                Student.query({curator: $scope.curator.id}, function (result) {
+                    $scope.students = result;
+                    $scope.studentsGrid.data = result;
+                });
             });
         };
         $scope.loadAll();
@@ -15,7 +18,6 @@ angular.module('jeducenterApp')
         $scope.refresh = function () {
             $scope.loadAll();
         };
-
 
         $scope.studentsGrid = {
             enableGridMenu: true,
@@ -57,7 +59,7 @@ angular.module('jeducenterApp')
                     headerCellFilter: "translate",
                     filter: {
                         type: uiGridConstants.filter.SELECT,
-                        selectOptions: [{value: 'СГУ', label: 'СГУ'}, {value: 'СГТУ', label:'СГТУ'}]
+                        selectOptions: [{value: 'СГУ', label: 'СГУ'}, {value: 'СГТУ', label: 'СГТУ'}]
                     }
                 },
                 {

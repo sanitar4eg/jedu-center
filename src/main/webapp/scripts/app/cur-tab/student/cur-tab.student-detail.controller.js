@@ -2,9 +2,12 @@
 
 angular.module('jeducenterApp')
     .controller('CurTabStudentDetailController', function ($scope, $rootScope, $state, $stateParams, entity, Student,
-                                                            User, GroupOfStudent, Curator, Form, Recall) {
+                                                            User, GroupOfStudent, Curator, Form, Recall, CurrentEntity) {
         $scope.student = entity;
+        $scope.curator = entity.curator;
         $scope.recalls = [];
+
+        console.log(JSON.stringify($scope.curator));
         $scope.load = function (id) {
             Student.get({id: id}, function (result) {
                 $scope.student = result;

@@ -59,20 +59,23 @@ angular.module('jeducenterApp')
                 data: {
                     authorities: ['ROLE_CURATOR', 'ROLE_ADMIN']
                 },
-                params: {student: null},
+                params: {student: null, curator:null},
                 onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'scripts/app/teacher/recall/teacher.recall-dialog.html',
-                        controller: 'TeacherRecallDialogController',
+                        templateUrl: 'scripts/app/cur-tab/recall/cur-tab.recall-dialog.html',
+                        controller: 'CrRecallDialogController',
                         size: 'lg',
                         resolve: {
                             entity: function () {
+                                console.log("Student: " + JSON.stringify($stateParams.student));
+                                console.log("Curator: " + JSON.stringify($stateParams.curator));
                                 return {
-                                    type: null,
+                                    type: 'Curatorial',
                                     name: null,
                                     description: null,
                                     file: null,
                                     id: null,
+                                    curator: $stateParams.curator,
                                     student: $stateParams.student
                                 };
                             }
