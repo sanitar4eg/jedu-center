@@ -7,7 +7,7 @@ angular.module('jeducenterApp')
                 parent: 'teacher',
                 url: '/teacher/recalls',
                 data: {
-                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN', 'ROLE_EMPLOYEE'],
                     pageTitle: 'jeducenterApp.recall.home.title'
                 },
                 views: {
@@ -29,7 +29,7 @@ angular.module('jeducenterApp')
                 parent: 'teacher',
                 url: '/teacher/recall/{id}',
                 data: {
-                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN'],
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN', 'ROLE_EMPLOYEE'],
                     pageTitle: 'jeducenterApp.recall.detail.title'
                 },
                 views: {
@@ -53,7 +53,7 @@ angular.module('jeducenterApp')
                 parent: 'teacher.recall',
                 url: '/teacher/new',
                 data: {
-                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN', 'ROLE_EMPLOYEE']
                 },
                 params: {student: null},
                 onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
@@ -84,7 +84,7 @@ angular.module('jeducenterApp')
                 parent: 'teacher.recall',
                 url: '/teacher/{id}/edit',
                 data: {
-                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN', 'ROLE_EMPLOYEE']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -107,7 +107,7 @@ angular.module('jeducenterApp')
                 parent: 'teacher.recall',
                 url: '/teacher/{id}/delete',
                 data: {
-                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN']
+                    authorities: ['ROLE_TEACHER', 'ROLE_ADMIN', 'ROLE_EMPLOYEE']
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
                     $uibModal.open({

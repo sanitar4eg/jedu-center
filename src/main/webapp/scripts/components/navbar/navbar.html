@@ -156,6 +156,22 @@
                             &#xA0;<span translate="global.menu.entities.note">Note</span></a></li>
                     </ul>
                 </li>
+
+                <!--Employee Tab-->
+                <li ng-class="{active: $state.includes('teacher')}"  ng-switch-when="true" has-authority="ROLE_EMPLOYEE" class="dropdown pointer">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="" id="teacher-menu">
+                        <span>
+                            <span class="glyphicon glyphicon-tower"></span>
+                            <span class="hidden-sm" translate="global.menu.teacher.main">Manage</span>
+                            <b class="caret"></b>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li ui-sref-active="active" ><a ui-sref="teacher.student" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
+                            &#xA0;<span translate="global.menu.entities.student">Student</span></a></li>
+                    </ul>
+                </li>
+
                 <!--Curator Tab-->
                 <li ng-class="{active: $state.includes('cur-tab')}"  ng-switch-when="true" has-authority="ROLE_CURATOR" class="dropdown pointer">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="" id="curator-menu">
