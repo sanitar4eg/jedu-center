@@ -44,7 +44,7 @@
 
         <div class="form-group">
             <label translate="jeducenterApp.lesson.timeTable" for="field_timeTable">timeTable</label>
-            <select class="form-control" id="field_timeTable" name="timeTable" ng-model="lesson.timeTable" ng-options="timeTable as timeTable.id for timeTable in timetables track by timeTable.id">
+            <select class="form-control" id="field_timeTable" name="timeTable" ng-model="lesson.timeTable" ng-options="timeTable as timeTable.name for timeTable in timetables track by timeTable.id">
                 <option value=""></option>
             </select>
         </div>

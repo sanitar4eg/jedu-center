@@ -1,54 +1,85 @@
 <div>
-    <h2><span translate="jeducenterApp.timeTable.detail.title">TimeTable</span> {{timeTable.id}}</h2>
+    <h2><span>Расписание {{timeTable.name}}</span></h2>
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="jh-table table table-striped">
             <thead>
             <tr>
-                <th translate="entity.detail.field">Field</th>
-                <th translate="entity.detail.value">Value</th>
+                <th>Студенты</th>
+                <th class="rotate" ng-repeat="lesson in lessons track by lesson.id">
+                    <div><span>{{lesson.topic}}</span></div>
+                </th>
+                <th>Студенты</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>
-                    <span translate="jeducenterApp.timeTable.name">Name</span>
+            <tr ng-repeat="student in students track by student.id">
+                <td>{{student.lastName}} {{student.firstName}} {{student.middleName}}</td>
+                <td ng-repeat="lesson in lessons track by lesson.id">
+                    <form role="form" novalidate show-validation>
+                        <div class="form-group" has-authority="ROLE_TEACHER">
+                            <input class="form-control" type="number" min="0" max="6" required
+                                   tabindex="{{lesson.id}}"
+                                   ng-model="searchEvaluation(student,lesson).value"
+                                   ng-change="evaluationChanged(searchEvaluation(student,lesson))"/>
+                        </div>
+
+                        <div class="form-group" has-authority="ROLE_EMPLOYEE">
+                            <input class="form-control" type="number" min="0" max="6"
+                                   ng-model="searchEvaluation(student,lesson).value" disabled/>
+                        </div>
+                    </form>
                 </td>
-                <td>
-                    <span class="form-control-static">{{timeTable.name}}</span>
+                <td>{{student.lastName}} {{student.firstName}} {{student.middleName}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <br/>
+    <div class="container-fluid" has-authority="ROLE_TEACHER">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="teacher.timeTable.detail.lesson({timeTable:timeTable})" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span
+                        translate="jeducenterApp.lesson.home.createLabel">Create new Lesson
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+            <tr jh-sort="predicate" ascending="reverse" callback="loadAll()">
+                <th><span translate="jeducenterApp.lesson.topic">Topic</span> </th>
+                <th><span translate="jeducenterApp.lesson.time">Time</span> </th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="lesson in lessons track by lesson.id">
+                <td>{{lesson.topic}}</td>
+                <td>{{lesson.time | date:'medium'}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container" has-authority="ROLE_TEACHER">
+                        <button type="submit"
+                                ui-sref="teacher.lesson.edit({id:lesson.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                            <span class="hidden-xs hidden-sm" translate="entity.action.edit"></span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="teacher.lesson.delete({id:lesson.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                            <span class="hidden-xs hidden-sm" translate="entity.action.delete"></span>
+                        </button>
+                    </div>
                 </td>
             </tr>
             </tbody>
         </table>
-
-        <div class="table-responsive">
-            <table class="jh-table table table-striped">
-                <thead>
-                <tr>
-                    <th>Студенты</th>
-                    <th class="rotate" ng-repeat="lesson in lessons track by lesson.id">
-                        <div><span>{{lesson.topic}}</span></div>
-                    </th>
-                    <th>Студенты</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="student in students track by student.id">
-                    <td>{{student.lastName}} {{student.firstName}} {{student.middleName}}</td>
-                    <td ng-repeat="lesson in lessons track by lesson.id">
-                        <form role="form" novalidate show-validation>
-                            <div class="form-group">
-                                <input class="form-control" type="number" min="0" max="6" required
-                                       tabindex="{{lesson.id}}"
-                                       ng-model="searchEvaluation(student,lesson).value"
-                                       ng-change="evaluationChanged(searchEvaluation(student,lesson))"/>
-                            </div>
-                        </form>
-                    </td>
-                    <td>{{student.lastName}} {{student.firstName}} {{student.middleName}}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
 
     <button type="submit"
