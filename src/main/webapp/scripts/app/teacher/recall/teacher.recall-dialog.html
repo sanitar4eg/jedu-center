@@ -14,6 +14,7 @@
                 <option value="Technical" translate="jeducenterApp.TypeRecallEnumeration.Technical">Technical</option>
                 <option value="Interview" translate="jeducenterApp.TypeRecallEnumeration.Interview">Interview</option>
                 <option value="Managerial" translate="jeducenterApp.TypeRecallEnumeration.Managerial">Managerial</option>
+                <option value="Curatorial" translate="jeducenterApp.TypeRecallEnumeration.Curatorial">Curatorial</option>
             </select>
             <div ng-show="editForm.type.$invalid">
                 <p class="help-block"
@@ -46,13 +47,13 @@
         </div>
         <div class="form-group">
             <label translate="jeducenterApp.recall.student" for="field_student">student</label>
-            <select class="form-control" id="field_student" name="student" ng-model="recall.student" ng-options="student as student.lastName for student in students track by student.id">
+            <select class="form-control" id="field_student" name="student" ng-model="recall.student" ng-options="student as student.lastName for student in students track by student.id" disabled>
                 <option value=""></option>
             </select>
         </div>
-        <div class="form-group">
+        <div class="form-group" has-authority="ROLE_CURATOR">
             <label translate="jeducenterApp.recall.curator" for="field_curator">curator</label>
-            <select class="form-control" id="field_curator" name="curator" ng-model="recall.curator" ng-options="curator as curator.lastName for curator in curators track by curator.id">
+            <select class="form-control" id="field_curator" name="curator" ng-model="recall.curator" ng-options="curator as curator.lastName for curator in curators track by curator.id" disabled>
                 <option value=""></option>
             </select>
         </div>
